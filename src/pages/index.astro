@@ -71,8 +71,14 @@ import { writing } from "../content/writing";
 					{book.description && <p>{book.description}</p>}
 
 					{book.href && (
-						<a href={book.href}>Explore book →</a>
-					)}
+	<a
+					href={book.href}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Buy on Amazon →
+				</a>
+			)}
 				</div>
 			</article>
 		))}
