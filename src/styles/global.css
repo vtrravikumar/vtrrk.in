@@ -2,8 +2,20 @@
 	font-family:
 		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
 		sans-serif;
-	color: #1a1a1a;
-	background: #ffffff;
+
+	color-scheme: light dark;
+
+	--background: #ffffff;
+	--foreground: #171717;
+	--muted: #666666;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #111111;
+		--foreground: #f2f2f2;
+		--muted: #a0a0a0;
+	}
 }
 
 html {
@@ -13,8 +25,14 @@ html {
 body {
 	margin: 0;
 	min-width: 320px;
+	background: var(--background);
+	color: var(--foreground);
 }
 
 * {
 	box-sizing: border-box;
+}
+
+a {
+	color: inherit;
 }
