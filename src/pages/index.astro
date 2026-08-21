@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { now } from "../content/site";
 ---
 
 <BaseLayout
@@ -24,13 +25,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			</div>
 		</section>
 
-		<section class="placeholder" id="now">
-			<p class="section-label">Now</p>
-			<h2>What I'm working on</h2>
-			<p>
-				Building, writing, learning and exploring — one project at a time.
-			</p>
-		</section>
+		<section class="content-section" id="now">
+	<p class="section-label">Now</p>
+
+	<h2>{now.title}</h2>
+
+	<p class="section-intro">
+		{now.intro}
+	</p>
+
+	<div class="now-grid">
+		{now.items.map((item) => (
+			<article>
+				<h3>{item.title}</h3>
+				<p>{item.description}</p>
+			</article>
+		))}
+	</div>
+</section>
 
 		<section class="placeholder" id="books">
 			<p class="section-label">Books</p>
@@ -140,4 +152,49 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 			padding: 5rem 0;
 		}
 	}
+	.content-section {
+	padding: 8rem 0;
+	border-top: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+
+.content-section h2 {
+	margin: 0;
+	font-size: clamp(2.5rem, 6vw, 5rem);
+	line-height: 1;
+	letter-spacing: -0.04em;
+	font-weight: 600;
+}
+
+.section-intro {
+	max-width: 650px;
+	margin: 1.5rem 0 0;
+	font-size: 1.2rem;
+	line-height: 1.6;
+	color: var(--muted);
+}
+
+.now-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 3rem;
+	margin-top: 4rem;
+}
+
+.now-grid article h3 {
+	margin: 0;
+	font-size: 1.1rem;
+}
+
+.now-grid article p {
+	margin: 0.75rem 0 0;
+	line-height: 1.6;
+	color: var(--muted);
+}
+
+@media (max-width: 700px) {
+	.now-grid {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+	}
+}
 </style>
