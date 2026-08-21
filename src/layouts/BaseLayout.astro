@@ -15,14 +15,21 @@ const {
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="description" content={description} />
-		<meta name="author" content="V.T.R. Ravi Kumar" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<title>{title}</title>
-	</head>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<meta name="description" content={description} />
+	<meta name="author" content="V.T.R. Ravi Kumar" />
+
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://vtrrk.in/" />
+
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+	<title>{title}</title>
+</head>
 
 <body>
 	<Header />
