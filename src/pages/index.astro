@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { now } from "../content/site";
 import { books } from "../content/books";
 import { projects } from "../content/projects";
+import { writing } from "../content/writing";
 ---
 
 <BaseLayout
@@ -108,10 +109,44 @@ import { projects } from "../content/projects";
 	</div>
 </section>
 
-		<section class="placeholder" id="writing">
-			<p class="section-label">Writing</p>
-			<h2>Thoughts, observations and stories.</h2>
-		</section>
+<section class="content-section writing-section" id="writing">
+	<p class="section-label">Writing</p>
+
+	<h2>Ideas, observations and stories.</h2>
+
+	<div class="writing-list">
+		{writing.map((entry) => (
+			<article class="writing-entry">
+				<div class="writing-type">{entry.type}</div>
+
+				<div class="writing-content">
+					<h3>{entry.title}</h3>
+
+					<p>{entry.description}</p>
+
+					{entry.href && (
+						<a href={entry.href}>Read →</a>
+					)}
+				</div>
+			</article>
+		))}
+	</div>
+</section>
+
+<section class="explore-section" id="photography">
+	<p class="section-label">Photography · Travel · Rides</p>
+
+	<h2>The road is part of the story.</h2>
+
+	<p class="explore-intro">
+		Photography, journeys and miles on two wheels.
+	</p>
+
+	<a class="explore-link" href="#photography">
+		Explore
+		<span aria-hidden="true">→</span>
+	</a>
+</section>
 	</main>
 </BaseLayout>
 
@@ -397,4 +432,97 @@ import { projects } from "../content/projects";
 		padding-top: 0;
 	}
 }
+.writing-list {
+	margin-top: 5rem;
+	border-top: 1px solid
+		color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+
+.writing-entry {
+	display: grid;
+	grid-template-columns: 120px 1fr;
+	gap: 3rem;
+	padding: 3rem 0;
+	border-bottom: 1px solid
+		color-mix(in srgb, var(--foreground) 15%, transparent);
+	max-width: 1000px;
+}
+
+.writing-type {
+	padding-top: 0.4rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+
+.writing-content h3 {
+	margin: 0;
+	font-size: clamp(1.8rem, 3.5vw, 3rem);
+	line-height: 1.05;
+	letter-spacing: -0.03em;
+}
+
+.writing-content p {
+	max-width: 650px;
+	margin: 1rem 0 0;
+	font-size: 1.05rem;
+	line-height: 1.7;
+	color: var(--muted);
+}
+
+.writing-content a {
+	display: inline-block;
+	margin-top: 1.25rem;
+	text-underline-offset: 0.3em;
+}
+
+@media (max-width: 600px) {
+	.writing-entry {
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+		padding: 2.5rem 0;
+	}
+}
+.explore-section {
+	padding: 10rem 0;
+	border-top: 1px solid
+		color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+
+.explore-section h2 {
+	max-width: 850px;
+	margin: 0;
+	font-size: clamp(3rem, 8vw, 7rem);
+	line-height: 0.98;
+	letter-spacing: -0.05em;
+	font-weight: 600;
+}
+
+.explore-intro {
+	max-width: 600px;
+	margin: 2rem 0 0;
+	font-size: clamp(1.2rem, 2vw, 1.5rem);
+	line-height: 1.6;
+	color: var(--muted);
+}
+
+.explore-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	margin-top: 3rem;
+	font-size: 1rem;
+	text-underline-offset: 0.3em;
+}
+
+.explore-link span {
+	transition: transform 0.2s ease;
+}
+
+.explore-link:hover span {
+	transform: translateX(4px);
+}
+
 </style>

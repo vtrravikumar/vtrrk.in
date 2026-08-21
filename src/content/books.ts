@@ -9,7 +9,7 @@ export const books = [
 	},
 	{
 		title: "Gen Z",
-		subtitle: "",
+		subtitle: "Generation Zero",
 		description: "",
 		cover: "/images/books/gen-z.png",
 		href: "",

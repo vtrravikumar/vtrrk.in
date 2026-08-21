@@ -1,0 +1,54 @@
+<footer>
+	<div class="footer-inner">
+		<div>
+			<p class="footer-name">V.T.R. Ravi Kumar</p>
+			<p class="footer-tagline">
+				Engineer · Author · Photographer · Traveller
+			</p>
+		</div>
+
+		<p class="copyright">
+			© {new Date().getFullYear()} V.T.R. Ravi Kumar
+		</p>
+	</div>
+</footer>
+
+<style>
+	footer {
+		border-top: 1px solid
+			color-mix(in srgb, var(--foreground) 15%, transparent);
+	}
+
+	.footer-inner {
+		width: min(1200px, calc(100% - 3rem));
+		margin: 0 auto;
+		padding: 3rem 0;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 2rem;
+	}
+
+	.footer-name {
+		margin: 0;
+		font-weight: 600;
+	}
+
+	.footer-tagline,
+	.copyright {
+		margin: 0.5rem 0 0;
+		font-size: 0.85rem;
+		color: var(--muted);
+	}
+
+	.copyright {
+		margin: 0;
+	}
+
+	@media (max-width: 600px) {
+		.footer-inner {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+</style>
