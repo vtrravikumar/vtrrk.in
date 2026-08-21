@@ -2,9 +2,142 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
+<BaseLayout
+	title="V.T.R. Ravi Kumar — Engineer · Author · Photographer · Traveller"
+	description="The personal website of V.T.R. Ravi Kumar — engineer, author, photographer and traveller."
+>
 	<main>
-		<h1>V.T.R. Ravi Kumar</h1>
-		<p>Engineer · Author · Photographer · Traveller</p>
+		<section class="hero">
+			<p class="eyebrow">Engineer · Author · Photographer · Traveller</p>
+
+			<h1>V.T.R. Ravi Kumar</h1>
+
+			<p class="intro">
+				I spent 25 years building software. Now I'm building things that
+				interest me.
+			</p>
+
+			<div class="hero-links">
+				<a href="#books">Books</a>
+				<a href="#projects">Projects</a>
+				<a href="#writing">Writing</a>
+			</div>
+		</section>
+
+		<section class="placeholder" id="now">
+			<p class="section-label">Now</p>
+			<h2>What I'm working on</h2>
+			<p>
+				Building, writing, learning and exploring — one project at a time.
+			</p>
+		</section>
+
+		<section class="placeholder" id="books">
+			<p class="section-label">Books</p>
+			<h2>Stories and ideas in print.</h2>
+		</section>
+
+		<section class="placeholder" id="projects">
+			<p class="section-label">Projects</p>
+			<h2>Things I'm building.</h2>
+		</section>
+
+		<section class="placeholder" id="writing">
+			<p class="section-label">Writing</p>
+			<h2>Thoughts, observations and stories.</h2>
+		</section>
 	</main>
 </BaseLayout>
+
+<style>
+	main {
+		width: min(1200px, calc(100% - 3rem));
+		margin: 0 auto;
+	}
+
+	.hero {
+		min-height: 75vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		max-width: 850px;
+		padding: 5rem 0;
+	}
+
+	.eyebrow,
+	.section-label {
+		margin: 0 0 1.5rem;
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(3.5rem, 9vw, 7rem);
+		line-height: 0.95;
+		letter-spacing: -0.05em;
+		font-weight: 700;
+	}
+
+	.intro {
+		max-width: 620px;
+		margin: 2.5rem 0 0;
+		font-size: clamp(1.3rem, 2.5vw, 2rem);
+		line-height: 1.45;
+		color: var(--muted);
+	}
+
+	.hero-links {
+		display: flex;
+		gap: 1.5rem;
+		margin-top: 3rem;
+	}
+
+	.hero-links a {
+		font-size: 0.95rem;
+		text-underline-offset: 0.3em;
+	}
+
+	.placeholder {
+		padding: 8rem 0;
+		border-top: 1px solid color-mix(in srgb, var(--foreground) 15%, transparent);
+	}
+
+	.placeholder h2 {
+		margin: 0;
+		font-size: clamp(2rem, 5vw, 4rem);
+		line-height: 1.05;
+		letter-spacing: -0.03em;
+		font-weight: 600;
+	}
+
+	.placeholder > p:last-child {
+		max-width: 600px;
+		margin-top: 1.5rem;
+		font-size: 1.2rem;
+		line-height: 1.6;
+		color: var(--muted);
+	}
+
+	@media (max-width: 600px) {
+		main {
+			width: min(100% - 2rem, 1200px);
+		}
+
+		.hero {
+			min-height: 70vh;
+			padding: 4rem 0;
+		}
+
+		.hero-links {
+			flex-wrap: wrap;
+		}
+
+		.placeholder {
+			padding: 5rem 0;
+		}
+	}
+</style>
