@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { now } from "../content/site";
 import { books } from "../content/books";
+import { projects } from "../content/projects";
 ---
 
 <BaseLayout
@@ -77,10 +78,35 @@ import { books } from "../content/books";
 	</div>
 </section>
 
-		<section class="placeholder" id="projects">
-			<p class="section-label">Projects</p>
-			<h2>Things I'm building.</h2>
-		</section>
+<section class="content-section projects-section" id="projects">
+	<p class="section-label">Projects</p>
+
+	<h2>Things I'm building.</h2>
+
+	<div class="projects-list">
+		{projects.map((project, index) => (
+			<article class="project">
+				<div class="project-number">
+					{String(index + 1).padStart(2, "0")}
+				</div>
+
+				<div class="project-content">
+					<h3>{project.title}</h3>
+
+					<p>{project.description}</p>
+
+					<div class="project-meta">
+						<span>{project.status}</span>
+
+						{project.href && (
+							<a href={project.href}>Explore project →</a>
+						)}
+					</div>
+				</div>
+			</article>
+		))}
+	</div>
+</section>
 
 		<section class="placeholder" id="writing">
 			<p class="section-label">Writing</p>
@@ -303,6 +329,72 @@ import { books } from "../content/books";
 
 	.book-info h3 {
 		font-size: 1.8rem;
+	}
+}
+.projects-list {
+	margin-top: 5rem;
+	border-top: 1px solid
+		color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+
+.project {
+	display: grid;
+	grid-template-columns: 80px 1fr;
+	gap: 2rem;
+	padding: 3rem 0;
+	border-bottom: 1px solid
+		color-mix(in srgb, var(--foreground) 15%, transparent);
+	max-width: 1000px;
+}
+
+.project-number {
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--muted);
+	letter-spacing: 0.08em;
+	padding-top: 0.5rem;
+}
+
+.project-content h3 {
+	margin: 0;
+	font-size: clamp(2rem, 4vw, 3.5rem);
+	line-height: 1;
+	letter-spacing: -0.035em;
+}
+
+.project-content > p {
+	max-width: 700px;
+	margin: 1.25rem 0 0;
+	font-size: 1.1rem;
+	line-height: 1.7;
+	color: var(--muted);
+}
+
+.project-meta {
+	display: flex;
+	align-items: center;
+	gap: 2rem;
+	margin-top: 1.5rem;
+	font-size: 0.85rem;
+}
+
+.project-meta span {
+	color: var(--muted);
+}
+
+.project-meta a {
+	text-underline-offset: 0.3em;
+}
+
+@media (max-width: 600px) {
+	.project {
+		grid-template-columns: 1fr;
+		gap: 0.75rem;
+		padding: 2.5rem 0;
+	}
+
+	.project-number {
+		padding-top: 0;
 	}
 }
 </style>
