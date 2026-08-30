@@ -17,9 +17,16 @@ type JourneyData = {
 };
 
 const markdownModules = import.meta.glob("../../../content/travel/india/*/*.md", { eager: true });
-const journeyModules = import.meta.glob("../../../content/travel/india/*/*.yaml", { eager: true, query: "?raw", import: "default" });
 
 export function getStaticPaths() {
+  // Keep the glob inside getStaticPaths so Astro's prerendered route
+  // generation always has the module map available at build time.
+  const journeyModules = import.meta.glob("../../../content/travel/india/*/*.yaml", {
+    eager: true,
+    query: "?raw",
+    import: "default"
+  });
+
   return Object.entries(journeyModules).map(([path, raw]) => {
     const data = load(raw as string) as JourneyData;
     const slug = path.split("/").at(-2) ?? data.title.toLowerCase().replace(/\s+/g, "-");
