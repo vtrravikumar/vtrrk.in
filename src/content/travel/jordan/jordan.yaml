@@ -1,24 +1,32 @@
 country: Jordan
 continent: Asia
 status: visited
+banner: /images/travel/jordan.jpg
+content_status: draft
+
 visits:
   - from: 2019-11-30
     to: 2019-12-05
-travelling_with:
-  type: solo
+    travelling_with: []
+
 origin: Dubai, UAE
+
 accommodation:
   - Amman
   - Nomad hostel, Wadi Musa
+
 flights:
   - date: 2019-11-30
-    route: DXB-AMM
+    from: DXB
+    to: AMM
     airline: Emirates
     flight: EK901
   - date: 2019-12-05
-    route: AMM-DXB
+    from: AMM
+    to: DXB
     airline: Emirates
     flight: EK904
+
 places_visited:
   - Amman
   - Temple of Hercules
@@ -27,5 +35,3 @@ places_visited:
   - Wadi Rum
   - Dead Sea
   - Mount Nebo
-banner: /images/travel/jordan.jpg
-content_status: draft
