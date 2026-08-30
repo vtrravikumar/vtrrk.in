@@ -1,0 +1,7 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { writing } from "../content/writing";
+---
+<BaseLayout title="Writing — V.T.R. Ravi Kumar" description="Ideas, observations and stories by V.T.R. Ravi Kumar."><main><header><p class="label">Writing</p><h1>Ideas, observations and stories.</h1><p>Writing is where the longer thoughts live.</p></header><section>{writing.map((entry)=><article><span>{entry.type}</span><div><h2>{entry.title}</h2><p>{entry.description}</p></div></article>)}</section></main></BaseLayout>
+<style>main{width:min(1000px,calc(100% - 3rem));margin:0 auto}header{padding:8rem 0 5rem}h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:1;letter-spacing:-.05em}header>p:last-child{max-width:600px;color:var(--muted);font-size:1.2rem;line-height:1.6}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}section{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}article{display:grid;grid-template-columns:120px 1fr;gap:3rem;padding:3rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}article span{font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}h2{margin:0;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.04em}article p{max-width:700px;color:var(--muted);line-height:1.7}@media(max-width:600px){main{width:min(100% - 2rem,1000px)}header{padding:5rem 0 3rem}article{grid-template-columns:1fr;gap:.75rem}}
+</style>
