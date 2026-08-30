@@ -7,7 +7,7 @@ type TravelData = {
   continent: string;
   banner?: string;
   intro?: string;
-  visits?: { from: string; to: string; travelling_with?: string[] }[];
+  visits?: { from: string | Date; to: string | Date; travelling_with?: string[] }[];
   travelling_with?: { type?: string; names?: string[] };
 };
 
@@ -31,9 +31,10 @@ const visits = (data.visits ?? []).map((visit) => ({
   travelling_with: visit.travelling_with ?? data.travelling_with?.names ?? [],
 }));
 const firstVisit = visits[0];
-const lastVisit = visits[visits.length - 1];
 const companion = firstVisit?.travelling_with?.join(", ") || (data.travelling_with?.type === "solo" ? "Solo" : "Solo");
-const formatDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const toDate = (value: string | Date) => value instanceof Date ? value : new Date(`${value}T00:00:00`);
+const formatDate = (value: string | Date) => toDate(value).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const durationDays = firstVisit ? Math.round((toDate(firstVisit.to).getTime() - toDate(firstVisit.from).getTime()) / 86400000) + 1 : 0;
 ---
 <BaseLayout title={`${data.country} — Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${data.country}.`}>
   <main>
@@ -45,10 +46,10 @@ const formatDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDate
       <p class="intro">{data.intro ?? `A personal travelogue from ${data.country}.`}</p>
     </header>
     <section class="record">
-      <div><span>Visits</span><strong>{visits.length}</strong></div>
-      {firstVisit && <div><span>First visit</span><strong>{formatDate(firstVisit.from)} – {formatDate(firstVisit.to)}</strong></div>}
-      {lastVisit && visits.length > 1 && <div><span>Latest visit</span><strong>{formatDate(lastVisit.from)} – {formatDate(lastVisit.to)}</strong></div>}
+      {firstVisit && <div><span>Dates</span><strong>{formatDate(firstVisit.from)} – {formatDate(firstVisit.to)}</strong></div>}
+      {firstVisit && <div><span>Duration</span><strong>{durationDays} days</strong></div>}
       <div><span>Travelled with</span><strong>{companion}</strong></div>
+      <div><span>Visits</span><strong>{visits.length}</strong></div>
     </section>
     {Story && <article class="story"><Story /></article>}
   </main>
