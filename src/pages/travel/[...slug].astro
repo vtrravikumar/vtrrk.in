@@ -22,6 +22,7 @@ type TravelData = {
   banner?: string;
   intro?: string;
   visits?: Visit[];
+  featured?: boolean;
 };
 
 const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", {
@@ -99,7 +100,7 @@ const backLabel = isIndia ? "← India journeys" : "← Travel";
       <p class="intro">{data.intro ?? `A personal travelogue from ${title}.`}</p>
     </header>
     <section class="record">
-      {from && to && <div><span>Dates</span><strong>{formatDate(from)} – {formatDate(to)}</strong></div>}
+      <div><span>Dates</span><strong>{formatDate(from)} – {formatDate(to)}</strong></div>
       {durationDays !== undefined && <div><span>Duration</span><strong>{durationDays} days</strong></div>}
       <div><span>Travelled with</span><strong>{companion}</strong></div>
       <div><span>Journey</span><strong>{journeyValue}</strong></div>
