@@ -46,7 +46,7 @@ A lightweight visual destination that points to Ravi's photography on Instagram,
 
 ## F08 — Travelogue
 
-A detailed personal travelogue covering roughly 20 countries visited over approximately 20 years.
+A detailed personal travelogue covering roughly 20 countries visited over approximately 20 years, together with individual journeys within India.
 
 Travel is deliberately richer than the other presentation-oriented sections and can combine stories, practical information and visual material.
 
@@ -54,19 +54,21 @@ Travel is deliberately richer than the other presentation-oriented sections and 
 
 ## F09 — Travel Geography
 
-Travel is organised deliberately by **Continent → Country**, giving visitors a clear geographic index.
+Travel is organised deliberately by **Continent → Country**, with individual journeys/stories beneath a country where appropriate.
+
+India is one country in the same geography; its index presents individual journeys rather than states.
 
 **Priority:** P1
 
 ## F10 — Common Travel Template
 
-Country/trip content uses a reusable template so that new destinations can be added consistently without bespoke page construction.
+All travel content uses one common underlying template and rendering mechanism. India journeys and international country/trip stories may have different URL depth or content emphasis, but they do not use separate page implementations.
 
 **Priority:** P1
 
 ## F11 — Trip Metadata
 
-Each trip has a structured metadata record that can be copied and edited for the next destination. Metadata may include dates, places, flights, airlines, seats, accommodation, rides and photography references.
+Each trip/journey has a structured metadata record that can be copied and edited for the next destination. Metadata may include dates, places, travel companions, journey type, flights, airlines, accommodation, transport, rides and photography references.
 
 **Priority:** P1
 
@@ -181,4 +183,6 @@ Not part of V1. Consider only if there is a clear publishing/distribution strate
 5. Travel is intentionally detailed and practical where first-hand knowledge exists.
 6. Photography is a gateway in V1, not a full archive.
 7. Rides belong within the Travel model rather than primary navigation.
-8. Features should not be added merely because they are technically interesting.
+8. India and international travel share one underlying travel mechanism; differences are represented by data and geography rather than duplicate implementations.
+9. Features should not be added merely because they are technically interesting.
+10. Avoid further architectural changes unless a demonstrated requirement shows that the current foundation cannot support the feature.
