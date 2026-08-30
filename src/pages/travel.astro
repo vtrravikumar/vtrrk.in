@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { load } from "js-yaml";
 import { travelCountries } from "../content/travel-countries";
 
 const continents = ["Asia", "Europe", "Africa", "Oceania", "North America"];
@@ -7,11 +8,14 @@ const visited = travelCountries.filter((country) => country.status === "Y");
 const international = visited.filter((country) => country.slug !== "india");
 const published = international.filter((country) => country.hasBlog);
 
-// India journeys will live independently from the country index.
-// Once an India journey is added, it automatically becomes eligible for the India feature.
+// India is organised as individual journeys rather than countries or states.
 const indiaJourneyModules = import.meta.glob("../content/travel/india/*/*.yaml", { eager: true, query: "?raw", import: "default" });
-const indiaJourneys = Object.entries(indiaJourneyModules).map(([path, raw]) => ({ path, raw })).filter(({ raw }) => raw);
-const hasIndiaJourneys = indiaJourneys.length > 0;
+const indiaJourneys = Object.entries(indiaJourneyModules).map(([path, raw]) => {
+  const data = load(raw as string) as { title: string; region?: string; banner?: string; featured?: boolean };
+  const slug = path.split("/").at(-2) ?? data.title.toLowerCase().replace(/\s+/g, "-");
+  return { ...data, slug };
+});
+const featuredIndia = indiaJourneys.find((journey) => journey.featured) ?? indiaJourneys[0];
 const fallbackWorld = published[0];
 const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
 ---
@@ -28,13 +32,13 @@ const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
       <div class="featured-grid">
         <article class="feature-column">
           <p class="feature-label">India</p>
-          {hasIndiaJourneys ? (
-            <a class="featured-card" href="/travel/india/" data-india-featured-card>
-              <div class="featured-placeholder"><span>India</span></div>
+          {featuredIndia ? (
+            <a class="featured-card" href={`/travel/india/${featuredIndia.slug}/`} data-india-featured-card>
+              <img src={featuredIndia.banner ?? `/images/travel/${featuredIndia.slug}.jpg`} alt={`${featuredIndia.title} travel banner`} data-india-featured-image />
               <div class="featured-copy">
-                <p class="featured-continent">India journey</p>
-                <h2 data-india-featured-name>Featured journey</h2>
-                <p class="featured-link">Explore India →</p>
+                <p class="featured-continent">India · {featuredIndia.region ?? "Journey"}</p>
+                <h2 data-india-featured-name>{featuredIndia.title}</h2>
+                <p class="featured-link">Read the travelogue →</p>
               </div>
             </a>
           ) : (
