@@ -54,7 +54,7 @@ The site should serve:
 
 Rides are intentionally not a primary navigation item. They appear as related content within Travel where appropriate.
 
-The exact implementation routes must be documented before coding is finalised and should remain human-readable and stable.
+The travel hierarchy is geographic at the index level but uses one underlying travel content model. India is a country containing individual journeys; international countries may contain one or multiple trips/stories. This is a content distinction, not a separate application architecture.
 
 ## 5. Homepage
 
@@ -173,20 +173,24 @@ Travel uses a deliberate geographic classification:
 
 Countries provide the broad index and orientation. Individual trips, places and stories provide the substantive content.
 
-The initial country/status list supplied by Ravi is source data for the travel record. The visited set currently contains 20 countries. The original status record should be retained as planning/source data.
+India is represented as one country within the same geography. Because India contains many individual journeys, its visitor-facing index presents those journeys beneath India rather than treating Indian states as countries. International countries can similarly contain one or more stories when needed.
 
 ### 11.2 Common travel template
 
-All country/trip presentations should use a common underlying template so that new destinations can be added by copying and editing structured data rather than redesigning pages.
+All country/trip/journey presentations use one common underlying travel template and rendering mechanism.
 
-The template should be consistent in structure but flexible in depth and content.
+The template is consistent in its metadata and presentation conventions but flexible in depth and content.
+
+The system determines whether a URL represents a country-level story or an individual journey from the travel data. India versus international does **not** select a different page implementation.
 
 Potential sections include:
 
 - Country / place / region
 - Continent
 - Visit date or period
-- Trip context
+- Duration
+- Travelled with / trip context
+- Journey or travel type where useful
 - Personal narrative
 - Places and experiences
 - What stood out
@@ -202,11 +206,39 @@ Potential sections include:
 
 Not every trip needs every section.
 
-### 11.3 Trip metadata
+### 11.3 Unified travel implementation
 
-Each trip should have a reusable structured metadata record that acts as the factual backbone for the site.
+The travel detail system uses a single underlying module for India and international travel.
 
-The metadata should be easy to edit, copy and reuse for the next destination. It may contain richer information than is publicly displayed.
+It must support variable route depth, for example:
+
+```text
+/travel/italy/
+/travel/jordan/
+/travel/armenia/
+/travel/india/amarnath/
+```
+
+The URL depth reflects how the content is organised for visitors. It must not result in separate travel rendering mechanisms.
+
+The common implementation is responsible for:
+
+- Loading travel metadata
+- Resolving the requested country/journey
+- Normalising and formatting dates
+- Calculating/displaying duration where applicable
+- Rendering common travel metadata
+- Rendering the travel narrative
+- Handling featured travel content
+- Providing consistent SEO/page metadata
+
+Country- or journey-specific differences should be expressed through structured data and optional fields.
+
+### 11.4 Trip metadata
+
+Each trip/journey should have a reusable structured metadata record that acts as the factual backbone for the site.
+
+The metadata should be easy to edit, copy and reuse for the next destination/journey. It may contain richer information than is publicly displayed.
 
 Potential metadata includes:
 
@@ -215,6 +247,8 @@ Potential metadata includes:
 - Places
 - Trip dates
 - Trip purpose/context
+- Journey/travel type
+- Travel companions
 - Flights
 - Flight dates/routes
 - Airlines
@@ -226,10 +260,13 @@ Potential metadata includes:
 - Photography references
 - Story references
 - Publication status
+- Featured status where appropriate
+
+Indian journeys and international travel use the same core metadata conventions. Fields remain optional where they do not apply.
 
 The site should derive repeatable presentation from this data rather than requiring facts to be duplicated across components or pages.
 
-### 11.4 Travel writing process
+### 11.5 Travel writing process
 
 Travel content should be developed through an interview-led editorial process.
 
@@ -239,11 +276,11 @@ The resulting narrative is then edited into the common travel template and suppl
 
 Existing travel records, including flight history, may be used as factual source material to establish chronology and prompt more precise questions. Detailed metadata should only be exposed publicly when it adds value.
 
-### 11.5 Travel and rides
+### 11.6 Travel and rides
 
 Riding experiences may appear as trips, stories or related content within Travel. The model must support ordinary travel that has no motorcycle component.
 
-### 11.6 Travel depth
+### 11.7 Travel depth
 
 Unlike most sections of vtrrk.in, Travel is intentionally allowed to be detailed. It can contain substantial narrative, practical advice and multiple related stories where the experience warrants it.
 
@@ -315,11 +352,13 @@ Initial content types:
 - Projects
 - Writing
 - Travel continents/countries
-- Travel trips
+- Travel trips/journeys
 - Travel stories
 - Travel trip metadata
 - Photography/external collections
 - Now entries
+
+The travel content types share one underlying travel model and rendering mechanism. India is not a separate technical content system from international travel.
 
 Portable Markdown and structured data files are preferred initially. A CMS or database is not required for V1.
 
@@ -379,3 +418,4 @@ Before V1 is considered complete, the site should be:
 - Easy to update
 - Reproducibly deployable from GitHub
 - Structured so future content can be added without redesigning the foundation
+- Able to add Indian journeys and international travel stories through the same travel mechanism
