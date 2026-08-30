@@ -4,43 +4,44 @@
 
 The architecture should keep vtrrk.in simple, fast, portable and easy for one person to maintain.
 
-The site is primarily a content-driven static website. It should avoid introducing infrastructure merely because it is technically possible.
+The site is primarily a content-driven static website. Infrastructure should only be introduced when a real requirement justifies it.
 
 ## 2. Stack
 
 - Astro for site generation and page composition.
-- TypeScript for structured content and application logic.
+- TypeScript for structured data and application logic.
 - CSS for presentation.
 - Markdown/content files for long-form publishing.
-- Git/GitHub for source control and content ownership.
+- Git/GitHub for source control and owned content.
 - Cloudflare Pages for deployment.
 
 ## 3. High-Level Model
 
 ```text
-Owned Content
-    |
-    +-- Books
-    +-- Writing
-    +-- Projects
-    +-- Travel
-    +-- Photography
-    +-- Now
-    +-- Site/About
-    |
-    v
+Owned Content / Structured Data
+        |
+        +-- Site / About / Now
+        +-- Books
+        +-- Writing
+        +-- Projects
+        +-- Travel geography
+        +-- Travel trip metadata
+        +-- Travel stories
+        +-- Photography links/curated references
+        |
+        v
 Astro Content/Data Layer
-    |
-    v
+        |
+        v
 Reusable Layouts + Components
-    |
-    v
+        |
+        v
 Static HTML/CSS/Optimised Assets
-    |
-    v
+        |
+        v
 Cloudflare Pages
-    |
-    v
+        |
+        v
 vtrrk.in
 ```
 
@@ -61,6 +62,7 @@ Target structure:
 ├── src/
 │   ├── components/
 │   ├── content/
+│   ├── data/
 │   ├── layouts/
 │   ├── pages/
 │   └── styles/
@@ -73,21 +75,23 @@ Target structure:
 └── tsconfig.json
 ```
 
-The exact directory structure may evolve as content collections and routes are added.
+The exact directory structure may evolve as content collections are implemented.
 
 ## 5. Content Architecture
 
 Content should be modelled independently from visual components.
 
-Current structured content is already separated into TypeScript modules for books, projects, site identity and writing. This pattern should be retained where it remains appropriate.
+Small, stable structured data may remain in TypeScript modules where that is the simplest solution. Long-form material should use Markdown/content collections.
 
-As long-form content grows, Markdown-based content collections are preferred for articles and travelogue entries because they are portable, version-controlled and easy to edit.
+Travel should use structured data for geography and trip metadata, with narrative content kept separate where practical.
 
-## 6. Proposed Content Types
+The goal is to enter facts once and derive repeatable presentation from them.
 
-### Site
+## 6. Content Models
 
-Global identity, navigation, metadata, external links and current positioning.
+### Site / Now
+
+Global identity, navigation, external links and current-focus content.
 
 ### Book
 
@@ -95,10 +99,11 @@ Global identity, navigation, metadata, external links and current positioning.
 - subtitle
 - description
 - cover
-- publication status
-- publication date where relevant
+- publication status/date
 - purchase/read links
 - related content
+
+Book pages should use a concise reusable presentation template.
 
 ### Writing
 
@@ -107,8 +112,8 @@ Global identity, navigation, metadata, external links and current positioning.
 - date
 - description/dek
 - body
-- hero image where useful
-- tags/categories where useful
+- optional hero image
+- optional tags/categories
 - related content
 
 ### Project
@@ -116,45 +121,110 @@ Global identity, navigation, metadata, external links and current positioning.
 - title
 - slug
 - short description
-- longer description
+- purpose/why
 - status
 - links
 - optional imagery
 - related writing
 
-### Travel
+Project pages should communicate the human/project story, not reproduce technical repository documentation.
 
-Travel should be modelled so that a trip can contain one or more places and a place can have its own durable story.
+### Travel geography
+
+Travel uses a deliberate geographic classification:
+
+```text
+Continent
+   |
+   +-- Country
+          |
+          +-- Trips / Places / Stories
+```
+
+Country is a first-class index concept. The implementation should support the initial country/status data and future destinations without bespoke page construction.
+
+### Travel trip metadata
+
+Every trip should have a reusable structured metadata record that can be copied and edited for another destination.
 
 Potential fields:
 
-- title
-- slug
 - country
-- place
-- region where useful
-- visit date/period
-- trip identifier where useful
+- continent
+- places
+- trip dates
+- trip context/purpose
+- flights
+- flight dates/routes
+- airline
+- flight number where useful
+- seat where useful
+- accommodation
+- transport
+- rides/routes
+- photography references
+- story references
+- publication status
+
+This metadata is the factual backbone. It may contain more information than is publicly displayed.
+
+### Travel story
+
+Narrative content may contain:
+
 - introduction
-- narrative/body
-- highlights
+- personal experience
+- places and experiences
+- memorable moments
 - observations
+- what to do again
+- mistakes/things to avoid
+- accommodation observations
+- transport observations
 - practical notes
-- photography
+- photography references/embeds
 - related rides
 - related writing
 
-The model should not force every travel entry to contain every field. Personal storytelling takes precedence over form completeness.
+The common template must remain flexible: not every story needs every section.
 
 ### Photography
 
-Photography may initially reference external collections, but the model should permit locally owned galleries/collections later.
+V1 should primarily contain curated external photography references and links. Local image assets should be limited to purposeful visual accents/contextual imagery rather than a complete archive.
 
-## 7. Routing
+The architecture should leave room for a dedicated owned photography site/gallery in the future.
+
+## 7. Travel Editorial Workflow
+
+Travel content follows an interview-led process:
+
+```text
+Travel records / metadata
+        +
+Ravi's memories
+        +
+Photographs / external references
+        |
+        v
+Pointed adaptive interview
+        |
+        v
+Travel story draft
+        |
+        v
+Common travel template
+        |
+        v
+Published destination/trip
+```
+
+Questions should adapt to the information already known and the memories revealed during the conversation. Existing flight/travel records can be used to establish chronology and prompt precise questions.
+
+## 8. Routing
 
 The site should use clean, human-readable canonical URLs.
 
-Illustrative target routes:
+Target primary routes:
 
 ```text
 /
@@ -166,43 +236,46 @@ Illustrative target routes:
 /writing/<slug>/
 /projects/
 /projects/<slug>/
-/photography/
 /travel/
-/travel/<slug>/
+/photography/
 /contact/
 /elsewhere/
 ```
 
-Final route naming should be confirmed before implementation.
+Travel's geographic hierarchy should be reflected in the final canonical route design where it improves discoverability. Exact country/trip/story route depth must be confirmed before implementation.
 
-## 8. Rendering Strategy
+## 9. Rendering Strategy
 
 Prefer static generation for public content.
 
-Client-side JavaScript should be introduced only when a feature genuinely needs it.
+Client-side JavaScript should be introduced only where a feature genuinely needs it.
 
-The default page should remain usable with minimal or no client-side scripting.
+Core pages must not depend on third-party embeds for basic rendering.
 
-## 9. Components
+External photography embeds, where used, should be progressive enhancement and should not make the page unusable when unavailable.
 
-Reusable components should be introduced around genuine repeated patterns, for example:
+## 10. Components
 
-- Header.
-- Footer.
-- Book card/presentation.
-- Project summary.
-- Writing preview.
-- Travel preview.
-- Image/gallery presentation.
-- Metadata/SEO helpers.
+Reusable components should correspond to genuine repeated patterns:
 
-Avoid turning every visual fragment into a component merely for abstraction.
+- Header
+- Footer
+- Book presentation
+- Project summary
+- Writing preview/article layout
+- Travel country/trip/story presentation
+- Travel metadata display
+- External-link presentation
+- Image/visual presentation
+- Metadata/SEO helpers
 
-## 10. Images
+Avoid abstraction for its own sake.
 
-Images are important to the identity of the site.
+## 11. Images
 
-Local images should live under `public/images/` or an appropriate Astro-managed asset structure depending on the final image pipeline.
+The site should be image-conscious rather than image-heavy.
+
+Local images, where required, should use Astro's appropriate asset pipeline or `public/` for assets that genuinely need direct public paths.
 
 Image handling should consider:
 
@@ -213,17 +286,19 @@ Image handling should consider:
 - loading behaviour
 - visual quality
 
-Travel and photography pages may require a stronger image pipeline than the initial homepage.
+The homepage should not load a large photographic collection.
 
-## 11. SEO Architecture
+Travel pages can carry richer imagery because Travel is intentionally a detailed visual/story experience.
 
-A shared layout should provide consistent metadata foundations.
+## 12. SEO Architecture
+
+Shared layouts should provide consistent metadata foundations.
 
 Page-level content should provide titles, descriptions and canonical URLs.
 
-Specialised metadata/structured data can be added for books, articles, places and personal identity where useful.
+Specialised structured data can be added for books, articles, travel/place content and personal identity where useful.
 
-## 12. Deployment Architecture
+## 13. Deployment Architecture
 
 ```text
 Developer / Content Author
@@ -244,34 +319,40 @@ Cloudflare Pages build
 
 The production site should be reproducible from the repository.
 
-## 13. External Dependencies
+## 14. External Dependencies
 
-The architecture should minimise runtime dependence on external services.
+Runtime dependence on external services should be minimal.
 
-External links are acceptable for distribution and references. Core site content should remain available even if an external platform changes or disappears.
+External links are acceptable for distribution and references. Core site content should remain available if an external platform changes or disappears.
 
-## 14. Future Architecture
+Photography platforms may be linked or selectively embedded. Such integrations must not become required infrastructure.
+
+## 15. Future Architecture
 
 Potential future additions include:
 
+- dedicated photography site/gallery
 - richer image management
-- search
+- site search
 - map-based travel discovery
 - RSS/Atom feed
 - newsletter
 - CMS
-- analytics
-- more advanced structured data
+- privacy-conscious analytics
+- richer structured data
 
-None should be introduced until there is a demonstrated need.
+None should be introduced until a demonstrated need exists.
 
-## 15. Architectural Principles
+## 16. Architectural Principles
 
 1. Static first.
-2. Content owned by the repository.
-3. Minimal JavaScript.
-4. Reusable components where useful.
-5. Human-readable URLs.
-6. Images treated as first-class content.
-7. No backend without a real requirement.
-8. Prefer simple solutions that can be maintained for years.
+2. Person-first product structure.
+3. Content owned by the repository wherever practical.
+4. Structured travel metadata entered once and reused.
+5. Long-form narrative separated from presentation where practical.
+6. Minimal JavaScript.
+7. Human-readable stable URLs.
+8. Photography is visual support/gateway in V1, not a photo-hosting system.
+9. Travel is detailed and template-driven.
+10. No backend without a real requirement.
+11. Prefer simple solutions that can be maintained for years.
