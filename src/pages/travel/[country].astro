@@ -1,33 +1,44 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { parse } from "yaml";
+import { load } from "js-yaml";
+
+type TravelData = {
+  country: string;
+  continent: string;
+  banner?: string;
+  intro?: string;
+  visits?: { from: string; to: string; travelling_with?: string[] }[];
+  travelling_with?: { type?: string; names?: string[] };
+};
 
 const markdownModules = import.meta.glob("../../content/travel/*/*.md", { eager: true });
-const yamlModules = import.meta.glob("../../content/travel/*/*.yaml", { eager: true, query: "?raw", import: "default" });
 
 export function getStaticPaths() {
   const countries = import.meta.glob("../../content/travel/*/*.yaml", { eager: true, query: "?raw", import: "default" });
   return Object.entries(countries).map(([path, raw]) => {
-    const data = parse(raw as string);
+    const data = load(raw as string) as TravelData;
     return { params: { country: data.country.toLowerCase().replace(/\s+/g, "-") }, props: { data, path } };
   });
 }
 
-const { data, path } = Astro.props;
-const slug = Astro.params.country!;
+const { data, path } = Astro.props as { data: TravelData; path: string };
 const markdownPath = path.replace(/\.yaml$/, ".md");
 const storyModule = markdownModules[markdownPath] as { Content: unknown } | undefined;
 const Story = storyModule?.Content;
-const visits = data.visits ?? [];
+
+const visits = (data.visits ?? []).map((visit) => ({
+  ...visit,
+  travelling_with: visit.travelling_with ?? data.travelling_with?.names ?? [],
+}));
 const firstVisit = visits[0];
 const lastVisit = visits[visits.length - 1];
-const companion = firstVisit?.travelling_with?.join(", ") || "Solo";
+const companion = firstVisit?.travelling_with?.join(", ") || (data.travelling_with?.type === "solo" ? "Solo" : "Solo");
 const formatDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 ---
 <BaseLayout title={`${data.country} — Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${data.country}.`}>
   <main>
     <a class="back" href="/travel/">← Travel</a>
-    <img class="banner" src={data.banner} alt={`${data.country} travel banner`} />
+    <img class="banner" src={data.banner ?? `/images/travel/${data.country.toLowerCase().replace(/\s+/g, "-")}.jpg`} alt={`${data.country} travel banner`} />
     <header>
       <p class="label">{data.continent} · {data.country}</p>
       <h1>{data.country}</h1>
