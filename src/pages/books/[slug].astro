@@ -5,7 +5,20 @@ export function getStaticPaths(){return books.map((book)=>({params:{slug:book.sl
 const { book } = Astro.props;
 ---
 <BaseLayout title={`${book.title} — V.T.R. Ravi Kumar`} description={book.description}>
-<main><a class="back" href="/books/">← All books</a><article class="book"><img src={book.cover} alt={`Cover of ${book.title}`} /><div><p class="label">Book</p><h1>{book.title}</h1>{book.subtitle&&<p class="subtitle">{book.subtitle}</p>}<p class="description">{book.description}</p><a class="buy" href={book.href} target="_blank" rel="noopener noreferrer">Buy / read →</a></div></article></main>
+<main>
+  <a class="back" href="/books/">← All books</a>
+  <article class="book">
+    <div class="cover-wrap"><img src={book.cover} alt={`Cover of ${book.title}`} /></div>
+    <div class="book-copy">
+      <p class="label">Book</p>
+      <h1>{book.title}</h1>
+      {book.subtitle && <p class="subtitle">{book.subtitle}</p>}
+      <p class="description">{book.description}</p>
+      <a class="buy" href={book.href} target="_blank" rel="noopener noreferrer">Buy / read <span>↗</span></a>
+    </div>
+  </article>
+</main>
 </BaseLayout>
-<style>main{width:min(1000px,calc(100% - 3rem));margin:0 auto}.back{display:inline-block;margin-top:4rem;color:var(--muted);text-underline-offset:.3em}.book{min-height:65vh;display:grid;grid-template-columns:320px 1fr;gap:5rem;align-items:center}.book img{width:320px;aspect-ratio:2/3;object-fit:cover}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.book h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:.95;letter-spacing:-.05em}.subtitle{font-size:1.25rem;color:var(--muted)}.description{max-width:620px;line-height:1.75;color:var(--muted)}.buy{display:inline-block;margin-top:1rem;text-underline-offset:.3em}@media(max-width:700px){main{width:min(100% - 2rem,1000px)}.book{min-height:auto;grid-template-columns:140px 1fr;gap:1.5rem;padding:4rem 0}.book img{width:140px}.book h1{font-size:2.5rem}}
+<style>
+main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.back{display:inline-block;margin:2rem 0 1.5rem;color:var(--muted);font-size:.9rem;text-decoration:none;transition:color .2s ease}.back:hover{color:var(--foreground)}.book{min-height:72vh;display:grid;grid-template-columns:360px 1fr;gap:6rem;align-items:center}.cover-wrap{width:360px;overflow:hidden;background:color-mix(in srgb,var(--foreground) 4%,var(--background));box-shadow:0 22px 55px color-mix(in srgb,var(--foreground) 12%,transparent)}.book img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}.cover-wrap:hover img{transform:scale(1.02)}.book-copy{max-width:680px}.label{margin:0 0 .9rem;color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase}.book h1{margin:0;font-size:clamp(3.2rem,7vw,6rem);line-height:.94;letter-spacing:-.055em}.subtitle{margin:1rem 0 0;color:var(--muted);font-size:1.2rem;line-height:1.5}.description{max-width:620px;margin:2rem 0 0;color:var(--muted);font-size:1.05rem;line-height:1.8}.buy{display:inline-block;margin-top:2rem;color:inherit;text-underline-offset:.3em}.buy span{display:inline-block;margin-left:.2rem;transition:transform .2s ease}.buy:hover span{transform:translate(2px,-2px)}@media(max-width:800px){main{width:min(100% - 2rem,1080px)}.book{min-height:auto;grid-template-columns:240px 1fr;gap:3rem;padding:4rem 0}.cover-wrap{width:240px}}@media(max-width:600px){.book{grid-template-columns:1fr;gap:2.5rem;padding:3rem 0}.cover-wrap{width:min(280px,100%)}.book h1{font-size:clamp(2.7rem,13vw,4rem)}.description{margin-top:1.5rem}}
 </style>
