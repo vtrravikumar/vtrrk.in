@@ -15,7 +15,7 @@ const indiaJourneys = Object.entries(indiaJourneyModules).map(([path, raw]) => {
   const slug = path.split("/").at(-2) ?? data.title.toLowerCase().replace(/\s+/g, "-");
   return { ...data, slug };
 });
-const featuredIndia = indiaJourneys.find((journey) => journey.featured) ?? indiaJourneys[0];
+const featuredIndia = indiaJourneys[Math.floor(Math.random() * indiaJourneys.length)];
 const fallbackWorld = published[0];
 const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
 ---
