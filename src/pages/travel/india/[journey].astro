@@ -6,8 +6,8 @@ type JourneyData = {
   title: string;
   country: string;
   region?: string;
-  from: string;
-  to: string;
+  from: string | Date;
+  to: string | Date;
   duration_days?: number;
   travelled_with?: string[];
   travel_type?: string;
@@ -19,8 +19,6 @@ type JourneyData = {
 const markdownModules = import.meta.glob("../../../content/travel/india/*/*.md", { eager: true });
 
 export function getStaticPaths() {
-  // Keep the glob inside getStaticPaths so Astro's prerendered route
-  // generation always has the module map available at build time.
   const journeyModules = import.meta.glob("../../../content/travel/india/*/*.yaml", {
     eager: true,
     query: "?raw",
@@ -38,7 +36,9 @@ const { data, path } = Astro.props as { data: JourneyData; path: string };
 const markdownPath = path.replace(/\.yaml$/, ".md");
 const storyModule = markdownModules[markdownPath] as { Content: unknown } | undefined;
 const Story = storyModule?.Content;
-const formatDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+
+const toDate = (value: string | Date) => value instanceof Date ? value : new Date(`${value}T00:00:00`);
+const formatDate = (value: string | Date) => toDate(value).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 const companion = data.travelled_with?.join(", ") || (data.solo ? "Solo" : "");
 ---
 <BaseLayout title={`${data.title} — India Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${data.title}, India.`}>
@@ -53,7 +53,7 @@ const companion = data.travelled_with?.join(", ") || (data.solo ? "Solo" : "");
     <section class="record">
       <div><span>Dates</span><strong>{formatDate(data.from)} – {formatDate(data.to)}</strong></div>
       {data.duration_days && <div><span>Duration</span><strong>{data.duration_days} days</strong></div>}
-      {data.travelled_with && <div><span>Travelled with</span><strong>{companion}</strong></div>}
+      <div><span>Travelled with</span><strong>{companion || "Solo"}</strong></div>
       {data.travel_type && <div><span>Journey</span><strong>{data.travel_type}</strong></div>}
     </section>
     {Story && <article class="story"><Story /></article>}
