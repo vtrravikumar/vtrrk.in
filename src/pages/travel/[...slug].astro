@@ -25,14 +25,13 @@ type TravelData = {
   featured?: boolean;
 };
 
-const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", {
-  eager: true,
-  query: "?raw",
-  import: "default"
-});
-const markdownModules = import.meta.glob("../../content/travel/**/*.md", { eager: true });
-
 export function getStaticPaths() {
+  const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", {
+    eager: true,
+    query: "?raw",
+    import: "default"
+  });
+
   return Object.entries(yamlModules).map(([path, raw]) => {
     const data = load(raw as string) as TravelData;
     const relative = path.replace("../../content/travel/", "").replace(/\.yaml$/, "");
@@ -42,6 +41,7 @@ export function getStaticPaths() {
   });
 }
 
+const markdownModules = import.meta.glob("../../content/travel/**/*.md", { eager: true });
 const { slug } = Astro.params;
 const { data, path } = Astro.props as { data: TravelData; path: string };
 const isIndia = slug?.startsWith("india/") ?? false;
@@ -100,7 +100,7 @@ const backLabel = isIndia ? "← India journeys" : "← Travel";
       <p class="intro">{data.intro ?? `A personal travelogue from ${title}.`}</p>
     </header>
     <section class="record">
-      <div><span>Dates</span><strong>{formatDate(from)} – {formatDate(to)}</strong></div>
+      {from && to && <div><span>Dates</span><strong>{formatDate(from)} – {formatDate(to)}</strong></div>}
       {durationDays !== undefined && <div><span>Duration</span><strong>{durationDays} days</strong></div>}
       <div><span>Travelled with</span><strong>{companion}</strong></div>
       <div><span>Journey</span><strong>{journeyValue}</strong></div>
