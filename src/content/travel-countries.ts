@@ -12,7 +12,7 @@ export type TravelCountry = {
 // The index intentionally includes only visited countries for now.
 // Blog availability is kept separate so the index can grow as stories are added.
 export const travelCountries: TravelCountry[] = [
-  { name: "Armenia", continent: "Asia", status: "Y", slug: "armenia", hasBlog: false },
+  { name: "Armenia", continent: "Asia", status: "Y", slug: "armenia", hasBlog: true },
   { name: "Azerbaijan", continent: "Asia", status: "Y", slug: "azerbaijan", hasBlog: false },
   { name: "Australia", continent: "Oceania", status: "Y", slug: "australia", hasBlog: false },
   { name: "Georgia", continent: "Asia", status: "Y", slug: "georgia", hasBlog: false },
