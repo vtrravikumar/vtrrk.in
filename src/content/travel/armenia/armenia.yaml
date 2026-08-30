@@ -1,7 +1,8 @@
 country: Armenia
 continent: Asia
-status: Y
-banner: armenia.jpg
+status: visited
+banner: /images/travel/armenia.jpg
+content_status: published
 
 visits:
   - from: 2017-11-28
@@ -12,6 +13,8 @@ visits:
     to: 2020-01-03
     travelling_with:
       - Pragati
+
+origin: Dubai, UAE
 
 flights:
   - date: 2017-11-28
@@ -26,9 +29,7 @@ flights:
     flight: FZ716
 
 accommodation:
-  - name: Marriott
-    location: Republic Square, Yerevan
-    visits: 2
+  - Marriott, Republic Square, Yerevan
 
 places_visited:
   - Lake Sevan
