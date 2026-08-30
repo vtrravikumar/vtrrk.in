@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { books } from "../../content/books";
+export function getStaticPaths(){return books.map((book)=>({params:{slug:book.slug},props:{book}}));}
+const { book } = Astro.props;
+---
+<BaseLayout title={`${book.title} — V.T.R. Ravi Kumar`} description={book.description}>
+<main><a class="back" href="/books/">← All books</a><article class="book"><img src={book.cover} alt={`Cover of ${book.title}`} /><div><p class="label">Book</p><h1>{book.title}</h1>{book.subtitle&&<p class="subtitle">{book.subtitle}</p>}<p class="description">{book.description}</p><a class="buy" href={book.href} target="_blank" rel="noopener noreferrer">Buy / read →</a></div></article></main>
+</BaseLayout>
+<style>main{width:min(1000px,calc(100% - 3rem));margin:0 auto}.back{display:inline-block;margin-top:4rem;color:var(--muted);text-underline-offset:.3em}.book{min-height:65vh;display:grid;grid-template-columns:320px 1fr;gap:5rem;align-items:center}.book img{width:320px;aspect-ratio:2/3;object-fit:cover}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.book h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:.95;letter-spacing:-.05em}.subtitle{font-size:1.25rem;color:var(--muted)}.description{max-width:620px;line-height:1.75;color:var(--muted)}.buy{display:inline-block;margin-top:1rem;text-underline-offset:.3em}@media(max-width:700px){main{width:min(100% - 2rem,1000px)}.book{min-height:auto;grid-template-columns:140px 1fr;gap:1.5rem;padding:4rem 0}.book img{width:140px}.book h1{font-size:2.5rem}}
+</style>
