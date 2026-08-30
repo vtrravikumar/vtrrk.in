@@ -1,0 +1,47 @@
+country: Armenia
+continent: Asia
+status: Y
+banner: armenia.jpg
+
+visits:
+  - from: 2017-11-28
+    to: 2017-12-04
+    travelling_with:
+      - Pragati
+  - from: 2019-12-31
+    to: 2020-01-03
+    travelling_with:
+      - Pragati
+
+flights:
+  - date: 2017-11-28
+    from: DXB
+    to: EVN
+    airline: Flydubai
+    flight: FZ715
+  - date: 2017-12-04
+    from: EVN
+    to: DXB
+    airline: Flydubai
+    flight: FZ716
+
+accommodation:
+  - name: Marriott
+    location: Republic Square, Yerevan
+    visits: 2
+
+places_visited:
+  - Lake Sevan
+  - Garni Temple
+  - Geghard Monastery
+  - Tsitsernakaberd Armenian Genocide Memorial Complex
+  - Tsaghkadzor Ski Resort
+  - Kecharis Monastery
+  - Haghartsin Monastic Complex
+  - Khor Virap
+  - Jermuk Falls
+  - Areni Winery
+
+photography:
+  500px: ""
+  instagram: ""
