@@ -1,0 +1,46 @@
+country: Italy
+continent: Europe
+status: visited
+visits:
+  - from: 2016-08-16
+    to: 2016-08-25
+    travelling_with:
+      - Pragati
+origin: Dubai, UAE
+accommodation:
+  - Rome
+  - Florence
+  - Venice
+  - Zurich
+flights:
+  - date: 2016-08-16
+    from: DXB
+    to: FCO
+    airline: Emirates
+    flight: EK95
+  - date: 2016-08-25
+    from: ZRH
+    to: DXB
+    airline: Emirates
+    flight: EK86
+route:
+  - Rome
+  - Florence
+  - Pisa
+  - Venice
+  - Milan
+  - Zurich
+places_visited:
+  - Colosseum
+  - Vatican City
+  - Trevi Fountain
+  - Spanish Steps
+  - Pantheon
+  - Piazza del Campidoglio
+  - Piazza del Duomo, Florence
+  - Leaning Tower of Pisa
+  - Rialto Bridge
+  - St Mark's Square
+  - Zurich
+banner: /images/travel/italy.jpg
+content_status: draft
