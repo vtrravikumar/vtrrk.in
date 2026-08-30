@@ -5,9 +5,10 @@ import { load } from "js-yaml";
 type JourneyData = {
   title: string;
   region?: string;
-  from: string;
-  to: string;
+  from: string | Date;
+  to: string | Date;
   banner?: string;
+  featured?: boolean;
 };
 
 const journeyModules = import.meta.glob("../../../content/travel/india/*/*.yaml", { eager: true, query: "?raw", import: "default" });
@@ -15,9 +16,10 @@ const journeys = Object.entries(journeyModules).map(([path, raw]) => {
   const data = load(raw as string) as JourneyData;
   const slug = path.split("/").at(-2) ?? data.title.toLowerCase().replace(/\s+/g, "-");
   return { ...data, slug };
-}).sort((a, b) => a.from.localeCompare(b.from));
+}).sort((a, b) => new Date(a.from).getTime() - new Date(b.from).getTime());
 
-const formatDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const featuredJourney = journeys.find((journey) => journey.featured) ?? journeys[0];
+const formatDate = (value: string | Date) => (value instanceof Date ? value : new Date(`${value}T00:00:00`)).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 ---
 <BaseLayout title="India — Travel — V.T.R. Ravi Kumar" description="A collection of journeys across India, organised as trips rather than states.">
   <main>
@@ -27,6 +29,19 @@ const formatDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDate
       <h1>Journeys across India.</h1>
       <p>India will be remembered here as individual journeys — not as a list of states. Each trip will have its own story, route, photographs and practical notes.</p>
     </header>
+
+    {featuredJourney && <section class="featured" aria-labelledby="featured-heading">
+      <p class="label" id="featured-heading">Featured journey</p>
+      <a class="featured-card" href={`/travel/india/${featuredJourney.slug}/`}>
+        <img src={featuredJourney.banner ?? `/images/travel/${featuredJourney.title.toLowerCase().replace(/\s+/g, "-")}.jpg`} alt={`${featuredJourney.title} travel banner`} />
+        <div class="featured-copy">
+          <p class="journey-region">India · {featuredJourney.region ?? "Journey"}</p>
+          <h2>{featuredJourney.title}</h2>
+          <p>{formatDate(featuredJourney.from)} – {formatDate(featuredJourney.to)}</p>
+          <span>Read the travelogue →</span>
+        </div>
+      </a>
+    </section>}
 
     <section class="journeys">
       <div class="section-heading">
@@ -48,5 +63,5 @@ const formatDate = (value: string) => new Date(`${value}T00:00:00`).toLocaleDate
   </main>
 </BaseLayout>
 <style>
-main{width:min(1000px,calc(100% - 3rem));margin:0 auto;padding-bottom:6rem}.back{display:inline-block;margin:3rem 0 1.5rem;color:var(--muted);text-decoration:none}header{padding:4rem 0 5rem;max-width:800px}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}h1{margin:.5rem 0 1rem;font-size:clamp(2.8rem,6vw,4.5rem);line-height:1;letter-spacing:-.04em}header>p:last-child{font-size:1.2rem;line-height:1.7;color:var(--muted)}.journeys{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding-top:3rem}.section-heading h2{font-size:2.2rem;margin:.5rem 0 2rem}.journey-list{display:grid;gap:1.5rem}.journey-card{display:grid;grid-template-columns:280px 1fr;min-height:210px;border:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);color:inherit;text-decoration:none;overflow:hidden}.journey-card img,.placeholder{width:100%;height:100%;min-height:210px;object-fit:cover;display:block}.placeholder{background:color-mix(in srgb,var(--foreground) 5%,transparent)}.copy{padding:2rem;display:flex;flex-direction:column;justify-content:center}.journey-region{margin:0 0 .5rem;color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}.copy h3{margin:0;font-size:2rem;line-height:1.1}.copy p:not(.journey-region){color:var(--muted);margin:.75rem 0}.copy span{color:var(--muted);margin-top:.75rem}.journey-card:hover span{text-decoration:underline}.empty{color:var(--muted);line-height:1.7}@media(max-width:700px){main{width:min(100% - 2rem,1000px)}header{padding:3rem 0 4rem}.journey-card{grid-template-columns:1fr}.journey-card img,.placeholder{min-height:220px}.copy{padding:1.5rem}}
+main{width:min(1000px,calc(100% - 3rem));margin:0 auto;padding-bottom:6rem}.back{display:inline-block;margin:3rem 0 1.5rem;color:var(--muted);text-decoration:none}header{padding:4rem 0 4rem;max-width:800px}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}h1{margin:.5rem 0 1rem;font-size:clamp(2.8rem,6vw,4.5rem);line-height:1;letter-spacing:-.04em}header>p:last-child{font-size:1.2rem;line-height:1.7;color:var(--muted)}.featured{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:3rem 0 5rem}.featured-card{display:grid;grid-template-columns:1fr 1fr;min-height:300px;color:inherit;text-decoration:none;border:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);overflow:hidden}.featured-card img{width:100%;height:100%;min-height:300px;object-fit:cover;display:block}.featured-copy{display:flex;flex-direction:column;justify-content:center;padding:2rem}.journey-region{margin:0 0 .5rem;color:var(--muted);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}.featured-copy h2{margin:0;font-size:clamp(2rem,4vw,3rem);line-height:1.05}.featured-copy p:not(.journey-region){color:var(--muted);margin:.9rem 0}.featured-copy span{color:var(--muted);margin-top:.75rem}.featured-card:hover span{text-decoration:underline}.journeys{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding-top:3rem}.section-heading h2{font-size:2.2rem;margin:.5rem 0 2rem}.journey-list{display:grid;gap:1.5rem}.journey-card{display:grid;grid-template-columns:280px 1fr;min-height:210px;border:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);color:inherit;text-decoration:none;overflow:hidden}.journey-card img,.placeholder{width:100%;height:100%;min-height:210px;object-fit:cover;display:block}.placeholder{background:color-mix(in srgb,var(--foreground) 5%,transparent)}.copy{padding:2rem;display:flex;flex-direction:column;justify-content:center}.copy h3{margin:0;font-size:2rem;line-height:1.1}.copy p:not(.journey-region){color:var(--muted);margin:.75rem 0}.copy span{color:var(--muted);margin-top:.75rem}.journey-card:hover span{text-decoration:underline}.empty{color:var(--muted);line-height:1.7}@media(max-width:700px){main{width:min(100% - 2rem,1000px)}header{padding:3rem 0}.featured-card{grid-template-columns:1fr}.featured-card img{min-height:220px}.featured-copy{padding:1.5rem}.journey-card{grid-template-columns:1fr}.journey-card img,.placeholder{min-height:220px}.copy{padding:1.5rem}}
 </style>
