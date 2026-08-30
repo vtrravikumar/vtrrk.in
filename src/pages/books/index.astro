@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { books } from "../../content/books";
+---
+<BaseLayout title="Books — V.T.R. Ravi Kumar" description="Books written by V.T.R. Ravi Kumar.">
+<main><header class="page-head"><p class="label">Books</p><h1>Stories, ideas and experiences in print.</h1><p>Three published books, each from a different part of the journey.</p></header>
+<section class="books">{books.map((book)=><article><img src={book.cover} alt={`Cover of ${book.title}`} /><div><h2>{book.title}</h2>{book.subtitle&&<p class="subtitle">{book.subtitle}</p>}<p>{book.description}</p><div class="actions"><a href={`/books/${book.slug}/`}>About the book →</a><a href={book.href} target="_blank" rel="noopener noreferrer">Buy / read →</a></div></div></article>)}</section></main>
+</BaseLayout>
+<style>main{width:min(1000px,calc(100% - 3rem));margin:0 auto}.page-head{padding:7rem 0 5rem;max-width:850px}.label{margin:0 0 1rem;color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.page-head h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:1;letter-spacing:-.05em}.page-head p:last-child{max-width:600px;color:var(--muted);font-size:1.2rem;line-height:1.6}.books{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}.books article{display:grid;grid-template-columns:220px 1fr;gap:4rem;padding:4rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}.books img{width:220px;aspect-ratio:2/3;object-fit:cover}.books h2{margin:0;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.04em}.subtitle{margin:.6rem 0 0;color:var(--muted)}.books article>div>p:not(.subtitle){max-width:650px;line-height:1.7;color:var(--muted)}.actions{display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem}.actions a{text-underline-offset:.3em}@media(max-width:650px){main{width:min(100% - 2rem,1000px)}.page-head{padding:5rem 0 3rem}.books article{grid-template-columns:120px 1fr;gap:1.5rem;padding:3rem 0}.books img{width:120px}.books h2{font-size:1.8rem}}
+</style>
