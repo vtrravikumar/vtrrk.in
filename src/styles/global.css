@@ -37,6 +37,19 @@ a {
 	color: inherit;
 }
 
+/* Site-wide editorial typography scale. Page-specific styles should not create oversized headings. */
+h1 {
+	font-size: clamp(2.5rem, 5vw, 4rem) !important;
+	line-height: 1.02;
+	letter-spacing: -0.04em;
+}
+
+h2 {
+	font-size: clamp(1.75rem, 3vw, 2.5rem);
+	line-height: 1.1;
+	letter-spacing: -0.03em;
+}
+
 .footer-social {
 	margin-top: 0.75rem;
 	display: flex;
