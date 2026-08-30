@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+<BaseLayout title="India — Travel — V.T.R. Ravi Kumar" description="A collection of journeys across India, organised as trips rather than states.">
+  <main>
+    <a class="back" href="/travel/">← Travel</a>
+    <header>
+      <p class="label">India</p>
+      <h1>Journeys across India.</h1>
+      <p>India will be remembered here as individual journeys — not as a list of states. Each trip will have its own story, route, photographs and practical notes.</p>
+    </header>
+
+    <section class="intro-card">
+      <p class="label">India index</p>
+      <h2>Trips</h2>
+      <p>The first India journey is next. As more trips are added, this page will become a collection of roughly twenty stories from across the country.</p>
+    </section>
+  </main>
+</BaseLayout>
+<style>
+main{width:min(1000px,calc(100% - 3rem));margin:0 auto;padding-bottom:6rem}.back{display:inline-block;margin:3rem 0 1.5rem;color:var(--muted);text-decoration:none}header{padding:4rem 0 5rem;max-width:800px}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}h1{margin:.5rem 0 1rem;font-size:clamp(2.8rem,6vw,4.5rem);line-height:1;letter-spacing:-.04em}header>p:last-child{font-size:1.2rem;line-height:1.7;color:var(--muted)}.intro-card{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:3rem 0;max-width:800px}.intro-card h2{font-size:2.2rem;margin:.5rem 0 1rem}.intro-card p:last-child{color:var(--muted);line-height:1.7}@media(max-width:700px){main{width:min(100% - 2rem,1000px)}header{padding:3rem 0 4rem}}
+</style>
