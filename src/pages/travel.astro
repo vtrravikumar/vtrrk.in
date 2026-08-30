@@ -4,7 +4,8 @@ import { travelCountries } from "../content/travel-countries";
 
 const continents = ["Asia", "Europe", "Africa", "Oceania", "North America"];
 const visited = travelCountries.filter((country) => country.status === "Y");
-const published = visited.filter((country) => country.hasBlog);
+const international = visited.filter((country) => country.slug !== "india");
+const published = international.filter((country) => country.hasBlog);
 const fallback = published[0];
 const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
 ---
@@ -31,7 +32,30 @@ const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
     )}
 
     <section class="index">
-      <div class="index-intro"><p class="label">Travel index</p><h2>{visited.length} countries visited</h2><p>Organised by continent. A green marker means a travelogue is available; a grey marker means the journey is recorded but the story is still to be written.</p></div>{continents.map((continent) => { const countries = visited.filter((country) => country.continent === continent); if (!countries.length) return null; return <section class="continent"><h3>{continent}</h3><div class="countries">{countries.map((country) => <div class:list-item={true} class:has-blog={hasBlog(country)}><span class="status" aria-label={hasBlog(country) ? "Travelogue available" : "Travelogue not yet written"}></span>{hasBlog(country) ? <a href={`/travel/${country.slug}/`}>{country.name}</a> : <span>{country.name}</span>}</div>)}</div></section>})}</section>
+      <div class="index-intro">
+        <p class="label">Travel index</p>
+        <h2>India &amp; {international.length} countries</h2>
+        <p>India is organised as individual journeys. The rest of the world is organised by country. A green marker means a travelogue is available; a grey marker means the journey is recorded but the story is still to be written.</p>
+      </div>
+
+      <section class="india-entry">
+        <div>
+          <p class="section-label">India</p>
+          <h3>Journeys across India</h3>
+          <p>Individual trips, routes and stories — not a list of states.</p>
+        </div>
+        <a href="/travel/india/">View India journeys →</a>
+      </section>
+
+      <section class="world">
+        <p class="section-label">Rest of the world</p>
+        {continents.map((continent) => {
+          const countries = international.filter((country) => country.continent === continent);
+          if (!countries.length) return null;
+          return <section class="continent"><h3>{continent}</h3><div class="countries">{countries.map((country) => <div class:list-item={true} class:has-blog={hasBlog(country)}><span class="status" aria-label={hasBlog(country) ? "Travelogue available" : "Travelogue not yet written"}></span>{hasBlog(country) ? <a href={`/travel/${country.slug}/`}>{country.name}</a> : <span>{country.name}</span>}</div>)}</div></section>;
+        })}
+      </section>
+    </section>
   </main>
 </BaseLayout>
 
@@ -55,5 +79,5 @@ const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
 )}
 
 <style>
-main{width:min(1000px,calc(100% - 3rem));margin:0 auto}header{padding:7rem 0 5rem;max-width:850px}h1{margin:0;font-size:clamp(2.75rem,5.5vw,4.5rem);line-height:1;letter-spacing:-.045em}header>p:last-child{max-width:700px;color:var(--muted);font-size:1.2rem;line-height:1.7}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.featured{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:3rem 0 5rem}.featured-card{display:grid;grid-template-columns:1.5fr 1fr;min-height:300px;margin-top:1.25rem;color:inherit;text-decoration:none;border:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);overflow:hidden}.featured-card img{width:100%;height:100%;min-height:300px;object-fit:cover;display:block}.featured-copy{display:flex;flex-direction:column;justify-content:center;padding:3rem}.featured-continent{margin:0 0 .5rem;color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}.featured-copy h2{margin:0;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1;letter-spacing:-.04em}.featured-link{margin:2rem 0 0;color:var(--muted)}.featured-card:hover .featured-link{text-decoration:underline}.index{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:4rem 0 7rem}.index-intro{max-width:700px;margin-bottom:5rem}.index-intro h2{margin:.5rem 0 1rem;font-size:2.4rem;line-height:1.1}.index-intro p:last-child{color:var(--muted);line-height:1.7}.continent{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:2rem 0 3rem}.continent h3{margin:0 0 1.5rem;font-size:1.1rem;letter-spacing:.04em}.countries{display:grid;grid-template-columns:repeat(3,1fr);gap:.2rem 2rem}.list-item{display:flex;align-items:center;gap:.65rem;min-height:2.4rem;color:var(--muted)}.list-item.has-blog{color:var(--foreground)}.list-item a{color:inherit;text-decoration:none}.list-item a:hover{text-decoration:underline}.status{width:.5rem;height:.5rem;border-radius:50%;background:#b5b5b5;flex:0 0 auto}.has-blog .status{background:#3b8f5a}@media(max-width:700px){main{width:min(100% - 2rem,1000px)}header{padding:5rem 0 3rem}.featured{padding:2.5rem 0 4rem}.featured-card{grid-template-columns:1fr}.featured-card img{min-height:220px}.featured-copy{padding:2rem}.countries{grid-template-columns:repeat(2,1fr)}.index{padding-top:3rem}}@media(max-width:450px){.countries{grid-template-columns:1fr}}
+main{width:min(1000px,calc(100% - 3rem));margin:0 auto}header{padding:7rem 0 5rem;max-width:850px}h1{margin:0;font-size:clamp(2.75rem,5.5vw,4.5rem);line-height:1;letter-spacing:-.045em}header>p:last-child{max-width:700px;color:var(--muted);font-size:1.2rem;line-height:1.7}.label,.section-label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.featured{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:3rem 0 5rem}.featured-card{display:grid;grid-template-columns:1.5fr 1fr;min-height:300px;margin-top:1.25rem;color:inherit;text-decoration:none;border:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);overflow:hidden}.featured-card img{width:100%;height:100%;min-height:300px;object-fit:cover;display:block}.featured-copy{display:flex;flex-direction:column;justify-content:center;padding:3rem}.featured-continent{margin:0 0 .5rem;color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}.featured-copy h2{margin:0;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1;letter-spacing:-.04em}.featured-link{margin:2rem 0 0;color:var(--muted)}.featured-card:hover .featured-link{text-decoration:underline}.index{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:4rem 0 7rem}.index-intro{max-width:700px;margin-bottom:4rem}.index-intro h2{margin:.5rem 0 1rem;font-size:2.4rem;line-height:1.1}.index-intro p:last-child{color:var(--muted);line-height:1.7}.india-entry{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:2rem 0;display:flex;justify-content:space-between;align-items:center;gap:2rem}.india-entry h3{margin:.35rem 0 .5rem;font-size:1.7rem}.india-entry p{margin:0;color:var(--muted)}.india-entry a{color:inherit;text-decoration:none;white-space:nowrap}.india-entry a:hover{text-decoration:underline}.world{padding-top:4rem}.continent{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:2rem 0 3rem}.continent h3{margin:0 0 1.5rem;font-size:1.1rem;letter-spacing:.04em}.countries{display:grid;grid-template-columns:repeat(3,1fr);gap:.2rem 2rem}.list-item{display:flex;align-items:center;gap:.65rem;min-height:2.4rem;color:var(--muted)}.list-item.has-blog{color:var(--foreground)}.list-item a{color:inherit;text-decoration:none}.list-item a:hover{text-decoration:underline}.status{width:.6rem;height:.6rem;border-radius:50%;background:#b5b5b5;flex:0 0 auto}.has-blog .status{background:#3b8f5a}@media(max-width:700px){main{width:min(100% - 2rem,1000px)}header{padding:5rem 0 3rem}.featured{padding:2.5rem 0 4rem}.featured-card{grid-template-columns:1fr}.featured-card img{min-height:220px}.featured-copy{padding:2rem}.india-entry{display:block}.india-entry a{display:inline-block;margin-top:1rem}.countries{grid-template-columns:repeat(2,1fr)}.index{padding-top:3rem}}@media(max-width:450px){.countries{grid-template-columns:1fr}}
 </style>
