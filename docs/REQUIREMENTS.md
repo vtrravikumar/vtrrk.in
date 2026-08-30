@@ -35,11 +35,11 @@ The site shall provide a dedicated, detailed Travel destination documenting Ravi
 ### FR-011 — Travel geography
 Travel shall support deliberate Continent → Country classification.
 
-### FR-012 — Travel template
-Travel entries shall use a common reusable template while allowing individual trips/stories to vary in depth.
+### FR-012 — Unified travel template
+India journeys and international country/trip entries shall use one common underlying travel template and rendering mechanism. Differences in geography, URL depth or story type shall be represented by travel data rather than separate page implementations.
 
 ### FR-013 — Travel metadata
-Each trip shall be represented by reusable structured metadata that can be copied and edited for future destinations.
+Each trip/journey shall be represented by reusable structured metadata that can be copied and edited for future destinations.
 
 ### FR-014 — Travel narrative
 Travel content shall support personal narrative, visit dates, trip context, places, experiences, observations, practical advice, mistakes to avoid, accommodation and transport observations, photography references and related rides where applicable.
@@ -88,6 +88,9 @@ Photography links/embeds shall be used selectively and shall not turn the homepa
 ### CR-007 — Reusable travel data
 Travel facts shall be entered once into structured trip metadata wherever practical rather than duplicated across page markup.
 
+### CR-008 — Common travel data model
+Indian journeys and international travel shall use the same core travel metadata conventions. Optional fields may be omitted where they do not apply.
+
 ## 3. UX Requirements
 
 ### UX-001 — Responsive
@@ -110,6 +113,9 @@ Animations and interactive elements shall be used only where they improve compre
 
 ### UX-007 — Travel usability
 Travel pages shall balance detailed information with clear scanning/navigation so practical information does not disappear inside prose.
+
+### UX-008 — Travel metadata consistency
+Travel metadata such as dates, duration, companion/travel context and journey type shall be presented consistently for India and international stories, while allowing fields to remain optional where appropriate.
 
 ## 4. Accessibility Requirements
 
@@ -183,7 +189,10 @@ The project shall be deployable from GitHub to the production hosting platform.
 No database, authentication system or CMS is required for V1.
 
 ### TECH-007
-Travel trip metadata shall use a structured, reusable format that can be copied and edited for new destinations.
+Travel trip/journey metadata shall use a structured, reusable format that can be copied and edited for new destinations.
+
+### TECH-008
+Travel detail pages shall use a single underlying rendering mechanism capable of handling both country-level international routes and journey-level India routes.
 
 ## 8. Maintainability Requirements
 
@@ -194,7 +203,7 @@ Adding a new book should not require editing multiple unrelated components.
 Adding a new writing article should not require rebuilding page layout logic.
 
 ### MAINT-003
-Adding a new travel country/trip should use the established geography, template and metadata model rather than require bespoke page construction.
+Adding a new travel country/trip/journey should use the established geography, common template and metadata model rather than require bespoke page construction.
 
 ### MAINT-004
 Travel facts shall be maintainable independently from travel narrative/presentation where practical.
@@ -205,6 +214,9 @@ Documentation shall describe the intended architecture and operating model.
 ### MAINT-006
 The backlog shall remain the authoritative list of planned work.
 
+### MAINT-007
+India and international travel shall not maintain separate implementations when the difference can be represented through shared travel data and routing.
+
 ## 9. V1 Acceptance Criteria
 
 V1 is ready when:
@@ -214,7 +226,9 @@ V1 is ready when:
 - Published books are accurately represented.
 - Writing supports real article pages rather than placeholder links.
 - Travel supports Continent → Country classification, reusable trip metadata and the common travel template.
+- The travel model can accommodate Indian journeys and international country/trip stories through one underlying travel mechanism.
 - The travel model can accommodate detailed narrative, practical observations and journey records without redesign.
+- Travel metadata is presented consistently across India and international stories.
 - Photography is a lightweight gateway rather than a full photo archive.
 - The homepage is not dominated by photographs or large image payloads.
 - Responsive behaviour is acceptable on mobile and desktop.
