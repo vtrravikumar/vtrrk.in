@@ -86,7 +86,7 @@ const durationDays = isIndia
     ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1
     : undefined;
 
-const banner = data.banner ?? `/images/travel/${title.toLowerCase().replace(/\s+/g, "-")}.jpg`;
+const banner = data.banner ?? "/images/travel/default.jpg";
 const backHref = isIndia ? "/travel/india/" : "/travel/";
 const backLabel = isIndia ? "← India journeys" : "← Travel";
 ---
