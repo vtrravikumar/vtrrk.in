@@ -1,0 +1,7 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { projects } from "../content/projects";
+---
+<BaseLayout title="Projects — V.T.R. Ravi Kumar" description="Projects V.T.R. Ravi Kumar is building and exploring."><main><header><p class="label">Projects</p><h1>Things I'm building.</h1><p>Projects, experiments and practical things that keep me curious.</p></header><section>{projects.map((project)=><article><div><h2>{project.title}</h2><p>{project.description}</p></div><span>{project.status}</span></article>)}</section></main></BaseLayout>
+<style>main{width:min(1000px,calc(100% - 3rem));margin:0 auto}header{padding:8rem 0 5rem}h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:1;letter-spacing:-.05em}header>p:last-child{max-width:600px;color:var(--muted);font-size:1.2rem;line-height:1.6}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}section{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}article{display:flex;justify-content:space-between;gap:3rem;padding:3rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}h2{margin:0;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:-.04em}article p{max-width:700px;color:var(--muted);line-height:1.7}article span{color:var(--muted);font-size:.8rem;white-space:nowrap}@media(max-width:650px){main{width:min(100% - 2rem,1000px)}header{padding:5rem 0 3rem}article{display:block}article span{display:block;margin-top:1rem}}
+</style>
