@@ -1,0 +1,7 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { now } from "../content/site";
+---
+<BaseLayout title="Now — V.T.R. Ravi Kumar" description={now.intro}><main><header><p class="label">Now</p><h1>{now.title}</h1><p>{now.intro}</p></header><section>{now.items.map((item)=><article><h2>{item.title}</h2><p>{item.description}</p></article>)}</section></main></BaseLayout>
+<style>main{width:min(900px,calc(100% - 3rem));margin:0 auto}header{padding:8rem 0 5rem}h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:1;letter-spacing:-.05em}header>p:last-child{max-width:650px;color:var(--muted);font-size:1.2rem;line-height:1.6}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}section{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}article{padding:3rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}article h2{margin:0;font-size:2rem}article p{max-width:700px;color:var(--muted);line-height:1.7}@media(max-width:600px){main{width:min(100% - 2rem,900px)}header{padding:5rem 0 3rem}}
+</style>
