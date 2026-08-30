@@ -25,58 +25,47 @@ The backlog describes work required to move from the current implementation towa
 # Phase 0 — Documentation & Product Definition
 
 ## DOC-001 — Establish product specification
-
 - Priority: P0
 - Status: Done
 - Area: Documentation
-
-Create the authoritative intended product specification.
 
 ## DOC-002 — Establish functional requirements
-
 - Priority: P0
 - Status: Done
 - Area: Documentation
-
-Document functional, content, UX, accessibility, SEO, performance and maintainability requirements.
 
 ## DOC-003 — Establish architecture
-
 - Priority: P0
 - Status: Done
 - Area: Documentation
-
-Document the intended technical and content architecture.
 
 ## DOC-004 — Establish feature catalogue
-
 - Priority: P0
 - Status: Done
 - Area: Documentation
-
-Create a catalogue separating intended features from current implementation status.
 
 ## DOC-005 — Establish authoritative backlog
-
 - Priority: P0
 - Status: Done
 - Area: Documentation
 
-Create this backlog and use it as the execution source of truth.
+## DOC-006 — Consolidate agreed product decisions
+- Priority: P0
+- Status: Done
+- Area: Documentation
+
+Capture the decisions made during product review, including person-first positioning, concise Books/Projects, Writing as the prose area, lightweight Photography, and the detailed Travel model.
 
 ---
 
 # Phase 1 — Foundation Audit & Information Architecture
 
 ## IA-001 — Define final site map
-
 - Priority: P0
 - Status: In Progress
 - Area: Information Architecture
 
-Confirm the final primary destinations and canonical URL structure before building additional pages.
-
-Current direction:
+Agreed primary destinations:
 
 - Home
 - About
@@ -86,29 +75,33 @@ Current direction:
 - Projects
 - Travel
 - Photography
-- Secondary: Contact, Elsewhere
 
-Travel is a first-class destination. Rides are represented within or alongside Travel rather than as a separate primary navigation item.
+Secondary destinations:
 
-Acceptance criteria:
+- Contact
+- Elsewhere
 
-- Primary destinations are agreed.
-- Canonical URLs are documented.
-- Navigation hierarchy is documented.
-- No route exists solely because of an implementation accident.
+Rides are intentionally not a primary navigation item.
+
+Remaining work is to confirm exact canonical route structure before implementation is finalised.
 
 ## IA-002 — Define content models
-
 - Priority: P0
 - Status: In Progress
 - Area: Content Architecture
 
-Define the final schemas for books, writing, projects, travel, photography and Now content.
+Agreed direction:
 
-Travel must support country/place, trips and stories as related but distinct concepts.
+- Books: concise reusable presentation.
+- Writing: Markdown-oriented long-form content.
+- Projects: concise purpose/status/link model.
+- Photography: external gateway in V1.
+- Travel: Continent → Country → Trips/Places/Stories with reusable trip metadata.
+- Now: independently maintainable current content.
+
+Remaining work is to turn the agreed models into final implementation schemas.
 
 ## IA-003 — Decide Markdown/content collections strategy
-
 - Priority: P0
 - Status: Planned
 - Area: Technical Architecture
@@ -116,7 +109,6 @@ Travel must support country/place, trips and stories as related but distinct con
 Determine which content remains in TypeScript data modules and which moves to Markdown/content collections.
 
 ## IA-004 — Map current implementation to intended specification
-
 - Priority: P0
 - Status: Planned
 - Area: Audit
@@ -128,99 +120,75 @@ Produce an explicit current-state versus intended-state gap assessment.
 # Phase 2 — Core Site Experience
 
 ## WEB-001 — Finalise homepage
-
 - Priority: P0
 - Status: Planned
 - Area: Homepage
 
-Bring the existing homepage into alignment with the approved specification and visual direction.
+Bring the homepage into alignment with the approved specification. Keep it curated and lightweight; it must not become a photo album.
 
 ## WEB-002 — Build About page
-
 - Priority: P1
 - Status: Planned
 - Area: About
 
-Create a narrative personal About experience.
-
 ## WEB-003 — Build Now page/section
-
 - Priority: P0
 - Status: Planned
 - Area: Now
 
-Provide a maintainable current-focus experience.
-
 ## WEB-004 — Finalise global navigation
-
 - Priority: P0
 - Status: Planned
 - Area: Navigation
 
-Implement the agreed navigation across desktop and mobile.
-
 ## WEB-005 — Finalise footer / Elsewhere / Contact
-
 - Priority: P1
 - Status: Planned
 - Area: Global UX
-
-Create coherent secondary navigation and contact paths.
 
 ---
 
 # Phase 3 — Books & Writing
 
 ## BOOK-001 — Finalise books landing experience
-
 - Priority: P0
 - Status: Planned
 - Area: Books
 
-Present the published books accurately and consistently.
+Present the three published books accurately and concisely.
 
 ## BOOK-002 — Create individual book pages
-
 - Priority: P1
 - Status: Planned
 - Area: Books
 
-Create dedicated pages for each published book.
+Use a reusable concise book presentation template.
 
 ## BOOK-003 — Add book metadata and related content
-
 - Priority: P2
 - Status: Planned
 - Area: Books
 
-Support publication metadata, related writing and other useful context.
-
 ## WRITE-001 — Establish writing content model
-
 - Priority: P0
 - Status: Planned
 - Area: Writing
 
-Create the durable model for long-form articles.
+Create the durable model for long-form articles, preferably using Markdown/content collections.
 
 ## WRITE-002 — Build writing index
-
 - Priority: P0
 - Status: Planned
 - Area: Writing
 
-Create a browsable writing landing page.
+Create a curated writing landing page rather than a dense feed.
 
 ## WRITE-003 — Build individual article pages
-
 - Priority: P0
 - Status: Planned
 - Area: Writing
 
-Create the canonical article route and reading experience.
-
 ## WRITE-004 — Migrate/curate existing writing entries
-
 - Priority: P1
 - Status: Planned
 - Area: Writing
@@ -232,7 +200,6 @@ Replace placeholder links with real destinations or intentionally remove entries
 # Phase 4 — Projects
 
 ## PROJ-001 — Build projects landing page
-
 - Priority: P0
 - Status: Planned
 - Area: Projects
@@ -240,15 +207,13 @@ Replace placeholder links with real destinations or intentionally remove entries
 Create a curated project index.
 
 ## PROJ-002 — Create project detail model/pages
-
 - Priority: P1
 - Status: Planned
 - Area: Projects
 
-Support individual project narratives and relevant links.
+Use a concise model covering what the project is, why it exists, current status and relevant links.
 
 ## PROJ-003 — Connect current projects
-
 - Priority: P1
 - Status: Planned
 - Area: Projects
@@ -260,204 +225,188 @@ Create proper destinations for Ride Together, VTR Press and HomeLab Engineering 
 # Phase 5 — Photography
 
 ## PHOTO-001 — Define photography information architecture
-
 - Priority: P1
 - Status: Planned
 - Area: Photography
 
-Decide between a curated external-first experience and locally owned galleries for V1.
+Define the V1 Photography page as a lightweight gateway to Instagram, 500px and other relevant photographic platforms.
 
 ## PHOTO-002 — Build photography landing experience
-
 - Priority: P1
 - Status: Planned
 - Area: Photography
 
-Create a dedicated visual photography destination.
+Create a visual but lightweight destination. Do not build a full photo archive in V1.
 
-## PHOTO-003 — Define image pipeline
-
+## PHOTO-003 — Define selective image/embedding strategy
 - Priority: P2
 - Status: Planned
 - Area: Photography
 
-Define image storage, optimisation, responsive sizing, alt text and performance strategy.
+Determine when a small local image, external image reference or external embed is appropriate. External integrations must not be required for basic page rendering.
+
+## PHOTO-004 — Evaluate future dedicated photography site
+- Priority: P3
+- Status: Parked
+- Area: Photography
+
+Revisit only if the photographic archive warrants a dedicated site/gallery.
 
 ---
 
 # Phase 6 — Travel / Travelogue
 
 ## TRAVEL-001 — Define travelogue information architecture
-
 - Priority: P0
 - Status: In Progress
 - Area: Travel
 
-Design the long-term structure for documenting roughly 20 visited countries and two decades of travel.
-
 Agreed direction:
 
 - Travel is a first-class primary destination.
-- Country/place provides the broad index and orientation.
+- Geography is deliberately organised as Continent → Country.
 - Trips group places where appropriate.
 - Stories provide the substantive personal travelogue content.
-- Rides are a related dimension of travel, not a separate primary destination.
-- The country/status list supplied by Ravi is the source data for the initial travel record.
+- Rides are a related dimension of Travel.
+- Travel is intentionally detailed rather than concise.
 
-Acceptance criteria:
+Remaining work is to formalise the final route depth and implementation schema.
 
-- Country/place is a first-class concept.
-- Individual stories have durable URLs.
-- A trip can contain multiple places where appropriate.
-- The model supports both ordinary travel and riding stories.
-- Photography is integrated naturally.
-- Adding future destinations does not require structural redesign.
-
-## TRAVEL-002 — Define travel content schema
-
+## TRAVEL-002 — Define travel trip metadata schema
 - Priority: P0
 - Status: Planned
 - Area: Travel
 
-Define fields for country/place, visited status, dates, trip context, narrative, observations, photography and related content.
+Create a reusable structured metadata template that can be copied and edited for each destination/trip.
 
-The initial country data contains 20 visited countries and additional status-marked destinations; the source list should be preserved as the authoritative planning input. fileciteturn22file0
+The model should support country, continent, places, dates, context, flights, routes, airline, optional flight number/seat, accommodation, transport, rides, photography references, story references and publication status. Rich source metadata may exceed what is publicly displayed.
 
-## TRAVEL-003 — Build travelogue index
+## TRAVEL-003 — Define common travel page template
+- Priority: P0
+- Status: Planned
+- Area: Travel
 
+Create one common template that can support personal narrative, places/experiences, what stood out, what to do again, mistakes to avoid, where to stay, transport, practical observations, photography and related rides/writing.
+
+## TRAVEL-004 — Define travel editorial interview workflow
+- Priority: P0
+- Status: Planned
+- Area: Travel
+
+Document the interview-first process: use available records and Ravi's memories to ask pointed, adaptive questions before drafting each travel story.
+
+## TRAVEL-005 — Build travelogue index
 - Priority: P1
 - Status: Planned
 - Area: Travel
 
-Create a visually engaging overview of destinations/stories.
+Create a visually engaging overview organised by continent and country.
 
-## TRAVEL-004 — Build individual travel pages
-
+## TRAVEL-006 — Build individual country/trip pages
 - Priority: P1
 - Status: Planned
 - Area: Travel
 
-Create the core travelogue story experience.
+Implement the common template and reusable metadata model.
 
-## TRAVEL-005 — Curate initial travel destinations
-
+## TRAVEL-007 — Curate initial travel destinations
 - Priority: P1
 - Status: Planned
 - Area: Travel
 
-Identify the initial countries/places to publish and establish a consistent editorial structure.
+Use the supplied country/status record as the initial planning data and identify the first destinations to publish.
 
-## TRAVEL-006 — Support related rides/routes
+## TRAVEL-008 — Import/reconcile travel records
+- Priority: P1
+- Status: Planned
+- Area: Travel
 
+Review Ravi's available flight/travel records and identify useful factual metadata for the initial destinations. Preserve richer source data separately from public presentation where appropriate.
+
+## TRAVEL-009 — Support related rides/routes
 - Priority: P2
 - Status: Planned
 - Area: Travel
 
-Connect relevant motorcycle/riding experiences to travel stories without forcing every trip into a riding format.
+Connect motorcycle journeys to Travel without assuming all travel is riding travel.
 
-## TRAVEL-007 — Explore map-based discovery
-
+## TRAVEL-010 — Explore map-based discovery
 - Priority: P3
 - Status: Parked
 - Area: Travel
 
-Consider an interactive or visual map after the narrative travelogue is established.
+Consider an interactive map after the narrative travelogue is established.
 
 ---
 
 # Phase 7 — Quality, SEO & Performance
 
 ## QA-001 — Responsive audit
-
 - Priority: P1
 - Status: Planned
 - Area: Quality
-
-Validate layouts and interactions across mobile, tablet and desktop.
 
 ## QA-002 — Accessibility audit
-
 - Priority: P1
 - Status: Planned
 - Area: Quality
 
-Validate semantics, keyboard navigation, focus states, alt text and contrast.
-
 ## SEO-001 — Complete metadata system
-
 - Priority: P1
 - Status: Planned
 - Area: SEO
-
-Implement page-specific titles, descriptions, canonical URLs and social metadata.
 
 ## SEO-002 — Add sitemap / robots foundations
-
 - Priority: P1
 - Status: Planned
 - Area: SEO
 
-Ensure search engines can discover canonical public content appropriately.
-
 ## PERF-001 — Image optimisation
-
 - Priority: P1
 - Status: Planned
 - Area: Performance
 
-Optimise locally served imagery without compromising the visual character of the site.
+Optimise locally served imagery without turning the site into a photo-hosting platform.
 
 ## PERF-002 — Minimise client-side JavaScript
-
 - Priority: P1
 - Status: Planned
 - Area: Performance
 
-Keep the site static-first and introduce browser-side behaviour only when justified.
-
 ## QA-003 — Production build verification
-
 - Priority: P0
 - Status: Planned
 - Area: Quality
-
-Verify clean build, deployment and production routing before V1 release.
 
 ---
 
 # Phase 8 — Future Enhancements
 
 ## FUT-001 — RSS / Atom feed
-
 - Priority: P3
 - Status: Parked
 
 ## FUT-002 — Site search
-
 - Priority: P3
 - Status: Parked
 
 ## FUT-003 — Advanced travel discovery
-
 - Priority: P3
 - Status: Parked
 
 Potential filters, map views, trip chronology and thematic discovery.
 
 ## FUT-004 — Privacy-conscious analytics
-
 - Priority: P3
 - Status: Parked
 
 ## FUT-005 — CMS evaluation
-
 - Priority: P4
 - Status: Parked
 
 Only revisit if repository-based publishing becomes a genuine burden.
 
 ## FUT-006 — Newsletter
-
 - Priority: P4
 - Status: Parked
 
@@ -474,3 +423,4 @@ Only revisit if there is a clear publishing/distribution strategy.
 5. Do not add features merely because they are technically interesting.
 6. When the intended product changes, update the specification first and then update the backlog.
 7. The backlog describes planned work; completed implementation should not be mistaken for completed product intent.
+8. Keep public presentation simpler than the underlying data where richer source records are useful.
