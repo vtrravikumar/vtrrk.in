@@ -1,76 +1,12 @@
 <footer>
-	<div class="footer-inner">
-		<div>
-			<p class="footer-name">V.T.R. Ravi Kumar</p>
-			<p class="footer-tagline">
-				Engineer · Author · Photographer · Traveller
-			</p>
-
-			<p class="footer-social">
-				<a
-					href="https://x.com/vtrrk"
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label="V.T.R. Ravi Kumar on X"
-				>
-					X · @vtrrk
-				</a>
-
-				<span aria-hidden="true">·</span>
-
-				<a
-					href="https://www.instagram.com/vtrravikumar/"
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label="V.T.R. Ravi Kumar on Instagram"
-				>
-					Instagram · @vtrravikumar
-				</a>
-			</p>
-		</div>
-
-		<p class="copyright">
-			© {new Date().getFullYear()} V.T.R. Ravi Kumar
-		</p>
-	</div>
+  <div class="footer-inner">
+    <div>
+      <p class="footer-name">V.T.R. Ravi Kumar</p>
+      <p class="footer-tagline">Engineer · Author · Photographer · Traveller</p>
+      <p class="footer-links"><a href="/contact/">Contact</a><span aria-hidden="true">·</span><a href="/elsewhere/">Elsewhere</a><span aria-hidden="true">·</span><a href="https://x.com/vtrrk" target="_blank" rel="noopener noreferrer">X</a><span aria-hidden="true">·</span><a href="https://www.instagram.com/vtrravikumar/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+    </div>
+    <p class="copyright">© {new Date().getFullYear()} V.T.R. Ravi Kumar</p>
+  </div>
 </footer>
-
-<style>
-	footer {
-		border-top: 1px solid
-			color-mix(in srgb, var(--foreground) 15%, transparent);
-	}
-
-	.footer-inner {
-		width: min(1200px, calc(100% - 3rem));
-		margin: 0 auto;
-		padding: 3rem 0;
-		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		gap: 2rem;
-	}
-
-	.footer-name {
-		margin: 0;
-		font-weight: 600;
-	}
-
-	.footer-tagline,
-	.copyright {
-		margin: 0.5rem 0 0;
-		font-size: 0.85rem;
-		color: var(--muted);
-	}
-
-	.copyright {
-		margin: 0;
-	}
-
-	@media (max-width: 600px) {
-		.footer-inner {
-			flex-direction: column;
-			align-items: flex-start;
-		}
-	}
+<style>footer{border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}.footer-inner{width:min(1200px,calc(100% - 3rem));margin:0 auto;padding:3rem 0;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem}.footer-name{margin:0;font-weight:600}.footer-tagline,.footer-links,.copyright{margin:.5rem 0 0;font-size:.85rem;color:var(--muted)}.footer-links{display:flex;gap:.6rem;align-items:center}.footer-links a{color:inherit;text-decoration:none}.footer-links a:hover{text-decoration:underline}.copyright{margin:0}@media(max-width:600px){.footer-inner{flex-direction:column;align-items:flex-start}.footer-links{flex-wrap:wrap}}
 </style>
