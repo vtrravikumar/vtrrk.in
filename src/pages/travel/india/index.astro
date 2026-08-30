@@ -18,7 +18,10 @@ const journeys = Object.entries(journeyModules).map(([path, raw]) => {
   return { ...data, slug };
 }).sort((a, b) => new Date(a.from).getTime() - new Date(b.from).getTime());
 
-const featuredJourney = journeys.find((journey) => journey.featured) ?? journeys[0];
+// Featured is selected at build time so it is not permanently tied to one journey.
+const featuredJourney = journeys.length
+  ? journeys[Math.floor(Math.random() * journeys.length)]
+  : undefined;
 const formatDate = (value: string | Date) => (value instanceof Date ? value : new Date(`${value}T00:00:00`)).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 ---
 <BaseLayout title="India — Travel — V.T.R. Ravi Kumar" description="A collection of journeys across India, organised as trips rather than states.">
