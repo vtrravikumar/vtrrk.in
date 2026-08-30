@@ -3,19 +3,19 @@
 ## 1. Functional Requirements
 
 ### FR-001 — Personal identity
-The site shall clearly establish V.T.R. Ravi Kumar as the person behind the site.
+The site shall clearly establish Ravi Kumar as the person behind the site.
 
 ### FR-002 — Primary navigation
-The site shall provide clear navigation to the primary content areas: About, Now, Books, Writing, Projects, Photography, and Travel & Rides.
+The site shall provide clear navigation to About, Now, Books, Writing, Projects, Travel and Photography.
 
 ### FR-003 — Homepage
-The homepage shall provide an editorial overview of Ravi and selected current work/content.
+The homepage shall provide a curated editorial overview of Ravi and selected current work/content. It shall not become a photo archive or exhaustive catalogue.
 
 ### FR-004 — About
-The site shall support a narrative About page describing Ravi beyond a conventional résumé.
+The site shall support a concise, human About page describing Ravi beyond a conventional résumé.
 
 ### FR-005 — Books
-The site shall support first-class presentation of published books, including cover, description and relevant external purchase/read links.
+The site shall support first-class presentation of published books using a reusable concise presentation template, including cover, synopsis and relevant external purchase/read links.
 
 ### FR-006 — Writing
 The site shall support a browsable collection of articles and individual article pages.
@@ -27,30 +27,42 @@ Articles shall support title, date, description, content, canonical URL and opti
 The site shall support individual project descriptions and links, with project status/content able to evolve independently.
 
 ### FR-009 — Photography
-The site shall provide a dedicated photography destination and support high-quality imagery.
+The site shall provide a lightweight dedicated photography destination that acts primarily as a gateway to external photographic platforms in V1. It shall not require hosting the complete photographic archive.
 
 ### FR-010 — Travelogue
-The site shall provide a dedicated Travel & Rides destination documenting Ravi's travel experiences.
+The site shall provide a dedicated, detailed Travel destination documenting Ravi's travel experiences.
 
-### FR-011 — Travel places
-The travelogue shall support individual pages/entries for countries or places visited.
+### FR-011 — Travel geography
+Travel shall support deliberate Continent → Country classification.
 
-### FR-012 — Travel narrative
-Travel entries shall support personal narrative, visit period, trip context, observations and photography.
+### FR-012 — Travel template
+Travel entries shall use a common reusable template while allowing individual trips/stories to vary in depth.
 
-### FR-013 — Travel discovery
-Users shall be able to browse or discover travel entries by place and, where useful, trip/year/category.
+### FR-013 — Travel metadata
+Each trip shall be represented by reusable structured metadata that can be copied and edited for future destinations.
 
-### FR-014 — Related content
+### FR-014 — Travel narrative
+Travel content shall support personal narrative, visit dates, trip context, places, experiences, observations, practical advice, mistakes to avoid, accommodation and transport observations, photography references and related rides where applicable.
+
+### FR-015 — Travel records
+The travel model shall be capable of representing detailed factual journey information, including flights, dates, routes and optionally airline, flight number and seat. Richer source metadata need not all be displayed publicly.
+
+### FR-016 — Travel discovery
+Users shall be able to discover travel by continent and country and, where useful, by trip, place, year or related story.
+
+### FR-017 — Travel editorial workflow
+The travel content process shall support an interview-first workflow in which pointed, adaptive questions are used to recover Ravi's memories and experience before the travelogue is drafted.
+
+### FR-018 — Related content
 Travel, writing, books, photography and projects should be linkable to related content where meaningful.
 
-### FR-015 — Now
-The current-focus content shall be independently maintainable and easy to update.
+### FR-019 — Now
+Current-focus content shall be independently maintainable and easy to update.
 
-### FR-016 — External links
-The site shall support links to relevant external platforms without depending on those platforms for core site functionality.
+### FR-020 — External links
+The site shall support relevant external platforms without depending on them for core page rendering.
 
-### FR-017 — Contact
+### FR-021 — Contact
 The site shall provide a simple contact path without requiring a custom backend in V1.
 
 ## 2. Content Requirements
@@ -67,8 +79,14 @@ Published navigation and content shall not contain intentionally empty destinati
 ### CR-004 — Editorial voice
 Long-form content shall favour Ravi's own perspective and experience over generic informational copy.
 
-### CR-005 — Image ownership
-Where photography is hosted locally, image references and metadata shall be maintainable without depending on a third-party platform.
+### CR-005 — Concise presentation
+Books, Projects and most general site content shall avoid unnecessary prose. Writing and Travel may be detailed where the content warrants it.
+
+### CR-006 — Photography gateway
+Photography links/embeds shall be used selectively and shall not turn the homepage or core site into a photo-hosting service.
+
+### CR-007 — Reusable travel data
+Travel facts shall be entered once into structured trip metadata wherever practical rather than duplicated across page markup.
 
 ## 3. UX Requirements
 
@@ -76,19 +94,22 @@ Where photography is hosted locally, image references and metadata shall be main
 The site shall work across desktop, tablet and mobile screen sizes.
 
 ### UX-002 — Clear hierarchy
-Content hierarchy shall remain understandable without excessive visual decoration.
+Content hierarchy shall remain understandable without excessive decoration.
 
 ### UX-003 — Readability
 Long-form pages shall provide comfortable typography, line length, spacing and navigation.
 
 ### UX-004 — Image presentation
-Photography and travel imagery shall receive sufficient size and whitespace to remain visually meaningful.
+Travel imagery shall receive sufficient size and whitespace to remain meaningful without requiring large image payloads on the homepage.
 
 ### UX-005 — Navigation consistency
 Header/footer behaviour shall remain consistent across pages.
 
 ### UX-006 — No unnecessary interaction
 Animations and interactive elements shall be used only where they improve comprehension or navigation.
+
+### UX-007 — Travel usability
+Travel pages shall balance detailed information with clear scanning/navigation so practical information does not disappear inside prose.
 
 ## 4. Accessibility Requirements
 
@@ -119,7 +140,7 @@ Canonical URLs shall be defined for published pages.
 Open Graph/social sharing metadata shall be supported.
 
 ### SEO-004
-Structured data may be added where it provides genuine search value, especially for books, articles and personal identity.
+Structured data may be added where it provides genuine search value, especially for books, articles, travel/place content and personal identity.
 
 ### SEO-005
 The site shall generate or expose a sitemap when appropriate.
@@ -137,6 +158,9 @@ Static content should be generated at build time wherever possible.
 
 ### PERF-004
 Third-party services shall not be required for basic page rendering.
+
+### PERF-005
+The homepage shall avoid loading a large photography collection.
 
 ## 7. Technical Requirements
 
@@ -158,6 +182,9 @@ The project shall be deployable from GitHub to the production hosting platform.
 ### TECH-006
 No database, authentication system or CMS is required for V1.
 
+### TECH-007
+Travel trip metadata shall use a structured, reusable format that can be copied and edited for new destinations.
+
 ## 8. Maintainability Requirements
 
 ### MAINT-001
@@ -167,12 +194,15 @@ Adding a new book should not require editing multiple unrelated components.
 Adding a new writing article should not require rebuilding page layout logic.
 
 ### MAINT-003
-Adding a new travelogue entry should not require redesigning the travel section.
+Adding a new travel country/trip should use the established geography, template and metadata model rather than require bespoke page construction.
 
 ### MAINT-004
-Documentation shall describe the intended architecture and operating model.
+Travel facts shall be maintainable independently from travel narrative/presentation where practical.
 
 ### MAINT-005
+Documentation shall describe the intended architecture and operating model.
+
+### MAINT-006
 The backlog shall remain the authoritative list of planned work.
 
 ## 9. V1 Acceptance Criteria
@@ -180,10 +210,13 @@ The backlog shall remain the authoritative list of planned work.
 V1 is ready when:
 
 - Primary site navigation is implemented and coherent.
-- About, Books, Writing, Projects, Photography, Travel & Rides and Now have defined experiences.
+- About, Books, Writing, Projects, Photography, Travel and Now have defined experiences.
 - Published books are accurately represented.
 - Writing supports real article pages rather than placeholder links.
-- Travel supports a scalable travelogue model and at least the initial content structure.
+- Travel supports Continent → Country classification, reusable trip metadata and the common travel template.
+- The travel model can accommodate detailed narrative, practical observations and journey records without redesign.
+- Photography is a lightweight gateway rather than a full photo archive.
+- The homepage is not dominated by photographs or large image payloads.
 - Responsive behaviour is acceptable on mobile and desktop.
 - Accessibility and SEO fundamentals are implemented.
 - No published section depends on empty placeholder links.
