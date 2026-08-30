@@ -16,6 +16,8 @@ The site is intended to be personal, editorial, visual, calm, and durable rather
 - Visual rather than text-heavy.
 - Simple rather than feature-heavy.
 - Photography is part of the site's visual identity.
+- Travel is a first-class expression of the person, not a generic travel-guide section.
+- Rides are a related dimension of travel rather than a separate primary destination.
 - Content should be owned and portable.
 - The website is the canonical home; external platforms are distribution layers.
 - The site should age well rather than depend on short-lived design trends.
@@ -41,13 +43,15 @@ Primary destinations:
 - Books
 - Writing
 - Projects
+- Travel
 - Photography
-- Travel & Rides
 
 Secondary destinations:
 
 - Contact
 - Elsewhere
+
+Travel is a first-class primary destination. Rides are represented within or alongside travel content rather than as a separate primary navigation item.
 
 The exact route structure may evolve, but every primary destination should have a clear canonical URL once implemented.
 
@@ -63,7 +67,7 @@ It should provide:
 - Selected projects.
 - Selected writing.
 - Photography presence.
-- Travel and riding presence.
+- Travel presence, including riding where relevant.
 - Links to relevant external platforms.
 
 The homepage should create curiosity and provide clear paths deeper into the site without becoming a catalogue of everything Ravi has done.
@@ -146,26 +150,41 @@ The initial implementation may use external photography platforms, but the archi
 
 Photography should favour large, high-quality imagery and restrained presentation.
 
-## 11. Travel & Rides
+## 11. Travel
 
-Travel and riding deserve a dedicated experience.
+Travel is a first-class content area of vtrrk.in.
 
-Ravi has travelled to roughly 20 countries over approximately the past 20 years. The site should eventually document these experiences as an owned travelogue rather than merely presenting a list of destinations.
+Ravi has travelled to roughly 20 countries over approximately the past 20 years. The site should document these experiences as an owned travelogue rather than merely presenting a list of destinations.
+
+The current travel record identifies 20 countries as visited. The source list also contains additional status markers for destinations that are not part of the visited set. The original country/status record should be preserved as the source data for future travel content planning. fileciteturn22file0
 
 ### Travelogue goals
 
 The travelogue should:
 
 - Provide a visual overview of places visited.
-- Give each place a meaningful, individual story/page.
+- Give each significant place a meaningful, individual story/page.
 - Capture Ravi's personal experience rather than generic tourist information.
 - Combine narrative, photography, observations, practical details, and memorable moments where appropriate.
 - Make it possible to discover travel by country/place and potentially by trip or year.
 - Support future expansion without redesigning the information architecture.
+- Preserve the distinction between places visited and places not visited.
+
+### Travel content model
+
+The travel experience should support a combination of:
+
+1. **Country/place index** — a way to see where Ravi has travelled.
+2. **Trips** — a way to group multiple places that formed part of one journey.
+3. **Stories** — the actual personal narratives, which may be attached to a place, a trip, or both.
+
+The visitor experience should therefore not reduce the travel history to a country checklist. The country/place view provides orientation; trips and stories provide the substance.
 
 A place/travel entry may contain:
 
-- Place/country.
+- Country.
+- Place/city/region.
+- Visited status.
 - Date or period of visit.
 - Trip context.
 - Personal narrative.
@@ -176,7 +195,26 @@ A place/travel entry may contain:
 - Related rides or routes where applicable.
 - Links to related writing.
 
-The tone should be a personal travelogue, not a commercial travel guide.
+Not every entry needs every field. Personal storytelling takes precedence over form completeness.
+
+### Travel and rides
+
+Riding experiences should be represented as a related dimension of travel. A motorcycle journey may form a trip, a story, or a related element within a destination page.
+
+The travel architecture must not assume that all travel is motorcycle travel.
+
+### Travel status data
+
+The supplied country list should ultimately become structured source data rather than being manually reproduced in page markup. The data should allow at least:
+
+- country name
+- region
+- visited status
+- optional visit years
+- optional trip/story references
+- optional photography references
+
+Additional metadata can be added later without changing the basic model.
 
 ## 12. Now
 
@@ -233,6 +271,8 @@ Photography should have enough visual space to breathe.
 
 Typography, spacing, hierarchy, and image treatment should carry most of the design rather than decoration.
 
+Travel pages should be particularly image-led while retaining strong narrative readability.
+
 ## 16. Content Model
 
 Content should be separated from presentation wherever practical.
@@ -243,7 +283,9 @@ Initial content types:
 - Books.
 - Projects.
 - Writing.
-- Travel places/trips.
+- Travel countries/places.
+- Travel trips.
+- Travel stories.
 - Photography collections.
 - Now entries.
 
