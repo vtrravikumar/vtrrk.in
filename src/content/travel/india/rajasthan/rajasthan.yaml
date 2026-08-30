@@ -1,0 +1,39 @@
+title: Chasing Sunsets
+country: India
+region: Rajasthan
+year: 2004
+status: published
+travelled_with:
+  - Prasannaa
+travel_type: road trip
+solo: false
+origin: Haridwar, India
+route:
+  - Haridwar
+  - Delhi
+  - Jaipur
+  - Bikaner
+  - Deshnoke
+  - Jaisalmer
+  - Sam
+  - Jodhpur
+  - Barmer
+  - Jaipur
+  - Agra
+places_visited:
+  - Jaipur
+  - Bikaner
+  - Deshnoke
+  - Jaisalmer
+  - Sam
+  - Jodhpur
+  - Agra
+highlights:
+  - First major road trip
+  - Newly purchased Santro
+  - Deshnoke
+  - Jaisalmer
+  - Long-distance driving across Rajasthan
+  - Taj Mahal
+banner: /images/travel/default.jpg
+content_status: published
