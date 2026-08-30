@@ -2,40 +2,41 @@
 
 ## 1. Purpose
 
-vtrrk.in is the personal digital home of V.T.R. Ravi Kumar.
+vtrrk.in is Ravi Kumar's personal digital home.
 
-It should present the person first and his body of work second: engineering, books, writing, photography, travel, rides, and projects.
+The site presents the **person first** and his work and experiences second: books, writing, projects, travel, photography, engineering and riding.
 
-The site is intended to be personal, editorial, visual, calm, and durable rather than a conventional résumé, corporate portfolio, or social-media replacement.
+It is a personal editorial site, not a résumé, corporate portfolio, generic developer portfolio, travel guide, photo archive or social-media replacement.
 
 ## 2. Product Principles
 
-- Person first; work second.
+- Person first; work and experiences second.
 - Editorial rather than corporate.
 - Personal rather than promotional.
-- Visual rather than text-heavy.
+- Concise where presentation is sufficient; detailed where the story warrants it.
 - Simple rather than feature-heavy.
-- Photography is part of the site's visual identity.
-- Travel is a first-class expression of the person, not a generic travel-guide section.
-- Rides are a related dimension of travel rather than a separate primary destination.
-- Content should be owned and portable.
-- The website is the canonical home; external platforms are distribution layers.
-- The site should age well rather than depend on short-lived design trends.
+- Visual without becoming image-heavy.
+- Travel is a first-class expression of the person.
+- Rides are a related dimension of travel, not a primary navigation item.
+- Photography is primarily a gateway to Ravi's photographic presence rather than a photo-hosting platform in V1.
+- Content should be owned and portable wherever practical.
+- External platforms are distribution/extensions, not dependencies.
+- The site should age well and remain maintainable by one person.
 
 ## 3. Primary Audiences
 
-The site should serve several overlapping audiences:
+The site should serve:
 
 1. People who know Ravi and want to know what he is doing now.
 2. Readers interested in his books and writing.
 3. People interested in his engineering and technology work.
-4. Fellow photographers, travellers, riders, and explorers.
-5. People discovering Ravi through search or social platforms.
-6. People who want a richer picture of his life and work than a résumé provides.
+4. Fellow photographers, travellers, riders and explorers.
+5. People discovering Ravi through search or external platforms.
+6. People who want a richer picture of Ravi than a résumé provides.
 
 ## 4. Information Architecture
 
-Primary destinations:
+### Primary navigation
 
 - Home
 - About
@@ -46,50 +47,41 @@ Primary destinations:
 - Travel
 - Photography
 
-Secondary destinations:
+### Secondary destinations
 
 - Contact
 - Elsewhere
 
-Travel is a first-class primary destination. Rides are represented within or alongside travel content rather than as a separate primary navigation item.
+Rides are intentionally not a primary navigation item. They appear as related content within Travel where appropriate.
 
-The exact route structure may evolve, but every primary destination should have a clear canonical URL once implemented.
+The exact implementation routes must be documented before coding is finalised and should remain human-readable and stable.
 
 ## 5. Homepage
 
-The homepage is the editorial front door to the site.
+The homepage is the editorial front door.
 
-It should provide:
+It should:
 
-- A concise personal introduction.
-- A current Now section.
-- Selected books.
-- Selected projects.
-- Selected writing.
-- Photography presence.
-- Travel presence, including riding where relevant.
-- Links to relevant external platforms.
+- Introduce Ravi concisely.
+- Show what he is focused on now.
+- Surface selected books, writing and projects.
+- Provide an invitation into Travel.
+- Provide a lightweight Photography presence.
+- Link to relevant external platforms.
 
-The homepage should create curiosity and provide clear paths deeper into the site without becoming a catalogue of everything Ravi has done.
+The homepage must **not become a photo album**. It should not load or display a large photography archive merely to make the page visually rich.
+
+Content shown on the homepage should be curated rather than exhaustive.
 
 ## 6. About
 
-The About experience should tell the story behind the person rather than reproduce a résumé.
+About should describe the person beyond a résumé.
 
-It may include:
-
-- Short biography.
-- Engineering background.
-- Transition across different interests and stages of life.
-- Author identity.
-- Photography, travel, and riding interests.
-- Current perspective and what matters now.
-
-The content should remain human and narrative.
+It may cover engineering, authorship, photography, travel, riding and the transitions between different stages of life, but should remain reasonably concise.
 
 ## 7. Books
 
-The site should treat Ravi's published books as first-class work.
+Books are first-class published work.
 
 Current published books:
 
@@ -97,257 +89,293 @@ Current published books:
 - Gen Z
 - The White Envelope
 
-Each book should eventually have a dedicated presentation containing, as appropriate:
+The Books experience should be a **concise presentation**, not a long prose treatment.
 
-- Cover.
-- Title and subtitle.
-- Description.
-- Publication information.
-- Purchase/read links.
-- Relevant background or story.
-- Optional reviews, excerpts, interviews, or related writing.
+The landing page should present the books clearly. Each book should have a reusable presentation template containing, as appropriate:
 
-The site must not imply that unpublished or planned books are published.
+- Cover
+- Title/subtitle
+- Short synopsis
+- Brief author's perspective or context
+- Publication information
+- Purchase/read links
+- Optional related links
+
+Reviews, excerpts, interviews and other extended material are optional future enhancements.
 
 ## 8. Writing
 
-Writing should become a first-class publishing area rather than a list of placeholder links.
+Writing is the primary prose-oriented area of the site.
 
-The design should support essays, reflections, technical or engineering writing, book-related writing, and other long-form material.
+It should support essays, reflections, engineering/technology writing, book-related writing and other long-form material.
 
-Writing should be owned by the site and published from portable content formats such as Markdown unless a future requirement justifies another approach.
+The writing index should be curated and readable rather than a dense feed or CMS-style archive.
 
 Each article should support:
 
-- Title.
-- Publication date.
-- Short description/dek.
-- Body content.
-- Optional cover/hero image.
-- Tags or categories where useful.
-- Canonical URL.
-- Appropriate metadata for sharing and search.
+- Title
+- Publication date
+- Short description/dek
+- Body
+- Optional image
+- Optional tags/categories
+- Canonical URL
+- SEO/social metadata
+- Optional related content
+
+Markdown/content files are preferred for long-form writing.
 
 ## 9. Projects
 
-Projects should communicate what Ravi is building or exploring without turning the site into a software portfolio.
+Projects answer: **What is Ravi building, exploring or working on?**
 
-Current important projects include:
+Projects should not turn vtrrk.in into a technology résumé or developer portfolio.
 
-- Ride Together.
-- VTR Press.
-- HomeLab Engineering.
+Important current projects include:
 
-Project pages should explain the idea, motivation, current state, and relevant links. They should be able to evolve as projects evolve.
+- Ride Together
+- VTR Press
+- HomeLab Engineering
+
+A project presentation should normally include:
+
+- Name
+- Concise description
+- Why it exists
+- Current status
+- Relevant links
+- Optional imagery
+- Optional related writing
+
+The project's own repository or technical site remains the appropriate place for implementation detail.
 
 ## 10. Photography
 
-Photography is part of Ravi's identity and should be treated as a visual pillar of the site.
+Photography is a visual pillar of Ravi's identity, but vtrrk.in is **not intended to host the complete photographic archive** in V1.
 
-The site should eventually provide a meaningful photography experience rather than merely linking to an external profile.
+The Photography destination should be a lightweight gateway to Ravi's photographic presence, including platforms such as Instagram, 500px and other future destinations.
 
-The initial implementation may use external photography platforms, but the architecture should leave room for an owned gallery or curated collections later.
+The site may use a small number of carefully selected images as visual accents or contextual material, but should not become a second photo-hosting platform.
 
-Photography should favour large, high-quality imagery and restrained presentation.
+A dedicated photography site/gallery may be considered in the future.
 
 ## 11. Travel
 
-Travel is a first-class content area of vtrrk.in.
+Travel is a first-class, deliberately detailed content area.
 
-Ravi has travelled to roughly 20 countries over approximately the past 20 years. The site should document these experiences as an owned travelogue rather than merely presenting a list of destinations.
+Ravi has travelled to roughly 20 countries over approximately two decades. The travelogue should document those experiences as personal, useful and visually supported stories rather than as a generic travel guide.
 
-The current travel record identifies 20 countries as visited. The source list also contains additional status markers for destinations that are not part of the visited set. The original country/status record should be preserved as the source data for future travel content planning. fileciteturn22file0
+### 11.1 Geographic classification
 
-### Travelogue goals
+Travel uses a deliberate geographic classification:
 
-The travelogue should:
+**Continent → Country → Travel content**
 
-- Provide a visual overview of places visited.
-- Give each significant place a meaningful, individual story/page.
-- Capture Ravi's personal experience rather than generic tourist information.
-- Combine narrative, photography, observations, practical details, and memorable moments where appropriate.
-- Make it possible to discover travel by country/place and potentially by trip or year.
-- Support future expansion without redesigning the information architecture.
-- Preserve the distinction between places visited and places not visited.
+Countries provide the broad index and orientation. Individual trips, places and stories provide the substantive content.
 
-### Travel content model
+The initial country/status list supplied by Ravi is source data for the travel record. The visited set currently contains 20 countries. The original status record should be retained as planning/source data.
 
-The travel experience should support a combination of:
+### 11.2 Common travel template
 
-1. **Country/place index** — a way to see where Ravi has travelled.
-2. **Trips** — a way to group multiple places that formed part of one journey.
-3. **Stories** — the actual personal narratives, which may be attached to a place, a trip, or both.
+All country/trip presentations should use a common underlying template so that new destinations can be added by copying and editing structured data rather than redesigning pages.
 
-The visitor experience should therefore not reduce the travel history to a country checklist. The country/place view provides orientation; trips and stories provide the substance.
+The template should be consistent in structure but flexible in depth and content.
 
-A place/travel entry may contain:
+Potential sections include:
 
-- Country.
-- Place/city/region.
-- Visited status.
-- Date or period of visit.
-- Trip context.
-- Personal narrative.
-- What stood out.
-- Places or experiences worth remembering.
-- Practical observations where useful.
-- Photography.
-- Related rides or routes where applicable.
-- Links to related writing.
+- Country / place / region
+- Continent
+- Visit date or period
+- Trip context
+- Personal narrative
+- Places and experiences
+- What stood out
+- What I would do again
+- Mistakes / things to avoid
+- Where to stay
+- Getting around
+- Practical observations
+- Photography links or embeds where appropriate
+- Related rides/routes
+- Related writing
+- Journey/flight details where useful
 
-Not every entry needs every field. Personal storytelling takes precedence over form completeness.
+Not every trip needs every section.
 
-### Travel and rides
+### 11.3 Trip metadata
 
-Riding experiences should be represented as a related dimension of travel. A motorcycle journey may form a trip, a story, or a related element within a destination page.
+Each trip should have a reusable structured metadata record that acts as the factual backbone for the site.
 
-The travel architecture must not assume that all travel is motorcycle travel.
+The metadata should be easy to edit, copy and reuse for the next destination. It may contain richer information than is publicly displayed.
 
-### Travel status data
+Potential metadata includes:
 
-The supplied country list should ultimately become structured source data rather than being manually reproduced in page markup. The data should allow at least:
+- Country
+- Continent
+- Places
+- Trip dates
+- Trip purpose/context
+- Flights
+- Flight dates/routes
+- Airlines
+- Flight numbers where useful
+- Seats where useful
+- Accommodation
+- Transport
+- Rides/routes
+- Photography references
+- Story references
+- Publication status
 
-- country name
-- region
-- visited status
-- optional visit years
-- optional trip/story references
-- optional photography references
+The site should derive repeatable presentation from this data rather than requiring facts to be duplicated across components or pages.
 
-Additional metadata can be added later without changing the basic model.
+### 11.4 Travel writing process
+
+Travel content should be developed through an interview-led editorial process.
+
+For each country/trip, ChatGPT should first ask **pointed, adaptive questions** designed to recover memories, observations, people, incidents, emotions, surprises, lessons and useful practical details. The interview should respond to Ravi's answers rather than follow a rigid generic questionnaire.
+
+The resulting narrative is then edited into the common travel template and supplemented with photographs or links/embeds where appropriate.
+
+Existing travel records, including flight history, may be used as factual source material to establish chronology and prompt more precise questions. Detailed metadata should only be exposed publicly when it adds value.
+
+### 11.5 Travel and rides
+
+Riding experiences may appear as trips, stories or related content within Travel. The model must support ordinary travel that has no motorcycle component.
+
+### 11.6 Travel depth
+
+Unlike most sections of vtrrk.in, Travel is intentionally allowed to be detailed. It can contain substantial narrative, practical advice and multiple related stories where the experience warrants it.
 
 ## 12. Now
 
-Now is a deliberately current section describing what Ravi is focused on at the present time.
+Now is a deliberately current, concise view of what Ravi is focused on.
 
-It should be easy to update without changing page structure or code unnecessarily.
-
-It may reference active projects, writing, travel, photography, learning, or other current priorities.
+It should be easy to update without unnecessary code changes and may reference projects, writing, travel, photography, learning or other current priorities.
 
 ## 13. External Presence
 
-External platforms should be treated as extensions of the site rather than the canonical source of identity.
+External platforms are extensions of the site.
 
-The site may link to platforms such as:
+Examples include Instagram, 500px, X, Amazon/book pages and GitHub.
 
-- X.
-- Instagram.
-- 500px.
-- Amazon/book pages.
-- GitHub.
-- Other relevant platforms as needed.
-
-External links should open safely where appropriate and should not make the site dependent on those platforms.
+The site should remain useful if an external platform changes or disappears.
 
 ## 14. Contact
 
-A simple contact path should exist when needed.
+V1 should provide a simple contact path without requiring a custom backend.
 
-V1 should avoid a complex contact backend unless there is a clear requirement. An email or simple external contact mechanism is sufficient initially.
+## 15. Cross-Content Relationships
 
-## 15. Visual Specification
+Books, writing, projects, travel and photography should be able to reference one another when the relationship adds context.
+
+Examples:
+
+- An article can reference a book.
+- A travel story can reference photographs.
+- A travel story can reference a ride.
+- A project can reference related writing.
+- A book can reference related writing.
+
+Relationships should be editorially chosen rather than automatically generated everywhere.
+
+## 16. Visual Specification
 
 The visual language should be:
 
-- Quiet.
-- Editorial.
-- Modern.
-- Personal.
-- Photographic.
-- Timeless.
+- Quiet
+- Editorial
+- Modern
+- Personal
+- Photographic
+- Timeless
 
 Avoid:
 
-- Corporate portfolio aesthetics.
-- Generic developer portfolio layouts.
-- Excessive card grids.
-- Animated gradients.
-- Stock imagery.
-- Skill bars.
-- Decorative animations without purpose.
-- Feature clutter.
+- Corporate portfolio aesthetics
+- Generic developer-portfolio layouts
+- Excessive card grids
+- Decorative animation without purpose
+- Stock imagery
+- Skill bars
+- Feature clutter
 
-Photography should have enough visual space to breathe.
+Photography should have room to breathe without dominating page weight.
 
-Typography, spacing, hierarchy, and image treatment should carry most of the design rather than decoration.
+Travel should be visually engaging while remaining readable and useful.
 
-Travel pages should be particularly image-led while retaining strong narrative readability.
-
-## 16. Content Model
+## 17. Content Model
 
 Content should be separated from presentation wherever practical.
 
 Initial content types:
 
-- Site identity/settings.
-- Books.
-- Projects.
-- Writing.
-- Travel countries/places.
-- Travel trips.
-- Travel stories.
-- Photography collections.
-- Now entries.
+- Site identity/settings
+- Books
+- Projects
+- Writing
+- Travel continents/countries
+- Travel trips
+- Travel stories
+- Travel trip metadata
+- Photography/external collections
+- Now entries
 
-Portable Markdown/TypeScript data is preferred initially. A CMS or database is not required for V1.
+Portable Markdown and structured data files are preferred initially. A CMS or database is not required for V1.
 
-## 17. Technology
+## 18. Technology
 
 Target stack:
 
-- Astro.
-- TypeScript.
-- CSS.
-- Markdown/content files.
-- Git/GitHub.
-- Cloudflare Pages.
+- Astro
+- TypeScript
+- CSS
+- Markdown/content files
+- Git/GitHub
+- Cloudflare Pages
 
 No database or CMS initially.
 
-## 18. Deployment
+## 19. Deployment
 
-Source repository:
+Source repository: `vtrravikumar/vtrrk.in`
 
-`vtrravikumar/vtrrk.in`
+Production domain: `vtrrk.in`
 
-Production domain:
+Hosting target: Cloudflare Pages.
 
-`vtrrk.in`
+The repository remains the source of truth for site code and owned content.
 
-Hosting target:
+## 20. V1 Boundaries
 
-Cloudflare Pages.
+V1 should remain small and maintainable.
 
-The repository should remain the source of truth for site code and owned content.
+Not initially required:
 
-## 19. V1 Boundaries
+- Authentication
+- Database
+- CMS
+- Comments
+- Newsletter infrastructure
+- E-commerce
+- Complex backend
+- User accounts
+- Full photography archive
+- Advanced travel map
+- Site-wide search
 
-V1 should remain deliberately small and maintainable.
+These can be reconsidered when a real use case emerges.
 
-Not required initially:
-
-- Authentication.
-- Database.
-- CMS.
-- Comments.
-- Newsletter infrastructure.
-- E-commerce.
-- Complex backend.
-- Personalisation.
-- User accounts.
-
-These may be reconsidered only when a real use case emerges.
-
-## 20. Quality Bar
+## 21. Quality Bar
 
 Before V1 is considered complete, the site should be:
 
-- Fully responsive.
-- Accessible to a reasonable modern web standard.
-- Fast on mobile and desktop.
-- SEO-ready with sensible metadata and canonical URLs.
-- Free of placeholder links/content in published sections.
-- Visually coherent across all primary pages.
-- Easy to update without unnecessary code changes.
-- Deployable reproducibly from GitHub.
-- Structured so future content can be added without redesigning the foundation.
+- Responsive
+- Accessible to a reasonable modern standard
+- Fast on mobile and desktop
+- SEO-ready
+- Free of intentional placeholder links in published sections
+- Visually coherent
+- Easy to update
+- Reproducibly deployable from GitHub
+- Structured so future content can be added without redesigning the foundation
