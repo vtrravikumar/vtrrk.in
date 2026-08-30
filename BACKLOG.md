@@ -71,10 +71,24 @@ Create this backlog and use it as the execution source of truth.
 ## IA-001 — Define final site map
 
 - Priority: P0
-- Status: Planned
+- Status: In Progress
 - Area: Information Architecture
 
 Confirm the final primary destinations and canonical URL structure before building additional pages.
+
+Current direction:
+
+- Home
+- About
+- Now
+- Books
+- Writing
+- Projects
+- Travel
+- Photography
+- Secondary: Contact, Elsewhere
+
+Travel is a first-class destination. Rides are represented within or alongside Travel rather than as a separate primary navigation item.
 
 Acceptance criteria:
 
@@ -86,10 +100,12 @@ Acceptance criteria:
 ## IA-002 — Define content models
 
 - Priority: P0
-- Status: Planned
+- Status: In Progress
 - Area: Content Architecture
 
 Define the final schemas for books, writing, projects, travel, photography and Now content.
+
+Travel must support country/place, trips and stories as related but distinct concepts.
 
 ## IA-003 — Decide Markdown/content collections strategy
 
@@ -269,22 +285,31 @@ Define image storage, optimisation, responsive sizing, alt text and performance 
 
 ---
 
-# Phase 6 — Travel & Rides / Travelogue
+# Phase 6 — Travel / Travelogue
 
 ## TRAVEL-001 — Define travelogue information architecture
 
 - Priority: P0
-- Status: Planned
+- Status: In Progress
 - Area: Travel
 
-Design the long-term structure for documenting approximately 20 countries and two decades of travel.
+Design the long-term structure for documenting roughly 20 visited countries and two decades of travel.
+
+Agreed direction:
+
+- Travel is a first-class primary destination.
+- Country/place provides the broad index and orientation.
+- Trips group places where appropriate.
+- Stories provide the substantive personal travelogue content.
+- Rides are a related dimension of travel, not a separate primary destination.
+- The country/status list supplied by Ravi is the source data for the initial travel record.
 
 Acceptance criteria:
 
 - Country/place is a first-class concept.
 - Individual stories have durable URLs.
 - A trip can contain multiple places where appropriate.
-- The model supports both travel and riding stories.
+- The model supports both ordinary travel and riding stories.
 - Photography is integrated naturally.
 - Adding future destinations does not require structural redesign.
 
@@ -294,7 +319,9 @@ Acceptance criteria:
 - Status: Planned
 - Area: Travel
 
-Define fields for place, country, dates, trip context, narrative, observations, photography and related content.
+Define fields for country/place, visited status, dates, trip context, narrative, observations, photography and related content.
+
+The initial country data contains 20 visited countries and additional status-marked destinations; the source list should be preserved as the authoritative planning input. fileciteturn22file0
 
 ## TRAVEL-003 — Build travelogue index
 
@@ -324,7 +351,7 @@ Identify the initial countries/places to publish and establish a consistent edit
 
 - Priority: P2
 - Status: Planned
-- Area: Travel & Rides
+- Area: Travel
 
 Connect relevant motorcycle/riding experiences to travel stories without forcing every trip into a riding format.
 
