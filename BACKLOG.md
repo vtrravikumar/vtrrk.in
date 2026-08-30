@@ -62,7 +62,7 @@ Capture the decisions made during product review, including person-first positio
 
 ## IA-001 — Define final site map
 - Priority: P0
-- Status: In Progress
+- Status: Done
 - Area: Information Architecture
 
 Agreed primary destinations:
@@ -83,11 +83,9 @@ Secondary destinations:
 
 Rides are intentionally not a primary navigation item.
 
-Remaining work is to confirm exact canonical route structure before implementation is finalised.
-
 ## IA-002 — Define content models
 - Priority: P0
-- Status: In Progress
+- Status: Done
 - Area: Content Architecture
 
 Agreed direction:
@@ -97,9 +95,8 @@ Agreed direction:
 - Projects: concise purpose/status/link model.
 - Photography: external gateway in V1.
 - Travel: Continent → Country → Trips/Places/Stories with reusable trip metadata.
+- India: one country containing individual journeys rather than state-based travel pages.
 - Now: independently maintainable current content.
-
-Remaining work is to turn the agreed models into final implementation schemas.
 
 ## IA-003 — Decide Markdown/content collections strategy
 - Priority: P0
@@ -258,67 +255,63 @@ Revisit only if the photographic archive warrants a dedicated site/gallery.
 
 ## TRAVEL-001 — Define travelogue information architecture
 - Priority: P0
-- Status: In Progress
+- Status: Done
 - Area: Travel
 
 Agreed direction:
 
 - Travel is a first-class primary destination.
 - Geography is deliberately organised as Continent → Country.
-- Trips group places where appropriate.
-- Stories provide the substantive personal travelogue content.
+- India is one country containing individual journeys; states are not used as the primary travel index.
+- International countries may contain one or multiple trips/stories.
 - Rides are a related dimension of Travel.
 - Travel is intentionally detailed rather than concise.
 
-Remaining work is to formalise the final route depth and implementation schema.
-
 ## TRAVEL-002 — Define travel trip metadata schema
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Travel
 
-Create a reusable structured metadata template that can be copied and edited for each destination/trip.
-
-The model should support country, continent, places, dates, context, flights, routes, airline, optional flight number/seat, accommodation, transport, rides, photography references, story references and publication status. Rich source metadata may exceed what is publicly displayed.
+A reusable structured metadata model is established for both Indian journeys and international travel. The model supports country, continent, places, dates, context, travel companions, journey/travel type, flights, routes, airline, optional flight number/seat, accommodation, transport, rides, photography references, story references, publication status and featured status where appropriate.
 
 ## TRAVEL-003 — Define common travel page template
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Travel
 
-Create one common template that can support personal narrative, places/experiences, what stood out, what to do again, mistakes to avoid, where to stay, transport, practical observations, photography and related rides/writing.
+One common travel-detail rendering mechanism is established for India and international travel. URL depth may vary, but India and international content do not use separate page implementations.
 
 ## TRAVEL-004 — Define travel editorial interview workflow
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Travel
 
 Document the interview-first process: use available records and Ravi's memories to ask pointed, adaptive questions before drafting each travel story.
 
 ## TRAVEL-005 — Build travelogue index
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Travel
 
-Create a visually engaging overview organised by continent and country.
+Create a visually engaging overview organised by continent and country, including India as a country with individual journeys beneath it.
 
 ## TRAVEL-006 — Build individual country/trip pages
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Travel
 
-Implement the common template and reusable metadata model.
+Implement the common template and reusable metadata model through the unified travel detail mechanism. The system currently supports international country stories such as Armenia, Jordan and Italy and the Indian Amarnath journey.
 
 ## TRAVEL-007 — Curate initial travel destinations
 - Priority: P1
-- Status: Planned
+- Status: In Progress
 - Area: Travel
 
-Use the supplied country/status record as the initial planning data and identify the first destinations to publish.
+Use the supplied country/status record as the initial planning data and continue adding destinations and Indian journeys through the established common travel model.
 
 ## TRAVEL-008 — Import/reconcile travel records
 - Priority: P1
-- Status: Planned
+- Status: In Progress
 - Area: Travel
 
 Review Ravi's available flight/travel records and identify useful factual metadata for the initial destinations. Preserve richer source data separately from public presentation where appropriate.
@@ -424,3 +417,4 @@ Only revisit if there is a clear publishing/distribution strategy.
 6. When the intended product changes, update the specification first and then update the backlog.
 7. The backlog describes planned work; completed implementation should not be mistaken for completed product intent.
 8. Keep public presentation simpler than the underlying data where richer source records are useful.
+9. Avoid further architectural changes unless a demonstrated requirement shows that the current foundation cannot support the feature.
