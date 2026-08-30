@@ -63,7 +63,7 @@ Target structure:
 │   ├── components/
 │   ├── content/
 │   ├── data/
-│   ├── layouts/
+│   ├── lib/
 │   ├── pages/
 │   └── styles/
 ├── AGENTS.md
@@ -83,7 +83,7 @@ Content should be modelled independently from visual components.
 
 Small, stable structured data may remain in TypeScript modules where that is the simplest solution. Long-form material should use Markdown/content collections.
 
-Travel should use structured data for geography and trip metadata, with narrative content kept separate where practical.
+Travel uses structured data for geography and trip metadata, with narrative content kept separate where practical.
 
 The goal is to enter facts once and derive repeatable presentation from them.
 
@@ -141,13 +141,13 @@ Continent
           +-- Trips / Places / Stories
 ```
 
-Country is a first-class index concept. The implementation should support the initial country/status data and future destinations without bespoke page construction.
+Country is a first-class index concept. India is represented as a country with individual journeys beneath it; international countries may have one or multiple trips/stories. The distinction is content structure, not a separate rendering architecture.
 
 ### Travel trip metadata
 
-Every trip should have a reusable structured metadata record that can be copied and edited for another destination.
+Every trip should have a reusable structured metadata record that can be copied and edited for another destination/trip.
 
-Potential fields:
+Potential fields include:
 
 - country
 - continent
@@ -165,8 +165,10 @@ Potential fields:
 - photography references
 - story references
 - publication status
+- journey/travel type where useful
+- featured status where applicable
 
-This metadata is the factual backbone. It may contain more information than is publicly displayed.
+The factual metadata model is shared by Indian journeys and international travel. A field may be optional when it is not meaningful for a particular story.
 
 ### Travel story
 
@@ -187,6 +189,25 @@ Narrative content may contain:
 - related writing
 
 The common template must remain flexible: not every story needs every section.
+
+### Unified Travel Rendering
+
+India and international travel use one common travel-detail rendering model.
+
+The implementation must not maintain separate page mechanisms merely because India contains individual journeys while international travel is commonly organised by country. The travel data determines the appropriate presentation and URL depth; the underlying loader, metadata handling, date handling, featured handling and story presentation remain shared.
+
+The current canonical implementation uses a single catch-all travel detail route for variable-depth travel URLs. This allows routes such as:
+
+```text
+/travel/italy/
+/travel/jordan/
+/travel/armenia/
+/travel/india/amarnath/
+```
+
+to be rendered through the same travel system.
+
+This is an explicit architectural decision: **India versus international is a content classification, not a separate application/module.**
 
 ### Photography
 
@@ -224,7 +245,7 @@ Questions should adapt to the information already known and the memories reveale
 
 The site should use clean, human-readable canonical URLs.
 
-Target primary routes:
+Primary routes:
 
 ```text
 /
@@ -237,12 +258,14 @@ Target primary routes:
 /projects/
 /projects/<slug>/
 /travel/
+/travel/<country>/
+/travel/india/<journey>/
 /photography/
 /contact/
 /elsewhere/
 ```
 
-Travel's geographic hierarchy should be reflected in the final canonical route design where it improves discoverability. Exact country/trip/story route depth must be confirmed before implementation.
+Travel detail URLs may have different depths because India is intentionally organised as a country containing individual journeys while an international country may itself be the story destination. These URL differences do not imply different page implementations.
 
 ## 9. Rendering Strategy
 
@@ -253,6 +276,8 @@ Client-side JavaScript should be introduced only where a feature genuinely needs
 Core pages must not depend on third-party embeds for basic rendering.
 
 External photography embeds, where used, should be progressive enhancement and should not make the page unusable when unavailable.
+
+Travel routes are statically generated from the unified travel data model.
 
 ## 10. Components
 
@@ -290,6 +315,8 @@ The homepage should not load a large photographic collection.
 
 Travel pages can carry richer imagery because Travel is intentionally a detailed visual/story experience.
 
+Travel banner assets follow a predictable country/journey naming convention where practical, for example `public/images/travel/italy.jpg` and `public/images/travel/amarnath.jpg`.
+
 ## 12. SEO Architecture
 
 Shared layouts should provide consistent metadata foundations.
@@ -297,6 +324,8 @@ Shared layouts should provide consistent metadata foundations.
 Page-level content should provide titles, descriptions and canonical URLs.
 
 Specialised structured data can be added for books, articles, travel/place content and personal identity where useful.
+
+Travel metadata is rendered through the common travel system so India and international pages use the same metadata conventions.
 
 ## 13. Deployment Architecture
 
@@ -354,5 +383,7 @@ None should be introduced until a demonstrated need exists.
 7. Human-readable stable URLs.
 8. Photography is visual support/gateway in V1, not a photo-hosting system.
 9. Travel is detailed and template-driven.
-10. No backend without a real requirement.
-11. Prefer simple solutions that can be maintained for years.
+10. India and international travel share one underlying travel module; geography/content differences are data, not separate application mechanisms.
+11. No backend without a real requirement.
+12. Prefer simple solutions that can be maintained for years.
+13. Avoid further architectural changes unless an actual requirement demonstrates that the current foundation cannot support the feature.
