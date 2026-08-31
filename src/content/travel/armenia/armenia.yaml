@@ -1,48 +1,76 @@
+title: Armenia
 country: Armenia
+region: null
 continent: Asia
 status: visited
-banner: /images/travel/armenia.jpg
 content_status: published
-
-visits:
-  - from: 2017-11-28
-    to: 2017-12-04
-    travelling_with:
-      - Pragati
-  - from: 2019-12-31
-    to: 2020-01-03
-    travelling_with:
-      - Pragati
-
-origin: Dubai, UAE
-
-flights:
-  - date: 2017-11-28
-    from: DXB
-    to: EVN
-    airline: Flydubai
-    flight: FZ715
-  - date: 2017-12-04
-    from: EVN
-    to: DXB
-    airline: Flydubai
-    flight: FZ716
-
-accommodation:
-  - Marriott, Republic Square, Yerevan
-
-places_visited:
-  - Lake Sevan
-  - Garni Temple
-  - Geghard Monastery
-  - Tsitsernakaberd Armenian Genocide Memorial Complex
-  - Tsaghkadzor Ski Resort
-  - Kecharis Monastery
-  - Haghartsin Monastic Complex
-  - Khor Virap
-  - Jermuk Falls
-  - Areni Winery
-
+banner: /images/travel/armenia.jpg
 photography:
-  500px: ""
-  instagram: ""
+  - label: 500px
+    url: ""
+  - label: Instagram
+    url: ""
+metadata: {}
+visits:
+  - title: null
+    from: 2017-11-28
+    to: 2017-12-04
+    duration_days: 7
+    travelled_with:
+      - Pragati
+    travel_type: flight + road
+    solo: false
+    origin: Dubai, UAE
+    route: []
+    places_visited:
+      - Lake Sevan
+      - Garni Temple
+      - Geghard Monastery
+      - Tsitsernakaberd Armenian Genocide Memorial Complex
+      - Tsaghkadzor Ski Resort
+      - Kecharis Monastery
+      - Haghartsin Monastic Complex
+      - Khor Virap
+      - Jermuk Falls
+      - Areni Winery
+    highlights: []
+    flights:
+      - date: 2017-11-28
+        from: DXB
+        to: EVN
+        airline: Flydubai
+        flight: FZ715
+        note: null
+      - date: 2017-12-04
+        from: EVN
+        to: DXB
+        airline: Flydubai
+        flight: FZ716
+        note: null
+    accommodation:
+      - place: Yerevan
+        name: Marriott, Republic Square, Yerevan
+        dates: null
+        notes: null
+    transport: []
+    stays: []
+    occasion: null
+    notes: null
+  - title: null
+    from: 2019-12-31
+    to: 2020-01-03
+    duration_days: 4
+    travelled_with:
+      - Pragati
+    travel_type: null
+    solo: false
+    origin: Dubai, UAE
+    route: []
+    places_visited: []
+    highlights: []
+    flights: []
+    accommodation: []
+    transport: []
+    stays: []
+    occasion: New Year
+    notes: The existing record contains dates and companion information for this second visit but no further journey details.
