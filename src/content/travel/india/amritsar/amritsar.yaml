@@ -1,32 +1,42 @@
 title: Amritsar
 country: India
 region: Punjab
+continent: Asia
 status: visited
-from: 2007-06-29
-to: 2007-07-02
-duration_days: 4
-travelled_with:
-  - Pragati
-travel_type: road trip
-solo: false
-featured: false
-origin: Delhi, India
-route:
-  - Delhi
-  - Amritsar
-  - Attari
-  - Wagah Border
-  - Ludhiana
-  - Delhi
-places_visited:
-  - Golden Temple (Harmandir Sahib)
-  - Jallianwala Bagh
-  - Attari Railway Station
-  - Wagah Border
-highlights:
-  - Golden Temple and its reflection in the sarovar
-  - Wagah Border flag ceremony
-  - Early-morning road journey from Delhi
-  - Unexpected overnight stop in Ludhiana
-banner: /images/travel/amritsar.jpg
 content_status: published
+banner: /images/travel/amritsar.jpg
+photography: []
+metadata: {}
+visits:
+  - title: null
+    from: 2007-06-29
+    to: 2007-07-02
+    duration_days: 4
+    travelled_with:
+      - Pragati
+    travel_type: road trip
+    solo: false
+    origin: Delhi, India
+    route:
+      - Delhi
+      - Amritsar
+      - Attari
+      - Wagah Border
+      - Ludhiana
+      - Delhi
+    places_visited:
+      - Golden Temple (Harmandir Sahib)
+      - Jallianwala Bagh
+      - Attari Railway Station
+      - Wagah Border
+    highlights:
+      - Golden Temple and its reflection in the sarovar
+      - Wagah Border flag ceremony
+      - Early-morning road journey from Delhi
+      - Unexpected overnight stop in Ludhiana
+    flights: []
+    accommodation: []
+    transport: []
+    stays: []
+    occasion: null
+    notes: null
