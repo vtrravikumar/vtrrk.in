@@ -10,7 +10,7 @@ metadata:
   story_title: Chasing Sunsets
 visits:
   - title: Chasing Sunsets
-    from: 2004-01-01
+    from: null
     to: null
     duration_days: null
     travelled_with:
@@ -50,4 +50,4 @@ visits:
     transport: []
     stays: []
     occasion: null
-    notes: Exact journey dates are not currently recorded; the original record gives the year as 2004.
+    notes: The original record gives the year as 2004, but exact journey dates are not currently recorded.
