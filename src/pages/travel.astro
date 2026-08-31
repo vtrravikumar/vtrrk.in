@@ -1,35 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { load } from "js-yaml";
+import { getCollection } from "astro:content";
 import { travelCountries } from "../content/travel-countries";
 
-type Visit = { places_visited?: string[]; from?: string | Date | null; to?: string | Date | null };
-type TravelMeta = { title?: string; country?: string; continent?: string; region?: string | null; status?: string; content_status?: "published" | "draft"; banner?: string; visits?: Visit[] };
+type JourneyEntry = Awaited<ReturnType<typeof getCollection<"travel">>>[number];
+
+const journeys = await getCollection("travel");
+const publishedJourneys = journeys.filter((journey) => journey.data.content_status === "published");
+const slugFor = (entry: JourneyEntry) => {
+  const parts = entry.id.split("/");
+  return parts[0] === "india" ? `india/${parts[1]}` : parts[0];
+};
+const slugForData = (entry: JourneyEntry) => slugFor(entry);
 
 const continents = ["Asia", "Europe", "Africa", "Oceania", "North America"];
-
-const internationalModules = import.meta.glob("../content/travel/*/*.yaml", { eager: true, query: "?raw", import: "default" });
-const internationalMetadata = Object.entries(internationalModules).map(([path, raw]) => {
-  const data = load(raw as string) as TravelMeta;
-  const slug = path.split("/").at(-2) ?? "";
-  return { slug, data };
-});
-
 const visitedCountries = travelCountries.filter((country) => country.status === "Y");
 const international = visitedCountries
   .filter((country) => country.slug !== "india")
-  .map((country) => ({ ...country, ...internationalMetadata.find((item) => item.slug === country.slug)?.data }));
+  .map((country) => {
+    const entry = journeys.find((journey) => slugForData(journey) === country.slug);
+    return { ...country, ...(entry ? entry.data : {}), slug: country.slug };
+  });
 const published = international.filter((country) => country.content_status === "published");
 
-const indiaJourneyModules = import.meta.glob("../content/travel/india/*/*.yaml", { eager: true, query: "?raw", import: "default" });
-const indiaJourneys = Object.entries(indiaJourneyModules)
-  .map(([path, raw]) => {
-    const data = load(raw as string) as TravelMeta;
-    const slug = path.split("/").at(-2) ?? data.title?.toLowerCase().replace(/\s+/g, "-");
-    const places_visited = [...new Set((data.visits ?? []).flatMap((visit) => visit.places_visited ?? []))];
-    return { ...data, slug, places_visited };
-  })
-  .filter((journey) => journey.content_status === "published");
+const indiaJourneys = publishedJourneys
+  .filter((journey) => slugFor(journey).startsWith("india/"))
+  .map((entry) => ({ ...entry.data, slug: slugFor(entry), places_visited: [...new Set((entry.data.visits ?? []).flatMap((visit) => visit.places_visited ?? []))] }));
 
 const indiaPlaces = Object.entries(
   indiaJourneys.reduce<Record<string, string[]>>((groups, journey) => {
@@ -54,7 +50,7 @@ const fallbackWorld = published[0];
       <div class="section-heading"><p class="label" id="featured-heading">Featured travel</p><p class="section-note">A few places from the road</p></div>
       <div class="featured-grid">
         <article class="feature-column"><p class="feature-label">India</p>
-          {featuredIndia ? <a class="featured-card" href={`/travel/india/${featuredIndia.slug}/`} data-india-featured-card><img src={featuredIndia.banner ?? `/images/travel/${featuredIndia.slug}.jpg`} alt={`${featuredIndia.title} travel banner`} data-india-featured-image /><div class="featured-copy"><p class="featured-continent">India · {featuredIndia.region ?? "Journey"}</p><h2 data-india-featured-name>{featuredIndia.title}</h2><p class="featured-link">Read the travelogue <span>→</span></p></div></a> : <div class="featured-card unavailable"><div class="featured-placeholder"><span>India</span></div><div class="featured-copy"><p class="featured-continent">India journeys</p><h2>Coming soon</h2><p class="featured-link">The first journey will appear here.</p></div></div>}
+          {featuredIndia ? <a class="featured-card" href={`/travel/india/${featuredIndia.slug.split("/").pop()}/`} data-india-featured-card><img src={featuredIndia.banner ?? `/images/travel/${featuredIndia.slug.split("/").pop()}.jpg`} alt={`${featuredIndia.title} travel banner`} data-india-featured-image /><div class="featured-copy"><p class="featured-continent">India · {featuredIndia.region ?? "Journey"}</p><h2 data-india-featured-name>{featuredIndia.title}</h2><p class="featured-link">Read the travelogue <span>→</span></p></div></a> : <div class="featured-card unavailable"><div class="featured-placeholder"><span>India</span></div><div class="featured-copy"><p class="featured-continent">India journeys</p><h2>Coming soon</h2><p class="featured-link">The first journey will appear here.</p></div></div>}
         </article>
         <article class="feature-column"><p class="feature-label">Rest of the world</p>
           {fallbackWorld && <a class="featured-card" href={`/travel/${fallbackWorld.slug}/`} data-featured-card><img src={fallbackWorld.banner ?? `/images/travel/${fallbackWorld.slug}.jpg`} alt="" data-featured-image /><div class="featured-copy"><p class="featured-continent" data-featured-continent>{fallbackWorld.continent}</p><h2 data-featured-name>{fallbackWorld.title ?? fallbackWorld.name}</h2><p class="featured-link">Read the travelogue <span>→</span></p></div></a>}
@@ -64,7 +60,7 @@ const fallbackWorld = published[0];
     <section class="index">
       <div class="index-intro"><p class="label">Travel index</p><h2>India &amp; {international.length} countries</h2><p>India is organised as individual journeys. The rest of the world is organised by country. A green marker means a published travelogue is available; a grey marker means the journey is recorded but the story is still to be written.</p></div>
       <section class="india-entry"><div><p class="section-label">India</p><h3>Journeys across India</h3><p>Individual trips, routes and stories — not a list of states.</p></div><a href="/travel/india/">View India journeys <span>→</span></a></section>
-      <section class="india-places"><div class="india-places-heading"><p class="section-label">Places across India</p><p>States and places I've travelled through, shown only where there is a published journey to tell.</p></div><div class="india-place-groups">{indiaPlaces.map(([region, places]) => <section class="india-place-group"><h3>{region}</h3><div class="india-places-list">{places.map((place) => { const journey = indiaJourneys.find((item) => item.places_visited.includes(place)); return journey ? <a href={`/travel/india/${journey.slug}/`}>{place}</a> : <span>{place}</span>; })}</div></section>)}</div></section>
+      <section class="india-places"><div class="india-places-heading"><p class="section-label">Places across India</p><p>States and places I've travelled through, shown only where there is a published journey to tell.</p></div><div class="india-place-groups">{indiaPlaces.map(([region, places]) => <section class="india-place-group"><h3>{region}</h3><div class="india-places-list">{places.map((place) => { const journey = indiaJourneys.find((item) => item.places_visited.includes(place)); return journey ? <a href={`/travel/india/${journey.slug.split("/").pop()}/`}>{place}</a> : <span>{place}</span>; })}</div></section>)}</div></section>
       <section class="world"><p class="section-label">Rest of the world</p>{continents.map((continent) => { const countries = international.filter((country) => country.continent === continent); if (!countries.length) return null; return <section class="continent"><h3>{continent}</h3><div class="countries">{countries.map((country) => { const isPublished = country.content_status === "published"; return <div class:list-item={true} class:has-blog={isPublished}><span class="status" aria-label={isPublished ? "Travelogue available" : "Travelogue not yet written"}></span>{isPublished ? <a href={`/travel/${country.slug}/`}>{country.title ?? country.name}</a> : <span>{country.name}</span>}</div>; })}</div></section>; })}</section>
     </section>
   </main>
