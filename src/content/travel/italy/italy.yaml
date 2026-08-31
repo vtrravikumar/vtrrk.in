@@ -1,46 +1,73 @@
+title: Italy
 country: Italy
+region: null
 continent: Europe
 status: visited
-visits:
-  - from: 2016-08-16
-    to: 2016-08-25
-    travelling_with:
-      - Pragati
-origin: Dubai, UAE
-accommodation:
-  - Rome
-  - Florence
-  - Venice
-  - Zurich
-flights:
-  - date: 2016-08-16
-    from: DXB
-    to: FCO
-    airline: Emirates
-    flight: EK95
-  - date: 2016-08-25
-    from: ZRH
-    to: DXB
-    airline: Emirates
-    flight: EK86
-route:
-  - Rome
-  - Florence
-  - Pisa
-  - Venice
-  - Milan
-  - Zurich
-places_visited:
-  - Colosseum
-  - Vatican City
-  - Trevi Fountain
-  - Spanish Steps
-  - Pantheon
-  - Piazza del Campidoglio
-  - Piazza del Duomo, Florence
-  - Leaning Tower of Pisa
-  - Rialto Bridge
-  - St Mark's Square
-  - Zurich
-banner: /images/travel/italy.jpg
 content_status: published
+banner: /images/travel/italy.jpg
+photography: []
+metadata: {}
+visits:
+  - title: null
+    from: 2016-08-16
+    to: 2016-08-25
+    duration_days: 10
+    travelled_with:
+      - Pragati
+    travel_type: flight + road/rail
+    solo: false
+    origin: Dubai, UAE
+    route:
+      - Rome
+      - Florence
+      - Pisa
+      - Venice
+      - Milan
+      - Zurich
+    places_visited:
+      - Colosseum
+      - Vatican City
+      - Trevi Fountain
+      - Spanish Steps
+      - Pantheon
+      - Piazza del Campidoglio
+      - Piazza del Duomo, Florence
+      - Leaning Tower of Pisa
+      - Rialto Bridge
+      - St Mark's Square
+      - Zurich
+    highlights: []
+    flights:
+      - date: 2016-08-16
+        from: DXB
+        to: FCO
+        airline: Emirates
+        flight: EK95
+        note: null
+      - date: 2016-08-25
+        from: ZRH
+        to: DXB
+        airline: Emirates
+        flight: EK86
+        note: null
+    accommodation:
+      - place: Rome
+        name: null
+        dates: null
+        notes: null
+      - place: Florence
+        name: null
+        dates: null
+        notes: null
+      - place: Venice
+        name: null
+        dates: null
+        notes: null
+      - place: Zurich
+        name: null
+        dates: null
+        notes: null
+    transport: []
+    stays: []
+    occasion: null
+    notes: null
