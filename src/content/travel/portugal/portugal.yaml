@@ -1,53 +1,68 @@
+title: Portugal
 country: Portugal
+region: null
 continent: Europe
 status: visited
-banner: /images/travel/portugal.jpg
 content_status: published
-
+banner: /images/travel/portugal.jpg
+photography: []
+metadata:
+  travel_style: Road trip originally planned; ultimately Lisbon and Madrid by air
+  planned_route:
+    - Lisbon, Portugal
+    - Spain
+    - France, if possible
 visits:
-  - from: 2018-11-29
+  - title: Portugal & Spain
+    from: 2018-11-29
     to: 2018-12-03
-    travelling_with:
+    duration_days: 5
+    travelled_with:
       - Pragati
-
-origin: Dubai, UAE
-
-accommodation:
-  - Lisbon — TURIM Av. Liberdade Hotel
-  - Madrid — AC Hotel Carlton Madrid
-
-route:
-  - Lisbon, Portugal
-  - Madrid, Spain
-
-flights:
-  - date: 2018-11-29
-    from: DXB
-    to: LIS
-  - date: 2018-12-03
-    from: MAD
-    to: DXB
-    note: Return flight was brought forward after the original road-trip plan was abandoned.
-
-places_visited:
-  - Praça do Comércio, Lisbon
-  - Belém Tower, Lisbon
-  - Belém, Lisbon
-  - Lisbon Metro
-  - El Retiro Park, Madrid
-  - Palacio de Cristal, Madrid
-  - Madrid-Puerta de Atocha-Almudena Grandes station
-
-travel_style: Road trip originally planned; ultimately Lisbon and Madrid by air
-planned_route:
-  - Lisbon, Portugal
-  - Spain
-  - France, if possible
-
-highlights:
-  - Lisbon in mist and winter weather
-  - Belém after a sudden shower
-  - Photography at Praça do Comércio and Belém
-  - El Retiro Park and Palacio de Cristal
-  - Imagining the European road trip from the air between Lisbon and Madrid
-  - Adapting the journey when Pragati became unwell
+    travel_type: air; road trip originally planned
+    solo: false
+    origin: Dubai, UAE
+    route:
+      - Lisbon, Portugal
+      - Madrid, Spain
+    places_visited:
+      - Praça do Comércio, Lisbon
+      - Belém Tower, Lisbon
+      - Belém, Lisbon
+      - Lisbon Metro
+      - El Retiro Park, Madrid
+      - Palacio de Cristal, Madrid
+      - Madrid-Puerta de Atocha-Almudena Grandes station
+    highlights:
+      - Lisbon in mist and winter weather
+      - Belém after a sudden shower
+      - Photography at Praça do Comércio and Belém
+      - El Retiro Park and Palacio de Cristal
+      - Imagining the European road trip from the air between Lisbon and Madrid
+      - Adapting the journey when Pragati became unwell
+    flights:
+      - date: 2018-11-29
+        from: DXB
+        to: LIS
+        airline: null
+        flight: null
+        note: null
+      - date: 2018-12-03
+        from: MAD
+        to: DXB
+        airline: null
+        flight: null
+        note: Return flight was brought forward after the original road-trip plan was abandoned.
+    accommodation:
+      - place: Lisbon
+        name: TURIM Av. Liberdade Hotel
+        dates: null
+        notes: null
+      - place: Madrid
+        name: AC Hotel Carlton Madrid
+        dates: null
+        notes: null
+    transport: []
+    stays: []
+    occasion: null
+    notes: null
