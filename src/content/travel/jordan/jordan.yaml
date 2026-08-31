@@ -1,37 +1,54 @@
+title: Jordan
 country: Jordan
+region: null
 continent: Asia
 status: visited
-banner: /images/travel/jordan.jpg
 content_status: published
-
+banner: /images/travel/jordan.jpg
+photography: []
+metadata: {}
 visits:
-  - from: 2019-11-30
+  - title: null
+    from: 2019-11-30
     to: 2019-12-05
-    travelling_with: []
-
-origin: Dubai, UAE
-
-accommodation:
-  - Amman
-  - Nomad hostel, Wadi Musa
-
-flights:
-  - date: 2019-11-30
-    from: DXB
-    to: AMM
-    airline: Emirates
-    flight: EK901
-  - date: 2019-12-05
-    from: AMM
-    to: DXB
-    airline: Emirates
-    flight: EK904
-
-places_visited:
-  - Amman
-  - Temple of Hercules
-  - Wadi Musa
-  - Petra
-  - Wadi Rum
-  - Dead Sea
-  - Mount Nebo
+    duration_days: 6
+    travelled_with: []
+    travel_type: null
+    solo: true
+    origin: Dubai, UAE
+    route: []
+    places_visited:
+      - Amman
+      - Temple of Hercules
+      - Wadi Musa
+      - Petra
+      - Wadi Rum
+      - Dead Sea
+      - Mount Nebo
+    highlights: []
+    flights:
+      - date: 2019-11-30
+        from: DXB
+        to: AMM
+        airline: Emirates
+        flight: EK901
+        note: null
+      - date: 2019-12-05
+        from: AMM
+        to: DXB
+        airline: Emirates
+        flight: EK904
+        note: null
+    accommodation:
+      - place: Amman
+        name: null
+        dates: null
+        notes: null
+      - place: Wadi Musa
+        name: Nomad hostel, Wadi Musa
+        dates: null
+        notes: null
+    transport: []
+    stays: []
+    occasion: null
+    notes: null
