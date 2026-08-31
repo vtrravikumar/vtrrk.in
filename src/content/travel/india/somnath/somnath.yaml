@@ -1,45 +1,66 @@
 title: Somnath
 country: India
 region: Gujarat
+continent: Asia
 status: visited
-from: 2014-03-14
-to: 2014-03-18
-duration_days: 5
-travelled_with:
-  - Pragati
-travel_type: flight + bus trip
-solo: false
-origin: Delhi, India
-route:
-  - Delhi
-  - Ahmedabad
-  - Somnath
-  - Ahmedabad
-  - Delhi
-places_visited:
-  - Somnath
-  - Ahmedabad
-  - Somnath Jyotirlinga Temple
-  - Local temples near Somnath
-  - Krishna's earthly departure spot
-  - Adalaj Vav
-  - Sabarmati Ashram
-highlights:
-  - Birthday journey with Pragati
-  - Somnath Jyotirlinga under a full moon
-  - Two overnight sleeper-bus journeys
-  - Last-minute visit to Adalaj Vav for photography
-  - Simple birthday dinner in Ahmedabad
-  - Unexpected meeting with Parthiv Patel
-banner: /images/travel/somnath.jpg
 content_status: published
-flights:
-  - date: 2014-03-14
-    route: DEL-Ahmedabad
-    airline: Air India
-    flight: AI10
-  - date: 2014-03-18
-    route: Ahmedabad-DEL
-    airline: Air India
-    flight: AI30
-hotel: Hotel Ambar, Somnath; Holiday Inn, Ahmedabad
+banner: /images/travel/somnath.jpg
+photography: []
+metadata: {}
+visits:
+  - title: Somnath
+    from: 2014-03-14
+    to: 2014-03-18
+    duration_days: 5
+    travelled_with:
+      - Pragati
+    travel_type: flight + bus trip
+    solo: false
+    origin: Delhi, India
+    route:
+      - Delhi
+      - Ahmedabad
+      - Somnath
+      - Ahmedabad
+      - Delhi
+    places_visited:
+      - Somnath
+      - Ahmedabad
+      - Somnath Jyotirlinga Temple
+      - Local temples near Somnath
+      - Krishna's earthly departure spot
+      - Adalaj Vav
+      - Sabarmati Ashram
+    highlights:
+      - Birthday journey with Pragati
+      - Somnath Jyotirlinga under a full moon
+      - Two overnight sleeper-bus journeys
+      - Last-minute visit to Adalaj Vav for photography
+      - Simple birthday dinner in Ahmedabad
+      - Unexpected meeting with Parthiv Patel
+    flights:
+      - date: 2014-03-14
+        from: DEL
+        to: Ahmedabad
+        airline: Air India
+        flight: AI10
+        note: null
+      - date: 2014-03-18
+        from: Ahmedabad
+        to: DEL
+        airline: Air India
+        flight: AI30
+        note: null
+    accommodation:
+      - place: Somnath
+        name: Hotel Ambar
+        dates: null
+        notes: null
+      - place: Ahmedabad
+        name: Holiday Inn
+        dates: null
+        notes: Birthday dinner was in Ahmedabad.
+    transport: []
+    stays: []
+    occasion: Birthday journey
+    notes: null
