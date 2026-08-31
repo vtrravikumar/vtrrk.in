@@ -6,7 +6,18 @@ import { travelCountries } from "../content/travel-countries";
 const continents = ["Asia", "Europe", "Africa", "Oceania", "North America"];
 const visited = travelCountries.filter((country) => country.status === "Y");
 const international = visited.filter((country) => country.slug !== "india");
-const published = international.filter((country) => country.hasBlog);
+
+// Publication state comes from each country's travel YAML. This is the single source of truth.
+const internationalJourneyModules = import.meta.glob("../content/travel/*/*.yaml", { eager: true, query: "?raw", import: "default" });
+const publishedSlugs = new Set(
+  Object.entries(internationalJourneyModules)
+    .filter(([, raw]) => {
+      const data = load(raw as string) as { content_status?: string };
+      return data.content_status === "published";
+    })
+    .map(([path]) => path.split("/").at(-2) ?? "")
+);
+const published = international.filter((country) => publishedSlugs.has(country.slug));
 
 // India is organised as individual journeys rather than a list of states.
 const indiaJourneyModules = import.meta.glob("../content/travel/india/*/*.yaml", { eager: true, query: "?raw", import: "default" });
@@ -36,7 +47,6 @@ const indiaPlaces = Object.entries(
 
 const featuredIndia = indiaJourneys[Math.floor(Math.random() * indiaJourneys.length)];
 const fallbackWorld = published[0];
-const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
 ---
 <BaseLayout title="Travel — V.T.R. Ravi Kumar" description="Travel stories, journeys and practical notes from V.T.R. Ravi Kumar.">
   <main>
@@ -132,7 +142,7 @@ const hasBlog = (country: (typeof travelCountries)[number]) => country.hasBlog;
         {continents.map((continent) => {
           const countries = international.filter((country) => country.continent === continent);
           if (!countries.length) return null;
-          return <section class="continent"><h3>{continent}</h3><div class="countries">{countries.map((country) => <div class:list-item={true} class:has-blog={hasBlog(country)}><span class="status" aria-label={hasBlog(country) ? "Travelogue available" : "Travelogue not yet written"}></span>{hasBlog(country) ? <a href={`/travel/${country.slug}/`}>{country.name}</a> : <span>{country.name}</span>}</div>)}</div></section>;
+          return <section class="continent"><h3>{continent}</h3><div class="countries">{countries.map((country) => <div class:list-item={true} class:has-blog={publishedSlugs.has(country.slug)}><span class="status" aria-label={publishedSlugs.has(country.slug) ? "Travelogue available" : "Travelogue not yet written"}></span>{publishedSlugs.has(country.slug) ? <a href={`/travel/${country.slug}/`}>{country.name}</a> : <span>{country.name}</span>}</div>)}</div></section>;
         })}
       </section>
     </section>
