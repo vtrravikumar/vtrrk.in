@@ -1,90 +1,64 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { load } from "js-yaml";
+import { getCollection } from "astro:content";
 
-type Visit = {
-  title?: string | null;
-  from?: string | Date | null;
-  to?: string | Date | null;
-  duration_days?: number | null;
-  travelled_with?: string[];
-  travel_type?: string | null;
-  solo?: boolean;
-  origin?: string | null;
-  route?: string[];
-  places_visited?: string[];
-  highlights?: string[];
-  flights?: unknown[];
-  accommodation?: unknown[];
-  transport?: string[];
-  stays?: unknown[];
-  occasion?: string | null;
-  notes?: string | null;
-};
+type JourneyEntry = Awaited<ReturnType<typeof getCollection<"travel">>>[number];
 
-type TravelData = {
-  title: string;
-  country: string;
-  region?: string | null;
-  continent?: string | null;
-  status?: string;
-  content_status?: "published" | "draft";
-  banner?: string;
-  photography?: unknown[];
-  metadata?: Record<string, unknown>;
-  visits: Visit[];
-};
+export async function getStaticPaths() {
+  const journeys = await getCollection("travel");
+  const published = journeys.filter((journey) => journey.data.content_status === "published");
 
-type Journey = { slug: string; data: TravelData; path: string };
-
-export function getStaticPaths() {
-  const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", { eager: true, query: "?raw", import: "default" });
-  const journeys: Journey[] = Object.entries(yamlModules).map(([path, raw]) => {
-    const data = load(raw as string) as TravelData;
-    const relative = path.replace("../../content/travel/", "").replace(/\.yaml$/, "");
-    const parts = relative.split("/");
+  return published.map((entry) => {
+    const parts = entry.id.split("/");
     const slug = parts[0] === "india" ? `india/${parts[1]}` : parts[0];
-    return { slug, data, path };
+    return { params: { slug }, props: { entry, journeys: published } };
   });
-  return journeys.map(({ slug, data, path }) => ({ params: { slug }, props: { data, path, journeys } }));
 }
 
 const markdownModules = import.meta.glob("../../content/travel/**/*.md", { eager: true });
 const { slug } = Astro.params;
-const { data, path, journeys } = Astro.props as { data: TravelData; path: string; journeys: Journey[] };
+const { entry, journeys } = Astro.props as { entry: JourneyEntry; journeys: JourneyEntry[] };
+const data = entry.data;
 const isIndia = slug?.startsWith("india/") ?? false;
-const markdownPath = path.replace(/\.yaml$/, ".md");
+const markdownPath = `../../content/travel/${entry.id}.md`;
 const storyModule = markdownModules[markdownPath] as { Content: unknown } | undefined;
 const Story = storyModule?.Content;
 
-const title = data.title ?? "Journey";
+const title = data.title ?? data.country ?? "Journey";
 const region = data.region ?? data.continent ?? "Travel";
 const visits = data.visits ?? [];
 const firstVisit = visits[0];
-const from = firstVisit?.from ?? null;
-const to = firstVisit?.to ?? null;
-const companions = firstVisit?.travelled_with ?? [];
-const companion = companions.length ? companions.join(", ") : (firstVisit?.solo ? "Solo" : "—");
-const journeyValue = visits.length > 1 ? `${visits.length} visits` : (firstVisit?.travel_type ?? "Journey");
+const from = firstVisit?.from ?? data.from ?? null;
+const to = firstVisit?.to ?? data.to ?? null;
+const companions = firstVisit?.travelled_with ?? data.travelled_with ?? [];
+const companion = companions.length ? companions.join(", ") : (firstVisit?.solo ?? data.solo ? "Solo" : "—");
+const journeyValue = visits.length > 1 ? `${visits.length} visits` : (firstVisit?.travel_type ?? data.travel_type ?? "Journey");
 
 const toDate = (value: unknown) => { if (value instanceof Date) return value; if (typeof value === "string") return new Date(`${value.slice(0, 10)}T00:00:00`); return new Date(NaN); };
 const formatDate = (value: unknown) => { const date = toDate(value); return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); };
 const hasDateRange = Boolean(from && to && !Number.isNaN(toDate(from).getTime()) && !Number.isNaN(toDate(to).getTime()));
-const dateLabel = hasDateRange ? `${formatDate(from)} – ${formatDate(to)}` : (from ? formatDate(from) : undefined);
-const durationDays = firstVisit?.duration_days ?? (hasDateRange && from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined);
+const dateLabel = hasDateRange ? `${formatDate(from)} – ${formatDate(to)}` : (from ? formatDate(from) : data.year ? String(data.year) : undefined);
+const durationDays = firstVisit?.duration_days ?? data.duration_days ?? (hasDateRange && from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined);
 const banner = data.banner ?? "/images/travel/default.jpg";
 const backHref = isIndia ? "/travel/india/" : "/travel/";
 const backLabel = isIndia ? "← India journeys" : "← Travel";
 
 const bucket = journeys.filter((journey) => {
-  const sameBucket = (journey.slug.startsWith("india/") ? "india" : "world") === (isIndia ? "india" : "world");
-  return sameBucket && journey.data.content_status === "published";
+  const journeyParts = journey.id.split("/");
+  const journeySlug = journeyParts[0] === "india" ? `india/${journeyParts[1]}` : journeyParts[0];
+  const sameBucket = (journeySlug.startsWith("india/") ? "india" : "world") === (isIndia ? "india" : "world");
+  return sameBucket;
 });
-const currentIndex = bucket.findIndex((journey) => journey.slug === slug);
+const currentIndex = bucket.findIndex((journey) => {
+  const journeyParts = journey.id.split("/");
+  return (journeyParts[0] === "india" ? `india/${journeyParts[1]}` : journeyParts[0]) === slug;
+});
 const nextJourney = currentIndex >= 0 && bucket.length > 1 ? bucket[(currentIndex + 1) % bucket.length] : undefined;
-const nextTitle = nextJourney?.data.title;
+const nextParts = nextJourney?.id.split("/");
+const nextSlug = nextParts ? (nextParts[0] === "india" ? `india/${nextParts[1]}` : nextParts[0]) : undefined;
+const nextTitle = nextJourney?.data.title ?? nextJourney?.data.country;
 const nextBanner = nextJourney?.data.banner ?? "/images/travel/default.jpg";
-const nextHref = nextJourney ? `/travel/${nextJourney.slug}/` : undefined;
+const nextHref = nextSlug ? `/travel/${nextSlug}/` : undefined;
 ---
 <BaseLayout title={`${title} — Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${title}${isIndia ? ", India" : ""}.`}>
   <main>
