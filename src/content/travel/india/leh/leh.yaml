@@ -1,65 +1,75 @@
-title: Leh — When the Mountains Became Real
+title: Leh
 country: India
 region: Ladakh
-year: 2022
-from: 2022-07-09
-to: 2022-07-17
-status: published
-travelled_with:
-  - Pragati
-travel_type: air and road
-solo: false
-origin: Chennai, India
-route:
-  - Chennai
-  - Delhi
-  - Leh
-  - Khardung La
-  - Nubra Valley
-  - Hunder
-  - Turtuk
-  - Thang
-  - Pangong Tso
-  - Chang La
-  - Leh
-  - Magnetic Hill
-  - Gurudwara Pathar Sahib
-  - Sangam
-transport:
-  - Flight
-  - Innova
-  - Royal Enfield Meteor
-stays:
-  - place: Leh
-    nights: 4
-    accommodation: Army guesthouse
-  - place: Partapur
-    nights: 2
-    accommodation: Army guesthouse
-  - place: Tangtse
-    nights: 1
-    accommodation: Army guesthouse
-places_visited:
-  - Leh
-  - Khardung La
-  - Nubra Valley
-  - Hunder
-  - Turtuk
-  - Thang
-  - Pangong Tso
-  - Chang La
-  - Magnetic Hill
-  - Gurudwara Pathar Sahib
-  - Sangam
-highlights:
-  - Pragati's first visit to Leh
-  - Khardung La
-  - Nubra Valley
-  - Double-humped camels at Hunder
-  - Maitreya Buddha statue
-  - Thang and the last post
-  - Pangong Tso
-  - Army guesthouse experience
-  - Royal Enfield Meteor ride around Leh
-banner: /images/travel/ladakh.jpg
+continent: Asia
+status: visited
 content_status: published
+banner: /images/travel/ladakh.jpg
+photography: []
+metadata:
+  story_title: Leh — When the Mountains Became Real
+visits:
+  - title: When the Mountains Became Real
+    from: 2022-07-09
+    to: 2022-07-17
+    duration_days: 9
+    travelled_with:
+      - Pragati
+    travel_type: air and road
+    solo: false
+    origin: Chennai, India
+    route:
+      - Chennai
+      - Delhi
+      - Leh
+      - Khardung La
+      - Nubra Valley
+      - Hunder
+      - Turtuk
+      - Thang
+      - Pangong Tso
+      - Chang La
+      - Leh
+      - Magnetic Hill
+      - Gurudwara Pathar Sahib
+      - Sangam
+    places_visited:
+      - Leh
+      - Khardung La
+      - Nubra Valley
+      - Hunder
+      - Turtuk
+      - Thang
+      - Pangong Tso
+      - Chang La
+      - Magnetic Hill
+      - Gurudwara Pathar Sahib
+      - Sangam
+    highlights:
+      - Pragati's first visit to Leh
+      - Khardung La
+      - Nubra Valley
+      - Double-humped camels at Hunder
+      - Maitreya Buddha statue
+      - Thang and the last post
+      - Pangong Tso
+      - Army guesthouse experience
+      - Royal Enfield Meteor ride around Leh
+    flights: []
+    accommodation: []
+    transport:
+      - Flight
+      - Innova
+      - Royal Enfield Meteor
+    stays:
+      - place: Leh
+        nights: 4
+        accommodation: Army guesthouse
+      - place: Partapur
+        nights: 2
+        accommodation: Army guesthouse
+      - place: Tangtse
+        nights: 1
+        accommodation: Army guesthouse
+    occasion: null
+    notes: null
