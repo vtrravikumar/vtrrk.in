@@ -1,21 +1,22 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { load } from "js-yaml";
+import { getCollection } from "astro:content";
 
-type Visit = { from?: string | Date | null; to?: string | Date | null };
-type JourneyData = { title: string; region?: string | null; banner?: string; content_status?: "published" | "draft"; visits: Visit[]; };
+type JourneyEntry = Awaited<ReturnType<typeof getCollection<"travel">>>[number];
 
-const journeyModules = import.meta.glob("../../../content/travel/india/*/*.yaml", { eager: true, query: "?raw", import: "default" });
-const journeys = Object.entries(journeyModules).map(([path, raw]) => {
-  const data = load(raw as string) as JourneyData;
-  const slug = path.split("/").at(-2) ?? data.title.toLowerCase().replace(/\s+/g, "-");
-  const firstVisit = data.visits?.[0];
-  return { ...data, slug, from: firstVisit?.from, to: firstVisit?.to };
-}).filter((journey) => journey.content_status === "published").sort((a, b) => {
-  const aDate = a.from ? new Date(a.from).getTime() : 0;
-  const bDate = b.from ? new Date(b.from).getTime() : 0;
-  return aDate - bDate;
-});
+const allJourneys = await getCollection("travel");
+const journeys = allJourneys
+  .filter((journey) => journey.id.startsWith("india/") && journey.data.content_status === "published")
+  .map((entry) => {
+    const slug = entry.id.split("/")[1];
+    const firstVisit = entry.data.visits?.[0];
+    return { ...entry.data, slug, from: firstVisit?.from ?? entry.data.from, to: firstVisit?.to ?? entry.data.to };
+  })
+  .sort((a, b) => {
+    const aDate = a.from ? new Date(a.from).getTime() : 0;
+    const bDate = b.from ? new Date(b.from).getTime() : 0;
+    return aDate - bDate;
+  });
 
 const featuredJourney = journeys.length ? journeys[Math.floor(Math.random() * journeys.length)] : undefined;
 const formatDate = (value: string | Date) => (value instanceof Date ? value : new Date(`${value}T00:00:00`)).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
