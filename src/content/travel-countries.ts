@@ -5,33 +5,32 @@ export type TravelCountry = {
   continent: string;
   status: TravelStatus;
   slug: string;
-  hasBlog: boolean;
 };
 
 // Source: Ravi's travel record. Y = visited; X = cannot be visited.
-// The index intentionally includes only visited countries for now.
-// Blog availability is kept separate so the index can grow as stories are added.
+// Publication state is intentionally NOT stored here. It belongs to each
+// country's travel YAML as content_status, so there is one source of truth.
 export const travelCountries: TravelCountry[] = [
-  { name: "Armenia", continent: "Asia", status: "Y", slug: "armenia", hasBlog: true },
-  { name: "Azerbaijan", continent: "Asia", status: "Y", slug: "azerbaijan", hasBlog: false },
-  { name: "Australia", continent: "Oceania", status: "Y", slug: "australia", hasBlog: false },
-  { name: "Georgia", continent: "Asia", status: "Y", slug: "georgia", hasBlog: false },
-  { name: "India", continent: "Asia", status: "Y", slug: "india", hasBlog: false },
-  { name: "Malaysia", continent: "Asia", status: "Y", slug: "malaysia", hasBlog: false },
-  { name: "Singapore", continent: "Asia", status: "Y", slug: "singapore", hasBlog: false },
-  { name: "Sri Lanka", continent: "Asia", status: "Y", slug: "sri-lanka", hasBlog: false },
-  { name: "Thailand", continent: "Asia", status: "Y", slug: "thailand", hasBlog: false },
-  { name: "Italy", continent: "Europe", status: "Y", slug: "italy", hasBlog: true },
-  { name: "Portugal", continent: "Europe", status: "Y", slug: "portugal", hasBlog: true },
-  { name: "Spain", continent: "Europe", status: "Y", slug: "spain", hasBlog: false },
-  { name: "Switzerland", continent: "Europe", status: "Y", slug: "switzerland", hasBlog: false },
-  { name: "United Kingdom", continent: "Europe", status: "Y", slug: "united-kingdom", hasBlog: false },
-  { name: "Jordan", continent: "Asia", status: "Y", slug: "jordan", hasBlog: true },
-  { name: "Oman", continent: "Asia", status: "Y", slug: "oman", hasBlog: false },
-  { name: "United Arab Emirates", continent: "Asia", status: "Y", slug: "united-arab-emirates", hasBlog: false },
-  { name: "Mauritius", continent: "Africa", status: "Y", slug: "mauritius", hasBlog: false },
-  { name: "Seychelles", continent: "Africa", status: "Y", slug: "seychelles", hasBlog: false },
-  { name: "United States", continent: "North America", status: "Y", slug: "united-states", hasBlog: false },
+  { name: "Armenia", continent: "Asia", status: "Y", slug: "armenia" },
+  { name: "Azerbaijan", continent: "Asia", status: "Y", slug: "azerbaijan" },
+  { name: "Australia", continent: "Oceania", status: "Y", slug: "australia" },
+  { name: "Georgia", continent: "Asia", status: "Y", slug: "georgia" },
+  { name: "India", continent: "Asia", status: "Y", slug: "india" },
+  { name: "Malaysia", continent: "Asia", status: "Y", slug: "malaysia" },
+  { name: "Singapore", continent: "Asia", status: "Y", slug: "singapore" },
+  { name: "Sri Lanka", continent: "Asia", status: "Y", slug: "sri-lanka" },
+  { name: "Thailand", continent: "Asia", status: "Y", slug: "thailand" },
+  { name: "Italy", continent: "Europe", status: "Y", slug: "italy" },
+  { name: "Portugal", continent: "Europe", status: "Y", slug: "portugal" },
+  { name: "Spain", continent: "Europe", status: "Y", slug: "spain" },
+  { name: "Switzerland", continent: "Europe", status: "Y", slug: "switzerland" },
+  { name: "United Kingdom", continent: "Europe", status: "Y", slug: "united-kingdom" },
+  { name: "Jordan", continent: "Asia", status: "Y", slug: "jordan" },
+  { name: "Oman", continent: "Asia", status: "Y", slug: "oman" },
+  { name: "United Arab Emirates", continent: "Asia", status: "Y", slug: "united-arab-emirates" },
+  { name: "Mauritius", continent: "Africa", status: "Y", slug: "mauritius" },
+  { name: "Seychelles", continent: "Africa", status: "Y", slug: "seychelles" },
+  { name: "United States", continent: "North America", status: "Y", slug: "united-states" },
 ];
 
 export const travelStatusLabel: Record<TravelStatus, string> = {
