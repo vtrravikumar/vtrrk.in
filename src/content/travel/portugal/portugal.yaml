@@ -2,7 +2,7 @@ country: Portugal
 continent: Europe
 status: visited
 banner: /images/travel/portugal.jpg
-content_status: draft
+content_status: published
 
 visits:
   - from: 2018-11-29
