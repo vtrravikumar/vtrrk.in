@@ -1,0 +1,46 @@
+title: Darjeeling
+country: India
+region: West Bengal
+status: visited
+from: 2012-12-30
+to: 2013-01-02
+duration_days: 4
+travelled_with:
+  - Pragati
+travel_type: flight + road trip
+solo: false
+origin: Delhi, India
+route:
+  - Delhi
+  - Bagdogra
+  - Darjeeling
+  - Ghoom
+  - Simana (Nepal border)
+  - Bagdogra
+  - Delhi
+places_visited:
+  - Darjeeling
+  - Ghoom
+  - Simana (Nepal border)
+  - St. Paul's School
+  - Kanchenjunga viewpoint
+highlights:
+  - Sudden New Year trip
+  - Winter in the mountains
+  - Cedar Inn
+  - Kanchenjunga view from the room
+  - Coal chimney in the room
+  - Toy train seen at Darjeeling station and along the route
+  - New Year spent quietly at the hotel
+banner: /images/travel/darjeeling.jpg
+content_status: published
+flights:
+  - date: 2012-12-30
+    route: DEL-IXB
+    airline: Jet Airways
+    flight: 9W-711
+  - date: 2013-01-02
+    route: IXB-DEL
+    airline: Jet Airways
+    flight: 9W-712
+hotel: Cedar Inn
