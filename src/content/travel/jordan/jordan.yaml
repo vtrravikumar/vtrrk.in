@@ -2,7 +2,7 @@ country: Jordan
 continent: Asia
 status: visited
 banner: /images/travel/jordan.jpg
-content_status: draft
+content_status: published
 
 visits:
   - from: 2019-11-30
