@@ -103,5 +103,3 @@ My 2013 visit had introduced me to Ladakh.
 The 2022 journey made it special because I could experience it with Pragati.
 
 And somewhere between the Army guesthouses, the mountain roads, the awkward salutes, the Royal Enfield ride and the vast blue expanse of Pangong Tso, the trip reminded me of something I have learned repeatedly through travel: sometimes a place becomes more memorable not because it is new to you, but because you get to see it for the first time through someone else's eyes.
-
-*Banner image will be updated later.*
