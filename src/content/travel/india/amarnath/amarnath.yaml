@@ -1,41 +1,50 @@
 title: Amarnath
 country: India
 region: Kashmir
+continent: Asia
 status: visited
-from: 2005-07-22
-to: 2005-07-30
-duration_days: 9
-travelled_with:
-  - Giriraj
-travel_type: pilgrimage
-solo: false
-featured: true
-first_himalayan_pilgrimage: true
-origin: Haridwar, India
-meeting_point: Saharanpur, India
-route:
-  - Haridwar
-  - Saharanpur
-  - Jammu
-  - Anantnag
-  - Pahalgam
-  - Amarnath
-  - Baltal
-  - Srinagar
-  - Jammu
-  - Haridwar
-places_visited:
-  - Amarnath Cave
-  - Pahalgam
-  - Baltal
-  - Dal Lake
-  - Shankaracharya Temple
-highlights:
-  - Amarnath Cave
-  - Ice Lingam
-  - Army-protected pilgrimage convoy
-  - Pahalgam to Amarnath trek
-  - Baltal return route
-  - Srinagar houseboat
-banner: /images/travel/amarnath.jpg
 content_status: published
+banner: /images/travel/amarnath.jpg
+photography: []
+metadata:
+  first_himalayan_pilgrimage: true
+visits:
+  - title: null
+    from: 2005-07-22
+    to: 2005-07-30
+    duration_days: 9
+    travelled_with:
+      - Giriraj
+    travel_type: pilgrimage
+    solo: false
+    origin: Haridwar, India
+    route:
+      - Haridwar
+      - Saharanpur
+      - Jammu
+      - Anantnag
+      - Pahalgam
+      - Amarnath
+      - Baltal
+      - Srinagar
+      - Jammu
+      - Haridwar
+    places_visited:
+      - Amarnath Cave
+      - Pahalgam
+      - Baltal
+      - Dal Lake
+      - Shankaracharya Temple
+    highlights:
+      - Amarnath Cave
+      - Ice Lingam
+      - Army-protected pilgrimage convoy
+      - Pahalgam to Amarnath trek
+      - Baltal return route
+      - Srinagar houseboat
+    flights: []
+    accommodation: []
+    transport: []
+    stays: []
+    occasion: null
+    notes: Meeting point was Saharanpur, India.
