@@ -4,22 +4,24 @@ import { load } from "js-yaml";
 
 type Visit = { from?: string | Date; to?: string | Date; travelling_with?: string[]; };
 type TravelData = { title?: string; country?: string; continent?: string; region?: string; from?: string | Date; to?: string | Date; duration_days?: number; travelled_with?: string[]; travel_type?: string; solo?: boolean; banner?: string; intro?: string; visits?: Visit[]; featured?: boolean; };
-
 type Journey = { slug: string; data: TravelData; path: string };
 
-const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", { eager: true, query: "?raw", import: "default" });
-const journeys: Journey[] = Object.entries(yamlModules).map(([path, raw]) => {
-  const data = load(raw as string) as TravelData;
-  const relative = path.replace("../../content/travel/", "").replace(/\.yaml$/, "");
-  const parts = relative.split("/");
-  const slug = parts[0] === "india" ? `india/${parts[1]}` : parts[0];
-  return { slug, data, path };
-});
-
-export function getStaticPaths() {
-  return journeys.map(({ slug, data, path }) => ({ params: { slug }, props: { data, path } }));
+function getJourneys(): Journey[] {
+  const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", { eager: true, query: "?raw", import: "default" });
+  return Object.entries(yamlModules).map(([path, raw]) => {
+    const data = load(raw as string) as TravelData;
+    const relative = path.replace("../../content/travel/", "").replace(/\.yaml$/, "");
+    const parts = relative.split("/");
+    const slug = parts[0] === "india" ? `india/${parts[1]}` : parts[0];
+    return { slug, data, path };
+  });
 }
 
+export function getStaticPaths() {
+  return getJourneys().map(({ slug, data, path }) => ({ params: { slug }, props: { data, path } }));
+}
+
+const journeys = getJourneys();
 const markdownModules = import.meta.glob("../../content/travel/**/*.md", { eager: true });
 const { slug } = Astro.params;
 const { data, path } = Astro.props as { data: TravelData; path: string };
