@@ -2,43 +2,22 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { load } from "js-yaml";
 
-type Visit = {
-  from?: string | Date;
-  to?: string | Date;
-  travelling_with?: string[];
-};
+type Visit = { from?: string | Date; to?: string | Date; travelling_with?: string[]; };
+type TravelData = { title?: string; country?: string; continent?: string; region?: string; from?: string | Date; to?: string | Date; duration_days?: number; travelled_with?: string[]; travel_type?: string; solo?: boolean; banner?: string; intro?: string; visits?: Visit[]; featured?: boolean; };
 
-type TravelData = {
-  title?: string;
-  country?: string;
-  continent?: string;
-  region?: string;
-  from?: string | Date;
-  to?: string | Date;
-  duration_days?: number;
-  travelled_with?: string[];
-  travel_type?: string;
-  solo?: boolean;
-  banner?: string;
-  intro?: string;
-  visits?: Visit[];
-  featured?: boolean;
-};
+type Journey = { slug: string; data: TravelData; path: string };
+
+const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", { eager: true, query: "?raw", import: "default" });
+const journeys: Journey[] = Object.entries(yamlModules).map(([path, raw]) => {
+  const data = load(raw as string) as TravelData;
+  const relative = path.replace("../../content/travel/", "").replace(/\.yaml$/, "");
+  const parts = relative.split("/");
+  const slug = parts[0] === "india" ? `india/${parts[1]}` : parts[0];
+  return { slug, data, path };
+});
 
 export function getStaticPaths() {
-  const yamlModules = import.meta.glob("../../content/travel/**/*.yaml", {
-    eager: true,
-    query: "?raw",
-    import: "default"
-  });
-
-  return Object.entries(yamlModules).map(([path, raw]) => {
-    const data = load(raw as string) as TravelData;
-    const relative = path.replace("../../content/travel/", "").replace(/\.yaml$/, "");
-    const parts = relative.split("/");
-    const slug = parts[0] === "india" ? `india/${parts[1]}` : parts[0];
-    return { params: { slug }, props: { data, path } };
-  });
+  return journeys.map(({ slug, data, path }) => ({ params: { slug }, props: { data, path } }));
 }
 
 const markdownModules = import.meta.glob("../../content/travel/**/*.md", { eager: true });
@@ -55,45 +34,35 @@ const region = isIndia ? (data.region ?? "Journey") : (data.continent ?? "Travel
 const firstVisit = data.visits?.[0];
 const from = isIndia ? data.from : firstVisit?.from;
 const to = isIndia ? data.to : firstVisit?.to;
-const companions = isIndia
-  ? data.travelled_with ?? []
-  : firstVisit?.travelling_with ?? data.travelled_with ?? [];
+const companions = isIndia ? data.travelled_with ?? [] : firstVisit?.travelling_with ?? data.travelled_with ?? [];
 const companion = companions.join(", ") || (data.solo ? "Solo" : "Solo");
 const visitCount = data.visits?.length ?? 1;
-const journeyValue = isIndia
-  ? (data.travel_type ?? "Journey")
-  : `${visitCount} ${visitCount === 1 ? "visit" : "visits"}`;
+const journeyValue = isIndia ? (data.travel_type ?? "Journey") : `${visitCount} ${visitCount === 1 ? "visit" : "visits"}`;
 
 const toDate = (value: unknown) => {
   if (value instanceof Date) return value;
-  if (typeof value === "string") {
-    const datePart = value.slice(0, 10);
-    return new Date(`${datePart}T00:00:00`);
-  }
+  if (typeof value === "string") return new Date(`${value.slice(0, 10)}T00:00:00`);
   return new Date(NaN);
 };
-
 const formatDate = (value: unknown) => {
   const date = toDate(value);
-  return Number.isNaN(date.getTime())
-    ? "—"
-    : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 };
-
-const durationDays = isIndia
-  ? data.duration_days
-  : from && to
-    ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1
-    : undefined;
-
+const durationDays = isIndia ? data.duration_days : from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined;
 const banner = data.banner ?? "/images/travel/default.jpg";
 const backHref = isIndia ? "/travel/india/" : "/travel/";
 const backLabel = isIndia ? "← India journeys" : "← Travel";
+
+const bucket = journeys.filter((journey) => (journey.slug.startsWith("india/") ? "india" : "world") === (isIndia ? "india" : "world"));
+const currentIndex = bucket.findIndex((journey) => journey.slug === slug);
+const nextJourney = currentIndex >= 0 && bucket.length > 1 ? bucket[(currentIndex + 1) % bucket.length] : undefined;
+const nextTitle = nextJourney ? (nextJourney.slug.startsWith("india/") ? (nextJourney.data.title ?? "Journey") : (nextJourney.data.country ?? "Journey")) : undefined;
+const nextBanner = nextJourney?.data.banner ?? "/images/travel/default.jpg";
+const nextHref = nextJourney ? `/travel/${nextJourney.slug}/` : undefined;
 ---
 <BaseLayout title={`${title} — Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${title}${isIndia ? ", India" : ""}.`}>
   <main>
     <a class="back" href={backHref}>{backLabel}</a>
-
     <section class="hero">
       <img class="banner" src={banner} alt={`${title} travel banner`} />
       <div class="hero-copy">
@@ -102,17 +71,22 @@ const backLabel = isIndia ? "← India journeys" : "← Travel";
         <p class="intro">{data.intro ?? `A personal travelogue from ${title}.`}</p>
       </div>
     </section>
-
     <section class="record" aria-label="Journey details">
       {from && to && <div><span>Dates</span><strong>{formatDate(from)} – {formatDate(to)}</strong></div>}
       {durationDays !== undefined && <div><span>Duration</span><strong>{durationDays} days</strong></div>}
       <div><span>Travelled with</span><strong>{companion}</strong></div>
       <div><span>Journey</span><strong>{journeyValue}</strong></div>
     </section>
-
     {Story && <article class="story"><Story /></article>}
+    {nextJourney && <nav class="next-journey" aria-label="Next journey">
+      <div><p class="next-label">Next journey</p><p class="next-bucket">{isIndia ? "India" : "Rest of world"}</p></div>
+      <a class="next-card" href={nextHref}>
+        <img src={nextBanner} alt="" />
+        <div><span>{isIndia ? "India" : nextJourney.data.continent ?? "Travel"}</span><h2>{nextTitle}</h2><strong>Read journey <b>→</b></strong></div>
+      </a>
+    </nav>}
   </main>
 </BaseLayout>
 <style>
-main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.back{display:inline-block;margin:2rem 0 1.5rem;color:var(--muted);font-size:.9rem;text-decoration:none;transition:color .2s ease}.back:hover{color:var(--foreground)}.hero{position:relative}.banner{display:block;width:100%;aspect-ratio:2.25/1;object-fit:cover;object-position:center;border-radius:3px}.hero-copy{max-width:780px;margin:-1px 0 0;padding:3.5rem 0 3rem}.label{margin:0 0 .8rem;color:var(--muted);font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}.hero h1{margin:0 0 1.25rem;font-size:clamp(3rem,7vw,5.4rem);line-height:.96;letter-spacing:-.045em}.intro{max-width:680px;margin:0;color:var(--muted);font-size:1.18rem;line-height:1.7}.record{display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:6rem;border-top:1px solid color-mix(in srgb,var(--foreground) 13%,transparent);border-bottom:1px solid color-mix(in srgb,var(--foreground) 13%,transparent)}.record div{padding:1.35rem 1rem 1.45rem 0}.record span{display:block;margin-bottom:.45rem;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em}.record strong{font-size:.92rem;font-weight:500}.story{max-width:720px;margin:0 auto}.story :global(h1){display:none}.story :global(h2){margin:3.5rem 0 1rem;font-size:2rem;line-height:1.15;letter-spacing:-.02em}.story :global(h3){margin:2.5rem 0 .75rem;font-size:1.35rem}.story :global(p){margin:0 0 1.4rem;font-size:1.08rem;line-height:1.85}.story :global(ul),.story :global(ol){margin:0 0 1.5rem;padding-left:1.25rem;line-height:1.8}.story :global(blockquote){margin:2.5rem 0;padding-left:1.5rem;border-left:2px solid color-mix(in srgb,var(--foreground) 25%,transparent);color:var(--muted);font-size:1.15rem;line-height:1.7}.story :global(img){display:block;width:calc(100% + 8rem);max-width:none;margin:3rem -4rem;border-radius:3px}.story :global(figure){margin:3rem 0}.story :global(figure img){width:100%;margin:0}.story :global(figcaption){margin-top:.6rem;color:var(--muted);font-size:.78rem;line-height:1.5}@media(max-width:700px){main{width:min(100% - 2rem,1080px);padding-bottom:5rem}.back{margin:1.5rem 0 1rem}.banner{aspect-ratio:1.65/1}.hero-copy{padding:2.5rem 0 2rem}.hero h1{font-size:clamp(2.6rem,13vw,4rem)}.intro{font-size:1.05rem;line-height:1.65}.record{grid-template-columns:1fr 1fr;margin-bottom:4rem}.record div{padding:1.1rem .75rem 1.1rem 0}.story{max-width:none}.story :global(h2){margin-top:2.75rem;font-size:1.7rem}.story :global(p){font-size:1.03rem;line-height:1.8}.story :global(img){width:100%;margin:2.25rem 0}.story :global(figure){margin:2.25rem 0}}
+main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.back{display:inline-block;margin:2rem 0 1.5rem;color:var(--muted);font-size:.9rem;text-decoration:none;transition:color .2s ease}.back:hover{color:var(--foreground)}.hero{position:relative}.banner{display:block;width:100%;aspect-ratio:2.25/1;object-fit:cover;object-position:center;border-radius:3px}.hero-copy{max-width:780px;margin:-1px 0 0;padding:3.5rem 0 3rem}.label{margin:0 0 .8rem;color:var(--muted);font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}.hero h1{margin:0 0 1.25rem;font-size:clamp(3rem,7vw,5.4rem);line-height:.96;letter-spacing:-.045em}.intro{max-width:680px;margin:0;color:var(--muted);font-size:1.18rem;line-height:1.7}.record{display:grid;grid-template-columns:repeat(4,1fr);margin-bottom:6rem;border-top:1px solid color-mix(in srgb,var(--foreground) 13%,transparent);border-bottom:1px solid color-mix(in srgb,var(--foreground) 13%,transparent)}.record div{padding:1.35rem 1rem 1.45rem 0}.record span{display:block;margin-bottom:.45rem;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.1em}.record strong{font-size:.92rem;font-weight:500}.story{max-width:720px;margin:0 auto}.story :global(h1){display:none}.story :global(h2){margin:3.5rem 0 1rem;font-size:2rem;line-height:1.15;letter-spacing:-.02em}.story :global(h3){margin:2.5rem 0 .75rem;font-size:1.35rem}.story :global(p){margin:0 0 1.4rem;font-size:1.08rem;line-height:1.85}.story :global(ul),.story :global(ol){margin:0 0 1.5rem;padding-left:1.25rem;line-height:1.8}.story :global(blockquote){margin:2.5rem 0;padding-left:1.5rem;border-left:2px solid color-mix(in srgb,var(--foreground) 25%,transparent);color:var(--muted);font-size:1.15rem;line-height:1.7}.story :global(img){display:block;width:calc(100% + 8rem);max-width:none;margin:3rem -4rem;border-radius:3px}.story :global(figure){margin:3rem 0}.story :global(figure img){width:100%;margin:0}.story :global(figcaption){margin-top:.6rem;color:var(--muted);font-size:.78rem;line-height:1.5}.next-journey{max-width:900px;margin:7rem auto 0;padding-top:3rem;border-top:1px solid color-mix(in srgb,var(--foreground) 13%,transparent)}.next-label{margin:0;color:var(--foreground);font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase}.next-bucket{margin:.4rem 0 1.5rem;color:var(--muted);font-size:.9rem}.next-card{display:grid;grid-template-columns:240px 1fr;min-height:180px;text-decoration:none;color:inherit;border:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);overflow:hidden;transition:border-color .2s ease,transform .2s ease}.next-card:hover{border-color:color-mix(in srgb,var(--foreground) 28%,transparent);transform:translateY(-2px)}.next-card img{display:block;width:100%;height:100%;min-height:180px;object-fit:cover}.next-card div{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:2rem 2.5rem}.next-card span{color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.12em;text-transform:uppercase}.next-card h2{margin:.45rem 0 1.25rem;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1;letter-spacing:-.035em}.next-card strong{font-size:.9rem;font-weight:500;text-decoration:underline;text-underline-offset:.3em}.next-card b{display:inline-block;margin-left:.2rem;font-weight:400;transition:transform .2s ease}.next-card:hover b{transform:translateX(4px)}@media(max-width:700px){main{width:min(100% - 2rem,1080px);padding-bottom:5rem}.back{margin:1.5rem 0 1rem}.banner{aspect-ratio:1.65/1}.hero-copy{padding:2.5rem 0 2rem}.hero h1{font-size:clamp(2.6rem,13vw,4rem)}.intro{font-size:1.05rem;line-height:1.65}.record{grid-template-columns:1fr 1fr;margin-bottom:4rem}.record div{padding:1.1rem .75rem 1.1rem 0}.story{max-width:none}.story :global(h2){margin-top:2.75rem;font-size:1.7rem}.story :global(p){font-size:1.03rem;line-height:1.8}.story :global(img){width:100%;margin:2.25rem 0}.story :global(figure){margin:2.25rem 0}.next-journey{margin-top:5rem}.next-card{grid-template-columns:120px 1fr}.next-card img{min-height:150px}.next-card div{padding:1.25rem}.next-card h2{font-size:1.7rem;margin:.35rem 0 1rem}}
 </style>
