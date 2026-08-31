@@ -1,0 +1,53 @@
+country: Portugal
+continent: Europe
+status: visited
+banner: /images/travel/portugal.jpg
+content_status: draft
+
+visits:
+  - from: 2018-11-29
+    to: 2018-12-03
+    travelling_with:
+      - Pragati
+
+origin: Dubai, UAE
+
+accommodation:
+  - Lisbon — TURIM Av. Liberdade Hotel
+  - Madrid — AC Hotel Carlton Madrid
+
+route:
+  - Lisbon, Portugal
+  - Madrid, Spain
+
+flights:
+  - date: 2018-11-29
+    from: DXB
+    to: LIS
+  - date: 2018-12-03
+    from: MAD
+    to: DXB
+    note: Return flight was brought forward after the original road-trip plan was abandoned.
+
+places_visited:
+  - Praça do Comércio, Lisbon
+  - Belém Tower, Lisbon
+  - Belém, Lisbon
+  - Lisbon Metro
+  - El Retiro Park, Madrid
+  - Palacio de Cristal, Madrid
+  - Madrid-Puerta de Atocha-Almudena Grandes station
+
+travel_style: Road trip originally planned; ultimately Lisbon and Madrid by air
+planned_route:
+  - Lisbon, Portugal
+  - Spain
+  - France, if possible
+
+highlights:
+  - Lisbon in mist and winter weather
+  - Belém after a sudden shower
+  - Photography at Praça do Comércio and Belém
+  - El Retiro Park and Palacio de Cristal
+  - Imagining the European road trip from the air between Lisbon and Madrid
+  - Adapting the journey when Pragati became unwell
