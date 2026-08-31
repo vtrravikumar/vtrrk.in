@@ -5,8 +5,9 @@ import { load } from "js-yaml";
 type JourneyData = {
   title: string;
   region?: string;
-  from: string | Date;
-  to: string | Date;
+  from?: string | Date;
+  to?: string | Date;
+  year?: number | string;
   banner?: string;
   featured?: boolean;
 };
@@ -16,13 +17,23 @@ const journeys = Object.entries(journeyModules).map(([path, raw]) => {
   const data = load(raw as string) as JourneyData;
   const slug = path.split("/").at(-2) ?? data.title.toLowerCase().replace(/\s+/g, "-");
   return { ...data, slug };
-}).sort((a, b) => new Date(a.from).getTime() - new Date(b.from).getTime());
+}).sort((a, b) => {
+  const aDate = a.from ? new Date(a.from).getTime() : a.year ? new Date(`${a.year}-01-01`).getTime() : 0;
+  const bDate = b.from ? new Date(b.from).getTime() : b.year ? new Date(`${b.year}-01-01`).getTime() : 0;
+  return aDate - bDate;
+});
 
 // Featured is selected at build time so it is not permanently tied to one journey.
 const featuredJourney = journeys.length
   ? journeys[Math.floor(Math.random() * journeys.length)]
   : undefined;
 const formatDate = (value: string | Date) => (value instanceof Date ? value : new Date(`${value}T00:00:00`)).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+const formatDateRange = (journey: JourneyData) => {
+  if (journey.from && journey.to) return `${formatDate(journey.from)} – ${formatDate(journey.to)}`;
+  if (journey.from) return formatDate(journey.from);
+  if (journey.year) return String(journey.year);
+  return "—";
+};
 ---
 <BaseLayout title="India — Travel — V.T.R. Ravi Kumar" description="A collection of journeys across India, organised as trips rather than states.">
   <main>
@@ -40,7 +51,7 @@ const formatDate = (value: string | Date) => (value instanceof Date ? value : ne
         <div class="featured-copy">
           <p class="journey-region">India · {featuredJourney.region ?? "Journey"}</p>
           <h2>{featuredJourney.title}</h2>
-          <p>{formatDate(featuredJourney.from)} – {formatDate(featuredJourney.to)}</p>
+          <p>{formatDateRange(featuredJourney)}</p>
           <span>Read the travelogue →</span>
         </div>
       </a>
@@ -57,7 +68,7 @@ const formatDate = (value: string | Date) => (value instanceof Date ? value : ne
           <div class="copy">
             <p class="journey-region">India · {journey.region ?? "Journey"}</p>
             <h3>{journey.title}</h3>
-            <p>{formatDate(journey.from)} – {formatDate(journey.to)}</p>
+            <p>{formatDateRange(journey)}</p>
             <span>Read the travelogue →</span>
           </div>
         </a>)}
