@@ -1,36 +1,45 @@
 title: Kodaikanal
 country: India
 region: Tamil Nadu
+continent: Asia
 status: visited
-from: 2021-08-27
-to: 2021-08-30
-duration_days: 4
-travelled_with:
-  - Pragati
-travel_type: road trip
-solo: false
-featured: false
-origin: Chennai, India
-route:
-  - Chennai
-  - Kodaikanal
-  - Trichy
-  - Chennai
-places_visited:
-  - Kodaikanal Lake
-  - Tea Factory
-  - Local Market
-  - Engineering College, Trichy
-highlights:
-  - Pragati's birthday
-  - Road trip from Chennai in a Hyundai Creta
-  - Cycling around Kodaikanal Lake
-  - The Carlton Kodaikanal
-  - Revisiting the engineering college in Trichy
-banner: /images/travel/kodaikanal.jpg
 content_status: published
-hotel: The Carlton Kodaikanal
-hotel_check_in: 2021-08-27
-hotel_check_out: 2021-08-30
-package: Deluxe room for two, including buffet breakfast and dinner
-occasion: Pragati's birthday
+banner: /images/travel/kodaikanal.jpg
+photography: []
+metadata: {}
+visits:
+  - title: null
+    from: 2021-08-27
+    to: 2021-08-30
+    duration_days: 4
+    travelled_with:
+      - Pragati
+    travel_type: road trip
+    solo: false
+    origin: Chennai, India
+    route:
+      - Chennai
+      - Kodaikanal
+      - Trichy
+      - Chennai
+    places_visited:
+      - Kodaikanal Lake
+      - Tea Factory
+      - Local Market
+      - Engineering College, Trichy
+    highlights:
+      - Pragati's birthday
+      - Road trip from Chennai in a Hyundai Creta
+      - Cycling around Kodaikanal Lake
+      - The Carlton Kodaikanal
+      - Revisiting the engineering college in Trichy
+    flights: []
+    accommodation:
+      - place: Kodaikanal
+        name: The Carlton Kodaikanal
+        dates: 2021-08-27 to 2021-08-30
+        notes: Deluxe room for two, including buffet breakfast and dinner
+    transport: []
+    stays: []
+    occasion: Pragati's birthday
+    notes: null
