@@ -2,8 +2,39 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { load } from "js-yaml";
 
-type Visit = { from?: string | Date; to?: string | Date; travelling_with?: string[]; };
-type TravelData = { title?: string; country?: string; continent?: string; region?: string; year?: number | string; from?: string | Date; to?: string | Date; duration_days?: number; travelled_with?: string[]; travel_type?: string; solo?: boolean; banner?: string; intro?: string; visits?: Visit[]; featured?: boolean; content_status?: "published" | "draft"; };
+type Visit = {
+  title?: string | null;
+  from?: string | Date | null;
+  to?: string | Date | null;
+  duration_days?: number | null;
+  travelled_with?: string[];
+  travel_type?: string | null;
+  solo?: boolean;
+  origin?: string | null;
+  route?: string[];
+  places_visited?: string[];
+  highlights?: string[];
+  flights?: unknown[];
+  accommodation?: unknown[];
+  transport?: string[];
+  stays?: unknown[];
+  occasion?: string | null;
+  notes?: string | null;
+};
+
+type TravelData = {
+  title: string;
+  country: string;
+  region?: string | null;
+  continent?: string | null;
+  status?: string;
+  content_status?: "published" | "draft";
+  banner?: string;
+  photography?: unknown[];
+  metadata?: Record<string, unknown>;
+  visits: Visit[];
+};
+
 type Journey = { slug: string; data: TravelData; path: string };
 
 export function getStaticPaths() {
@@ -26,40 +57,39 @@ const markdownPath = path.replace(/\.yaml$/, ".md");
 const storyModule = markdownModules[markdownPath] as { Content: unknown } | undefined;
 const Story = storyModule?.Content;
 
-const title = isIndia ? (data.title ?? "Journey") : (data.country ?? "Journey");
-const region = isIndia ? (data.region ?? "Journey") : (data.continent ?? "Travel");
-const firstVisit = data.visits?.[0];
-const from = isIndia ? data.from : firstVisit?.from;
-const to = isIndia ? data.to : firstVisit?.to;
-const companions = isIndia ? data.travelled_with ?? [] : firstVisit?.travelling_with ?? data.travelled_with ?? [];
-const companion = companions.join(", ") || (data.solo ? "Solo" : "Solo");
-const visitCount = data.visits?.length ?? 1;
-const journeyValue = isIndia ? (data.travel_type ?? "Journey") : `${visitCount} ${visitCount === 1 ? "visit" : "visits"}`;
+const title = data.title ?? "Journey";
+const region = data.region ?? data.continent ?? "Travel";
+const visits = data.visits ?? [];
+const firstVisit = visits[0];
+const from = firstVisit?.from ?? null;
+const to = firstVisit?.to ?? null;
+const companions = firstVisit?.travelled_with ?? [];
+const companion = companions.length ? companions.join(", ") : (firstVisit?.solo ? "Solo" : "—");
+const journeyValue = visits.length > 1 ? `${visits.length} visits` : (firstVisit?.travel_type ?? "Journey");
 
 const toDate = (value: unknown) => { if (value instanceof Date) return value; if (typeof value === "string") return new Date(`${value.slice(0, 10)}T00:00:00`); return new Date(NaN); };
 const formatDate = (value: unknown) => { const date = toDate(value); return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); };
 const hasDateRange = Boolean(from && to && !Number.isNaN(toDate(from).getTime()) && !Number.isNaN(toDate(to).getTime()));
-const dateLabel = hasDateRange ? `${formatDate(from)} – ${formatDate(to)}` : data.year ? String(data.year) : undefined;
-const durationDays = hasDateRange && from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined;
+const dateLabel = hasDateRange ? `${formatDate(from)} – ${formatDate(to)}` : (from ? formatDate(from) : undefined);
+const durationDays = firstVisit?.duration_days ?? (hasDateRange && from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined);
 const banner = data.banner ?? "/images/travel/default.jpg";
 const backHref = isIndia ? "/travel/india/" : "/travel/";
 const backLabel = isIndia ? "← India journeys" : "← Travel";
 
-// Next-journey navigation uses the same content_status publication rule for both buckets.
 const bucket = journeys.filter((journey) => {
   const sameBucket = (journey.slug.startsWith("india/") ? "india" : "world") === (isIndia ? "india" : "world");
   return sameBucket && journey.data.content_status === "published";
 });
 const currentIndex = bucket.findIndex((journey) => journey.slug === slug);
 const nextJourney = currentIndex >= 0 && bucket.length > 1 ? bucket[(currentIndex + 1) % bucket.length] : undefined;
-const nextTitle = nextJourney ? (nextJourney.slug.startsWith("india/") ? (nextJourney.data.title ?? "Journey") : (nextJourney.data.country ?? "Journey")) : undefined;
+const nextTitle = nextJourney?.data.title;
 const nextBanner = nextJourney?.data.banner ?? "/images/travel/default.jpg";
 const nextHref = nextJourney ? `/travel/${nextJourney.slug}/` : undefined;
 ---
 <BaseLayout title={`${title} — Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${title}${isIndia ? ", India" : ""}.`}>
   <main>
     <a class="back" href={backHref}>{backLabel}</a>
-    <section class="hero"><img class="banner" src={banner} alt={`${title} travel banner`} /><div class="hero-copy"><p class="label">{isIndia ? "India" : region} · {isIndia ? region : title}</p><h1>{title}</h1><p class="intro">{data.intro ?? `A personal travelogue from ${title}.`}</p></div></section>
+    <section class="hero"><img class="banner" src={banner} alt={`${title} travel banner`} /><div class="hero-copy"><p class="label">{isIndia ? "India" : region} · {isIndia ? region : title}</p><h1>{title}</h1><p class="intro">A personal travelogue from {title}.</p></div></section>
     <section class="record" aria-label="Journey details">{dateLabel && <div><span>Dates</span><strong>{dateLabel}</strong></div>}{durationDays !== undefined && <div><span>Duration</span><strong>{durationDays} days</strong></div>}<div><span>Travelled with</span><strong>{companion}</strong></div><div><span>Journey</span><strong>{journeyValue}</strong></div></section>
     {Story && <article class="story"><Story /></article>}
     {nextJourney && <nav class="next-journey" aria-label="Next journey"><div><p class="next-label">Next journey</p><p class="next-bucket">{isIndia ? "India" : "Rest of world"}</p></div><a class="next-card" href={nextHref}><img src={nextBanner} alt="" /><div><span>{isIndia ? "India" : nextJourney.data.continent ?? "Travel"}</span><h2>{nextTitle}</h2><strong>Read journey <b>→</b></strong></div></a></nav>}
