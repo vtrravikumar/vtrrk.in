@@ -6,7 +6,8 @@ status: visited
 content_status: published
 banner: /images/travel/kodaikanal.jpg
 photography: []
-metadata: {}
+metadata:
+  featured: false
 visits:
   - title: null
     from: 2021-08-27
