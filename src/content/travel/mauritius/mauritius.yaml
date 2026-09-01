@@ -26,27 +26,35 @@ visits:
       - Chamarel Seven Colored Earth Geopark
       - Black River Gorges National Park
       - Chamarel Waterfall
-    highlights: []
+      - Hidden waterfall near sugarcane plantations
+      - Local markets
+      - Hanuman temple
+      - Offshore island
+    highlights:
+      - First business-class flight experience, on Emirates both ways
+      - Half-day sailing/catamaran trip to an offshore island
+      - Swimming in a secluded waterfall pool
+      - Relaxing at Outrigger Beach Resort & Spa Mauritius
     flights:
       - date: 2019-07-12
         from: DXB
         to: MRU
         airline: Emirates
         flight: EK701
-        note: null
+        note: First business-class flight experience
       - date: 2019-07-14
         from: MRU
         to: DXB
         airline: Emirates
         flight: EK702
-        note: null
+        note: First business-class flight experience
     accommodation:
       - place: Bel Ombre
         name: Outrigger Beach Resort & Spa Mauritius
         dates: 2019-07-12/2019-07-14
-        notes: Hotel beside the sea with a private beach.
+        notes: Spacious cottage with its own beach space, beachfront setting, sunsets from the cottage, several restaurants and a wide variety of food including South Indian dishes.
     transport:
       - Car rental
     stays: []
-    occasion: Short surprise trip from Dubai
-    notes: null
+    occasion: Short surprise escape from Dubai; Mauritius was chosen partly because it did not require a visa for entry.
+    notes: The trip was deliberately short and focused mainly on relaxing at the resort, with a few tourist outings. We drove around the island ourselves after collecting the rental car at the airport. Mauritius felt similar to Seychelles in its scenic beauty, but with better infrastructure. We unexpectedly found Indian temples and enjoyed finding familiar food, including idli and dosa. The hidden waterfall was reached after following a Google Maps nearby attraction through sugarcane plantations; we took a leap of faith, found the falls clean and almost deserted, and swam in the pool. In hindsight, the resort deserved even more time.
