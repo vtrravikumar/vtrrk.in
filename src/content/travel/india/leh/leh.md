@@ -1,16 +1,58 @@
 # Leh — When the Mountains Became Real
 
-**9–17 July 2022**
+Leh was not my first visit to Ladakh. I had been there once before, in April 2011, on a trip with my colleague and friend Manish. Eight years later, I returned with Pragati.
 
-Leh was not my first visit to Ladakh. I had been there once before, in 2013, on a trip with a colleague. But that visit had happened without Pragati.
+The two journeys could hardly have been more different, and together they tell a more complete story of my relationship with Ladakh.
+
+## April 2011 — The first Leh adventure
+
+Manish and I had planned our Leh trip a year earlier, but had to cancel after the devastating 2010 cloudburst in Leh. A year later, we finally made the journey.
+
+Our original idea was quite ambitious: we had considered renting bikes and riding all the way from Delhi. Eventually we decided to fly to Leh and rent bikes there instead.
+
+We arrived in April, right at the beginning of the Leh season. Many of the attractions and mountain passes were still not open, so the bike plan was not practical for the main circuit. We decided to stay put initially, acclimatise and use the time to arrange the Inner Line Permits for Khardung La, Nubra and Pangong Tso.
+
+Once the permits were in place, we hired a cab and planned a circuit from Leh to Khardung La, Nubra Valley and Hunder, returning to Leh before continuing towards Chang La and Pangong Tso.
+
+There was one complication. Our original plan was to visit Pangong first, but the locals told us the lake was still frozen. We decided to reverse the itinerary and travel to Nubra first, hoping that Pangong would clear by the time we returned.
+
+### Khardung La and Nubra
+
+Khardung La was my first experience of travelling at that altitude. I had a mild headache when we reached the pass. The Army personnel told me that it was normal and that it would disappear as we descended. Fortunately, that is exactly what happened.
+
+From there we continued into Nubra Valley. We stopped at the large Maitreya Buddha statue and visited Diskit Monastery before reaching Hunder.
+
+We found accommodation for the night in Hunder and went for a camel ride. The night itself became one of the unexpected highlights of the trip. There was almost no light pollution and the surroundings were incredibly quiet. Looking up at the sky and seeing so many stars so clearly was something I still remember.
+
+The next day we returned towards Leh, crossing Khardung La again.
+
+There was another small but memorable detail about our stay. We had booked Hotel Tsokar in Leh for the entire duration of the trip. When we left Leh for the Nubra and Pangong excursions, we even left part of our luggage in the room. The hotel owners simply adjusted the booking and charged us only for the days we actually stayed there. That kind of flexibility was something we had never expected from a hotel in a city.
+
+### Pangong Tso
+
+From Leh we headed towards Pangong Tso, now hoping that the lake had opened up enough for us to see it.
+
+It had.
+
+The excitement around Pangong was already high in those days, and the location had become even more popular after the movie *3 Idiots* showcased it. We took plenty of photographs.
+
+The lake is said to stretch across India and China. We asked our driver to take us as far along the lake as he could. Even after travelling that distance, it felt like we had seen only a small fraction of the enormous lake.
+
+On the return journey we passed Thiksey Monastery before heading back to Leh.
+
+Once back in Leh, we finally rented a bike and explored locally, riding towards the Zanskar River and Shanti Stupa.
+
+That first visit was short — just five days — but it introduced me to a landscape that would stay in my mind for years.
+
+## July 2022 — When the Mountains Became Real
+
+Nine years later, I returned to Leh with Pragati.
 
 This time, she was coming with me.
 
 Leh had been a distant dream for her. In her mind, it was almost an inaccessible place — somewhere far away in the mountains that required a great deal of effort to reach. I had a feeling that actually going there would change that perception.
 
 It did.
-
-## Getting to Leh
 
 We flew from Chennai to Delhi and then onwards to Leh.
 
@@ -30,7 +72,7 @@ We were simply guests, but explaining that to every person we met would have bee
 
 The food was another pleasant surprise. Meals in the Army establishments were simple, home-like and exceptionally good. After a day of travelling in the mountains, sitting down to that food was something we genuinely looked forward to.
 
-## Khardung La and Nubra
+### Khardung La and Nubra
 
 Once we had acclimatised, our Innova became our transport for the entire circuit — Leh, Nubra, Thang, Pangong Tso and back to Leh.
 
@@ -48,7 +90,7 @@ The Maitreya Buddha statue in Nubra was another sight that stayed with us. Its s
 
 We continued towards Turtuk and then Thang, moving progressively closer to the border.
 
-## Thang and the last post
+### Thang and the last post
 
 Thang is not a place one simply drives into as a tourist. Access requires Army permission.
 
@@ -64,7 +106,7 @@ Our driver was not particularly happy about going there. He appeared to prefer t
 
 His irritation was evident for some time afterwards, until the journey eventually took us towards Pangong.
 
-## Pangong Tso
+### Pangong Tso
 
 Pangong Tso was the highlight of the trip.
 
@@ -76,7 +118,7 @@ The landscape seemed almost unreal — the lake stretching out between the mount
 
 After seeing it, I understood why people speak about Pangong with such fascination. Even having visited Leh before, this felt like a completely different experience because I was seeing it through Pragati's eyes as well.
 
-## Back to Leh
+### Back to Leh
 
 We returned to Leh after completing the circuit.
 
@@ -86,7 +128,7 @@ We rode towards Magnetic Hill, Gurudwara Pathar Sahib and the Sangam, enjoying t
 
 This part of the trip was different from the circuit in the Innova. The car had taken us across the major distances, but the motorcycle gave us the feeling of actually being on the road and in the landscape.
 
-## A different Leh for Pragati
+### A different Leh for Pragati
 
 For me, one of the most satisfying parts of this trip was seeing Pragati's perception of Leh change.
 
@@ -98,8 +140,8 @@ It was simply a place with a very different geography.
 
 There were roads, hotels, tourists, bikers, markets and all the other things one associates with a tourist destination. But surrounding all of that was an extraordinary landscape that made Leh unique.
 
-My 2013 visit had introduced me to Ladakh.
+My 2011 visit introduced me to Ladakh.
 
 The 2022 journey made it special because I could experience it with Pragati.
 
-And somewhere between the Army guesthouses, the mountain roads, the awkward salutes, the Royal Enfield ride and the vast blue expanse of Pangong Tso, the trip reminded me of something I have learned repeatedly through travel: sometimes a place becomes more memorable not because it is new to you, but because you get to see it for the first time through someone else's eyes.
+And somewhere between the early-season mountain roads, the clear Hunder night sky, the Army guesthouses, the awkward salutes, the Royal Enfield ride and the vast blue expanse of Pangong Tso, the two journeys reminded me of something I have learned repeatedly through travel: sometimes a place becomes more memorable not because it is new to you, but because you return to it years later and see it through someone else's eyes.
