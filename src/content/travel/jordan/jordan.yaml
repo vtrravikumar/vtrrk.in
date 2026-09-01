@@ -5,7 +5,9 @@ continent: Asia
 status: visited
 content_status: published
 banner: /images/travel/jordan.jpg
-photography: []
+photography:
+  - label: 500px
+    url: "https://500px.com/photo/1013556247/the-siq-petra-by-directions-eight"
 metadata: {}
 visits:
   - title: null
