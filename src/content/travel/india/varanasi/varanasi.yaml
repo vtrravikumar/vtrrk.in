@@ -57,11 +57,11 @@ visits:
         dates: 2017-11-02 to 2017-11-05
         notes: Small hotel near the ghats, close enough to walk.
     transport:
-      - mode: cab + cycle rickshaw
-        notes: The final approach to the hotel was through narrow lanes inaccessible to vehicles; luggage was carried in multiple cycle rickshaws.
+      - cab
+      - cycle rickshaw
     stays: []
     occasion: Photography tour and Dev Deepawali
-    notes: This was primarily a photography and learning trip rather than a personal spiritual journey. The Kashi Vishwanath visit was before the Kashi Corridor was created.
+    notes: This was primarily a photography and learning trip rather than a personal spiritual journey. The Kashi Vishwanath visit was before the Kashi Corridor was created. The final approach to the hotel was through narrow lanes inaccessible to vehicles, so luggage was carried in multiple cycle rickshaws. During an early-morning rush to photograph sunrise and the akhada, a tripod was accidentally left behind in an auto-rickshaw.
   - title: Varanasi with Pragati
     from: 2025-11-10
     to: 2025-11-13
@@ -103,10 +103,10 @@ visits:
         dates: 2025-11-11 to 2025-11-13
         notes: Near the main junction close to the temple.
     transport:
-      - mode: Vande Bharat train
-        notes: Travelled from Agra to Varanasi and back.
-      - mode: cab + rickshaw + walking
-        notes: Reached the first hotel via cab and rickshaw followed by a final walk with luggage.
+      - Vande Bharat train
+      - cab
+      - rickshaw
+      - walking
     stays: []
     occasion: Spiritual trip with Pragati
-    notes: The second Varanasi visit was more spiritual than photographic. Despite being unwell for the last two days, I continued visiting places. The return journey included a last-minute transfer between Varanasi railway stations after initially going to the wrong station.
+    notes: The second Varanasi visit was more spiritual than photographic. Despite being unwell for the last two days, I continued visiting places. The return journey included a last-minute transfer between Varanasi railway stations after initially going to the wrong station. The first hotel was reached via cab and rickshaw followed by a final walk with luggage.
