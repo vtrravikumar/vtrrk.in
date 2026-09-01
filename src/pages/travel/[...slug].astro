@@ -28,17 +28,21 @@ const title = data.title ?? data.country ?? "Journey";
 const region = data.region ?? data.continent ?? "Travel";
 const visits = data.visits ?? [];
 const firstVisit = visits[0];
+const hasMultipleVisits = visits.length > 1;
+const uniqueYears = [...new Set(visits.map((visit) => String(visit.from ?? "").slice(0, 4)).filter(Boolean))];
+const allCompanions = [...new Set(visits.flatMap((visit) => visit.travelled_with ?? []))];
 const from = firstVisit?.from ?? data.from ?? null;
 const to = firstVisit?.to ?? data.to ?? null;
-const companions = firstVisit?.travelled_with ?? data.travelled_with ?? [];
+const companions = hasMultipleVisits ? allCompanions : (firstVisit?.travelled_with ?? data.travelled_with ?? []);
 const companion = companions.length ? companions.join(", ") : (firstVisit?.solo ?? data.solo ? "Solo" : "—");
-const journeyValue = visits.length > 1 ? `${visits.length} visits` : (firstVisit?.travel_type ?? data.travel_type ?? "Journey");
+const journeyValue = hasMultipleVisits ? `${visits.length} visits` : (firstVisit?.travel_type ?? data.travel_type ?? "Journey");
 
 const toDate = (value: unknown) => { if (value instanceof Date) return value; if (typeof value === "string") return new Date(`${value.slice(0, 10)}T00:00:00`); return new Date(NaN); };
 const formatDate = (value: unknown) => { const date = toDate(value); return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); };
 const hasDateRange = Boolean(from && to && !Number.isNaN(toDate(from).getTime()) && !Number.isNaN(toDate(to).getTime()));
-const dateLabel = hasDateRange ? `${formatDate(from)} – ${formatDate(to)}` : (from ? formatDate(from) : data.year ? String(data.year) : undefined);
-const durationDays = firstVisit?.duration_days ?? data.duration_days ?? (hasDateRange && from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined);
+const dateLabel = hasMultipleVisits ? uniqueYears.join(" · ") : (hasDateRange ? `${formatDate(from)} – ${formatDate(to)}` : (from ? formatDate(from) : data.year ? String(data.year) : undefined));
+const durationDays = hasMultipleVisits ? undefined : (firstVisit?.duration_days ?? data.duration_days ?? (hasDateRange && from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined));
+const durationLabel = hasMultipleVisits ? `${visits.length} visits` : (durationDays !== undefined ? `${durationDays} days` : undefined);
 const banner = data.banner ?? "/images/travel/default.jpg";
 const backHref = isIndia ? "/travel/india/" : "/travel/";
 const backLabel = isIndia ? "← India journeys" : "← Travel";
@@ -64,7 +68,7 @@ const nextHref = nextSlug ? `/travel/${nextSlug}/` : undefined;
   <main>
     <a class="back" href={backHref}>{backLabel}</a>
     <section class="hero"><img class="banner" src={banner} alt={`${title} travel banner`} /><div class="hero-copy"><p class="label">{isIndia ? "India" : region} · {isIndia ? region : title}</p><h1>{title}</h1><p class="intro">A personal travelogue from {title}.</p></div></section>
-    <section class="record" aria-label="Journey details">{dateLabel && <div><span>Dates</span><strong>{dateLabel}</strong></div>}{durationDays !== undefined && <div><span>Duration</span><strong>{durationDays} days</strong></div>}<div><span>Travelled with</span><strong>{companion}</strong></div><div><span>Journey</span><strong>{journeyValue}</strong></div></section>
+    <section class="record" aria-label="Journey details">{dateLabel && <div><span>Dates</span><strong>{dateLabel}</strong></div>}{durationLabel && <div><span>{hasMultipleVisits ? "Visits" : "Duration"}</span><strong>{durationLabel}</strong></div>}<div><span>Travelled with</span><strong>{companion}</strong></div><div><span>Journey</span><strong>{journeyValue}</strong></div></section>
     {Story && <article class="story"><Story /></article>}
     {nextJourney && <nav class="next-journey" aria-label="Next journey"><div><p class="next-label">Next journey</p><p class="next-bucket">{isIndia ? "India" : "Rest of world"}</p></div><a class="next-card" href={nextHref}><img src={nextBanner} alt="" /><div><span>{isIndia ? "India" : nextJourney.data.continent ?? "Travel"}</span><h2>{nextTitle}</h2><strong>Read journey <b>→</b></strong></div></a></nav>}
   </main>
