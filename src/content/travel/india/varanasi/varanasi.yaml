@@ -1,0 +1,112 @@
+title: Spiritual Varanasi
+country: India
+region: Uttar Pradesh
+continent: Asia
+status: visited
+content_status: published
+banner: /images/travel/varanasi.jpg
+photography: []
+metadata: {}
+visits:
+  - title: Photography and Dev Deepawali
+    from: 2017-11-02
+    to: 2017-11-05
+    duration_days: 4
+    travelled_with:
+      - Lal Nallath
+      - FSO photography group
+    travel_type: flight
+    solo: false
+    origin: Sharjah, UAE
+    route:
+      - Sharjah
+      - Varanasi
+      - Sharjah
+    places_visited:
+      - Varanasi Ghats
+      - Ganga Aarti
+      - Traditional wrestling akhada
+      - Weaver colony
+      - Sarnath
+      - Kashi Vishwanath Temple
+    highlights:
+      - Photography tour organised by mentor Lal Nallath of the FSO group in Dubai
+      - Dev Deepawali and illuminated ghats
+      - Photographing wrestlers at a traditional riverside akhada
+      - Photographing weavers at work
+      - Candid photographs of pilgrims taking a dip in the Ganges
+      - Personal dip in the Ganges and solo visit to Kashi Vishwanath Temple
+      - The memorable loss of a tripod after leaving it behind in an auto-rickshaw
+      - Street food and learning photography throughout the trip
+    flights:
+      - date: 2017-11-02
+        from: SHJ
+        to: Varanasi
+        airline: Air India Express
+        flight: IX184
+        note: null
+      - date: 2017-11-05
+        from: Varanasi
+        to: SHJ
+        airline: Air India Express
+        flight: IX183
+        note: null
+    accommodation:
+      - place: Varanasi
+        name: null
+        dates: 2017-11-02 to 2017-11-05
+        notes: Small hotel near the ghats, close enough to walk.
+    transport:
+      - mode: cab + cycle rickshaw
+        notes: The final approach to the hotel was through narrow lanes inaccessible to vehicles; luggage was carried in multiple cycle rickshaws.
+    stays: []
+    occasion: Photography tour and Dev Deepawali
+    notes: This was primarily a photography and learning trip rather than a personal spiritual journey. The Kashi Vishwanath visit was before the Kashi Corridor was created.
+  - title: Varanasi with Pragati
+    from: 2025-11-10
+    to: 2025-11-13
+    duration_days: 4
+    travelled_with:
+      - Pragati
+    travel_type: train
+    solo: false
+    origin: Agra, India
+    route:
+      - Agra
+      - Varanasi
+      - Agra
+    places_visited:
+      - Varanasi Ghats
+      - Ganga Aarti
+      - Kashi Vishwanath Temple
+      - Sarnath
+      - Kashi Corridor
+      - Banarasi handloom markets
+    highlights:
+      - Sudden trip from Agra to Varanasi with Pragati
+      - Newly started Vande Bharat journey from Agra to Varanasi
+      - Room with a Ganges river view at Dwivedi Hotels Palace On Steps
+      - Staying directly by the ghats for convenient access to the river and temple
+      - Visiting Kashi Vishwanath after the Kashi Corridor was created
+      - Pragati's enthusiastic shopping for Banarasi handwoven dress materials
+      - Getting sick with a throat infection and flu-like symptoms during the trip
+      - Rushing from Sarnath to collect luggage before departure
+      - Reaching the wrong railway station and being rescued by an auto driver who got us to the correct station in time
+    flights: []
+    accommodation:
+      - place: Varanasi
+        name: Dwivedi Hotels Palace On Steps
+        dates: 2025-11-10 to 2025-11-11
+        notes: Trishul room with river view; hotel was directly on the banks of the Ganges and inaccessible by vehicle. The hotel could have arranged help with luggage.
+      - place: Varanasi
+        name: Saffron
+        dates: 2025-11-11 to 2025-11-13
+        notes: Near the main junction close to the temple.
+    transport:
+      - mode: Vande Bharat train
+        notes: Travelled from Agra to Varanasi and back.
+      - mode: cab + rickshaw + walking
+        notes: Reached the first hotel via cab and rickshaw followed by a final walk with luggage.
+    stays: []
+    occasion: Spiritual trip with Pragati
+    notes: The second Varanasi visit was more spiritual than photographic. Despite being unwell for the last two days, I continued visiting places. The return journey included a last-minute transfer between Varanasi railway stations after initially going to the wrong station.
