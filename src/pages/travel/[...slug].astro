@@ -29,15 +29,15 @@ const region = data.region ?? data.continent ?? "Travel";
 const visits = data.visits ?? [];
 const firstVisit = visits[0];
 const hasMultipleVisits = visits.length > 1;
-const uniqueYears = [...new Set(visits.map((visit) => String(visit.from ?? "").slice(0, 4)).filter(Boolean))];
+const toDate = (value: unknown) => { if (value instanceof Date) return value; if (typeof value === "string") return new Date(`${value.slice(0, 10)}T00:00:00`); return new Date(NaN); };
+const getYear = (value: unknown) => { const date = toDate(value); return Number.isNaN(date.getTime()) ? "" : String(date.getFullYear()); };
+const uniqueYears = [...new Set(visits.map((visit) => getYear(visit.from)).filter(Boolean))];
 const allCompanions = [...new Set(visits.flatMap((visit) => visit.travelled_with ?? []))];
 const from = firstVisit?.from ?? data.from ?? null;
 const to = firstVisit?.to ?? data.to ?? null;
 const companions = hasMultipleVisits ? allCompanions : (firstVisit?.travelled_with ?? data.travelled_with ?? []);
 const companion = companions.length ? companions.join(", ") : (firstVisit?.solo ?? data.solo ? "Solo" : "—");
 const journeyValue = hasMultipleVisits ? `${visits.length} visits` : (firstVisit?.travel_type ?? data.travel_type ?? "Journey");
-
-const toDate = (value: unknown) => { if (value instanceof Date) return value; if (typeof value === "string") return new Date(`${value.slice(0, 10)}T00:00:00`); return new Date(NaN); };
 const formatDate = (value: unknown) => { const date = toDate(value); return Number.isNaN(date.getTime()) ? "—" : date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }); };
 const hasDateRange = Boolean(from && to && !Number.isNaN(toDate(from).getTime()) && !Number.isNaN(toDate(to).getTime()));
 const dateLabel = hasMultipleVisits ? uniqueYears.join(" · ") : (hasDateRange ? `${formatDate(from)} – ${formatDate(to)}` : (from ? formatDate(from) : data.year ? String(data.year) : undefined));
