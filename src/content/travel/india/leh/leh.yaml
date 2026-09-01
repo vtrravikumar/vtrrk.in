@@ -10,6 +10,82 @@ metadata:
   year: 2022
   story_title: Leh — When the Mountains Became Real
 visits:
+  - title: First Leh visit with Manish
+    from: 2011-04-22
+    to: 2011-04-26
+    duration_days: 5
+    travelled_with:
+      - Manish
+    travel_type: air and road
+    solo: false
+    origin: Delhi, India
+    route:
+      - Delhi
+      - Leh
+      - Khardung La
+      - Nubra Valley
+      - Hunder
+      - Leh
+      - Chang La
+      - Pangong Tso
+      - Leh
+      - Thiksey Monastery
+      - Delhi
+    places_visited:
+      - Leh
+      - Khardung La
+      - Nubra Valley
+      - Hunder
+      - Maitreya Buddha
+      - Diskit Monastery
+      - Pangong Tso
+      - Thiksey Monastery
+      - Zanskar River
+      - Shanti Stupa
+    highlights:
+      - Trip with Manish planned a year earlier and postponed after the 2010 Leh cloudburst
+      - Early-season visit in April when many mountain passes and attractions were still closed
+      - Inner Line Permits for Khardung La, Nubra and Pangong Tso
+      - First experience of Khardung La and mild high-altitude headache
+      - Overnight in Hunder and camel ride
+      - Exceptionally clear, dark night sky with visible stars in Hunder
+      - Maitreya Buddha and Diskit Monastery in Nubra Valley
+      - Pangong Tso was initially frozen, so the itinerary was changed and the lake visited after returning from Nubra
+      - Pangong Tso experience after the excitement created by the movie 3 Idiots
+      - Renting a bike in Leh and riding to the Zanskar River and Shanti Stupa
+      - Thiksey Monastery
+      - Hotel Tsokar adjusted the booking for the days spent away and charged only for the nights actually stayed, despite luggage being left in the room
+    flights:
+      - date: 2011-04-22
+        from: DEL
+        to: Leh
+        airline: Jet Airways
+        flight: 9W-609
+        note: null
+      - date: 2011-04-26
+        from: Leh
+        to: DEL
+        airline: Go Air
+        flight: G8-160
+        note: null
+    accommodation:
+      - place: Leh
+        name: Hotel Tsokar
+        dates: 2011-04-22 to 2011-04-26
+        notes: Deluxe room. The room was retained during the excursions, while the hotel charged only for the nights actually stayed.
+    transport:
+      - Flight
+      - Cab
+      - Rental bike
+    stays:
+      - place: Leh
+        nights: 3
+        accommodation: Hotel Tsokar
+      - place: Hunder
+        nights: 1
+        accommodation: Local accommodation
+    occasion: null
+    notes: The original plan was to ride from Delhi, but the trip changed to flying to Leh and renting bikes. Because April was the beginning of the season and the passes were not open, the main Nubra and Pangong circuit was done by cab.
   - title: When the Mountains Became Real
     from: 2022-07-09
     to: 2022-07-17
