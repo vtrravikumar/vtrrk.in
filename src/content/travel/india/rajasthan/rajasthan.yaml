@@ -5,7 +5,9 @@ continent: Asia
 status: visited
 content_status: published
 banner: /images/travel/rajasthan.jpg
-photography: []
+photography: 
+  - label: 500px
+    url: "https://500px.com/photo/274470977/pillars-by-directions-eight"
 metadata:
   year: 2004
   story_title: Chasing Sunsets
