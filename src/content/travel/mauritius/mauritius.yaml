@@ -1,0 +1,52 @@
+title: Mauritius
+country: Mauritius
+region: null
+continent: Africa
+status: visited
+content_status: published
+banner: /images/travel/mauritius.jpg
+photography:
+  - label: 500px
+    url: ""
+  - label: Instagram
+    url: ""
+metadata: {}
+visits:
+  - title: null
+    from: 2019-07-12
+    to: 2019-07-14
+    duration_days: 3
+    travelled_with:
+      - Pragati
+    travel_type: flight + road
+    solo: false
+    origin: Dubai, UAE
+    route: []
+    places_visited:
+      - Chamarel Seven Colored Earth Geopark
+      - Black River Gorges National Park
+      - Chamarel Waterfall
+    highlights: []
+    flights:
+      - date: 2019-07-12
+        from: DXB
+        to: MRU
+        airline: Emirates
+        flight: EK701
+        note: null
+      - date: 2019-07-14
+        from: MRU
+        to: DXB
+        airline: Emirates
+        flight: EK702
+        note: null
+    accommodation:
+      - place: Bel Ombre
+        name: Outrigger Beach Resort & Spa Mauritius
+        dates: 2019-07-12/2019-07-14
+        notes: Hotel beside the sea with a private beach.
+    transport:
+      - Car rental
+    stays: []
+    occasion: Short surprise trip from Dubai
+    notes: null
