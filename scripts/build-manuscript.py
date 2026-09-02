@@ -205,7 +205,9 @@ def read_front_matter() -> str:
         raise BuildError(f"Editable front matter not found: {FRONT_MATTER.relative_to(ROOT)}")
 
     text = FRONT_MATTER.read_text(encoding="utf-8").strip()
-    if not re.match(r"^#\s+Travelogue\s*$", text):
+    first_line = text.splitlines()[0].strip()
+
+    if first_line != "# Travelogue":
         raise BuildError("travelogue-frontmatter.md must begin with '# Travelogue'")
     if not re.search(r"^##\s+Prologue\s*$", text, flags=re.MULTILINE):
         raise BuildError("travelogue-frontmatter.md must contain '## Prologue'")
