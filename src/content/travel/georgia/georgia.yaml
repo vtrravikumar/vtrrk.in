@@ -1,0 +1,86 @@
+title: Georgia
+country: Georgia
+region: null
+continent: Europe
+status: visited
+content_status: published
+banner: /images/travel/georgia.jpg
+photography: []
+metadata:
+  travel_style: Air travel with a spontaneous train journey and road exploration
+  planned_route:
+    - Tbilisi, Georgia
+    - Batumi, Georgia
+visits:
+  - title: Georgia
+    from: 2015-11-26
+    to: 2015-12-01
+    duration_days: 6
+    travelled_with:
+      - Pragati
+    travel_type: air; train; road
+    solo: false
+    origin: Dubai, UAE
+    route:
+      - Tbilisi, Georgia
+      - Batumi, Georgia
+      - Tbilisi, Georgia
+    places_visited:
+      - Holy Trinity Church, Tbilisi
+      - Batumi
+      - Batumi Viewpoint
+      - Sarpi Turkish Border
+      - Makhuntseti Waterfall
+      - Makhuntseti Stone Arch Bridge
+      - Adjarian Wine House
+      - Black Sea
+      - Gonio-Apsaros Archaeological Museum
+      - Rustaveli-Mtatsminda Cable Car
+      - Tsminda Nino's Monastery
+      - Bodbe Monastery Complex
+      - Kvareli
+      - Corporation Kindzmarauli Winery
+      - Tbilisi Sulphur Baths
+    highlights:
+      - First personal international trip
+      - Spontaneous business-class train journey from Tbilisi to Batumi
+      - Exploring Batumi and the Black Sea coast with a couple met at the station
+      - Makhuntseti Waterfall and Stone Arch Bridge
+      - Georgian wine tasting in Kvareli
+      - City sightseeing around Tbilisi
+      - Unexpected Indian and Soviet-era cultural connections
+      - Sulphur bath in Tbilisi
+    flights:
+      - date: 2015-11-26
+        from: DXB
+        to: TBS
+        airline: Flydubai
+        flight: FZ711
+        note: First personal international flight trip.
+      - date: 2015-12-01
+        from: TBS
+        to: DXB
+        airline: Flydubai
+        flight: FZ712
+        note: Return to Dubai.
+    accommodation:
+      - place: Tbilisi
+        name: Mirobelle
+        dates: 2015-11-26; 2015-11-29 to 2015-11-30
+        notes: Replaced the original B&B Old Tbilisi booking after the location proved inconvenient. The hotel was next to Holy Trinity Church, visible from the room window, and also allowed luggage to be kept without an additional charge.
+      - place: Tbilisi
+        name: B&B Old Tbilisi
+        dates: 2015-11-26
+        notes: Booked through Booking.com, but the remote location was disappointing. The reservation was abandoned in favour of Mirobelle.
+      - place: Batumi
+        name: null
+        dates: 2015-11-27 to 2015-11-28
+        notes: Walk-in booking at the same hotel where the Indian couple from Abu Dhabi were staying.
+    transport:
+      - Tbilisi to Batumi and return by train
+      - Cab around Batumi
+      - Rustaveli-Mtatsminda Cable Car
+      - City sightseeing bus around Tbilisi
+    stays: []
+    occasion: null
+    notes: The trip was chosen in part because Georgia offered visa on arrival. It was the first personal international trip for the couple. The train journey to Batumi was an impromptu decision. Communication was sometimes difficult because few local people spoke English, so gestures and sign language often became the solution. Despite the unpleasant immigration experience on arrival, the Georgians encountered during the trip were warm and welcoming, with a noticeable affection for India and old Hindi cinema. Some could sing songs from Raj Kapoor films such as Mera Naam Joker, reflecting the lingering Soviet-era connection with Indian cinema.
