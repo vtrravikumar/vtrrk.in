@@ -14,7 +14,15 @@ ISBN:
 
 ## Dedication
 
-[Final dedication to be added]
+For all kindred travelling spirits,
+
+who know that the best journeys
+
+are not measured in miles,
+
+but in moments, memories, and stories
+
+carried home.
 
 ## Thirukkural
 
