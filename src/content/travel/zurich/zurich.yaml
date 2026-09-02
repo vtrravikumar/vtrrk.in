@@ -1,0 +1,52 @@
+title: Switzerland
+country: Switzerland
+region: Zurich
+continent: Europe
+status: visited
+content_status: published
+banner: /images/travel/zurich.jpg
+photography: []
+metadata:
+  travel_style: European rail journey
+  planned_route:
+    - Zurich, Switzerland
+visits:
+  - title: Zurich
+    from: 2016-08-23
+    to: 2016-08-25
+    duration_days: 3
+    travelled_with:
+      - Pragati
+    travel_type: rail; flight
+    solo: false
+    origin: Milan, Italy
+    route:
+      - Milan, Italy
+      - Zurich, Switzerland
+    places_visited:
+      - Zurich
+    highlights:
+      - Final stop of the Italy journey
+      - Exploring Zurich by public transport
+      - Buses, trams, trains and ferries
+      - Staying near Zurich station
+    flights:
+      - date: 2016-08-25
+        from: ZRH
+        to: DXB
+        airline: Emirates
+        flight: EK86
+        note: Return flight to Dubai at the end of the European journey.
+    accommodation:
+      - place: Zurich
+        name: null
+        dates: 2016-08-23 to 2016-08-25
+        notes: Stayed near Zurich station.
+    transport:
+      - Buses
+      - Trams
+      - Trains
+      - Ferries
+    stays: []
+    occasion: null
+    notes: Zurich was the final stop of the 2016 European journey that began in Rome and continued through Florence, Pisa, Venice and Milan.
