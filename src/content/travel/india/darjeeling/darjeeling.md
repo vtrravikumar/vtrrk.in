@@ -32,13 +32,17 @@ Everything had worked out.
 
 ## The road to Darjeeling
 
-The drive from Bagdogra to Darjeeling was scenic and enjoyable. The landscape changed as we climbed, and the cold became increasingly noticeable.
+The drive from Bagdogra to Darjeeling was more than just a transfer. The landscape changed steadily as we climbed away from the plains, the roads became more mountainous and the cold became increasingly noticeable.
+
+Darjeeling sits high in the Himalayan foothills, surrounded by tea gardens, forests and views towards the great peaks of the eastern Himalayas. It is easy to understand why the town acquired its reputation as the Queen of the Hills.
 
 We had come looking for winter in the mountains, and Darjeeling was not disappointing us.
 
 By the time we reached the hotel, it was almost dark.
 
 Cedar Inn itself was wonderful. Our room had a coal chimney that served as the heater, and the view from the bedroom was something we had not expected — Kanchenjunga in all its majesty.
+
+Kanchenjunga is the world's third-highest mountain, and seeing it from the comfort of our room made the long journey from Delhi feel worthwhile almost immediately.
 
 We retired to the room to wear away the tiredness of the journey.
 
@@ -56,11 +60,21 @@ But we were tourists, after all. Sometimes you have to do the touristy things.
 
 We also went to Simana, near the Nepal border, and visited the local zoo. St. Paul's School was right across from our hotel, so we went there as well.
 
-And then there was the toy train.
+The town itself had the character of a classic hill station — steep roads, old buildings, mountain views and the constant presence of the surrounding hills. Even ordinary drives felt different from travelling in the plains.
 
-Darjeeling and the toy train are almost inseparable in the imagination of anyone visiting the place. We couldn't get a ticket, but we did see the train at the station and several times along the route.
+## And then there was the toy train
+
+Darjeeling and the toy train are almost inseparable in the imagination of anyone visiting the place.
+
+The Darjeeling Himalayan Railway is not simply a tourist attraction. It is a remarkable piece of mountain railway engineering. The narrow-gauge line was built in the late nineteenth century to connect the plains with Darjeeling, climbing dramatically through the Himalayan foothills. UNESCO later recognised it as part of the Mountain Railways of India World Heritage Site. citeturn0search2turn0search4
+
+The railway uses tight curves, zigzags and loops to gain altitude, with Ghum — high in the hills — forming one of its most famous points. The Batasia Loop is particularly well known for the way the railway negotiates the steep terrain while opening up views of the mountains. citeturn0search12
+
+We couldn't get a ticket, but we did see the train at the station and several times along the route.
 
 That became one of the unfinished items on this trip.
+
+In a way, knowing what the railway represented made missing the ride even more frustrating. We had come all the way to Darjeeling and had seen the famous little train, but had not actually experienced the journey it was built for.
 
 One day, whenever we return to Darjeeling, we would like to actually ride it.
 
@@ -73,6 +87,8 @@ There was no need for a big celebration or a crowded party. We were in the mount
 So we simply chilled, enjoyed the weather and welcomed the New Year in our own way.
 
 For me, that was exactly what I had wanted when we decided to get away for New Year in the first place.
+
+There was something particularly satisfying about ending one year and starting another in a place so different from everyday life in Delhi. We had not planned an elaborate celebration. We had simply changed the surroundings, and that was enough.
 
 ## A trip that felt unfinished
 
