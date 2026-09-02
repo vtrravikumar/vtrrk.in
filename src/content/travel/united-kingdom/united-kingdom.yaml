@@ -1,0 +1,86 @@
+title: United Kingdom
+country: United Kingdom
+region: null
+continent: Europe
+status: visited
+content_status: published
+banner: /images/travel/uk.jpg
+photography: []
+metadata:
+  travel_style: London stay and Historic Scotland road tour
+  planned_route:
+    - London, United Kingdom
+    - Scotland, United Kingdom
+visits:
+  - title: London and Scotland
+    from: 2017-06-01
+    to: 2017-06-10
+    duration_days: 10
+    travelled_with:
+      - Pragati
+      - Prasannaa
+      - Kokilavani
+    travel_type: flight; metro; road tour
+    solo: false
+    origin: Dubai, UAE
+    route:
+      - London, United Kingdom
+      - Scotland, United Kingdom
+      - London, United Kingdom
+    places_visited:
+      - London
+      - Westfield Stratford City
+      - Greenwich Park
+      - Glasgow
+      - Glasgow Cathedral
+      - George Square
+      - Edinburgh
+      - Loch Tulla
+      - Glengoyne Distillery
+      - Lake District National Park
+      - London Eye
+      - Trafalgar Square
+      - Big Ben
+      - St Paul's Cathedral
+      - Madame Tussauds
+    highlights:
+      - Staying with close friends in Ilford
+      - Four-Day Historic Scotland tour
+      - Scotland road trip
+      - Glasgow and Edinburgh
+      - Loch Tulla
+      - Glengoyne Distillery
+      - Exploring London by Underground
+      - Travelling as a group with friends
+    flights:
+      - date: 2017-06-01
+        from: DXB
+        to: LHR
+        airline: Emirates
+        flight: EK003
+        note: Departed Dubai at 14:15.
+      - date: 2017-06-10
+        from: LHR
+        to: DXB
+        airline: Emirates
+        flight: EK032
+        note: Departed London Heathrow at 19:50.
+    accommodation:
+      - place: Ilford, London
+        name: Prasannaa and Kokilavani's home
+        dates: 2017-06-01 to 2017-06-03
+        notes: Stayed with close friends rather than in a hotel.
+      - place: Glasgow, Scotland
+        name: Jurys Inn Glasgow
+        dates: 2017-06-03 to 2017-06-06
+        notes: Accommodation arranged as part of the Historic Scotland tour.
+      - place: Ilford, London
+        name: Prasannaa and Kokilavani's home
+        dates: 2017-06-07 to 2017-06-10
+        notes: Returned to London and stayed with friends again.
+    transport:
+      - London Underground
+      - Star Tours Historic Scotland road tour
+    stays: []
+    occasion: null
+    notes: The trip combined a London visit with a four-day Historic Scotland tour. The Scotland tour departed from Wembley on June 3 and the group returned to London on June 7.
