@@ -1,0 +1,99 @@
+title: Sri Lanka
+country: Sri Lanka
+region: null
+continent: Asia
+status: visited
+content_status: published
+banner: /images/travel/srilanka.jpg
+
+photography: []
+
+metadata:
+  travel_style: Road journey with a local driver
+  planned_route:
+    - Colombo, Sri Lanka
+    - Dambulla, Sri Lanka
+    - Sigiriya, Sri Lanka
+    - Kandy, Sri Lanka
+    - Nuwara Eliya, Sri Lanka
+    - Bentota, Sri Lanka
+    - Colombo, Sri Lanka
+
+visits:
+  - title: Sri Lanka
+    from: 2022-03-16
+    to: 2022-03-21
+    duration_days: 6
+    travelled_with:
+      - Pragati
+    travel_type: air; road
+    solo: false
+    origin: Chennai, India
+    route:
+      - Chennai, India
+      - Colombo, Sri Lanka
+      - Dambulla, Sri Lanka
+      - Sigiriya, Sri Lanka
+      - Kandy, Sri Lanka
+      - Nuwara Eliya, Sri Lanka
+      - Bentota, Sri Lanka
+      - Colombo, Sri Lanka
+      - Chennai, India
+    places_visited:
+      - Dambulla
+      - Dambulla Cave Temple
+      - Hurulu Eco Park
+      - Sigiriya
+      - Kandy
+      - Temple of the Tooth
+      - Glenloch Tea Factory
+      - Nuwara Eliya
+      - Seetha Amman Temple
+      - Bentota
+      - Colombo
+    highlights:
+      - Unexpectedly upgrading the Chennai–Colombo flight to business class
+      - Abandoning the planned rental-car journey because of the fuel crisis
+      - Finding a local driver through a last-minute Uber booking
+      - Dambulla Cave Temple
+      - Elephant safari at Hurulu Eco Park
+      - Climbing Sigiriya
+      - Visiting the Temple of the Tooth in Kandy during a full moon
+      - Driving through Sri Lanka's tea country
+      - Visiting the Ramayana-associated site in Nuwara Eliya
+      - Meeting the driver's family in his village
+      - Resting at the private beach in Bentota
+      - Shopping and sightseeing in Colombo before the return flight
+    flights:
+      - date: 2022-03-16
+        from: MAA
+        to: CMB
+        airline: SriLankan Airlines
+        flight: UL126
+        note: Originally booked in economy; later upgraded to business class for a paid upgrade.
+      - date: 2022-03-21
+        from: CMB
+        to: MAA
+        airline: SpiceJet
+        flight: SJ357
+        note: Return flight to Chennai.
+    accommodation:
+      - place: Dambulla
+        name: Liyya Water Villas
+        dates: 2022-03-16 to 2022-03-18
+        notes: Isolated cottages arranged around man-made lakes; calm and peaceful setting.
+      - place: Nuwara Eliya
+        name: La Grande Villa
+        dates: 2022-03-18 to 2022-03-19
+        notes: Small, cozy property; cold and rainy weather during the stay.
+      - place: Bentota
+        name: Avani Bentota Resort
+        dates: 2022-03-19 to 2022-03-20
+        notes: Resort with a private beach and swimming pool; used primarily for much-needed rest.
+    transport:
+      - Uber
+      - Private car with local driver
+      - Road journey
+    stays: []
+    occasion: Birthday
+    notes: The original plan was to rent a car and drive around Sri Lanka. The economic crisis and resulting fuel shortages made the rental company unable to guarantee fuel availability, so the plan was changed immediately after arrival. A local Uber driver offered to stay with us for the entire journey, drive us around and finally drop us at the airport. His local knowledge and confidence in finding fuel solved the transport problem for the remainder of the trip. During the journey, the Sri Lankan rupee depreciated noticeably, making many things feel increasingly inexpensive when converted from foreign currency. The trip also reinforced how easy it is to overlook destinations that are geographically close to home; Sri Lanka is only a short flight from Chennai.
