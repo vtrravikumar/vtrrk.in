@@ -1,37 +1,22 @@
 name: Normalize travel manuscript
-
-on:
-  push:
-    paths:
-      - manuscript.md
-      - .github/workflows/normalize-travel-manuscript.yml
-
+on: [push]
 permissions:
   contents: write
-
 jobs:
   normalize:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Normalize manuscript
-        shell: python
         run: |
+          python3 <<'PY'
           from pathlib import Path
-          import re
-
           p = Path('manuscript.md')
           text = p.read_text(encoding='utf-8')
-
           marker = '# Part I — Asia'
           if marker not in text:
               raise SystemExit('Could not find Part I marker')
           body = text[text.index(marker):]
-
-          # Convert the existing hierarchy:
-          # Part (#) -> Part (##), destination (##) -> Chapter (###),
-          # chapter subheads (###) -> Scene (####).
           out = []
           for line in body.splitlines():
               if line.startswith('# Part '):
@@ -42,7 +27,6 @@ jobs:
                   line = '### ' + line[3:]
               out.append(line)
           body = '\n'.join(out).rstrip() + '\n'
-
           front = '''<!--
 
 Generated from:
@@ -120,7 +104,7 @@ These are some of those journeys.
 
 '''
           p.write_text(front + body, encoding='utf-8')
-
+          PY
       - name: Commit normalized manuscript and remove helper
         run: |
           git config user.name 'github-actions[bot]'
