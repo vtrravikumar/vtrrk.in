@@ -31,6 +31,101 @@ class BuildError(Exception):
     pass
 
 
+# VTR Press publishing metadata. These values belong to the book-level
+# manuscript rather than to individual travel stories.
+BOOK_FRONT_MATTER = """<!--
+
+Generated from:
+
+manuscript.md
+
+This file is the publishing source.
+
+Only make formatting changes required by the publisher.
+
+Editorial changes belong in the reading draft.
+
+-->
+
+---
+
+# ------------------------------------------------------------------
+# Book Identity
+# ------------------------------------------------------------------
+
+title: Travelogue
+subtitle:
+author: V.T.R. Ravi Kumar
+type: book
+
+# ------------------------------------------------------------------
+# Publication
+# ------------------------------------------------------------------
+
+edition: Reading Draft
+version: v1.0
+copyright_year: 2026
+
+# ------------------------------------------------------------------
+# Layout
+# ------------------------------------------------------------------
+
+paper: A5
+language: en
+
+---"""
+
+DEFAULT_STATIC_SECTIONS = {
+    "Copyright": """First Edition — 2026
+
+Copyright © 2026 V.T.R. Ravi Kumar
+
+All rights reserved.
+
+No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior written permission of the publisher, except for brief quotations used in reviews or scholarly works.
+
+ISBN:""",
+    "Dedication": """For my father,
+
+whose faith in me
+
+began long before mine did.""",
+    "Thirukkural": """குறள்
+
+:::verse
+
+உள்ளியது எய்தல் எளிதுமன் மற்றுந்தான்
+
+உள்ளியது உள்ளப் பெறின்.
+
+:::
+
+:::verse
+
+What one has firmly resolved is easy to attain,
+
+if the mind remains steadfast upon that purpose.
+
+:::
+
+— திருவள்ளுவர் (Thiruvalluvar)""",
+    "Prologue": """I have never been very good at saying no to travel.
+
+Sometimes the reason was a birthday. Sometimes New Year. Sometimes a colleague sent an email asking if I wanted to join a trip. Sometimes a visa was easy to obtain. Sometimes the plan was simply to get into the car and see where the road went.
+
+Looking back, there was no single philosophy behind all these journeys. I travelled because I was curious. I wanted to see places I had never seen, photograph them, understand how they felt, and sometimes simply get away from the familiar.
+
+The photographs are important, but they are not the whole story. What stays with me are the decisions made along the way: sleeping in a Tata Sumo because an Army checkpoint stopped us, changing hotels because the first one was in the wrong place, buying a train ticket at the last moment, discovering a waterfall through sugarcane plantations, losing a tripod from an auto-rickshaw, or taking a flight because a road trip had become impossible.
+
+Travel also taught me that uncertainty is not always something to eliminate. Sometimes it is the thing that makes a journey interesting.
+
+These are some of those journeys.""",
+}
+
+
+STATIC_SECTION_ORDER = ("Copyright", "Dedication", "Thirukkural", "Prologue")
+
+
 def clean_heading(text: str) -> str:
     """Normalize a heading enough for use as a Markdown heading."""
     return text.strip().rstrip("#").strip()
@@ -173,8 +268,51 @@ def roman(number: int) -> str:
     return "".join(result)
 
 
+def extract_static_sections(template: str) -> dict[str, str]:
+    """Extract known book-level sections from the current manuscript.
+
+    Existing local editorial text wins over defaults, so rebuilding the
+    manuscript does not overwrite later edits to these sections.
+    """
+    lines = template.splitlines()
+    sections: dict[str, str] = {}
+
+    for index, line in enumerate(lines):
+        match = re.match(r"^##\s+(.+?)\s*$", line)
+        if not match:
+            continue
+
+        heading = clean_heading(match.group(1))
+        if heading not in STATIC_SECTION_ORDER:
+            continue
+
+        body_lines = []
+        for body_line in lines[index + 1:]:
+            if re.match(r"^##\s+", body_line) or re.match(r"^##\s+[IVXLCDM]+\s+—\s+", body_line):
+                break
+            body_lines.append(body_line)
+
+        body = "\n".join(body_lines).strip()
+        if body:
+            sections[heading] = body
+
+    return sections
+
+
+def build_book_header(template: str) -> str:
+    """Build the VTR Press metadata and book-level front matter in order."""
+    existing = extract_static_sections(template)
+    parts = [BOOK_FRONT_MATTER, "# Travelogue"]
+
+    for heading in STATIC_SECTION_ORDER:
+        body = existing.get(heading, DEFAULT_STATIC_SECTIONS[heading])
+        parts.append(f"## {heading}\n\n{body}")
+
+    return "\n\n".join(parts)
+
+
 def replace_travel_section(template: str, generated: str) -> str:
-    """Replace the generated travel portion while preserving static manuscript text."""
+    """Replace the generated travel portion while preserving the epilogue onward."""
     lines = template.splitlines()
 
     start = next(
@@ -183,7 +321,6 @@ def replace_travel_section(template: str, generated: str) -> str:
     )
 
     if start is None:
-        # Also accept an already-generated Roman-numbered continent heading.
         start = next(
             (i for i, line in enumerate(lines) if re.match(r"^##\s+[IVXLCDM]+\s+—\s+", line)),
             None,
@@ -197,9 +334,9 @@ def replace_travel_section(template: str, generated: str) -> str:
             "The first existing Part/continent heading is used as the replacement start."
         )
 
-    prefix = "\n".join(lines[:start]).rstrip()
+    header = build_book_header(template)
     suffix = "\n".join(lines[end:]).lstrip()
-    return f"{prefix}\n\n{generated.rstrip()}\n\n{suffix}\n"
+    return f"{header}\n\n{generated.rstrip()}\n\n{suffix}\n"
 
 
 def write_atomically(path: Path, content: str) -> None:
