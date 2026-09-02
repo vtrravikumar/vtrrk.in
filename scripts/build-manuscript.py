@@ -5,12 +5,13 @@ Travel Markdown files remain the canonical story sources. Their companion
 YAML files provide metadata used for grouping and sorting.
 
 Book-level editorial content lives in publishing/travelogue-frontmatter.md.
-The generated manuscript is local-only; add manuscript.md to .gitignore.
+The generated manuscript and VTR Press image copies are local-only.
 """
 
 from __future__ import annotations
 
 import re
+import shutil
 import sys
 import tempfile
 from pathlib import Path
@@ -26,6 +27,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TRAVEL_ROOT = ROOT / "src" / "content" / "travel"
 FRONT_MATTER = ROOT / "publishing" / "travelogue-frontmatter.md"
 MANUSCRIPT = ROOT / "manuscript.md"
+BOOK_IMAGE_ROOT = ROOT / "assets" / "image"
 
 BOOK_FRONT_MATTER = """<!--
 
@@ -95,6 +97,7 @@ def load_story(md_path: Path) -> dict:
     region = str(metadata.get("region") or "").strip()
     country = str(metadata.get("country") or "").strip()
     title = str(metadata.get("title") or "").strip()
+    banner = str(metadata.get("banner") or "").strip()
 
     nested_metadata = metadata.get("metadata") or {}
     story_title = ""
@@ -114,6 +117,7 @@ def load_story(md_path: Path) -> dict:
         "region": region,
         "country": country,
         "title": chapter_title,
+        "banner": banner,
     }
 
 
@@ -163,7 +167,49 @@ def sort_key(value: str) -> tuple[int, str]:
     return (0 if value else 1, value.casefold())
 
 
-def build_travel_section(stories: list[dict]) -> str:
+def prepare_book_images(stories: list[dict]) -> dict[Path, str]:
+    """Copy story banners into the local VTR Press image directory.
+
+    Returns a mapping from story metadata identity to a relative Markdown image
+    reference. Missing banners produce warnings rather than failing the build.
+    """
+    BOOK_IMAGE_ROOT.mkdir(parents=True, exist_ok=True)
+
+    # Remove only previously generated book images. Never touch assets/book_cover.png.
+    for path in BOOK_IMAGE_ROOT.iterdir():
+        if path.is_file() or path.is_symlink():
+            path.unlink()
+        elif path.is_dir():
+            shutil.rmtree(path)
+
+    image_refs: dict[Path, str] = {}
+    for story in stories:
+        banner = story["banner"]
+        if not banner:
+            print(f"WARNING: No banner specified for {story['title']}", file=sys.stderr)
+            continue
+
+        # YAML stores website paths such as /images/travel/italy.jpg.
+        if banner.startswith("/"):
+            source = ROOT / "public" / banner.lstrip("/")
+        else:
+            source = ROOT / banner
+
+        if not source.exists() or not source.is_file():
+            print(
+                f"WARNING: Banner not found for {story['title']}: {banner}",
+                file=sys.stderr,
+            )
+            continue
+
+        destination = BOOK_IMAGE_ROOT / source.name
+        shutil.copy2(source, destination)
+        image_refs[story["md_path"]] = f"assets/image/{destination.name}"
+
+    return image_refs
+
+
+def build_travel_section(stories: list[dict], image_refs: dict[Path, str]) -> str:
     grouped: dict[str, list[dict]] = {}
     for story in stories:
         grouped.setdefault(story["continent"], []).append(story)
@@ -181,6 +227,9 @@ def build_travel_section(stories: list[dict]) -> str:
         )
         for story in continent_stories:
             sections.append(f"### {story['title']}")
+            image_ref = image_refs.get(story["md_path"])
+            if image_ref:
+                sections.append(f"![{story['title']}]({image_ref})")
             body = prepare_story(story)
             if body:
                 sections.append(body)
@@ -250,13 +299,15 @@ def main() -> int:
         raise BuildError(f"Manuscript template not found: {MANUSCRIPT}")
 
     stories = discover_stories()
+    image_refs = prepare_book_images(stories)
     template = MANUSCRIPT.read_text(encoding="utf-8")
-    generated = build_travel_section(stories)
+    generated = build_travel_section(stories, image_refs)
     result = replace_generated_content(template, generated)
     write_atomically(MANUSCRIPT, result)
 
     continents = sorted(set(s["continent"] for s in stories), key=str.casefold)
     print(f"Built {MANUSCRIPT.relative_to(ROOT)}")
+    print(f"Copied {len(image_refs)} travel banner images to {BOOK_IMAGE_ROOT.relative_to(ROOT)}")
     print(f"Discovered {len(stories)} travel stories in {len(continents)} continents:")
     for continent in continents:
         print(f"  {continent}: {sum(1 for s in stories if s['continent'] == continent)}")
