@@ -24,7 +24,7 @@ We also visited the spot associated with the belief that Lord Krishna left the e
 
 This is Bhalka Tirth, near Prabhas Patan. According to the traditional account, Krishna was mistaken for a deer by the hunter Jara and was struck by an arrow; the episode is associated with Krishna's departure from earthly life.
 
-For us, it was one of the smaller stops around Somnath rather than the main reason for the journey. But places like this add context to a pilgrimage. The region isn't defined by the Somnath temple alone; it is surrounded by sites connected to stories that have been part of Indian religious tradition for centuries. citeturn0search11
+For us, it was one of the smaller stops around Somnath rather than the main reason for the journey. But places like this add context to a pilgrimage. The region isn't defined by the Somnath temple alone; it is surrounded by sites connected to stories that have been part of Indian religious tradition for centuries.
 
 ## When the trip went wrong
 
