@@ -1,0 +1,56 @@
+title: Spain
+country: Spain
+region: null
+continent: Europe
+status: visited
+content_status: published
+banner: /images/travel/default.jpg
+photography: []
+metadata:
+  travel_style: Road trip originally planned; ultimately Madrid by air
+  planned_route:
+    - Madrid, Spain
+visits:
+  - title: Spain
+    from: 2018-12-01
+    to: 2018-12-03
+    duration_days: 3
+    travelled_with:
+      - Pragati
+    travel_type: air; road trip originally planned
+    solo: false
+    origin: Lisbon, Portugal
+    route:
+      - Madrid, Spain
+    places_visited:
+      - El Retiro Park, Madrid
+      - Palacio de Cristal, Madrid
+      - Madrid-Puerta de Atocha-Almudena Grandes station
+    highlights:
+      - El Retiro Park
+      - Palacio de Cristal
+      - Photography around Madrid
+      - Imagining the European road trip from the air
+      - Adapting the journey when Pragati became unwell
+    flights:
+      - date: 2018-12-01
+        from: LIS
+        to: MAD
+        airline: EasyJet
+        flight: null
+        note: Flight replaced the originally planned road journey from Lisbon to Madrid.
+      - date: 2018-12-03
+        from: MAD
+        to: DXB
+        airline: null
+        flight: null
+        note: Return journey was brought forward after the original road-trip plan was abandoned.
+    accommodation:
+      - place: Madrid
+        name: AC Hotel Carlton Madrid
+        dates: null
+        notes: null
+    transport: []
+    stays: []
+    occasion: null
+    notes: This entry was created from the Portugal journey as an initial Spain record. Details and photography links can be refined later.
