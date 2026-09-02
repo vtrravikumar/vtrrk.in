@@ -24,6 +24,8 @@ The Colosseum was a particular favourite. One evening Pragati decided to rest at
 
 We used the city sightseeing bus as well as local buses and other public transport. Rome was our introduction to travelling around a European city without needing a car.
 
+The city also set the tone for the trip in another way. We were not trying to understand Rome in a single day or reduce it to a checklist. We were simply moving through it, stopping where something caught our attention and allowing the city to become familiar at its own pace.
+
 ## The journey north
 
 From Rome we took the train to Florence. We had not planned every detail in advance. The next stay and the next journey were booked as we moved along.
@@ -39,6 +41,8 @@ The train from Florence to Pisa was itself memorable — a double-decker train, 
 After getting off at Pisa station, we took a bus to the Leaning Tower.
 
 And yes, Pisa was exactly what you expect it to be: the tower was tilting. Seeing it in person after having seen it so many times in photographs was still a wonderful experience.
+
+There was something satisfying about that stop precisely because it was simple. We did not need to spend days there. We arrived, saw the tower, photographed it and moved on.
 
 ## Venice
 
@@ -65,6 +69,8 @@ From Milan we continued to Zurich, which was our planned exit point.
 Zurich surprised us with its public transport. Buses, trams, trains and ferries all seemed to fit together seamlessly, and everything was remarkably clean.
 
 We chose to stay near the station, which made much of the city accessible on foot. After the movement through Italy, Zurich was a comfortable place to slow down for the final two nights before flying back to Dubai.
+
+Looking back, Zurich was almost the natural conclusion to the experiment that had started in Rome. We had spent the trip moving between places, learning how to use trains and public transport, and making decisions as we went. By the time we reached Zurich, we had become comfortable with that way of travelling.
 
 ## What Italy taught us
 
