@@ -2,7 +2,9 @@
 
 Leh was not my first visit to Ladakh. I had been there once before, in April 2011, on a trip with my colleague and friend Manish. Eight years later, I returned with Pragati.
 
-The two journeys could hardly have been more different, and together they tell a more complete story of my relationship with Ladakh.
+The two journeys could hardly have been more different. The first was an early-season adventure with a colleague, built around mountain roads and the excitement of discovering Ladakh for the first time. The second was a much more comfortable journey with Pragati, shaped by Army hospitality, better preparation and the experience of returning to a place I already knew.
+
+Together, they tell a more complete story of my relationship with Ladakh.
 
 ## April 2011 — The first Leh adventure
 
@@ -15,6 +17,8 @@ We arrived in April, right at the beginning of the Leh season. Many of the attra
 Once the permits were in place, we hired a cab and planned a circuit from Leh to Khardung La, Nubra Valley and Hunder, returning to Leh before continuing towards Chang La and Pangong Tso.
 
 There was one complication. Our original plan was to visit Pangong first, but the locals told us the lake was still frozen. We decided to reverse the itinerary and travel to Nubra first, hoping that Pangong would clear by the time we returned.
+
+That small change captured something about the trip as a whole. We had travelled to Ladakh with an idea of what we wanted to do, but the mountains and the season dictated what was actually possible.
 
 ### Khardung La and Nubra
 
@@ -44,7 +48,7 @@ Once back in Leh, we finally rented a bike and explored locally, riding towards 
 
 That first visit was short — just five days — but it introduced me to a landscape that would stay in my mind for years.
 
-## July 2022 — When the Mountains Became Real
+## July 2022 — Returning to Leh
 
 Nine years later, I returned to Leh with Pragati.
 
@@ -128,7 +132,7 @@ We rode towards Magnetic Hill, Gurudwara Pathar Sahib and the Sangam, enjoying t
 
 This part of the trip was different from the circuit in the Innova. The car had taken us across the major distances, but the motorcycle gave us the feeling of actually being on the road and in the landscape.
 
-### A different Leh for Pragati
+## A different Leh for Pragati
 
 For me, one of the most satisfying parts of this trip was seeing Pragati's perception of Leh change.
 
@@ -139,6 +143,16 @@ Leh was not inaccessible.
 It was simply a place with a very different geography.
 
 There were roads, hotels, tourists, bikers, markets and all the other things one associates with a tourist destination. But surrounding all of that was an extraordinary landscape that made Leh unique.
+
+## Two journeys, one place
+
+The contrast between my two visits is what makes Ladakh particularly meaningful to me.
+
+In 2011, I was discovering the place with Manish. We were dealing with the early-season conditions, changing plans because of frozen roads and lakes, arranging permits and figuring out how to make the journey work.
+
+In 2022, I returned with Pragati. The journey was more comfortable, better prepared and helped by the extraordinary generosity of an Army friend. We had already learnt how important acclimatisation was, and we were able to travel deeper into Ladakh than we had on the first visit.
+
+Yet some things remained unchanged: the scale of the mountains, the clear night sky, the feeling of distance and the sense that every road was taking us somewhere extraordinary.
 
 My 2011 visit introduced me to Ladakh.
 
