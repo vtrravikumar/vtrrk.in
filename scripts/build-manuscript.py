@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Build the VTR Press travelogue manuscript from the travel content tree.
 
-The travel Markdown files remain the canonical story sources. Their companion
-YAML files provide the book metadata used for grouping and sorting.
+Travel Markdown files remain the canonical story sources. Their companion
+YAML files provide metadata used for grouping and sorting.
 
-The generated manuscript is intentionally local-only; add manuscript.md to
-.gitignore so rebuilding it never causes a website deployment.
+Book-level editorial content lives in publishing/travelogue-frontmatter.md.
+The generated manuscript is local-only; add manuscript.md to .gitignore.
 """
 
 from __future__ import annotations
@@ -24,15 +24,9 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 TRAVEL_ROOT = ROOT / "src" / "content" / "travel"
+FRONT_MATTER = ROOT / "publishing" / "travelogue-frontmatter.md"
 MANUSCRIPT = ROOT / "manuscript.md"
 
-
-class BuildError(Exception):
-    pass
-
-
-# VTR Press publishing metadata. These values belong to the book-level
-# manuscript rather than to individual travel stories.
 BOOK_FRONT_MATTER = """<!--
 
 Generated from:
@@ -75,64 +69,16 @@ language: en
 
 ---"""
 
-DEFAULT_STATIC_SECTIONS = {
-    "Copyright": """First Edition — 2026
 
-Copyright © 2026 V.T.R. Ravi Kumar
-
-All rights reserved.
-
-No part of this publication may be reproduced, stored in a retrieval system, or transmitted in any form or by any means, electronic, mechanical, photocopying, recording, or otherwise, without the prior written permission of the publisher, except for brief quotations used in reviews or scholarly works.
-
-ISBN:""",
-    "Dedication": """For my father,
-
-whose faith in me
-
-began long before mine did.""",
-    "Thirukkural": """குறள்
-
-:::verse
-
-உள்ளியது எய்தல் எளிதுமன் மற்றுந்தான்
-
-உள்ளியது உள்ளப் பெறின்.
-
-:::
-
-:::verse
-
-What one has firmly resolved is easy to attain,
-
-if the mind remains steadfast upon that purpose.
-
-:::
-
-— திருவள்ளுவர் (Thiruvalluvar)""",
-    "Prologue": """I have never been very good at saying no to travel.
-
-Sometimes the reason was a birthday. Sometimes New Year. Sometimes a colleague sent an email asking if I wanted to join a trip. Sometimes a visa was easy to obtain. Sometimes the plan was simply to get into the car and see where the road went.
-
-Looking back, there was no single philosophy behind all these journeys. I travelled because I was curious. I wanted to see places I had never seen, photograph them, understand how they felt, and sometimes simply get away from the familiar.
-
-The photographs are important, but they are not the whole story. What stays with me are the decisions made along the way: sleeping in a Tata Sumo because an Army checkpoint stopped us, changing hotels because the first one was in the wrong place, buying a train ticket at the last moment, discovering a waterfall through sugarcane plantations, losing a tripod from an auto-rickshaw, or taking a flight because a road trip had become impossible.
-
-Travel also taught me that uncertainty is not always something to eliminate. Sometimes it is the thing that makes a journey interesting.
-
-These are some of those journeys.""",
-}
-
-
-STATIC_SECTION_ORDER = ("Copyright", "Dedication", "Thirukkural", "Prologue")
+class BuildError(Exception):
+    pass
 
 
 def clean_heading(text: str) -> str:
-    """Normalize a heading enough for use as a Markdown heading."""
     return text.strip().rstrip("#").strip()
 
 
 def load_story(md_path: Path) -> dict:
-    """Load one travel story and its companion YAML metadata."""
     yaml_path = md_path.with_suffix(".yaml")
     if not yaml_path.exists():
         raise BuildError(f"Missing YAML metadata: {yaml_path.relative_to(ROOT)}")
@@ -172,16 +118,13 @@ def load_story(md_path: Path) -> dict:
 
 
 def strip_frontmatter(text: str) -> str:
-    """Remove YAML frontmatter if a source Markdown file contains it."""
     if not text.startswith("---"):
         return text
-
     match = re.match(r"\A---\s*\n.*?\n---\s*\n", text, flags=re.DOTALL)
     return text[match.end():] if match else text
 
 
 def strip_first_h1(text: str) -> str:
-    """Remove the source file's first H1; the YAML title becomes the chapter title."""
     lines = text.splitlines()
     for index, line in enumerate(lines):
         if re.match(r"^#\s+", line):
@@ -193,13 +136,11 @@ def strip_first_h1(text: str) -> str:
 
 
 def convert_internal_headings(text: str) -> str:
-    """Move source ##/### headings down to book scene level (####)."""
     converted = []
     for line in text.splitlines():
         match = re.match(r"^(#{2,3})(\s+.*)$", line)
         if match:
-            heading = clean_heading(match.group(2))
-            converted.append(f"#### {heading}")
+            converted.append(f"#### {clean_heading(match.group(2))}")
         else:
             converted.append(line)
     return "\n".join(converted).strip()
@@ -207,23 +148,17 @@ def convert_internal_headings(text: str) -> str:
 
 def prepare_story(story: dict) -> str:
     text = story["md_path"].read_text(encoding="utf-8")
-    text = strip_frontmatter(text)
-    text = strip_first_h1(text)
-    text = convert_internal_headings(text)
-    return text
+    return convert_internal_headings(strip_first_h1(strip_frontmatter(text)))
 
 
 def discover_stories() -> list[dict]:
-    stories = []
-    for md_path in sorted(TRAVEL_ROOT.rglob("*.md")):
-        stories.append(load_story(md_path))
+    stories = [load_story(path) for path in sorted(TRAVEL_ROOT.rglob("*.md"))]
     if not stories:
         raise BuildError(f"No travel Markdown files found under {TRAVEL_ROOT}")
     return stories
 
 
 def sort_key(value: str) -> tuple[int, str]:
-    """Sort named regions before empty/null regions, then alphabetically."""
     value = value.strip()
     return (0 if value else 1, value.casefold())
 
@@ -233,10 +168,8 @@ def build_travel_section(stories: list[dict]) -> str:
     for story in stories:
         grouped.setdefault(story["continent"], []).append(story)
 
-    continents = sorted(grouped, key=str.casefold)
     sections: list[str] = []
-
-    for number, continent in enumerate(continents, start=1):
+    for number, continent in enumerate(sorted(grouped, key=str.casefold), start=1):
         sections.append(f"## {roman(number)} — {continent}")
         continent_stories = sorted(
             grouped[continent],
@@ -246,7 +179,6 @@ def build_travel_section(stories: list[dict]) -> str:
                 story["title"].casefold(),
             ),
         )
-
         for story in continent_stories:
             sections.append(f"### {story['title']}")
             body = prepare_story(story)
@@ -268,75 +200,38 @@ def roman(number: int) -> str:
     return "".join(result)
 
 
-def extract_static_sections(template: str) -> dict[str, str]:
-    """Extract known book-level sections from the current manuscript.
+def read_front_matter() -> str:
+    if not FRONT_MATTER.exists():
+        raise BuildError(f"Editable front matter not found: {FRONT_MATTER.relative_to(ROOT)}")
 
-    Existing local editorial text wins over defaults, so rebuilding the
-    manuscript does not overwrite later edits to these sections.
-    """
+    text = FRONT_MATTER.read_text(encoding="utf-8").strip()
+    if not re.match(r"^#\s+Travelogue\s*$", text):
+        raise BuildError("travelogue-frontmatter.md must begin with '# Travelogue'")
+    if not re.search(r"^##\s+Prologue\s*$", text, flags=re.MULTILINE):
+        raise BuildError("travelogue-frontmatter.md must contain '## Prologue'")
+    return text
+
+
+def build_book_header(front_matter: str) -> str:
+    return f"{BOOK_FRONT_MATTER}\n\n{front_matter}"
+
+
+def replace_generated_content(template: str, generated: str) -> str:
     lines = template.splitlines()
-    sections: dict[str, str] = {}
-
-    for index, line in enumerate(lines):
-        match = re.match(r"^##\s+(.+?)\s*$", line)
-        if not match:
-            continue
-
-        heading = clean_heading(match.group(1))
-        if heading not in STATIC_SECTION_ORDER:
-            continue
-
-        body_lines = []
-        for body_line in lines[index + 1:]:
-            if re.match(r"^##\s+", body_line) or re.match(r"^##\s+[IVXLCDM]+\s+—\s+", body_line):
-                break
-            body_lines.append(body_line)
-
-        body = "\n".join(body_lines).strip()
-        if body:
-            sections[heading] = body
-
-    return sections
-
-
-def build_book_header(template: str) -> str:
-    """Build the VTR Press metadata and book-level front matter in order."""
-    existing = extract_static_sections(template)
-    parts = [BOOK_FRONT_MATTER, "# Travelogue"]
-
-    for heading in STATIC_SECTION_ORDER:
-        body = existing.get(heading, DEFAULT_STATIC_SECTIONS[heading])
-        parts.append(f"## {heading}\n\n{body}")
-
-    return "\n\n".join(parts)
-
-
-def replace_travel_section(template: str, generated: str) -> str:
-    """Replace the generated travel portion while preserving the epilogue onward."""
-    lines = template.splitlines()
-
     start = next(
-        (i for i, line in enumerate(lines) if re.match(r"^##?\s+Part\s+[IVXLCDM]+\s+—\s+", line)),
+        (i for i, line in enumerate(lines) if re.match(r"^##\s+[IVXLCDM]+\s+—\s+", line)),
         None,
     )
-
-    if start is None:
-        start = next(
-            (i for i, line in enumerate(lines) if re.match(r"^##\s+[IVXLCDM]+\s+—\s+", line)),
-            None,
-        )
-
     end = next((i for i, line in enumerate(lines) if re.match(r"^##\s+Epilogue\s*$", line)), None)
 
     if start is None or end is None or start >= end:
         raise BuildError(
-            "manuscript.md must contain a generated travel section followed by '## Epilogue'. "
-            "The first existing Part/continent heading is used as the replacement start."
+            "manuscript.md must contain generated continent headings followed by '## Epilogue'."
         )
 
-    header = build_book_header(template)
     suffix = "\n".join(lines[end:]).lstrip()
-    return f"{header}\n\n{generated.rstrip()}\n\n{suffix}\n"
+    front_matter = read_front_matter()
+    return f"{build_book_header(front_matter)}\n\n{generated.rstrip()}\n\n{suffix}\n"
 
 
 def write_atomically(path: Path, content: str) -> None:
@@ -355,14 +250,14 @@ def main() -> int:
     stories = discover_stories()
     template = MANUSCRIPT.read_text(encoding="utf-8")
     generated = build_travel_section(stories)
-    result = replace_travel_section(template, generated)
+    result = replace_generated_content(template, generated)
     write_atomically(MANUSCRIPT, result)
 
+    continents = sorted(set(s["continent"] for s in stories), key=str.casefold)
     print(f"Built {MANUSCRIPT.relative_to(ROOT)}")
-    print(f"Discovered {len(stories)} travel stories in {len(set(s['continent'] for s in stories))} continents:")
-    for continent in sorted(set(s["continent"] for s in stories), key=str.casefold):
-        count = sum(1 for s in stories if s["continent"] == continent)
-        print(f"  {continent}: {count}")
+    print(f"Discovered {len(stories)} travel stories in {len(continents)} continents:")
+    for continent in continents:
+        print(f"  {continent}: {sum(1 for s in stories if s['continent'] == continent)}")
     return 0
 
 
