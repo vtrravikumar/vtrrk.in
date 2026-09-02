@@ -34,6 +34,8 @@ But the walking had one unexpected benefit. I found a small ledge that a few peo
 
 Petra was so impressive that I visited it again later in the trip, this time wearing comfortable footwear and enjoying it with much less pain.
 
+The two visits gave me two very different experiences of the same place. The first was about surprise and pushing through discomfort; the second was about slowing down enough to actually enjoy it. For a photographer, Petra also had something else: scale. The monuments are impressive, but the approach through the gorge makes the reveal feel even more dramatic.
+
 ## Wadi Rum
 
 After Petra, my new friend from Taiwan and I planned the next part of the journey. This time we made some calls and booked a stay inside Wadi Rum.
@@ -65,6 +67,8 @@ If Pragati had been with me, I would probably have travelled differently. I woul
 Travelling alone allowed me to stay in a hostel, take buses, change plans, walk more, accept uncertainty and push myself further than I normally would.
 
 That is what Jordan gave me beyond Petra and the Dead Sea: the realization that uncertainty can be part of the fun of travel.
+
+It also gave me something I had not expected when I left Dubai: the confidence that I could enjoy a journey entirely on my own terms. There was no one else to consult about the next bus, the next hostel or whether to take one more photograph. Every decision was mine.
 
 I came back from Jordan with a very good feeling about having travelled alone. I would do it again anytime.
 
