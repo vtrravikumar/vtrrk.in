@@ -1,0 +1,66 @@
+title: Azerbaijan
+country: Azerbaijan
+region: null
+continent: Asia
+status: visited
+content_status: published
+banner: /images/travel/azerbaijan.jpg
+photography: []
+metadata:
+  travel_style: Ski resort and city break
+  planned_route:
+    - Baku, Azerbaijan
+    - Shahdag, Azerbaijan
+visits:
+  - title: Azerbaijan
+    from: 2018-03-16
+    to: 2018-03-19
+    duration_days: 4
+    travelled_with:
+      - Pragati
+    travel_type: air; road trip
+    solo: false
+    origin: Dubai, UAE
+    route:
+      - Baku, Azerbaijan
+      - Shahdag, Azerbaijan
+      - Baku, Azerbaijan
+    places_visited:
+      - Shahdag Mountain Resort
+      - Baku
+      - Caspian Sea
+      - Local market, Baku
+    highlights:
+      - Birthday trip to Azerbaijan
+      - First stay at a ski resort
+      - Snow-covered Shahdag
+      - Cable-car rides at Shahdag
+      - Night-time snowfall and snow clearing on the ski slopes
+      - Caspian Sea from Baku
+      - Exploring Baku and its local market
+    flights:
+      - date: 2018-03-16
+        from: DXB
+        to: GYD
+        airline: Azerbaijan Airlines
+        flight: J216
+        note: null
+      - date: 2018-03-19
+        from: GYD
+        to: DXB
+        airline: Azerbaijan Airlines
+        flight: J215
+        note: null
+    accommodation:
+      - place: Shahdag
+        name: Pik Palace, Shahdag, Autograph Collection
+        dates: 2018-03-16 to 2018-03-18
+        notes: Deluxe Room, 2 nights
+      - place: Baku
+        name: Hilton Baku
+        dates: 2018-03-18 to 2018-03-19
+        notes: Twin Guest Room, 14th floor; room with Caspian Sea view
+    transport: []
+    stays: []
+    occasion: Birthday
+    notes: The trip was chosen partly because of the ease of obtaining a visa. The return flight was from Baku, so the final night was spent in Baku after checking out of Shahdag.
