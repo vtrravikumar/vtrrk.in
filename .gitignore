@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # generated VTR Press manuscript
 manuscript.md
+
+# generated VTR Press images
+assets/image/
