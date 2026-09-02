@@ -24,6 +24,8 @@ We did venture out to some of the island's better-known sights, including the Ch
 
 We took a half-day boat trip on what I remember as a sailing boat or catamaran. It had a comfortable area to sit and enjoy the journey, and took us to an offshore island before returning us to Mauritius. I don't remember the name of the boat or island, so there is no reason to invent one now.
 
+There was a useful contrast between these outings and the resort itself. The island invited us to explore, but the short length of the trip meant that we were constantly choosing between seeing something new and simply enjoying where we were staying. We chose a little of both.
+
 ## The waterfall we almost didn't find
 
 One of the most memorable outings came from something much less touristy. While looking at nearby attractions on Google, we found a waterfall that appeared to be close by. We followed the directions and eventually found ourselves driving through sugarcane plantations.
@@ -37,6 +39,8 @@ That experience stayed with me partly because of the contrast with India, where 
 ## Mauritius in hindsight
 
 Mauritius reminded me in some ways of Seychelles — both are small island destinations where having a car gives you considerable freedom to explore. But Mauritius felt better developed in terms of infrastructure without losing the scenic beauty that makes these islands special.
+
+There was also a nice balance to the trip. The car gave us independence, the resort gave us a place to slow down, and the unplanned waterfall gave us the kind of story that no itinerary could have produced. Even with only a couple of days, the trip never felt like we were simply moving from one attraction to another.
 
 If I had to choose one thing that represents this trip, though, it would not be one of the tourist attractions. It would be the Outrigger itself: the spacious cottage, the beach just outside, the sunsets, the excellent food and the feeling of being in a large resort that somehow never felt crowded.
 
