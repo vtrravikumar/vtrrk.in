@@ -18,7 +18,7 @@ export const travelCountries: TravelCountry[] = [
   { name: "India", continent: "Asia", status: "Y", slug: "india" },
   { name: "Malaysia", continent: "Asia", status: "Y", slug: "malaysia" },
   { name: "Singapore", continent: "Asia", status: "Y", slug: "singapore" },
-  { name: "Sri Lanka", continent: "Asia", status: "Y", slug: "sri-lanka" },
+  { name: "Sri Lanka", continent: "Asia", status: "Y", slug: "srilanka" },
   { name: "Thailand", continent: "Asia", status: "Y", slug: "thailand" },
   { name: "Italy", continent: "Europe", status: "Y", slug: "italy" },
   { name: "Portugal", continent: "Europe", status: "Y", slug: "portugal" },
