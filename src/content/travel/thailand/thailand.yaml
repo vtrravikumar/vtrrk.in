@@ -1,0 +1,77 @@
+title: Thailand
+country: Thailand
+region: null
+continent: Asia
+status: visited
+content_status: published
+banner: /images/travel/thailand.jpg
+photography: []
+metadata: {}
+visits:
+  - title: null
+    from: 2016-12-29
+    to: 2017-01-07
+    duration_days: 10
+    travelled_with:
+      - Pragati
+    travel_type: null
+    solo: false
+    origin: Dubai, UAE
+    route:
+      - Bangkok
+      - Pattaya
+      - Bangkok
+    places_visited:
+      - Bangkok
+      - Wat Arun
+      - Grand Palace
+      - Wat Phra
+      - CentralWorld
+      - Wat Saphan Floating Market
+      - Khlong Lad Mayom Floating Market
+      - Bang Phrom River
+      - Pattaya
+      - Ko Lan
+      - Chinatown
+      - Sri Maha Mariamman Temple (Wat Khaek)
+      - Chao Phraya River
+    highlights:
+      - Muted New Year celebrations following the death of King Bhumibol Adulyadej
+      - Floating markets and a speed boat ride in Bang Phrom River
+      - Parasailing twice in Pattaya
+      - Boat trip to Ko Lan
+      - Chinatown and Sri Maha Mariamman Temple
+    flights:
+      - date: 2016-12-30
+        from: DXB
+        to: BKK
+        airline: Flydubai
+        flight: FZ523
+        note: Left Dubai on the night of December 29 for the midnight flight.
+      - date: 2017-01-07
+        from: BKK
+        to: DXB
+        airline: Flydubai
+        flight: FZ524
+        note: null
+    accommodation:
+      - place: Bangkok
+        name: Courtyard by Marriott Bangkok
+        dates: 2016-12-30 to 2017-01-02
+        notes: null
+      - place: Pattaya
+        name: Courtyard by Marriott Pattaya
+        dates: 2017-01-02 to 2017-01-05
+        notes: null
+      - place: Bangkok
+        name: Novotel Bangkok Fenix Silom
+        dates: 2017-01-05 to 2017-01-07
+        notes: null
+    transport:
+      - Grab
+      - Bus
+      - Speed boat
+      - Boat
+    stays: []
+    occasion: New Year
+    notes: Thailand was chosen because of the ease of visa on arrival for Indian travellers. The trip took place soon after the death of King Bhumibol Adulyadej in October 2016, and the country was in mourning. New Year celebrations around CentralWorld were muted, with no fireworks or countdown experienced despite many people wanting to celebrate.
