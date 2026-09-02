@@ -139,20 +139,27 @@ def strip_first_h1(text: str) -> str:
     return "\n".join(lines).strip()
 
 
-def convert_internal_headings(text: str) -> str:
+def convert_internal_headings(text: str, target_level: int | None = 4) -> str:
     converted = []
     for line in text.splitlines():
         match = re.match(r"^(#{2,3})(\s+.*)$", line)
         if match:
-            converted.append(f"#### {clean_heading(match.group(2))}")
+            heading = clean_heading(match.group(2))
+            if target_level is None:
+                converted.append(f"**{heading}**")
+            else:
+                converted.append(f"{'#' * target_level} {heading}")
         else:
             converted.append(line)
     return "\n".join(converted).strip()
 
 
-def prepare_story(story: dict) -> str:
+def prepare_story(story: dict, internal_heading_level: int | None = 4) -> str:
     text = story["md_path"].read_text(encoding="utf-8")
-    return convert_internal_headings(strip_first_h1(strip_frontmatter(text)))
+    return convert_internal_headings(
+        strip_first_h1(strip_frontmatter(text)),
+        target_level=internal_heading_level,
+    )
 
 
 def discover_stories() -> list[dict]:
@@ -165,6 +172,21 @@ def discover_stories() -> list[dict]:
 def sort_key(value: str) -> tuple[int, str]:
     value = value.strip()
     return (0 if value else 1, value.casefold())
+
+
+def is_india_story(story: dict) -> bool:
+    return story["country"].casefold() == "india"
+
+
+def split_india_stories(stories: list[dict]) -> tuple[list[dict], list[dict]]:
+    non_india_stories = []
+    india_stories = []
+    for story in stories:
+        if is_india_story(story):
+            india_stories.append(story)
+        else:
+            non_india_stories.append(story)
+    return non_india_stories, india_stories
 
 
 def prepare_book_images(stories: list[dict]) -> dict[Path, str]:
@@ -209,14 +231,14 @@ def prepare_book_images(stories: list[dict]) -> dict[Path, str]:
     return image_refs
 
 
-def build_travel_section(stories: list[dict], image_refs: dict[Path, str]) -> str:
+def build_non_india_sections(stories: list[dict], image_refs: dict[Path, str]) -> list[str]:
     grouped: dict[str, list[dict]] = {}
     for story in stories:
         grouped.setdefault(story["continent"], []).append(story)
 
     sections: list[str] = []
     for number, continent in enumerate(sorted(grouped, key=str.casefold), start=1):
-        sections.append(f"## {roman(number)} — {continent}")
+        sections.append(f"## Part {roman(number)} — {continent}")
         continent_stories = sorted(
             grouped[continent],
             key=lambda story: (
@@ -233,6 +255,66 @@ def build_travel_section(stories: list[dict], image_refs: dict[Path, str]) -> st
             body = prepare_story(story)
             if body:
                 sections.append(body)
+
+    return sections
+
+
+def india_region(story: dict) -> str:
+    region = story["region"].strip()
+    if region:
+        return region
+    print(
+        f"WARNING: Indian story '{story['title']}' has no region; using 'Unspecified Region'",
+        file=sys.stderr,
+    )
+    return "Unspecified Region"
+
+
+def build_india_section(
+    stories: list[dict],
+    image_refs: dict[Path, str],
+    part_number: int,
+) -> list[str]:
+    if not stories:
+        return []
+
+    grouped: dict[str, list[dict]] = {}
+    for story in stories:
+        grouped.setdefault(india_region(story), []).append(story)
+
+    sections = [f"## Part {roman(part_number)} — India"]
+    for region in sorted(grouped, key=str.casefold):
+        sections.append(f"### {region}")
+        region_stories = sorted(
+            grouped[region],
+            key=lambda story: (
+                story["title"].casefold(),
+                story["country"].casefold(),
+            ),
+        )
+        for story in region_stories:
+            sections.append(f"#### {story['title']}")
+            image_ref = image_refs.get(story["md_path"])
+            if image_ref:
+                sections.append(f"![{story['title']}]({image_ref})")
+            body = prepare_story(story, internal_heading_level=None)
+            if body:
+                sections.append(body)
+
+    return sections
+
+
+def build_travel_section(stories: list[dict], image_refs: dict[Path, str]) -> str:
+    non_india_stories, india_stories = split_india_stories(stories)
+    sections = build_non_india_sections(non_india_stories, image_refs)
+    non_india_continents = {story["continent"] for story in non_india_stories}
+    sections.extend(
+        build_india_section(
+            india_stories,
+            image_refs,
+            part_number=len(non_india_continents) + 1,
+        )
+    )
 
     return "\n\n".join(sections).rstrip() + "\n"
 
@@ -270,7 +352,11 @@ def build_book_header(front_matter: str) -> str:
 def replace_generated_content(template: str, generated: str) -> str:
     lines = template.splitlines()
     start = next(
-        (i for i, line in enumerate(lines) if re.match(r"^##\s+[IVXLCDM]+\s+—\s+", line)),
+        (
+            i
+            for i, line in enumerate(lines)
+            if re.match(r"^##\s+(?:Part\s+)?[IVXLCDM]+\s+—\s+", line)
+        ),
         None,
     )
     end = next((i for i, line in enumerate(lines) if re.match(r"^##\s+Epilogue\s*$", line)), None)
@@ -305,12 +391,30 @@ def main() -> int:
     result = replace_generated_content(template, generated)
     write_atomically(MANUSCRIPT, result)
 
-    continents = sorted(set(s["continent"] for s in stories), key=str.casefold)
+    non_india_stories, india_stories = split_india_stories(stories)
+    continents = sorted(set(s["continent"] for s in non_india_stories), key=str.casefold)
+    india_regions = sorted(
+        set(story["region"].strip() or "Unspecified Region" for story in india_stories),
+        key=str.casefold,
+    )
+
     print(f"Built {MANUSCRIPT.relative_to(ROOT)}")
-    print(f"Copied {len(image_refs)} travel banner images to {BOOK_IMAGE_ROOT.relative_to(ROOT)}")
-    print(f"Discovered {len(stories)} travel stories in {len(continents)} continents:")
+    print()
+    print(f"Discovered {len(stories)} travel stories")
+    print()
+    print("Continents:")
     for continent in continents:
-        print(f"  {continent}: {sum(1 for s in stories if s['continent'] == continent)}")
+        print(f"  {continent}: {sum(1 for s in non_india_stories if s['continent'] == continent)}")
+    if india_stories:
+        print()
+        print("India:")
+        for region in india_regions:
+            print(
+                f"  {region}: "
+                f"{sum(1 for s in india_stories if (s['region'].strip() or 'Unspecified Region') == region)}"
+            )
+    print()
+    print(f"Generated {len(image_refs)} banner images")
     return 0
 
 
