@@ -46,6 +46,8 @@ We also visited the Adjarian Wine House. Georgian wine became one of the recurri
 
 The two days in Batumi were short, but they were packed with places, people and the feeling of having discovered much more than we had planned.
 
+Standing beside the Black Sea was also a small milestone in its own right. Until then, seas were mostly something I knew through maps, photographs and names. Being there made the geography of the world feel much more real.
+
 ## Back to Tbilisi
 
 After returning to Tbilisi, we continued exploring the city. We took the Rustaveli–Mtatsminda Cable Car and went all the way to the top.
@@ -75,6 +77,8 @@ When we left Georgia on Flydubai FZ712 on 1 December, we were carrying much more
 This was our **first personal international trip**. We had travelled because getting to Georgia was relatively straightforward, but the country gave us far more than an easy visa arrangement.
 
 There was the uncomfortable beginning at immigration, followed by the warmth of ordinary Georgians. There was the spontaneous train journey to Batumi, the Indian couple from Abu Dhabi, the unexpected hotel booking, the Black Sea, waterfalls, monasteries and wine country. There was the Indian coffee seller on top of the cable-car ride, the friends we made on the sightseeing bus, and the strange but wonderful discovery that people thousands of kilometres away could still remember and sing old Raj Kapoor songs.
+
+More than anything, Georgia opened a door. Before this trip, international travel had been something we imagined and discussed. After it, it became something we knew we could actually do.
 
 It was a short trip, but it opened a door for us.
 
