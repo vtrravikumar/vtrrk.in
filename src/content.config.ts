@@ -67,7 +67,7 @@ const travel = defineCollection({
     continent: z.string().nullable().optional(),
     status: z.string().optional(),
     content_status: z.enum(["published", "draft"]).default("draft"),
-    banner: z.string().optional(),
+    banner: z.string().default("/images/travel/default.jpg"),
     photography: z.any().optional(),
     metadata: z.any().optional(),
     visits: travelVisit.array().default([]),
