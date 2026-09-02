@@ -32,7 +32,9 @@ And then we saw it.
 
 ## The Golden Temple
 
-The Golden Temple, Harmandir Sahib, was far more impressive than I had expected.
+The Golden Temple, or Harmandir Sahib, is the spiritual centre of Sikhism and one of India's most recognisable places of worship. The central shrine stands within the sacred sarovar, connected by a causeway, and the surrounding complex is designed around the water.
+
+But knowing those facts doesn't prepare you for the first sight of it.
 
 The complex was remarkably clean, calm and well organised despite the number of people moving through it. There was a long queue for entry, but it moved quickly, so we didn't have to wait very long.
 
@@ -46,9 +48,13 @@ There was nowhere we needed to rush to.
 
 For a while, we simply sat there and enjoyed the view.
 
+The experience also made the idea of the Golden Temple as a place of welcome more tangible. It wasn't just an architectural landmark we had come to photograph or see. It was a living place of worship, surrounded by people who had come for many different reasons.
+
 ## Towards Wagah
 
 The next day, we decided to go to the Wagah Border.
+
+Wagah sits on the India–Pakistan border between Amritsar and Lahore. The daily Beating Retreat ceremony has become one of the best-known border spectacles in the region, with soldiers from the two sides carrying out highly choreographed drills before the flags are lowered. citeturn0search16
 
 It was late June and the weather was humid. There were occasional showers, and between the rain and the humidity, our clothes were regularly drenched in either rain or sweat.
 
@@ -84,7 +90,11 @@ The following day, we visited Jallianwala Bagh.
 
 After the crowds and energy of Wagah, the atmosphere here felt completely different.
 
-Jallianwala Bagh is one of those places where the history of India's freedom struggle becomes very tangible. Walking through the site and remembering what happened there makes the place difficult to experience simply as another tourist attraction.
+Jallianwala Bagh is inseparable from one of the darkest episodes of India's freedom struggle. The massacre of 13 April 1919, when British troops fired on a gathering in the enclosed garden, left a deep mark on India's history and became a symbol of colonial repression.
+
+Walking through the site and remembering what happened there makes the place difficult to experience simply as another tourist attraction.
+
+After Wagah, where the crowd had been loud and celebratory, Jallianwala Bagh felt almost deliberately quiet. That contrast stayed with me.
 
 We spent some time there before returning once again to Harmandir Sahib.
 
@@ -115,6 +125,8 @@ And just like that, the completely unplanned road trip was over.
 Looking back, what I like most about this journey is how little of it was planned.
 
 We left Delhi at three or four in the morning because that was how I liked to drive. We had a flat tyre. We arrived in Amritsar without a hotel. We parked the car and took a rickshaw to the Golden Temple. We went to Wagah, stopped at Attari, visited Jallianwala Bagh and then ended up spending an unexpected night in Ludhiana because of the rain.
+
+The places themselves also gave the trip a remarkable range. The Golden Temple offered stillness and reflection. Wagah brought spectacle and patriotic energy. Jallianwala Bagh brought history and sadness. And the road home reminded us, once again, that the weather can rewrite an itinerary in minutes.
 
 Nothing went exactly according to a plan because there really wasn't one.
 
