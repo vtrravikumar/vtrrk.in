@@ -1,0 +1,61 @@
+title: Malaysia
+country: Malaysia
+region: Kuala Lumpur
+continent: Asia
+status: visited
+content_status: published
+banner: /images/travel/malaysia.jpg
+photography: []
+metadata: {}
+visits:
+  - title: Kuala Lumpur
+    from: 2023-05-16
+    to: 2023-05-23
+    duration_days: 8
+    travelled_with:
+      - Pragati
+    travel_type: official trip extended as personal travel
+    solo: false
+    origin: Chennai, India
+    route:
+      - Kuala Lumpur
+      - Batu Caves
+      - Bukit Bintang
+    places_visited:
+      - Petronas Twin Towers
+      - Central Market
+      - Bukit Bintang
+      - Batu Caves
+      - Menara Kuala Lumpur
+      - KL Sentral
+    highlights:
+      - Seeing the Petronas Twin Towers from outside and later visiting the towers
+      - Visiting Batu Caves and the Murugan temple
+      - Menara Kuala Lumpur Sky Terrace and glass-floor experience
+      - Exploring Central Market and Bukit Bintang
+      - Discovering Mr Naan & Mrs Idli and returning there throughout the stay
+    flights:
+      - date: 2023-05-16
+        from: MAA
+        to: KUL
+        airline: Malaysia Airlines
+        flight: MH180
+        note: Arrival in Kuala Lumpur
+      - date: 2023-05-23
+        from: KUL
+        to: MAA
+        airline: Malaysia Airlines
+        flight: MH182
+        note: Return flight
+    accommodation:
+      - place: Kuala Lumpur
+        name: Aloft Kuala Lumpur Sentral
+        dates: 2023-05-16 to 2023-05-23
+        notes: Located beside KL Sentral and within walking distance of the office.
+    transport:
+      - Airport train from KLIA to KL Sentral
+      - Kuala Lumpur train network
+      - Walking from the hotel to the office and nearby places
+    stays: []
+    occasion: Five-day office visit extended as personal travel
+    notes: The trip was a five-day visit to the Kuala Lumpur office branch to interact with the team working under the user. Pragati travelled throughout the trip and stayed put during office hours. Sightseeing happened on weekday evenings, while the weekend was dedicated to full-day travel. The final two workdays were quieter, with evenings spent relaxing at the hotel, visiting local shops and eating at Mr Naan & Mrs Idli.
