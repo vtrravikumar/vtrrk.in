@@ -1,0 +1,66 @@
+title: Singapore
+country: Singapore
+region: null
+continent: Asia
+status: visited
+content_status: published
+banner: /images/travel/singapore.jpg
+photography: []
+metadata: {}
+visits:
+  - title: Singapore
+    from: 2023-03-06
+    to: 2023-03-13
+    duration_days: 8
+    travelled_with: []
+    travel_type: official trip extended as personal travel
+    solo: false
+    origin: Chennai, India
+    route:
+      - Singapore
+    places_visited:
+      - Marina Bay Sands
+      - Gardens by the Bay
+      - Universal Studios Singapore
+      - Little India
+      - Chinatown
+      - Merlion Park
+      - VivoCity
+      - Bugis Junction
+      - Mustafa Centre
+      - Jewel Changi Airport
+    highlights:
+      - Viewing Singapore from the top of Marina Bay Sands
+      - Gardens by the Bay light show
+      - Universal Studios Singapore
+      - Exploring Little India and Mustafa Centre
+      - Visiting Jewel Changi Airport
+    flights:
+      - date: 2023-03-06
+        from: MAA
+        to: SIN
+        airline: Air India
+        flight: AI346
+        note: User's flight
+      - date: 2023-03-09
+        from: MAA
+        to: SIN
+        airline: Air India
+        flight: AI346
+        note: Pragati's flight
+      - date: 2023-03-13
+        from: SIN
+        to: MAA
+        airline: Air India
+        flight: AI347
+        note: Return flight together
+    accommodation:
+      - place: Singapore
+        name: Orchid Hotel
+        dates: 2023-03-06 to 2023-03-13
+        notes: Stayed during the trip.
+    transport:
+      - Singapore public transport
+    stays: []
+    occasion: official trip extended as personal travel
+    notes: The trip began as an office visit. The user travelled to Singapore on 6 March for three days of work. Pragati arrived on 9 March, and the remainder of the trip became a holiday together before returning to Chennai on 13 March. Singapore subsequently became a frequent work destination, making this first trip with Pragati particularly special.
