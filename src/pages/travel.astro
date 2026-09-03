@@ -39,7 +39,9 @@ const trainJourneys = allVisits.filter((visit) => {
 const visitDurations = allVisits.filter((visit) => typeof visit.duration_days === "number" && visit.duration_days > 0);
 const shortestTrip = visitDurations.reduce((shortest, visit) => !shortest || visit.duration_days! < shortest.duration_days! ? visit : shortest, null as (typeof visitDurations)[number] | null);
 const longestTrip = visitDurations.reduce((longest, visit) => !longest || visit.duration_days! > longest.duration_days! ? visit : longest, null as (typeof visitDurations)[number] | null);
-const latestVisit = [...allVisits].sort((a, b) => String(b.to).localeCompare(String(a.to)))[0];
+const latestVisit = [...allVisits]
+  .filter((visit) => visit.to)
+  .sort((a, b) => b.to!.getTime() - a.to!.getTime())[0];
 const latestJourney = latestVisit ? publishedJourneys.find((journey) => (journey.data.visits ?? []).includes(latestVisit)) : null;
 const latestJourneyLabel = latestJourney?.data.title ?? latestJourney?.id.split("/").pop() ?? "the latest journey";
 const flightLabel = flightsTaken === 1 ? "flight" : "flights";
