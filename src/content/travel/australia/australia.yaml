@@ -1,0 +1,48 @@
+title: Australia
+country: Australia
+region: Melbourne
+continent: Oceania
+status: visited
+content_status: published
+banner: /images/travel/australia.jpg
+photography: []
+metadata: {}
+visits:
+  - title: Melbourne
+    from: 2012-12-09
+    to: 2012-12-16
+    duration_days: 8
+    travelled_with: []
+    travel_type: official trip extended as personal travel
+    solo: true
+    origin: Dubai, UAE
+    route:
+      - Melbourne
+      - Great Ocean Road
+      - Twelve Apostles
+      - Maits Rest Rainforest Walk
+    places_visited:
+      - Melbourne
+      - Melbourne Cricket Ground (MCG)
+      - Rod Laver Arena
+      - Great Ocean Road
+      - Maits Rest Rainforest Walk
+      - Twelve Apostles
+    highlights:
+      - Guided tour of the Melbourne Cricket Ground
+      - Visiting the Rod Laver Arena
+      - Travelling along the Great Ocean Road
+      - Maits Rest rainforest walk
+      - Seeing the Twelve Apostles
+    flights: []
+    accommodation:
+      - place: Melbourne
+        name: The Crown, Melbourne
+        dates: 2012-12-09 to 2012-12-16
+        notes: null
+    transport:
+      - local public transport in Melbourne
+      - group sightseeing tour in a mini van to the Great Ocean Road and Twelve Apostles
+    stays: []
+    occasion: official trip extended as personal travel
+    notes: The trip began as a two-day office seminar on 9-10 December 2012 and was extended for personal travel. Satinder Singh and Rodrigo Garcia joined the Melbourne sightseeing at the MCG and Rod Laver Arena before returning to India and the US. The Great Ocean Road and Twelve Apostles were visited on a day trip after the colleagues left.
