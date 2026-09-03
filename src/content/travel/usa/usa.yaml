@@ -1,0 +1,72 @@
+title: USA
+country: United States
+region: Northeast
+continent: North America
+status: visited
+content_status: published
+banner: /images/travel/usa.jpg
+photography: []
+metadata: {}
+visits:
+  - title: Connecticut and New York
+    from: 2009-02-07
+    to: 2009-03-09
+    duration_days: 31
+    travelled_with:
+      - Pragati
+    travel_type: official trip extended as personal travel
+    solo: false
+    origin: Delhi, India
+    route:
+      - Newark
+      - Norwalk
+      - Stamford
+      - New Haven
+      - New York City
+    places_visited:
+      - Norwalk
+      - Stamford
+      - New Haven
+      - Yale University
+      - Peabody Museum of Natural History
+      - New York City
+      - Times Square
+      - Statue of Liberty
+      - Central Park
+      - Empire State Building
+      - World Trade Center site
+    highlights:
+      - Pragati's first international trip
+      - Experiencing their first snowfall together
+      - Visiting Times Square on Valentine's Day
+      - Seeing the Statue of Liberty
+      - Visiting the Empire State Building
+      - Exploring Central Park
+      - Visiting Yale and the Peabody Museum of Natural History
+      - Returning to Times Square
+    flights:
+      - date: 2009-02-07
+        from: DEL
+        to: EWR
+        airline: Air India
+        flight: null
+        note: Outbound flight to Newark
+      - date: 2009-03-09
+        from: EWR
+        to: DEL
+        airline: Air India
+        flight: null
+        note: Return flight to Delhi
+    accommodation:
+      - place: Norwalk, Connecticut
+        name: Homestead
+        dates: 2009-02-08 to 2009-03-09
+        notes: Company-provided homestay during the approximately one-month work trip. The room had a small kitchen, which made it possible to cook when going out for food was inconvenient.
+    transport:
+      - Office-provided cab from Newark to Norwalk
+      - Cabs for local travel around Norwalk
+      - City sightseeing bus in New York City
+      - Colleague pickups and drop-offs for work
+    stays: []
+    occasion: Client visit combined with company headquarters visit and personal travel
+    notes: The trip combined a client visit with a visit to the company's headquarters in Norwalk, Connecticut. The user travelled with Pragati, making this her first international trip. Work occupied much of the stay, while evenings, weekends and selected holidays were used for sightseeing. The first New York outing was on Valentine's Day, 14 February, when Times Square was filled with red decorations. A second New York visit on 7 March included Central Park, the Empire State Building, Times Square and the site where the Twin Towers had stood. The couple experienced their first snowfall while staying at the Homestead and went outside to enjoy it. Shopping was also part of the trip, including clothes, handbags and a Citizen Eco-Drive watch bought for Pragati, which she still has. A memorable meal was pizza near the Empire State Building, though after so many years it is impossible to know whether it tasted especially good or whether hunger made it seem that way. The trip is remembered particularly for the help and hospitality of colleagues who picked them up, dropped them back and helped them experience the area while the user was working.
