@@ -17,3 +17,15 @@ These stories are my attempt to bring a little of that world home.
 V.T.R. Ravi Kumar is the author of *Engineering Home: Rediscovering the Engineer Beyond the Workplace*, *Gen Z*, and *The White Envelope*.
 
 He writes across engineering, society, memory, and personal experience, with a continuing interest in documenting the journeys and stories that shape how we see the world.
+
+Ravi lives in Chennai with his wife, Pragati, where he continues to write, build software, explore new technologies and pursue a lifelong curiosity about how stories and engineering can together create something meaningful.
+
+
+Thank you for reading my travelogue.
+
+If these pages reminded you of your own journey, then this memoir has accomplished its purpose.
+
+— V.T.R. Ravi Kumar
+
+Connect with the author
+X: @vtrrk
