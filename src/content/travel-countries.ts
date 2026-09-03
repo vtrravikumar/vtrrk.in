@@ -30,7 +30,7 @@ export const travelCountries: TravelCountry[] = [
   { name: "United Arab Emirates", continent: "Asia", status: "Y", slug: "united-arab-emirates" },
   { name: "Mauritius", continent: "Africa", status: "Y", slug: "mauritius" },
   { name: "Seychelles", continent: "Africa", status: "Y", slug: "seychelles" },
-  { name: "United States", continent: "North America", status: "Y", slug: "united-states" },
+  { name: "United States", continent: "North America", status: "Y", slug: "usa" },
 ];
 
 export const travelStatusLabel: Record<TravelStatus, string> = {
