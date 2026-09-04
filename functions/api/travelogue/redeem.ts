@@ -1,9 +1,8 @@
 interface Env {
   TRAVELOGUE_DB: D1Database;
-  TRAVELOGUE_PDF: R2Bucket;
 }
 
-const PDF_KEY = "travelogue/travelogue.pdf";
+const PDF_PATH = "/books/travelogue/travelogue.pdf";
 const CODE_PATTERN = /^TRV-[A-Z2-7]{4}(?:-[A-Z2-7]{4}){3}$/;
 
 function normalizeCode(value: string) {
@@ -18,9 +17,9 @@ async function sha256(value: string) {
     .join("");
 }
 
-function redirectToError(request: Request, error: string) {
+function redirectToError(request: Request) {
   const url = new URL("/books/travelogue/", request.url);
-  url.searchParams.set("error", error);
+  url.searchParams.set("error", "invalid");
   return Response.redirect(url.toString(), 303);
 }
 
@@ -29,25 +28,18 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const submittedCode = form.get("code");
 
   if (typeof submittedCode !== "string") {
-    return redirectToError(request, "invalid");
+    return redirectToError(request);
   }
 
   const code = normalizeCode(submittedCode);
   if (!CODE_PATTERN.test(code)) {
-    return redirectToError(request, "invalid");
-  }
-
-  const object = await env.TRAVELOGUE_PDF.get(PDF_KEY);
-  if (!object) {
-    return new Response("Travelogue download is temporarily unavailable.", {
-      status: 503,
-      headers: { "Cache-Control": "no-store" },
-    });
+    return redirectToError(request);
   }
 
   const codeHash = await sha256(code);
   const redeemedAt = new Date().toISOString();
 
+  // The conditional UPDATE is atomic in D1, so a valid code can only win once.
   const result = await env.TRAVELOGUE_DB
     .prepare(
       `UPDATE download_codes
@@ -60,15 +52,9 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     .run();
 
   if (!result.meta.changes) {
-    return redirectToError(request, "invalid");
+    return redirectToError(request);
   }
 
-  const headers = new Headers();
-  object.writeHttpMetadata(headers);
-  headers.set("Content-Type", "application/pdf");
-  headers.set("Content-Disposition", 'attachment; filename="VTRRK-Travelogue.pdf"');
-  headers.set("Cache-Control", "no-store, private");
-  headers.set("X-Content-Type-Options", "nosniff");
-
-  return new Response(object.body, { headers });
+  const downloadUrl = new URL(PDF_PATH, request.url);
+  return Response.redirect(downloadUrl.toString(), 303);
 };
