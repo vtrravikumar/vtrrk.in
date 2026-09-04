@@ -4,7 +4,11 @@ export interface Book {
   subtitle?: string;
   description: string;
   cover: string;
-  href: string;
+  access: {
+    type: "amazon" | "free";
+    label: string;
+    url: string;
+  };
 }
 
 export const books: Book[] = [
@@ -14,7 +18,11 @@ export const books: Book[] = [
     subtitle: "Rediscovering the Engineer Beyond the Workplace",
     description: "An engineering memoir about rediscovering the engineer within after leaving the traditional workplace. From decades in technology to building a home lab, this is a story about curiosity, experimentation, failure, and the enduring mindset of an engineer.",
     cover: "/images/books/engineering-home.png",
-    href: "https://www.amazon.in/Engineering-Home-Rediscovering-Engineer-Workplace-ebook/dp/B0HDZFP4CF/",
+    access: {
+      type: "amazon",
+      label: "Buy / read",
+      url: "https://www.amazon.in/Engineering-Home-Rediscovering-Engineer-Workplace-ebook/dp/B0HDZFP4CF/",
+    },
   },
   {
     slug: "gen-z",
@@ -22,20 +30,32 @@ export const books: Book[] = [
     subtitle: "Generation Zero",
     description: "A candid exploration of growing up and finding your place in a world shaped by technology, changing expectations, and a generation that has inherited a very different future. Written for Gen Z, but with something to say to anyone trying to understand them.",
     cover: "/images/books/gen-z.png",
-    href: "https://www.amazon.in/Gen-Z-Generation-Ravi-Kumar-ebook/dp/B0HF57Y74L/",
+    access: {
+      type: "amazon",
+      label: "Buy / read",
+      url: "https://www.amazon.in/Gen-Z-Generation-Ravi-Kumar-ebook/dp/B0HF57Y74L/",
+    },
   },
   {
     slug: "the-white-envelope",
     title: "The White Envelope",
     description: "A story of choices, uncertainty, relationships, and the moments that can quietly change the course of a life. The White Envelope is a personal story about what lies behind an ordinary-looking envelope — and the consequences that follow.",
     cover: "/images/books/the-white-envelope.png",
-    href: "https://www.amazon.in/White-Envelope-V-Ravi-Kumar/dp/B0HDNSG816/",
+    access: {
+      type: "amazon",
+      label: "Buy / read",
+      url: "https://www.amazon.in/White-Envelope-V-Ravi-Kumar/dp/B0HDNSG816/",
+    },
   },
-    {
+  {
     slug: "travelogue",
     title: "Travelogue",
-    description: "A collection of travel stories and experiences from around the world. From bustling cities to serene landscapes, this is a journey through different cultures and the memories that make each place special.",
+    description: "Twenty years of journeys, captured through memories, photographs, people and moments that stayed behind long after the bags were unpacked. A personal travelogue across India and the world.",
     cover: "/images/books/travelogue.png",
-    href: "/books/travelogue",
+    access: {
+      type: "free",
+      label: "Get for free",
+      url: "/books/travelogue/",
+    },
   },
 ];
