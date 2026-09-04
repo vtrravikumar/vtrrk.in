@@ -11,7 +11,7 @@ ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ234567"
 
 def make_code():
     groups = ["".join(secrets.choice(ALPHABET) for _ in range(4)) for _ in range(4)]
-    return "TRV-" + "-".join(groups)
+    return "VTR-" + "-".join(groups)
 
 
 def main():
