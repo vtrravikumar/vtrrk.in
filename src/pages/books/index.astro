@@ -7,7 +7,7 @@ import { books } from "../../content/books";
   <header class="page-head">
     <p class="label">Books</p>
     <h1>Stories, ideas and experiences in print.</h1>
-    <p>Three published books, each from a different part of the journey.</p>
+    <p>Four books, each from a different part of the journey.</p>
   </header>
 
   <section class="books">
@@ -21,20 +21,14 @@ import { books } from "../../content/books";
           <p class="description">{book.description}</p>
           <div class="actions">
             <a href={`/books/${book.slug}/`}>About the book <span>→</span></a>
-            <a href={book.href} target="_blank" rel="noopener noreferrer">Buy / read <span>↗</span></a>
+            <a href={book.access.url} target={book.access.type === "amazon" ? "_blank" : undefined} rel={book.access.type === "amazon" ? "noopener noreferrer" : undefined}>{book.access.label} <span>{book.access.type === "amazon" ? "↗" : "→"}</span></a>
           </div>
         </div>
       </article>
     ))}
   </section>
-
-  <section class="travelogue-link">
-    <p class="label">Travelogue</p>
-    <h2>A free digital edition of the journey.</h2>
-    <a href="/books/travelogue/">Get The Travelogue <span>→</span></a>
-  </section>
 </main>
 </BaseLayout>
 <style>
-main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.page-head{padding:8rem 0 6rem;max-width:850px}.label{margin:0 0 1rem;color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase}.page-head h1{margin:0;font-size:clamp(3.2rem,7vw,6rem);line-height:.96;letter-spacing:-.055em}.page-head p:last-child{max-width:600px;margin:1.5rem 0 0;color:var(--muted);font-size:1.18rem;line-height:1.7}.books{border-top:1px solid color-mix(in srgb,var(--foreground) 12%,transparent)}.books article{display:grid;grid-template-columns:300px 1fr;gap:5rem;align-items:center;padding:5.5rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 12%,transparent)}.cover-wrap{overflow:hidden;background:color-mix(in srgb,var(--foreground) 4%,var(--background));box-shadow:0 16px 40px color-mix(in srgb,var(--foreground) 8%,transparent)}.books img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}.books article:hover img{transform:scale(1.025)}.book-copy{max-width:650px}.book-number{margin:0 0 .8rem;color:var(--muted);font-size:.68rem;font-weight:650;letter-spacing:.12em;text-transform:uppercase}.books h2{margin:0;font-size:clamp(2.2rem,4.5vw,4rem);line-height:1;letter-spacing:-.045em}.subtitle{margin:.8rem 0 0;color:var(--muted);font-size:1.05rem}.description{max-width:620px;margin:2rem 0 0;color:var(--muted);line-height:1.75}.actions{display:flex;gap:1.75rem;flex-wrap:wrap;margin-top:2rem}.actions a,.travelogue-link a{color:inherit;text-underline-offset:.3em}.actions span,.travelogue-link span{display:inline-block;margin-left:.2rem;transition:transform .2s ease}.actions a:hover span,.travelogue-link a:hover span{transform:translateX(3px)}.travelogue-link{padding:5rem 0 1rem}.travelogue-link h2{max-width:700px;margin:0 0 1.5rem;font-size:clamp(2.2rem,4.5vw,4rem);line-height:1;letter-spacing:-.045em}.travelogue-link .label{margin-bottom:1rem}@media(max-width:800px){main{width:min(100% - 2rem,1080px)}.page-head{padding:6rem 0 4rem}.books article{grid-template-columns:220px 1fr;gap:3rem;padding:4rem 0}}@media(max-width:600px){.page-head{padding:5rem 0 3.5rem}.books article{grid-template-columns:1fr;gap:2rem;padding:3.5rem 0}.cover-wrap{max-width:280px}.book-copy{max-width:none}.description{margin-top:1.5rem}.travelogue-link{padding-top:3.5rem}}
+main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.page-head{padding:8rem 0 6rem;max-width:850px}.label{margin:0 0 1rem;color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase}.page-head h1{margin:0;font-size:clamp(3.2rem,7vw,6rem);line-height:.96;letter-spacing:-.055em}.page-head p:last-child{max-width:600px;margin:1.5rem 0 0;color:var(--muted);font-size:1.18rem;line-height:1.7}.books{border-top:1px solid color-mix(in srgb,var(--foreground) 12%,transparent)}.books article{display:grid;grid-template-columns:300px 1fr;gap:5rem;align-items:center;padding:5.5rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 12%,transparent)}.cover-wrap{overflow:hidden;background:color-mix(in srgb,var(--foreground) 4%,var(--background));box-shadow:0 16px 40px color-mix(in srgb,var(--foreground) 8%,transparent)}.books img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}.books article:hover img{transform:scale(1.025)}.book-copy{max-width:650px}.book-number{margin:0 0 .8rem;color:var(--muted);font-size:.68rem;font-weight:650;letter-spacing:.12em;text-transform:uppercase}.books h2{margin:0;font-size:clamp(2.2rem,4.5vw,4rem);line-height:1;letter-spacing:-.045em}.subtitle{margin:.8rem 0 0;color:var(--muted);font-size:1.05rem}.description{max-width:620px;margin:2rem 0 0;color:var(--muted);line-height:1.75}.actions{display:flex;gap:1.75rem;flex-wrap:wrap;margin-top:2rem}.actions a{color:inherit;text-underline-offset:.3em}.actions span{display:inline-block;margin-left:.2rem;transition:transform .2s ease}.actions a:hover span{transform:translateX(3px)}@media(max-width:800px){main{width:min(100% - 2rem,1080px)}.page-head{padding:6rem 0 4rem}.books article{grid-template-columns:220px 1fr;gap:3rem;padding:4rem 0}}@media(max-width:600px){.page-head{padding:5rem 0 3.5rem}.books article{grid-template-columns:1fr;gap:2rem;padding:3.5rem 0}.cover-wrap{max-width:280px}.book-copy{max-width:none}.description{margin-top:1.5rem}}
 </style>
