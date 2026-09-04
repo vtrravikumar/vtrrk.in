@@ -31,4 +31,11 @@ export const books: Book[] = [
     cover: "/images/books/the-white-envelope.png",
     href: "https://www.amazon.in/White-Envelope-V-Ravi-Kumar/dp/B0HDNSG816/",
   },
+    {
+    slug: "travelogue",
+    title: "Travelogue",
+    description: "A collection of travel stories and experiences from around the world. From bustling cities to serene landscapes, this is a journey through different cultures and the memories that make each place special.",
+    cover: "/images/books/travelogue.png",
+    href: "/books/travelogue",
+  },
 ];
