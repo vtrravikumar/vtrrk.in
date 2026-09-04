@@ -39,12 +39,14 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   const codeHash = await sha256(code);
   const redeemedAt = new Date().toISOString();
 
+  // A code must have been explicitly issued before it can be redeemed.
   // The conditional UPDATE is atomic in D1, so a valid code can only win once.
   const result = await env.TRAVELOGUE_DB
     .prepare(
       `UPDATE download_codes
        SET redeemed_at = ?
        WHERE code_hash = ?
+         AND issued_at IS NOT NULL
          AND redeemed_at IS NULL
          AND expires_at > datetime('now')`,
     )
