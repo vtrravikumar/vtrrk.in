@@ -1,7 +1,5 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-
-const error = Astro.url.searchParams.get("error");
 ---
 
 <BaseLayout
@@ -36,11 +34,9 @@ const error = Astro.url.searchParams.get("error");
         <h2>Enter your code</h2>
         <p>Use the code I send you below. Each code works once and expires after a limited period.</p>
 
-        {error === "invalid" && (
-          <p class="error" role="alert">
-            That code is invalid, expired, or has already been used. Please request a new code if needed.
-          </p>
-        )}
+        <p id="invalid-code" class="error" role="alert" hidden>
+          That code is invalid, expired, or has already been used. Please request a new code if needed.
+        </p>
 
         <form action="/api/travelogue/redeem" method="post">
           <label for="code">Download code</label>
@@ -72,6 +68,14 @@ const error = Astro.url.searchParams.get("error");
     </section>
   </main>
 </BaseLayout>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("error") === "invalid") {
+    const error = document.querySelector<HTMLElement>("#invalid-code");
+    if (error) error.hidden = false;
+  }
+</script>
 
 <style>
 main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.page-head{padding:8rem 0 5rem;max-width:850px}.label,.step{margin:0;color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase}.page-head h1{margin:.9rem 0 0;font-size:clamp(4rem,9vw,7rem);line-height:.9;letter-spacing:-.06em}.intro{max-width:650px;margin:1.75rem 0 0;color:var(--muted);font-size:1.2rem;line-height:1.7}.download-card{display:grid;grid-template-columns:1fr 1fr;gap:5rem;padding:4rem 0;border-top:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);border-bottom:1px solid color-mix(in srgb,var(--foreground) 12%,transparent)}h2{margin:.7rem 0 1.2rem;font-size:clamp(2rem,4vw,3.4rem);line-height:1;letter-spacing:-.045em}.download-card p:not(.step){max-width:500px;color:var(--muted);line-height:1.75}.download-card a,.note a{color:inherit;text-underline-offset:.3em}.error{padding:1rem 1.1rem;border:1px solid color-mix(in srgb,var(--foreground) 18%,transparent);color:var(--foreground)!important;font-size:.95rem}.download-card form{margin-top:2rem}.download-card label{display:block;margin-bottom:.65rem;font-size:.78rem;font-weight:650;letter-spacing:.08em;text-transform:uppercase}.form-row{display:flex;gap:.75rem}input{width:100%;min-width:0;padding:1rem 1.05rem;border:1px solid color-mix(in srgb,var(--foreground) 20%,transparent);border-radius:0;background:transparent;color:inherit;font:inherit;letter-spacing:.08em;text-transform:uppercase}input:focus{outline:2px solid color-mix(in srgb,var(--foreground) 35%,transparent);outline-offset:2px}button{flex:0 0 auto;padding:1rem 1.15rem;border:1px solid var(--foreground);border-radius:0;background:var(--foreground);color:var(--background);font:inherit;font-weight:650;cursor:pointer;white-space:nowrap}.note{padding:2.5rem 0;color:var(--muted);line-height:1.7}.note p{margin:0}@media(max-width:700px){main{width:min(100% - 2rem,1080px)}.page-head{padding:6rem 0 4rem}.download-card{grid-template-columns:1fr;gap:3.5rem;padding:3rem 0}.form-row{flex-direction:column}button{width:100%}}
