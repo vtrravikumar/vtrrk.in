@@ -28,3 +28,6 @@ manuscript.md
 
 # generated VTR Press images
 assets/image/
+
+# private Travelogue download-code inventory
+scripts/travelogue-codes.yaml
