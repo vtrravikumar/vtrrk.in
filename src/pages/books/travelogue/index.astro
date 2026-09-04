@@ -49,8 +49,8 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
               autocomplete="off"
               autocapitalize="characters"
               spellcheck="false"
-              placeholder="TRV-XXXX-XXXX-XXXX-XXXX"
-              pattern="TRV-[A-Za-z2-7]{4}(-[A-Za-z2-7]{4}){3}"
+              placeholder="VTR-XXXX-XXXX-XXXX-XXXX"
+              pattern="VTR-[A-Za-z2-7]{4}(-[A-Za-z2-7]{4}){3}"
               maxlength="23"
               required
             />
@@ -70,19 +70,17 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
-  const input = document.querySelector<HTMLInputElement>("#code");
   const params = new URLSearchParams(window.location.search);
-
   if (params.get("error") === "invalid") {
     const error = document.querySelector<HTMLElement>("#invalid-code");
     if (error) error.hidden = false;
   }
 
+  const input = document.querySelector<HTMLInputElement>("#code");
   input?.addEventListener("input", () => {
-    const raw = input.value.toUpperCase().replace(/[^A-Z2-7]/g, "");
-    const withoutPrefix = raw.startsWith("TRV") ? raw.slice(3) : raw;
-    const groups = withoutPrefix.match(/.{1,4}/g) ?? [];
-    input.value = `TRV-${groups.join("-")}`.slice(0, 23);
+    const raw = input.value.toUpperCase().replace(/[^A-Z2-7]/g, "").replace(/^VTR/, "");
+    const groups = raw.match(/.{1,4}/g) ?? [];
+    input.value = "VTR-" + groups.slice(0, 4).join("-");
   });
 </script>
 
