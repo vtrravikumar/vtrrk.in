@@ -3,7 +3,7 @@ interface Env {
 }
 
 const PDF_PATH = "/books/travelogue/travelogue.pdf";
-const CODE_PATTERN = /^TRV-[A-Z2-7]{4}(?:-[A-Z2-7]{4}){3}$/;
+const CODE_PATTERN = /^VTR-[A-Z2-7]{4}(?:-[A-Z2-7]{4}){3}$/;
 
 function normalizeCode(value: string) {
   return value.trim().toUpperCase();
