@@ -18,8 +18,8 @@ visits:
     duration_days: 10
     travelled_with:
       - Pragati
-      - Prasannaa
-      - Kokilavani
+      - Kalaivalli
+      - Pradeep
     travel_type: flight; metro; road tour
     solo: false
     origin: Dubai, UAE
@@ -67,7 +67,7 @@ visits:
         note: Departed London Heathrow at 19:50.
     accommodation:
       - place: Ilford, London
-        name: Prasannaa and Kokilavani's home
+        name: Pradeep and Kalaivalli's home
         dates: 2017-06-01 to 2017-06-03
         notes: Stayed with close friends rather than in a hotel.
       - place: Glasgow, Scotland
@@ -75,7 +75,7 @@ visits:
         dates: 2017-06-03 to 2017-06-06
         notes: Accommodation arranged as part of the Historic Scotland tour.
       - place: Ilford, London
-        name: Prasannaa and Kokilavani's home
+        name: Pradeep and Kalaivalli's home
         dates: 2017-06-07 to 2017-06-10
         notes: Returned to London and stayed with friends again.
     transport:

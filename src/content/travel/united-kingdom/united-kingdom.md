@@ -2,13 +2,13 @@
 
 ## London, friends and the road north
 
-Our United Kingdom trip in June 2017 was different from many of our earlier journeys. Pragati and I were travelling together, but this time the trip was also about spending time with close friends. Prasannaa had recently moved into his home in Ilford and insisted that we stay with him and Kokilavani for the entire trip rather than book a hotel.
+Our United Kingdom trip in June 2017 was different from many of our earlier journeys. Pragati and I were travelling together, but this time the trip was also about spending time with close friends. Pradeep had recently moved into his home in Ilford and insisted that we stay with him and Kalaivalli for the entire trip rather than book a hotel.
 
-That decision shaped the trip more than we probably realised at the time. We weren't simply arriving in London, checking into a hotel and following an itinerary. We were arriving at a friend's home, being picked up from the airport, sharing meals and then heading out each day to discover the city. Later, when Prasannaa and Kokilavani joined us for the Scotland tour, the trip became a proper group journey.
+That decision shaped the trip more than we probably realised at the time. We weren't simply arriving in London, checking into a hotel and following an itinerary. We were arriving at a friend's home, being picked up from the airport, sharing meals and then heading out each day to discover the city. Later, when Pradeep and Kalaivalli joined us for the Scotland tour, the trip became a proper group journey.
 
 ### Arriving in London
 
-We flew from Dubai to London Heathrow on Emirates flight EK003 on 1 June 2017. Prasannaa came to pick us up at the airport, and from Heathrow we made our way towards Ilford using London's rail network.
+We flew from Dubai to London Heathrow on Emirates flight EK003 on 1 June 2017. Pradeep came to pick us up at the airport, and from Heathrow we made our way towards Ilford using London's rail network.
 
 For someone visiting London for the first time, the scale of the transport system is one of the things that immediately makes an impression. The Underground is not simply a way of getting from one tourist attraction to another; it is part of how London functions. During this trip, it became our default way of moving around the city, making it possible to cover very different parts of London without having to think too much about road traffic or parking.
 
@@ -16,13 +16,13 @@ Our first stop was Westfield Stratford City, the huge shopping and entertainment
 
 The following day, 2 June, we went to Greenwich Park. Greenwich is much more than just another London park. It is closely associated with Britain's maritime history and with the Royal Observatory, whose location is tied to the Prime Meridian and Greenwich Mean Time. The area brings together the park, the observatory, historic buildings and views across London, making it one of those places where geography and history are both part of the experience.
 
-For us, though, the more immediate memory was simply being there with Prasannaa and beginning to settle into the rhythm of London.
+For us, though, the more immediate memory was simply being there with Pradeep and beginning to settle into the rhythm of London.
 
 ### From London to Scotland
 
 On the morning of 3 June, the character of the trip changed completely.
 
-We left London for a four-day Historic Scotland tour organised by Star Tours. Prasannaa and Kokilavani joined us, turning what had started as a trip for two into a group road journey.
+We left London for a four-day Historic Scotland tour organised by Star Tours. Pradeep and Kalaivalli joined us, turning what had started as a trip for two into a group road journey.
 
 There is something different about seeing a country from a road rather than moving between airports and city centres. As we travelled north, London gradually gave way to a very different landscape. The road itself became part of the experience, with the changing scenery providing a continuous introduction to Scotland before we even reached the cities.
 
@@ -62,11 +62,11 @@ Food was another thing we never had to worry much about. Indian restaurants were
 
 Looking back, I don't remember this trip primarily as a collection of landmarks.
 
-I remember Prasannaa picking us up from Heathrow. I remember staying in his home in Ilford rather than a hotel. I remember the change from exploring London with a friend to setting off on a road tour through Scotland with a larger group. I remember the Scottish countryside between the stops, the cities we passed through, Loch Tulla, and the experience of seeing a distillery in its own surroundings.
+I remember Pradeep picking us up from Heathrow. I remember staying in his home in Ilford rather than a hotel. I remember the change from exploring London with a friend to setting off on a road tour through Scotland with a larger group. I remember the Scottish countryside between the stops, the cities we passed through, Loch Tulla, and the experience of seeing a distillery in its own surroundings.
 
 That is probably what made this journey different from many others. Travel is often described through destinations, but sometimes the people you travel with become the real destination of the memory.
 
-It was also one of the relatively rare occasions when we travelled as a larger group rather than just Pragati and me. Prasannaa and Kokilavani were wonderful hosts, and their insistence that we stay with them made the London part of the journey feel less like a conventional holiday and more like visiting friends while discovering another country.
+It was also one of the relatively rare occasions when we travelled as a larger group rather than just Pragati and me. Pradeep and Kalaivalli were wonderful hosts, and their insistence that we stay with them made the London part of the journey feel less like a conventional holiday and more like visiting friends while discovering another country.
 
 The Scotland road trip added another dimension. For four days we were not simply tourists based in one city; we were moving together through a landscape that was completely different from London, sharing the long stretches of road and the stops along the way.
 
