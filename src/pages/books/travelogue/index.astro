@@ -70,11 +70,20 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
+  const input = document.querySelector<HTMLInputElement>("#code");
   const params = new URLSearchParams(window.location.search);
+
   if (params.get("error") === "invalid") {
     const error = document.querySelector<HTMLElement>("#invalid-code");
     if (error) error.hidden = false;
   }
+
+  input?.addEventListener("input", () => {
+    const raw = input.value.toUpperCase().replace(/[^A-Z2-7]/g, "");
+    const withoutPrefix = raw.startsWith("TRV") ? raw.slice(3) : raw;
+    const groups = withoutPrefix.match(/.{1,4}/g) ?? [];
+    input.value = `TRV-${groups.join("-")}`.slice(0, 23);
+  });
 </script>
 
 <style>
