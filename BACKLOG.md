@@ -194,10 +194,10 @@ A curated Writing landing page exists; article destinations still need to be imp
 
 ## WRITE-003 — Build individual article pages
 - Priority: P0
-- Status: In Progress
+- Status: Done
 - Area: Writing
 
-Build a reusable Astro content-collection route for individual Markdown writing articles. Article content migration and wiring of the current curated entries remain part of WRITE-004.
+A reusable `[...slug]` Astro route now renders individual Markdown entries from the Writing content collection. It supports the existing Writing schema metadata (type, date, tags and optional hero image), renders the Markdown body, and provides a link back to the Writing index. Current curated `writing.ts` entries are intentionally not migrated or linked until WRITE-004.
 
 ## WRITE-004 — Migrate/curate existing writing entries
 - Priority: P1
