@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("writing");
+
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, date, type, tags, heroImage } = entry.data;
+---
+<BaseLayout title={`${title} — Writing — V.T.R. Ravi Kumar`} description={description}>
+  <main>
+    <a class="back" href="/writing/">← Writing</a>
+
+    <article>
+      {heroImage && <img class="hero-image" src={heroImage} alt="" />}
+
+      <header>
+        {type && <p class="label">{type}</p>}
+        <h1>{title}</h1>
+        <p class="description">{description}</p>
+        {(date || tags?.length) && (
+          <div class="meta">
+            {date && <time datetime={date.toISOString()}>{date.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}</time>}
+            {tags?.length && <span>{tags.join(" · ")}</span>}
+          </div>
+        )}
+      </header>
+
+      <section class="content">
+        <Content />
+      </section>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+main{width:min(1000px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.back{display:inline-block;margin:2rem 0 1.5rem;color:var(--muted);font-size:.9rem;text-decoration:none;transition:color .2s ease}.back:hover{color:var(--foreground)}article{max-width:900px;margin:0 auto}.hero-image{display:block;width:100%;max-height:520px;object-fit:cover;border-radius:3px;margin:1rem 0 3.5rem}header{max-width:780px;padding:3rem 0 4rem}.label{margin:0 0 .8rem;color:var(--muted);font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}h1{margin:0 0 1.25rem;font-size:clamp(3rem,7vw,5.4rem);line-height:.96;letter-spacing:-.045em}.description{max-width:700px;margin:0;color:var(--muted);font-size:1.18rem;line-height:1.7}.meta{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;margin-top:1.5rem;color:var(--muted);font-size:.78rem}.content{max-width:720px;margin:0 auto}.content :global(h2){margin:3.5rem 0 1rem;font-size:2rem;line-height:1.15;letter-spacing:-.02em}.content :global(h3){margin:2.5rem 0 .75rem;font-size:1.35rem}.content :global(p){margin:0 0 1.4rem;font-size:1.08rem;line-height:1.85}.content :global(ul),.content :global(ol){margin:0 0 1.5rem;padding-left:1.25rem;line-height:1.8}.content :global(blockquote){margin:2.5rem 0;padding-left:1.5rem;border-left:2px solid color-mix(in srgb,var(--foreground) 25%,transparent);color:var(--muted);font-size:1.15rem;line-height:1.7}.content :global(a){text-underline-offset:.2em}.content :global(img){display:block;width:calc(100% + 8rem);max-width:none;margin:3rem -4rem;border-radius:3px}.content :global(figure){margin:3rem 0}.content :global(figure img){width:100%;margin:0}.content :global(figcaption){margin-top:.6rem;color:var(--muted);font-size:.78rem;line-height:1.5}@media(max-width:600px){main{width:min(100% - 2rem,1000px);padding-bottom:5rem}.back{margin:1.5rem 0 1rem}.hero-image{margin:1rem 0 2.5rem}header{padding:2.5rem 0 3rem}h1{font-size:clamp(2.6rem,13vw,4rem)}.description{font-size:1.05rem;line-height:1.65}.content{max-width:none}.content :global(h2){margin-top:2.75rem;font-size:1.7rem}.content :global(p){font-size:1.03rem;line-height:1.8}.content :global(img){width:100%;margin:2.25rem 0}.content :global(figure){margin:2.25rem 0}}
+</style>
