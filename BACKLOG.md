@@ -148,10 +148,10 @@ Basic About page is implemented; final editorial refinement may still be folded 
 
 ## WEB-005 — Finalise footer / Elsewhere / Contact
 - Priority: P1
-- Status: In Progress
+- Status: Done
 - Area: Global UX
 
-Elsewhere and Contact pages exist; final footer/global UX verification remains.
+Footer, Elsewhere and Contact routes are implemented and verified. Footer content remains intentionally minimal, with Contact/Elsewhere as site destinations and social links as external destinations. Footer alignment now matches the site's 1000px content grid. No additional global UX features are required for this backlog item.
 
 ---
 
