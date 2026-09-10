@@ -173,10 +173,10 @@ Reusable individual book route is implemented and the stale `book.href` referenc
 
 ## BOOK-003 — Add book metadata and related content
 - Priority: P2
-- Status: In Progress
+- Status: Done
 - Area: Books
 
-Enrich the existing reusable book model/pages with useful metadata and restrained related-content links, without turning Books into a catalogue or inventing publication facts that are not available.
+The reusable book model now distinguishes published books from the free digital Travelogue edition and supports optional related-content links. The Books landing and individual book pages expose the edition status and render related links only where defined, keeping the presentation concise and avoiding unsupported publication facts.
 
 ## WRITE-001 — Establish writing content model
 - Priority: P0
