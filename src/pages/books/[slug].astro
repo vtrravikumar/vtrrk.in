@@ -10,15 +10,24 @@ const { book } = Astro.props;
   <article class="book">
     <div class="cover-wrap"><img src={book.cover} alt={`Cover of ${book.title}`} /></div>
     <div class="book-copy">
-      <p class="label">Book</p>
+      <p class="label">{book.edition === "free-digital" ? "Free digital edition" : "Published book"}</p>
       <h1>{book.title}</h1>
       {book.subtitle && <p class="subtitle">{book.subtitle}</p>}
       <p class="description">{book.description}</p>
-      <a class="buy" href={book.access.url} target="_blank" rel="noopener noreferrer">Buy / read <span>↗</span></a>
+      <a class="buy" href={book.access.url} target="_blank" rel="noopener noreferrer">{book.access.label} <span>↗</span></a>
     </div>
   </article>
+  {book.related?.length && (
+    <section class="related" aria-labelledby="related-title">
+      <p class="label">Related</p>
+      <h2 id="related-title">Continue exploring</h2>
+      <div class="related-links">
+        {book.related.map((item) => <a href={item.url}>{item.label} <span>→</span></a>)}
+      </div>
+    </section>
+  )}
 </main>
 </BaseLayout>
 <style>
-main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.back{display:inline-block;margin:2rem 0 1.5rem;color:var(--muted);font-size:.9rem;text-decoration:none;transition:color .2s ease}.back:hover{color:var(--foreground)}.book{min-height:72vh;display:grid;grid-template-columns:360px 1fr;gap:6rem;align-items:center}.cover-wrap{width:360px;overflow:hidden;background:color-mix(in srgb,var(--foreground) 4%,var(--background));box-shadow:0 22px 55px color-mix(in srgb,var(--foreground) 12%,transparent)}.book img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}.cover-wrap:hover img{transform:scale(1.02)}.book-copy{max-width:680px}.label{margin:0 0 .9rem;color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase}.book h1{margin:0;font-size:clamp(3.2rem,7vw,6rem);line-height:.94;letter-spacing:-.055em}.subtitle{margin:1rem 0 0;color:var(--muted);font-size:1.2rem;line-height:1.5}.description{max-width:620px;margin:2rem 0 0;color:var(--muted);font-size:1.05rem;line-height:1.8}.buy{display:inline-block;margin-top:2rem;color:inherit;text-underline-offset:.3em}.buy span{display:inline-block;margin-left:.2rem;transition:transform .2s ease}.buy:hover span{transform:translate(2px,-2px)}@media(max-width:800px){main{width:min(100% - 2rem,1080px)}.book{min-height:auto;grid-template-columns:240px 1fr;gap:3rem;padding:4rem 0}.cover-wrap{width:240px}}@media(max-width:600px){.book{grid-template-columns:1fr;gap:2.5rem;padding:3rem 0}.cover-wrap{width:min(280px,100%)}.book h1{font-size:clamp(2.7rem,13vw,4rem)}.description{margin-top:1.5rem}}
+main{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.back{display:inline-block;margin:2rem 0 1.5rem;color:var(--muted);font-size:.9rem;text-decoration:none;transition:color .2s ease}.back:hover{color:var(--foreground)}.book{min-height:72vh;display:grid;grid-template-columns:360px 1fr;gap:6rem;align-items:center}.cover-wrap{width:360px;overflow:hidden;background:color-mix(in srgb,var(--foreground) 4%,var(--background));box-shadow:0 22px 55px color-mix(in srgb,var(--foreground) 12%,transparent)}.book img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}.cover-wrap:hover img{transform:scale(1.02)}.book-copy{max-width:680px}.label{margin:0 0 .9rem;color:var(--muted);font-size:.72rem;font-weight:650;letter-spacing:.14em;text-transform:uppercase}.book h1{margin:0;font-size:clamp(3.2rem,7vw,6rem);line-height:.94;letter-spacing:-.055em}.subtitle{margin:1rem 0 0;color:var(--muted);font-size:1.2rem;line-height:1.5}.description{max-width:620px;margin:2rem 0 0;color:var(--muted);font-size:1.05rem;line-height:1.8}.buy{display:inline-block;margin-top:2rem;color:inherit;text-underline-offset:.3em}.buy span,.related-links span{display:inline-block;margin-left:.2rem;transition:transform .2s ease}.buy:hover span{transform:translate(2px,-2px)}.related{border-top:1px solid color-mix(in srgb,var(--foreground) 12%,transparent);padding-top:3rem}.related h2{margin:0;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.04em}.related-links{display:flex;gap:1.75rem;flex-wrap:wrap;margin-top:1.5rem}.related-links a{color:inherit;text-underline-offset:.3em}.related-links a:hover span{transform:translateX(3px)}@media(max-width:800px){main{width:min(100% - 2rem,1080px)}.book{min-height:auto;grid-template-columns:240px 1fr;gap:3rem;padding:4rem 0}.cover-wrap{width:240px}}@media(max-width:600px){.book{grid-template-columns:1fr;gap:2.5rem;padding:3rem 0}.cover-wrap{width:min(280px,100%)}.book h1{font-size:clamp(2.7rem,13vw,4rem)}.description{margin-top:1.5rem}.related{padding-top:2.5rem}}
 </style>
