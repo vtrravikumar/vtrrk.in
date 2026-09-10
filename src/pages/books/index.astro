@@ -15,7 +15,7 @@ import { books } from "../../content/books";
       <article>
         <div class="cover-wrap"><img src={book.cover} alt={`Cover of ${book.title}`} /></div>
         <div class="book-copy">
-          <p class="book-number">0{index + 1} · Book</p>
+          <p class="book-number">0{index + 1} · {book.edition === "free-digital" ? "Free digital edition" : "Published book"}</p>
           <h2>{book.title}</h2>
           {book.subtitle && <p class="subtitle">{book.subtitle}</p>}
           <p class="description">{book.description}</p>
