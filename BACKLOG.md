@@ -173,8 +173,10 @@ Reusable individual book route is implemented and the stale `book.href` referenc
 
 ## BOOK-003 — Add book metadata and related content
 - Priority: P2
-- Status: Planned
+- Status: In Progress
 - Area: Books
+
+Enrich the existing reusable book model/pages with useful metadata and restrained related-content links, without turning Books into a catalogue or inventing publication facts that are not available.
 
 ## WRITE-001 — Establish writing content model
 - Priority: P0
