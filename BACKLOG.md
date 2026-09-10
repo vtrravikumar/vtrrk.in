@@ -166,10 +166,10 @@ Present the three published books accurately and concisely. Travelogue is curren
 
 ## BOOK-002 — Create individual book pages
 - Priority: P1
-- Status: In Progress
+- Status: Done
 - Area: Books
 
-Reusable individual book route exists, but the current implementation contains a stale `book.href` reference that must be corrected to the current `book.access.url` model.
+Reusable individual book route is implemented and the stale `book.href` reference has been corrected to the current `book.access.url` model. The route is used by the homepage and Books landing for individual book destinations.
 
 ## BOOK-003 — Add book metadata and related content
 - Priority: P2
