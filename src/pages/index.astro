@@ -23,7 +23,7 @@ import { writing } from "../content/writing";
 
     <section class="section books-section">
       <div class="section-head"><p class="label">Books</p><a href="/books/">All books →</a></div>
-      <h2>Three books, three different journeys.</h2>
+      <h2>Four books, four different journeys.</h2>
       <div class="book-grid">{books.map((book) => <a class="book-card" href={`/books/${book.slug}/`}><div class="book-cover"><img src={book.cover} alt={`Cover of ${book.title}`} loading="lazy" /></div><h3>{book.title}</h3>{book.subtitle && <p>{book.subtitle}</p>}</a>)}</div>
     </section>
 
