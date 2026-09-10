@@ -180,10 +180,10 @@ The reusable book model now distinguishes published books from the free digital 
 
 ## WRITE-001 — Establish writing content model
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Writing
 
-Create the durable model for long-form articles, preferably using Markdown/content collections.
+The existing Astro content-collection schema establishes the durable Writing model with title, description, optional date, type, tags and optional hero image. The current curated `writing.ts` presentation data remains separate until article content is migrated; that migration belongs to WRITE-004 rather than this foundation item.
 
 ## WRITE-002 — Build writing index
 - Priority: P0
