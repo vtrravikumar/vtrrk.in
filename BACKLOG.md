@@ -124,10 +124,10 @@ Current-state audit completed on 10 September 2026. The core site shell, navigat
 
 ## WEB-001 — Finalise homepage
 - Priority: P0
-- Status: In Progress
+- Status: Done
 - Area: Homepage
 
-Bring the homepage into alignment with the approved specification. Keep it curated and lightweight; it must not become a photo album.
+Homepage finalised as a curated, lightweight doorway rather than a catalogue. The hero is compact, and Now, Books, Writing, Projects, Travel and Photography are presented as expandable sections using native details/summary elements. Detailed content remains on dedicated pages, keeping the initial homepage experience concise and avoiding a photo-album or infinite-scroll feel.
 
 ## WEB-002 — Build About page
 - Priority: P1
@@ -151,7 +151,7 @@ Basic About page is implemented; final editorial refinement may still be folded 
 - Status: Done
 - Area: Global UX
 
-Footer, Elsewhere and Contact routes are implemented and verified. Footer content remains intentionally minimal, with Contact/Elsewhere as site destinations and social links as external destinations. Footer alignment now matches the site's 1000px content grid. No additional global UX features are required for this backlog item.
+Footer, Elsewhere and Contact are implemented and verified. Footer content is aligned to the site's main 1000px visual grid; the secondary destinations remain deliberately simple and separate from the primary navigation.
 
 ---
 
