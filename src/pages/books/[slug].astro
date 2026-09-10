@@ -14,7 +14,7 @@ const { book } = Astro.props;
       <h1>{book.title}</h1>
       {book.subtitle && <p class="subtitle">{book.subtitle}</p>}
       <p class="description">{book.description}</p>
-      <a class="buy" href={book.href} target="_blank" rel="noopener noreferrer">Buy / read <span>↗</span></a>
+      <a class="buy" href={book.access.url} target="_blank" rel="noopener noreferrer">Buy / read <span>↗</span></a>
     </div>
   </article>
 </main>
