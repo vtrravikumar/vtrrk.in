@@ -194,8 +194,10 @@ A curated Writing landing page exists; article destinations still need to be imp
 
 ## WRITE-003 — Build individual article pages
 - Priority: P0
-- Status: Planned
+- Status: In Progress
 - Area: Writing
+
+Build a reusable Astro content-collection route for individual Markdown writing articles. Article content migration and wiring of the current curated entries remain part of WRITE-004.
 
 ## WRITE-004 — Migrate/curate existing writing entries
 - Priority: P1
@@ -406,6 +408,8 @@ Potential filters, map views, trip chronology and thematic discovery.
 ## FUT-004 — Privacy-conscious analytics
 - Priority: P3
 - Status: Parked
+
+Only revisit if there is a clear publishing/distribution strategy.
 
 ## FUT-005 — CMS evaluation
 - Priority: P4
