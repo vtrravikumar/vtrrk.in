@@ -100,17 +100,23 @@ Agreed direction:
 
 ## IA-003 — Decide Markdown/content collections strategy
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Technical Architecture
 
-Determine which content remains in TypeScript data modules and which moves to Markdown/content collections.
+Decision:
+
+- Use Astro content collections for durable, narrative content and structured travel records, especially Travel and future Writing articles.
+- Keep small, curated site-wide presentation data in TypeScript modules where a content collection would add unnecessary complexity, including Books, Projects and Now.
+- Keep the public site presentation simpler than the underlying travel metadata.
+- Do not introduce a CMS or database for ordinary V1 publishing.
+- The Travelogue redemption feature is a deliberate, narrow D1-backed exception for one-time download-code redemption.
 
 ## IA-004 — Map current implementation to intended specification
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Audit
 
-Produce an explicit current-state versus intended-state gap assessment.
+Current-state audit completed on 10 September 2026. The core site shell, navigation, Now, Books, Projects, Photography gateway and Travel architecture are implemented to varying degrees. Writing, project detail pages, SEO, automated build verification, accessibility/performance verification and some editorial/content work remain incomplete. The backlog has been reconciled to reflect the actual implementation state.
 
 ---
 
@@ -118,30 +124,34 @@ Produce an explicit current-state versus intended-state gap assessment.
 
 ## WEB-001 — Finalise homepage
 - Priority: P0
-- Status: Planned
+- Status: In Progress
 - Area: Homepage
 
 Bring the homepage into alignment with the approved specification. Keep it curated and lightweight; it must not become a photo album.
 
 ## WEB-002 — Build About page
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: About
+
+Basic About page is implemented; final editorial refinement may still be folded into the final site review.
 
 ## WEB-003 — Build Now page/section
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Now
 
 ## WEB-004 — Finalise global navigation
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Navigation
 
 ## WEB-005 — Finalise footer / Elsewhere / Contact
 - Priority: P1
-- Status: Planned
+- Status: In Progress
 - Area: Global UX
+
+Elsewhere and Contact pages exist; final footer/global UX verification remains.
 
 ---
 
@@ -149,17 +159,17 @@ Bring the homepage into alignment with the approved specification. Keep it curat
 
 ## BOOK-001 — Finalise books landing experience
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Books
 
-Present the three published books accurately and concisely.
+Present the three published books accurately and concisely. Travelogue is currently presented as a fourth, free digital edition and needs final content-model/positioning reconciliation.
 
 ## BOOK-002 — Create individual book pages
 - Priority: P1
-- Status: Planned
+- Status: In Progress
 - Area: Books
 
-Use a reusable concise book presentation template.
+Reusable individual book route exists, but the current implementation contains a stale `book.href` reference that must be corrected to the current `book.access.url` model.
 
 ## BOOK-003 — Add book metadata and related content
 - Priority: P2
@@ -175,10 +185,10 @@ Create the durable model for long-form articles, preferably using Markdown/conte
 
 ## WRITE-002 — Build writing index
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Writing
 
-Create a curated writing landing page rather than a dense feed.
+A curated Writing landing page exists; article destinations still need to be implemented.
 
 ## WRITE-003 — Build individual article pages
 - Priority: P0
@@ -198,7 +208,7 @@ Replace placeholder links with real destinations or intentionally remove entries
 
 ## PROJ-001 — Build projects landing page
 - Priority: P0
-- Status: Planned
+- Status: Done
 - Area: Projects
 
 Create a curated project index.
@@ -223,17 +233,17 @@ Create proper destinations for Ride Together, VTR Press and HomeLab Engineering 
 
 ## PHOTO-001 — Define photography information architecture
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Photography
 
-Define the V1 Photography page as a lightweight gateway to Instagram, 500px and other relevant photographic platforms.
+V1 is defined as a lightweight gateway to external photographic platforms.
 
 ## PHOTO-002 — Build photography landing experience
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Photography
 
-Create a visual but lightweight destination. Do not build a full photo archive in V1.
+A lightweight landing page linking to 500px and Instagram is implemented. No full photo archive is hosted in V1.
 
 ## PHOTO-003 — Define selective image/embedding strategy
 - Priority: P2
@@ -300,7 +310,7 @@ Create a visually engaging overview organised by continent and country, includin
 - Status: Done
 - Area: Travel
 
-Implement the common template and reusable metadata model through the unified travel detail mechanism. The system currently supports international country stories such as Armenia, Jordan and Italy and the Indian Amarnath journey.
+Implement the common template and reusable metadata model through the unified travel detail mechanism. The system currently supports international country stories and Indian journeys.
 
 ## TRAVEL-007 — Curate initial travel destinations
 - Priority: P1
@@ -363,8 +373,10 @@ Optimise locally served imagery without turning the site into a photo-hosting pl
 
 ## PERF-002 — Minimise client-side JavaScript
 - Priority: P1
-- Status: Planned
+- Status: In Progress
 - Area: Performance
+
+The site is predominantly static and uses only small amounts of client-side JavaScript, but a final audit is still required.
 
 ## QA-003 — Production build verification
 - Priority: P0
