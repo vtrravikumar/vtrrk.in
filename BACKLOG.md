@@ -201,10 +201,10 @@ A reusable `[...slug]` Astro route now renders individual Markdown entries from 
 
 ## WRITE-004 — Migrate/curate existing writing entries
 - Priority: P1
-- Status: Planned
+- Status: In Progress
 - Area: Writing
 
-Replace placeholder links with real destinations or intentionally remove entries until their content exists.
+Curate genuine standalone writing from existing source repositories rather than inventing placeholder articles. Initial candidates identified from HomeLab-Engineering are “The Repository Is the Laboratory”, “Recovery Is an Engineering Skill”, and “When the Engineer Leaves the Room”. Create curated Markdown articles in vtrrk.in and connect them to the Writing index. Other source material may be added later when it clearly belongs in Writing.
 
 ---
 
