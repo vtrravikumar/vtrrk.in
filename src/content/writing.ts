@@ -1,20 +1,23 @@
 export const writing = [
 	{
-		title: "The Engineer Beyond the Workplace",
+		title: "The Repository Is the Laboratory",
 		description:
-			"Thoughts on engineering, technology, work and discovering what remains when the job title is gone.",
+			"What happens when a software repository stops being a backup and becomes the place where engineering actually happens.",
 		type: "Essay",
+		slug: "the-repository-is-the-laboratory",
 	},
 	{
-		title: "Building Things That Matter",
+		title: "Recovery Is an Engineering Skill",
 		description:
-			"Notes from building software, books, tools and experiments — and the lessons that emerge along the way.",
-		type: "Notes",
+			"Why designing for failure is only half the job — a HomeLab recovery taught me that resilience depends on knowing how to rebuild.",
+		type: "Essay",
+		slug: "recovery-is-an-engineering-skill",
 	},
 	{
-		title: "The White Envelope",
+		title: "When the Engineer Leaves the Room",
 		description:
-			"A story from a longer journey — where memory, people and moments become part of the writing.",
-		type: "Story",
+			"The quiet measure of a dependable system is not how often its engineer watches it, but how little it needs to be watched.",
+		type: "Essay",
+		slug: "when-the-engineer-leaves-the-room",
 	},
 ];
