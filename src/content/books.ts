@@ -1,14 +1,21 @@
+export interface RelatedBookContent {
+  label: string;
+  url: string;
+}
+
 export interface Book {
   slug: string;
   title: string;
   subtitle?: string;
   description: string;
   cover: string;
+  edition: "published" | "free-digital";
   access: {
     type: "amazon" | "free";
     label: string;
     url: string;
   };
+  related?: RelatedBookContent[];
 }
 
 export const books: Book[] = [
@@ -18,6 +25,7 @@ export const books: Book[] = [
     subtitle: "Rediscovering the Engineer Beyond the Workplace",
     description: "An engineering memoir about rediscovering the engineer within after leaving the traditional workplace. From decades in technology to building a home lab, this is a story about curiosity, experimentation, failure, and the enduring mindset of an engineer.",
     cover: "/images/books/engineering-home.png",
+    edition: "published",
     access: {
       type: "amazon",
       label: "Buy / read",
@@ -30,6 +38,7 @@ export const books: Book[] = [
     subtitle: "Generation Zero",
     description: "A candid exploration of growing up and finding your place in a world shaped by technology, changing expectations, and a generation that has inherited a very different future. Written for Gen Z, but with something to say to anyone trying to understand them.",
     cover: "/images/books/gen-z.png",
+    edition: "published",
     access: {
       type: "amazon",
       label: "Buy / read",
@@ -41,6 +50,7 @@ export const books: Book[] = [
     title: "The White Envelope",
     description: "A story of choices, uncertainty, relationships, and the moments that can quietly change the course of a life. The White Envelope is a personal story about what lies behind an ordinary-looking envelope — and the consequences that follow.",
     cover: "/images/books/the-white-envelope.png",
+    edition: "published",
     access: {
       type: "amazon",
       label: "Buy / read",
@@ -52,10 +62,14 @@ export const books: Book[] = [
     title: "Travelogue",
     description: "Twenty years of journeys, captured through memories, photographs, people and moments that stayed behind long after the bags were unpacked. A personal travelogue across India and the world.",
     cover: "/images/books/travelogue.png",
+    edition: "free-digital",
     access: {
       type: "free",
       label: "Get for free",
       url: "/books/travelogue/",
     },
+    related: [
+      { label: "Explore the travelogue", url: "/travel/" },
+    ],
   },
 ];
