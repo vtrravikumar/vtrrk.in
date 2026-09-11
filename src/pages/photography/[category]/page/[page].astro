@@ -41,9 +41,9 @@ const pagePhotos = photos.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
       {pagePhotos.map((photo) => (
         <figure>
           <a class="photo" href={`/photography/photo/${photo.id}/`}>
-            <img src={`/photography/${photo.thumbnail}`} alt={photo.title} width={photo.width} height={photo.height} loading="lazy" />
+            <img src={`/photography/${photo.thumbnail}`} alt="" width={photo.width} height={photo.height} loading="lazy" />
           </a>
-          <figcaption><span>{photo.place}</span><span>{photo.title}</span></figcaption>
+          <figcaption><span>{photo.place}</span><span>{photo.country}</span></figcaption>
         </figure>
       ))}
     </section>
