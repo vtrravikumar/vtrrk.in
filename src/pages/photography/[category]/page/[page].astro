@@ -1,7 +1,7 @@
 ---
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import BaseLayout from "../../../layouts/BaseLayout.astro";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
 const catalogPath = join(process.cwd(), "public/photography/catalog.json");
 const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
