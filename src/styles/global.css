@@ -1,20 +1,38 @@
 :root {
 	font-family:
-		"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		Helvetica, Arial, sans-serif;
+		-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Plus Jakarta Sans", "Segoe UI", sans-serif;
 
-	color-scheme: dark;
+	color-scheme: light dark;
 
-	--background: #0d1117;
-	--surface: #161b22;
-	--surface-elevated: #1c222b;
-	--foreground: #f0f6fc;
-	--muted: #8b949e;
-	--border: #30363d;
-	--accent: #58a6ff;
+	--background: #f5f5f7;
+	--background-glow: rgba(255, 255, 255, 0.72);
+	--surface: rgba(255, 255, 255, 0.62);
+	--surface-elevated: rgba(255, 255, 255, 0.82);
+	--foreground: #1d1d1f;
+	--muted: #6e6e73;
+	--border: rgba(0, 0, 0, 0.09);
+	--accent: #0071e3;
 	--accent-creative: #ff5a36;
-	--accent-soft: rgba(88, 166, 255, 0.12);
+	--accent-soft: rgba(0, 113, 227, 0.1);
 	--accent-creative-soft: rgba(255, 90, 54, 0.1);
+	--glass-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--background: #0b0d10;
+		--background-glow: rgba(255, 255, 255, 0.045);
+		--surface: rgba(28, 32, 38, 0.62);
+		--surface-elevated: rgba(37, 42, 49, 0.82);
+		--foreground: #f5f5f7;
+		--muted: #a1a1a6;
+		--border: rgba(255, 255, 255, 0.11);
+		--accent: #2997ff;
+		--accent-creative: #ff6b4a;
+		--accent-soft: rgba(41, 151, 255, 0.14);
+		--accent-creative-soft: rgba(255, 107, 74, 0.12);
+		--glass-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+	}
 }
 
 html {
@@ -24,7 +42,9 @@ html {
 body {
 	margin: 0;
 	min-width: 320px;
-	background: var(--background);
+	background:
+		radial-gradient(circle at 75% 8%, var(--background-glow), transparent 28rem),
+		var(--background);
 	color: var(--foreground);
 }
 
@@ -34,14 +54,14 @@ body {
 
 a {
 	color: var(--accent);
-	transition: color 0.2s ease;
+	transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
 
 a:hover {
 	color: var(--accent-creative);
 }
 
-/* Site-wide editorial typography scale. Page-specific styles should not create oversized headings. */
+/* Site-wide editorial typography scale. Page-specific styles can override where needed. */
 h1 {
 	font-size: clamp(2.5rem, 5vw, 4rem) !important;
 	line-height: 1.02;
