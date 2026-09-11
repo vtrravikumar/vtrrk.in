@@ -5,6 +5,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const catalogPath = join(process.cwd(), "public/photography/catalog.json");
 const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
+
+const categories = [
+  { slug: "countries", title: "Countries", photos: catalog },
+  { slug: "portraits", title: "Portraits", photos: [] },
+  { slug: "landscapes", title: "Landscapes", photos: [] },
+  { slug: "model", title: "Model Portfolio", photos: [] },
+  { slug: "street", title: "Street", photos: [] },
+  { slug: "abstract", title: "Abstract", photos: [] },
+];
+
+function pickRandomPhoto(photos) {
+  return photos.length ? photos[Math.floor(Math.random() * photos.length)] : null;
+}
 ---
 <BaseLayout title="Photography — V.T.R. Ravi Kumar" description="Photography by V.T.R. Ravi Kumar.">
   <main>
@@ -14,24 +27,20 @@ const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
       <p>Selected photographs, published from my personal archive.</p>
     </header>
 
-    <section class="gallery" aria-label="Photography collection">
-      {catalog.map((photo) => (
-        <figure>
-          <a href={`/photography/${photo.file}`} target="_blank" rel="noopener noreferrer">
-            <img
-              src={`/photography/${photo.file}`}
-              alt={photo.title}
-              width={photo.width}
-              height={photo.height}
-              loading="lazy"
-            />
+    <section class="catalogue" aria-label="Photography portfolios">
+      {categories.map((category) => {
+        const cover = pickRandomPhoto(category.photos);
+        return cover ? (
+          <a class="category" href={`/photography/${category.slug}/`} aria-label={category.title}>
+            <img src={`/photography/${cover.thumbnail}`} alt="" width={cover.width} height={cover.height} loading="lazy" />
+            <span>{category.title}</span>
           </a>
-          <figcaption>
-            <span>{photo.place}</span>
-            <span>{photo.title}</span>
-          </figcaption>
-        </figure>
-      ))}
+        ) : (
+          <div class="category empty" aria-label={`${category.title}, coming soon`}>
+            <span>{category.title}</span>
+          </div>
+        );
+      })}
     </section>
 
     <nav aria-label="Photography links">
@@ -41,19 +50,5 @@ const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
   </main>
 </BaseLayout>
 <style>
-main{width:min(1200px,calc(100% - 3rem));margin:0 auto}
-header{padding:8rem 0 5rem;max-width:850px}
-h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:.98;letter-spacing:-.05em}
-header>p:last-child{max-width:650px;color:var(--muted);font-size:1.2rem;line-height:1.7}
-.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}
-figure{margin:0}
-figure a{display:block;overflow:hidden;border-radius:1.25rem;background:color-mix(in srgb,var(--foreground) 5%,transparent)}
-img{display:block;width:100%;height:auto}
-figcaption{display:flex;justify-content:space-between;gap:1rem;padding:.75rem .25rem 1.5rem;color:var(--muted);font-size:.85rem}
-nav{margin-top:2rem;border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}
-nav a{display:flex;justify-content:space-between;gap:2rem;padding:2rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);color:inherit;text-decoration:none}
-nav strong{font-size:1.5rem}
-nav span{color:var(--muted);align-self:center}
-@media(max-width:700px){main{width:min(100% - 2rem,1200px)}header{padding:5rem 0 3rem}.gallery{grid-template-columns:1fr}nav a{display:block}nav span{display:block;margin-top:.5rem}}
+main{width:min(1200px,calc(100% - 3rem));margin:0 auto}header{padding:8rem 0 5rem;max-width:850px}h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:.98;letter-spacing:-.05em}header>p:last-child{max-width:650px;color:var(--muted);font-size:1.2rem;line-height:1.7}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.catalogue{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem}.category{position:relative;display:block;overflow:hidden;min-height:22rem;border-radius:1.5rem;background:color-mix(in srgb,var(--foreground) 6%,transparent);color:#fff;text-decoration:none}.category img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.category::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.7) 100%)}.category span{position:absolute;z-index:1;left:1.5rem;right:1.5rem;bottom:1.25rem;font-size:clamp(3rem,7vw,7rem);font-weight:700;line-height:.88;letter-spacing:-.06em}.category.empty{color:var(--muted);border:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}.category.empty span{position:static;display:block;padding:1.5rem}.category.empty::after{display:none}nav{margin-top:2rem;border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent)}nav a{display:flex;justify-content:space-between;gap:2rem;padding:2rem 0;border-bottom:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);color:inherit;text-decoration:none}nav strong{font-size:1.5rem}nav span{color:var(--muted);align-self:center}@media(max-width:700px){main{width:min(100% - 2rem,1200px)}header{padding:5rem 0 3rem}.catalogue{grid-template-columns:1fr}.category{min-height:18rem}nav a{display:block}nav span{display:block;margin-top:.5rem}}
 </style>
