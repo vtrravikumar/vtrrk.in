@@ -15,30 +15,31 @@ export async function getStaticPaths() {
 const { photo } = Astro.props;
 const pageUrl = `https://vtrrk.in/photography/photo/${photo.id}/`;
 const imageUrl = `https://vtrrk.in/photography/${photo.file}`;
-const shareText = `${photo.title} — ${photo.place}, ${photo.country}`;
+const shareText = `${photo.place} · ${photo.country}`;
 const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
 ---
 <BaseLayout
-  title={`${photo.title} — V.T.R. Ravi Kumar`}
-  description={`${photo.title}, photographed in ${photo.place}, ${photo.country}.`}
+  title={`${photo.place} · ${photo.country} — V.T.R. Ravi Kumar`}
+  description={`Photography from ${photo.place}, ${photo.country}.`}
   ogUrl={pageUrl}
   ogImage={imageUrl}
 >
   <main>
     <header>
       <a class="back" href="/photography/">← Photography</a>
-      <p class="label">{photo.place} · {photo.country}</p>
-      <h1>{photo.title}</h1>
+      <p class="label">Photography</p>
     </header>
 
     <figure class="viewer">
-      <img
-        src={`/photography/${photo.file}`}
-        alt={photo.title}
-        width={photo.width}
-        height={photo.height}
-        draggable="false"
-      />
+      <div class="frame">
+        <img
+          src={`/photography/${photo.file}`}
+          alt={`${photo.place} · ${photo.country}`}
+          width={photo.width}
+          height={photo.height}
+          draggable="false"
+        />
+      </div>
       <figcaption>{photo.place} · {photo.country}</figcaption>
     </figure>
 
@@ -54,5 +55,5 @@ const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(page
   image?.addEventListener("dragstart", (event) => event.preventDefault());
 </script>
 <style>
-main{width:min(1200px,calc(100% - 3rem));margin:0 auto}header{padding:5rem 0 3rem;max-width:900px}.back{display:inline-block;margin-bottom:3rem;color:var(--muted);text-decoration:none}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}h1{margin:0;font-size:clamp(3rem,7vw,6rem);line-height:.95;letter-spacing:-.06em}.viewer{margin:0}.viewer img{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;border-radius:1.25rem;user-select:none;-webkit-user-drag:none}.viewer figcaption{padding:.9rem .25rem;color:var(--muted);font-size:.85rem}.actions{display:flex;justify-content:space-between;gap:2rem;margin:2rem 0 4rem;border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding-top:1.5rem}.actions a{color:inherit;text-decoration:none;font-weight:600}@media(max-width:700px){main{width:min(100% - 2rem,1200px)}header{padding:3rem 0 2rem}.viewer img{max-height:none}.actions{display:block}.actions a{display:block;margin:.75rem 0}}
+main{width:min(1200px,calc(100% - 3rem));margin:0 auto}header{padding:5rem 0 2rem;max-width:900px}.back{display:inline-block;margin-bottom:2rem;color:var(--muted);text-decoration:none}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.viewer{margin:0}.frame{padding:.7rem;border:1px solid color-mix(in srgb,var(--foreground) 18%,transparent);border-radius:1.5rem;background:color-mix(in srgb,var(--foreground) 3%,transparent);box-shadow:0 1rem 3rem color-mix(in srgb,var(--foreground) 8%,transparent)}.viewer img{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;border-radius:.9rem;user-select:none;-webkit-user-drag:none}.viewer figcaption{padding:.9rem .25rem;color:var(--muted);font-size:.85rem}.actions{display:flex;justify-content:space-between;gap:2rem;margin:2rem 0 4rem;border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding-top:1.5rem}.actions a{color:inherit;text-decoration:none;font-weight:600}@media(max-width:700px){main{width:min(100% - 2rem,1200px)}header{padding:3rem 0 1rem}.viewer img{max-height:none}.frame{padding:.45rem;border-radius:1rem}.viewer img{border-radius:.65rem}.actions{display:block}.actions a{display:block;margin:.75rem 0}}
 </style>
