@@ -1,21 +1,18 @@
 :root {
 	font-family:
-		-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-		sans-serif;
+		"Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+		Helvetica, Arial, sans-serif;
 
-	color-scheme: light dark;
+	color-scheme: dark;
 
-	--background: #ffffff;
-	--foreground: #171717;
-	--muted: #666666;
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #111111;
-		--foreground: #f2f2f2;
-		--muted: #a0a0a0;
-	}
+	--background: #0d1117;
+	--surface: #161b22;
+	--surface-elevated: #1c222b;
+	--foreground: #f0f6fc;
+	--muted: #8b949e;
+	--border: #30363d;
+	--accent: #58a6ff;
+	--accent-creative: #ff5a36;
 }
 
 html {
@@ -34,7 +31,11 @@ body {
 }
 
 a {
-	color: inherit;
+	color: var(--accent);
+}
+
+a:hover {
+	color: var(--accent-creative);
 }
 
 /* Site-wide editorial typography scale. Page-specific styles should not create oversized headings. */
