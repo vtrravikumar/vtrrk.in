@@ -13,6 +13,8 @@
 	--border: #30363d;
 	--accent: #58a6ff;
 	--accent-creative: #ff5a36;
+	--accent-soft: rgba(88, 166, 255, 0.12);
+	--accent-creative-soft: rgba(255, 90, 54, 0.1);
 }
 
 html {
@@ -32,6 +34,7 @@ body {
 
 a {
 	color: var(--accent);
+	transition: color 0.2s ease;
 }
 
 a:hover {
