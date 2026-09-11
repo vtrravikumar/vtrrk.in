@@ -8,13 +8,17 @@ const REPO_RAW = "https://raw.githubusercontent.com/vtrravikumar/vtrrk-photograp
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "public", "photography");
 const CATALOG_URL = `${REPO_RAW}/catalog/photos.yaml`;
 
+function stripYamlQuotes(value) {
+  return value.replace(/^(["'])(.*)\1$/, "$2");
+}
+
 function extractEntries(yaml) {
   const blocks = yaml.split(/^  - id:\s*/m).slice(1);
 
   return blocks.map((block) => {
-    const id = block.split("\n", 1)[0].trim();
-    const file = block.match(/^    file:\s*(.+)$/m)?.[1]?.trim();
-    const thumbnail = block.match(/^    thumbnail:\s*(.+)$/m)?.[1]?.trim();
+    const id = stripYamlQuotes(block.split("\n", 1)[0].trim());
+    const file = stripYamlQuotes(block.match(/^    file:\s*(.+)$/m)?.[1]?.trim() ?? "");
+    const thumbnail = stripYamlQuotes(block.match(/^    thumbnail:\s*(.+)$/m)?.[1]?.trim() ?? "");
     const published = block.match(/^    published:\s*(true|false)$/m)?.[1] === "true";
 
     if (!id || !file || !thumbnail || !published) return null;
