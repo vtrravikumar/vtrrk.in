@@ -2,17 +2,29 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { travelCountries } from "../../../content/travel-countries";
 
 export async function getStaticPaths() {
   const catalogPath = join(process.cwd(), "public/photography/catalog.json");
   const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
-  return catalog.map((photo) => ({
-    params: { id: photo.id },
-    props: { photo },
+  const journeys = await getCollection("travel");
+  const published = journeys.filter((journey) => journey.data.content_status === "published");
+  const publishedSlugs = new Set(published.map((entry) => {
+    const parts = entry.id.split("/");
+    return parts[0] === "india" ? `india/${parts[1]}` : parts[0];
   }));
+
+  return catalog.map((photo) => {
+    const countryKey = String(photo.country ?? "").trim().toLowerCase();
+    const country = travelCountries.find((entry) => entry.slug === countryKey || entry.name.toLowerCase() === countryKey);
+    const travelSlug = country?.slug === "india" ? "india" : country?.slug;
+    const travelHref = travelSlug && publishedSlugs.has(travelSlug) ? `/travel/${travelSlug}/` : undefined;
+    return { params: { id: photo.id }, props: { photo, travelHref, travelLabel: country?.name ?? photo.country } };
+  });
 }
 
-const { photo } = Astro.props;
+const { photo, travelHref, travelLabel } = Astro.props;
 const pageUrl = `https://vtrrk.in/photography/photo/${photo.id}/`;
 const imageUrl = `https://vtrrk.in/photography/${photo.file}`;
 const shareText = `${photo.place} · ${photo.country}`;
@@ -45,6 +57,7 @@ const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(page
 
     <nav class="actions" aria-label="Photo actions">
       <a href="/photography/">← Back to Photography</a>
+      {travelHref && <a href={travelHref}>Explore {travelLabel} travel →</a>}
       <a href={shareUrl} target="_blank" rel="noopener noreferrer">Share on X ↗</a>
     </nav>
   </main>
