@@ -4,11 +4,11 @@ import { join } from "node:path";
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 
 const catalogPath = join(process.cwd(), "public/photography/catalog.json");
-const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
 const PAGE_SIZE = 12;
 const categoryNames = { countries: "Countries", portraits: "Portraits", landscapes: "Landscapes", model: "Model Portfolio", street: "Street", abstract: "Abstract" };
 
 export async function getStaticPaths() {
+  const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
   const categories = [...new Set(catalog.flatMap((photo) => photo.categories ?? []))];
   return categories.flatMap((category) => {
     const photos = catalog.filter((photo) => photo.categories?.includes(category));
