@@ -1,0 +1,42 @@
+---
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const catalogPath = join(process.cwd(), "public/photography/catalog.json");
+  const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
+  const photos = catalog.filter((photo) => photo.categories?.includes("model") && photo.model);
+  const models = [...new Set(photos.map((photo) => photo.model))];
+
+  return models.map((model) => ({
+    params: { model: model.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") },
+    props: { model, photos: photos.filter((photo) => photo.model === model) },
+  }));
+}
+
+const { model, photos } = Astro.props;
+---
+<BaseLayout title={`${model} — Model Portfolio — V.T.R. Ravi Kumar`} description={`Model portfolio photography of ${model} by V.T.R. Ravi Kumar.`}>
+  <main>
+    <header>
+      <a class="back" href="/photography/model/">← Model Portfolio</a>
+      <p class="label">Photography / Model Portfolio / {model}</p>
+      <h1>{model}</h1>
+      <p>{photos.length} photographs in this portfolio.</p>
+    </header>
+
+    <section class="gallery" aria-label={`${model} photographs`}>
+      {photos.map((photo) => (
+        <figure>
+          <a class="photo" href={`/photography/photo/${photo.id}/`}>
+            <img src={`/photography/${photo.thumbnail}`} alt="" width={photo.width} height={photo.height} loading="lazy" />
+          </a>
+        </figure>
+      ))}
+    </section>
+  </main>
+</BaseLayout>
+<style>
+main{width:min(1200px,calc(100% - 3rem));margin:0 auto}header{padding:5rem 0 4rem;max-width:850px}.back{display:inline-block;margin-bottom:3rem;color:var(--muted);text-decoration:none}.label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}h1{margin:0;font-size:clamp(3.5rem,8vw,7rem);line-height:.9;letter-spacing:-.06em}header>p:last-child{color:var(--muted);font-size:1.1rem}.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}figure{margin:0}.photo{display:block;overflow:hidden;aspect-ratio:3 / 2;border-radius:1.25rem;background:color-mix(in srgb,var(--foreground) 5%,transparent)}img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}@media(max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){main{width:min(100% - 2rem,1200px)}header{padding:3rem 0}.gallery{grid-template-columns:1fr}}
+</style>

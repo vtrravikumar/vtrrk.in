@@ -21,6 +21,7 @@ function extractEntries(yaml) {
     const thumbnail = stripYamlQuotes(block.match(/^    thumbnail:\s*(.+)$/m)?.[1]?.trim() ?? "");
     const country = stripYamlQuotes(block.match(/^    country:\s*(.+)$/m)?.[1]?.trim() ?? "");
     const place = stripYamlQuotes(block.match(/^    place:\s*(.+)$/m)?.[1]?.trim() ?? "");
+    const model = stripYamlQuotes(block.match(/^    model:\s*(.+)$/m)?.[1]?.trim() ?? "");
     const title = stripYamlQuotes(block.match(/^    title:\s*(.+)$/m)?.[1]?.trim() ?? "");
     const width = Number(block.match(/^    width:\s*(\d+)$/m)?.[1] ?? 0);
     const height = Number(block.match(/^    height:\s*(\d+)$/m)?.[1] ?? 0);
@@ -30,8 +31,8 @@ function extractEntries(yaml) {
       ? categoriesMatch.split(",").map((value) => stripYamlQuotes(value.trim())).filter(Boolean)
       : country ? ["countries"] : [];
 
-    if (!id || !file || !thumbnail || !country || !place || !title || !width || !height || !published || !categories.length) return null;
-    return { id, file, thumbnail, country, place, title, width, height, categories, published };
+    if (!id || !file || !thumbnail || !title || !width || !height || !published || !categories.length) return null;
+    return { id, file, thumbnail, country, place, model, title, width, height, categories, published };
   }).filter(Boolean);
 }
 

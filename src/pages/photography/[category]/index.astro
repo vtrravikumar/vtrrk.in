@@ -29,6 +29,22 @@ const photos = Astro.props.photos;
 const title = categoryNames[category] ?? category;
 const pageCount = Math.ceil(photos.length / PAGE_SIZE);
 const pagePhotos = photos.slice(0, PAGE_SIZE);
+
+const countries = category === "countries"
+  ? [...new Set(photos.map((photo) => photo.country).filter(Boolean))].map((country) => ({
+      name: country,
+      slug: country.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      cover: photos.find((photo) => photo.country === country),
+    }))
+  : [];
+
+const models = category === "model"
+  ? [...new Set(photos.map((photo) => photo.model).filter(Boolean))].map((model) => ({
+      name: model,
+      slug: model.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      cover: photos.find((photo) => photo.model === model),
+    }))
+  : [];
 ---
 <BaseLayout title={`${title} Photography — V.T.R. Ravi Kumar`} description={`${title} photography by V.T.R. Ravi Kumar.`}>
   <main>
@@ -36,21 +52,45 @@ const pagePhotos = photos.slice(0, PAGE_SIZE);
       <a class="back" href="/photography/">← Photography</a>
       <p class="label">Photography / {title}</p>
       <h1>{title}</h1>
-      <p>{photos.length} photographs in this portfolio.</p>
+      <p>{category === "countries" ? `${countries.length} countries in this portfolio.` : category === "model" ? `${models.length} models in this portfolio.` : `${photos.length} photographs in this portfolio.`}</p>
     </header>
 
-    <section class="gallery" aria-label={`${title} photographs`}>
-      {pagePhotos.map((photo) => (
-        <figure>
-          <a class="photo" href={`/photography/photo/${photo.id}/`}>
-            <img src={`/photography/${photo.thumbnail}`} alt="" width={photo.width} height={photo.height} loading="lazy" />
+    {category === "countries" ? (
+      <section class="country-grid" aria-label="Countries">
+        {countries.map((country) => (
+          <a class="country" href={`/photography/countries/${country.slug}/`}>
+            <div class="country-photo">
+              <img src={`/photography/${country.cover.thumbnail}`} alt="" width={country.cover.width} height={country.cover.height} loading="lazy" />
+              <span>{country.name}</span>
+            </div>
           </a>
-          <figcaption><span>{photo.place}</span><span>{photo.country}</span></figcaption>
-        </figure>
-      ))}
-    </section>
+        ))}
+      </section>
+    ) : category === "model" ? (
+      <section class="country-grid" aria-label="Models">
+        {models.map((model) => (
+          <a class="country" href={`/photography/model/${model.slug}/`}>
+            <div class="country-photo">
+              <img src={`/photography/${model.cover.thumbnail}`} alt="" width={model.cover.width} height={model.cover.height} loading="lazy" />
+              <span>{model.name}</span>
+            </div>
+          </a>
+        ))}
+      </section>
+    ) : (
+      <section class="gallery" aria-label={`${title} photographs`}>
+        {pagePhotos.map((photo) => (
+          <figure>
+            <a class="photo" href={`/photography/photo/${photo.id}/`}>
+              <img src={`/photography/${photo.thumbnail}`} alt="" width={photo.width} height={photo.height} loading="lazy" />
+            </a>
+            <figcaption><span>{photo.place}</span><span>{photo.country}</span></figcaption>
+          </figure>
+        ))}
+      </section>
+    )}
 
-    {pageCount > 1 && (
+    {category !== "countries" && category !== "model" && pageCount > 1 && (
       <nav class="pagination" aria-label="Photography pagination">
         <a href={`/photography/${category}/page/2/`}>Next →</a>
       </nav>
@@ -64,9 +104,11 @@ header{padding:5rem 0 4rem;max-width:850px}
 .label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
 h1{margin:0;font-size:clamp(3.5rem,8vw,7rem);line-height:.9;letter-spacing:-.06em}
 header>p:last-child{color:var(--muted);font-size:1.1rem}
-.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
-figure{margin:0}.photo{display:block;overflow:hidden;aspect-ratio:3 / 2;border-radius:1.25rem;background:color-mix(in srgb,var(--foreground) 5%,transparent)}img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.country-grid,.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
+.country{display:block;color:inherit;text-decoration:none}.country-photo{position:relative;overflow:hidden;aspect-ratio:3 / 2;border-radius:1.25rem;background:color-mix(in srgb,var(--foreground) 5%,transparent)}
+.country-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}.country-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(0,0,0,.7))}.country-photo span{position:absolute;z-index:1;left:1.25rem;right:1.25rem;bottom:1rem;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;line-height:.9;letter-spacing:-.05em;color:white}
+figure{margin:0}.photo{display:block;overflow:hidden;aspect-ratio:3 / 2;border-radius:1.25rem;background:color-mix(in srgb,var(--foreground) 5%,transparent)}.gallery img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 figcaption{display:flex;justify-content:space-between;gap:1rem;padding:.75rem .25rem 1.5rem;color:var(--muted);font-size:.85rem}
 .pagination{display:flex;justify-content:flex-end;margin-top:1rem;border-top:1px solid color-mix(in srgb,var(--foreground) 15%,transparent);padding:1.5rem 0}.pagination a{color:inherit;text-decoration:none;font-weight:600}
-@media(max-width:900px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){main{width:min(100% - 2rem,1200px)}header{padding:3rem 0}.gallery{grid-template-columns:1fr}}
+@media(max-width:900px){.country-grid,.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){main{width:min(100% - 2rem,1200px)}header{padding:3rem 0}.country-grid,.gallery{grid-template-columns:1fr}}
 </style>

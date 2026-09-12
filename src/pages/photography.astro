@@ -7,13 +7,16 @@ const catalogPath = join(process.cwd(), "public/photography/catalog.json");
 const catalog = JSON.parse(await readFile(catalogPath, "utf-8"));
 
 const categories = [
-  { slug: "countries", title: "Countries", photos: catalog },
-  { slug: "portraits", title: "Portraits", photos: [] },
-  { slug: "landscapes", title: "Landscapes", photos: [] },
-  { slug: "model", title: "Model Portfolio", photos: [] },
-  { slug: "street", title: "Street", photos: [] },
-  { slug: "abstract", title: "Abstract", photos: [] },
-];
+  { slug: "countries", title: "Countries" },
+  { slug: "portraits", title: "Portraits" },
+  { slug: "landscapes", title: "Landscapes" },
+  { slug: "model", title: "Model Portfolio" },
+  { slug: "street", title: "Street" },
+  { slug: "abstract", title: "Abstract" },
+].map((category) => ({
+  ...category,
+  photos: catalog.filter((photo) => photo.categories?.includes(category.slug)),
+}));
 
 function pickRandomPhoto(photos) {
   return photos.length ? photos[Math.floor(Math.random() * photos.length)] : null;
