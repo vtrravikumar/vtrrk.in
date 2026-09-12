@@ -3,9 +3,6 @@ title: "VTR Press"
 description: "An open-source publishing engine for producing professionally typeset books and technical documents from structured Markdown manuscripts."
 purpose: "Keep content separate from presentation so a manuscript can be written once and published into multiple formats through a repeatable workflow."
 status: "Active"
-links:
-  - label: "GitHub"
-    url: "https://github.com/vtrravikumar/vtr-press"
 ---
 
 ## What is it?
