@@ -37,6 +37,14 @@ const countries = category === "countries"
       cover: photos.find((photo) => photo.country === country),
     }))
   : [];
+
+const models = category === "model"
+  ? [...new Set(photos.map((photo) => photo.model).filter(Boolean))].map((model) => ({
+      name: model,
+      slug: model.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+      cover: photos.find((photo) => photo.model === model),
+    }))
+  : [];
 ---
 <BaseLayout title={`${title} Photography — V.T.R. Ravi Kumar`} description={`${title} photography by V.T.R. Ravi Kumar.`}>
   <main>
@@ -44,7 +52,7 @@ const countries = category === "countries"
       <a class="back" href="/photography/">← Photography</a>
       <p class="label">Photography / {title}</p>
       <h1>{title}</h1>
-      <p>{category === "countries" ? `${countries.length} countries in this portfolio.` : `${photos.length} photographs in this portfolio.`}</p>
+      <p>{category === "countries" ? `${countries.length} countries in this portfolio.` : category === "model" ? `${models.length} models in this portfolio.` : `${photos.length} photographs in this portfolio.`}</p>
     </header>
 
     {category === "countries" ? (
@@ -54,6 +62,17 @@ const countries = category === "countries"
             <div class="country-photo">
               <img src={`/photography/${country.cover.thumbnail}`} alt="" width={country.cover.width} height={country.cover.height} loading="lazy" />
               <span>{country.name}</span>
+            </div>
+          </a>
+        ))}
+      </section>
+    ) : category === "model" ? (
+      <section class="country-grid" aria-label="Models">
+        {models.map((model) => (
+          <a class="country" href={`/photography/model/${model.slug}/`}>
+            <div class="country-photo">
+              <img src={`/photography/${model.cover.thumbnail}`} alt="" width={model.cover.width} height={model.cover.height} loading="lazy" />
+              <span>{model.name}</span>
             </div>
           </a>
         ))}
@@ -71,7 +90,7 @@ const countries = category === "countries"
       </section>
     )}
 
-    {category !== "countries" && pageCount > 1 && (
+    {category !== "countries" && category !== "model" && pageCount > 1 && (
       <nav class="pagination" aria-label="Photography pagination">
         <a href={`/photography/${category}/page/2/`}>Next →</a>
       </nav>
