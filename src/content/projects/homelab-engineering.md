@@ -3,9 +3,6 @@ title: "HomeLab Engineering"
 description: "A personal engineering laboratory exploring home automation, practical systems and the engineering thinking behind building them."
 purpose: "Continue engineering curiosity beyond a software career by building, breaking, repairing and improving a real HomeLab while documenting the decisions and lessons along the way."
 status: "Active"
-links:
-  - label: "GitHub"
-    url: "https://github.com/vtrravikumar/HomeLab-Engineering"
 ---
 
 ## What is it?
