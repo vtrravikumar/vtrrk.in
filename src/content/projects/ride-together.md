@@ -3,9 +3,6 @@ title: "Ride Together"
 description: "A platform for organising and managing group motorcycle rides with real-time visibility, coordination and communication."
 purpose: "Make group motorcycle rides safer and easier to coordinate by giving riders better visibility of participation, movement and communication."
 status: "Active"
-links:
-  - label: "GitHub"
-    url: "https://github.com/vtrravikumar/RideTogether"
 ---
 
 ## What is it?
