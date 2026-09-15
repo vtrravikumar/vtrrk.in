@@ -21,14 +21,19 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps
+import pillow_heif
 
 SOURCE = Path("/Volumes/photo/vtrrk-photography")
 OUTPUT = Path("public/photography")
-SUPPORTED = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
+SUPPORTED = {".jpg", ".jpeg", ".png", ".heic", ".heif", ".tif", ".tiff", ".webp"}
 CATEGORIES = {"countries", "portraits", "landscapes", "model", "street", "abstract"}
 SKIP_DIRECTORIES = {".git", "published", "catalog", "scripts", ".venv", ".venv-photo"}
 WEB_MAX = 2400
 THUMB_MAX = 600
+
+# Register HEIC/HEIF support with Pillow so iPhone/Apple photos can be
+# processed directly from the NAS without modifying the originals.
+pillow_heif.register_heif_opener()
 
 
 def slug(value: str) -> str:
