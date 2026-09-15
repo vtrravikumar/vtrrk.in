@@ -255,6 +255,21 @@
     "published": true
   },
   {
+    "id": "india-udaipur-img-2176-e95d05c59d",
+    "file": "countries/india/udaipur/img-2176.avif",
+    "thumbnail": "countries/india/udaipur/img-2176-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2176",
+    "width": 2412,
+    "height": 1356,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
     "id": "india-varanasi-5dm-7122-6c55ae4571",
     "file": "countries/india/varanasi/5dm-7122.avif",
     "thumbnail": "countries/india/varanasi/5dm-7122-thumb.avif",
