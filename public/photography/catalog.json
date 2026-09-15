@@ -60,6 +60,21 @@
     "published": true
   },
   {
+    "id": "india-leh-img-0213-28f295e649",
+    "file": "countries/india/leh/img-0213.avif",
+    "thumbnail": "countries/india/leh/img-0213-thumb.avif",
+    "country": "india",
+    "place": "leh",
+    "model": "",
+    "title": "IMG_0213",
+    "width": 3932,
+    "height": 2388,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
     "id": "india-leh-img-0274-61c261ea96",
     "file": "countries/india/leh/img-0274.avif",
     "thumbnail": "countries/india/leh/img-0274-thumb.avif",
@@ -240,6 +255,36 @@
     "published": true
   },
   {
+    "id": "india-leh-img-0850-d988b55399",
+    "file": "countries/india/leh/img-0850.avif",
+    "thumbnail": "countries/india/leh/img-0850-thumb.avif",
+    "country": "india",
+    "place": "leh",
+    "model": "",
+    "title": "IMG_0850",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-leh-img-0881-3ca3bb2d62",
+    "file": "countries/india/leh/img-0881.avif",
+    "thumbnail": "countries/india/leh/img-0881-thumb.avif",
+    "country": "india",
+    "place": "leh",
+    "model": "",
+    "title": "IMG_0881",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
     "id": "india-leh-img-9923-a8ec1ab09b",
     "file": "countries/india/leh/img-9923.avif",
     "thumbnail": "countries/india/leh/img-9923-thumb.avif",
@@ -247,6 +292,141 @@
     "place": "leh",
     "model": "",
     "title": "IMG_9923",
+    "width": 4032,
+    "height": 2268,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-1936-b2eb2dc6f4",
+    "file": "countries/india/udaipur/img-1936.avif",
+    "thumbnail": "countries/india/udaipur/img-1936-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_1936",
+    "width": 5333,
+    "height": 3000,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-1940-a254b662bb",
+    "file": "countries/india/udaipur/img-1940.avif",
+    "thumbnail": "countries/india/udaipur/img-1940-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_1940",
+    "width": 4032,
+    "height": 2268,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-1960-15bae03f5f",
+    "file": "countries/india/udaipur/img-1960.avif",
+    "thumbnail": "countries/india/udaipur/img-1960-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_1960",
+    "width": 5333,
+    "height": 3000,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-1971-ccc05f0636",
+    "file": "countries/india/udaipur/img-1971.avif",
+    "thumbnail": "countries/india/udaipur/img-1971-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_1971",
+    "width": 5333,
+    "height": 3000,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2005-abded76786",
+    "file": "countries/india/udaipur/img-2005.avif",
+    "thumbnail": "countries/india/udaipur/img-2005-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2005",
+    "width": 5333,
+    "height": 3000,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2087-05012cada5",
+    "file": "countries/india/udaipur/img-2087.avif",
+    "thumbnail": "countries/india/udaipur/img-2087-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2087",
+    "width": 4032,
+    "height": 2268,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2102-d9aae8e4e6",
+    "file": "countries/india/udaipur/img-2102.avif",
+    "thumbnail": "countries/india/udaipur/img-2102-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2102",
+    "width": 5333,
+    "height": 3000,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2145-82ca830c61",
+    "file": "countries/india/udaipur/img-2145.avif",
+    "thumbnail": "countries/india/udaipur/img-2145-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2145",
+    "width": 5333,
+    "height": 3000,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2165-1aa598ea9b",
+    "file": "countries/india/udaipur/img-2165.avif",
+    "thumbnail": "countries/india/udaipur/img-2165-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2165",
     "width": 4032,
     "height": 2268,
     "categories": [
@@ -264,6 +444,51 @@
     "title": "IMG_2176",
     "width": 2412,
     "height": 1356,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2179-fa2bf23076",
+    "file": "countries/india/udaipur/img-2179.avif",
+    "thumbnail": "countries/india/udaipur/img-2179-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2179",
+    "width": 5333,
+    "height": 3000,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2190-80ca93f55a",
+    "file": "countries/india/udaipur/img-2190.avif",
+    "thumbnail": "countries/india/udaipur/img-2190-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2190",
+    "width": 4032,
+    "height": 2268,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "india-udaipur-img-2192-764e203d34",
+    "file": "countries/india/udaipur/img-2192.avif",
+    "thumbnail": "countries/india/udaipur/img-2192-thumb.avif",
+    "country": "india",
+    "place": "udaipur",
+    "model": "",
+    "title": "IMG_2192",
+    "width": 4032,
+    "height": 2268,
     "categories": [
       "countries"
     ],
@@ -2034,6 +2259,21 @@
     "title": "IMG_0759",
     "width": 4822,
     "height": 3214,
+    "categories": [
+      "street"
+    ],
+    "published": true
+  },
+  {
+    "id": "street-img-5827-8e7d4fe59f",
+    "file": "street/img-5827.avif",
+    "thumbnail": "street/img-5827-thumb.avif",
+    "country": "",
+    "place": "",
+    "model": "",
+    "title": "IMG_5827",
+    "width": 4032,
+    "height": 2630,
     "categories": [
       "street"
     ],
