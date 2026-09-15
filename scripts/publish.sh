@@ -32,7 +32,7 @@ REMOTE=$(git rev-parse origin/main)
 
 if [ "$LOCAL" != "$REMOTE" ]; then
     echo
-    echo "ERROR: Local main is not synchronized with origin/main."
+echo "ERROR: Local main is not synchronized with origin/main."
     echo
     echo "Local : $LOCAL"
     echo "Remote: $REMOTE"
@@ -73,12 +73,13 @@ fi
 
 source "$VENV/bin/activate"
 
-python -m pip install -r <(printf 'Pillow>=11,<13\n')
+# Pillow handles the image processing; pillow-heif adds native HEIC/HEIF
+# support so Apple/iPhone originals can be published without conversion.
+python -m pip install -r <(printf 'Pillow>=11,<13\npillow-heif>=1.1,<2\n')
 
 echo
 echo "Publishing photography..."
 python scripts/publish.py
-
 echo
 
 if [ -n "$(git status --porcelain -- public/photography)" ]; then
