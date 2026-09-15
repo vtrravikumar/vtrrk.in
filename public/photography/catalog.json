@@ -675,6 +675,396 @@
     "published": true
   },
   {
+    "id": "srilanka-columbo-img-5052-e1a985e50c",
+    "file": "countries/srilanka/columbo/img-5052.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5052-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5052",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5063-db7494c765",
+    "file": "countries/srilanka/columbo/img-5063.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5063-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5063",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5216-97d999ce7c",
+    "file": "countries/srilanka/columbo/img-5216.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5216-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5216",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5234-48fc6cf1d5",
+    "file": "countries/srilanka/columbo/img-5234.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5234-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5234",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5259-2aa4608c75",
+    "file": "countries/srilanka/columbo/img-5259.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5259-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5259",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5283-1daa2e3948",
+    "file": "countries/srilanka/columbo/img-5283.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5283-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5283",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5356-aae13989f8",
+    "file": "countries/srilanka/columbo/img-5356.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5356-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5356",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5365-48041cdf05",
+    "file": "countries/srilanka/columbo/img-5365.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5365-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5365",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-5400-8f4f8441e9",
+    "file": "countries/srilanka/columbo/img-5400.avif",
+    "thumbnail": "countries/srilanka/columbo/img-5400-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_5400",
+    "width": 2048,
+    "height": 1365,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-8782-97f133f5e4",
+    "file": "countries/srilanka/columbo/img-8782.avif",
+    "thumbnail": "countries/srilanka/columbo/img-8782-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_8782",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-8792-98a33b692e",
+    "file": "countries/srilanka/columbo/img-8792.avif",
+    "thumbnail": "countries/srilanka/columbo/img-8792-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_8792",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-8795-c6d1970e75",
+    "file": "countries/srilanka/columbo/img-8795.avif",
+    "thumbnail": "countries/srilanka/columbo/img-8795-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_8795",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-8810-b4e6ed50a8",
+    "file": "countries/srilanka/columbo/img-8810.avif",
+    "thumbnail": "countries/srilanka/columbo/img-8810-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_8810",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-8855-0a77d90437",
+    "file": "countries/srilanka/columbo/img-8855.avif",
+    "thumbnail": "countries/srilanka/columbo/img-8855-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_8855",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-8966-8568d8bf58",
+    "file": "countries/srilanka/columbo/img-8966.avif",
+    "thumbnail": "countries/srilanka/columbo/img-8966-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_8966",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9021-6f380400d7",
+    "file": "countries/srilanka/columbo/img-9021.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9021-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9021",
+    "width": 3786,
+    "height": 2099,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9195-2f627ae31d",
+    "file": "countries/srilanka/columbo/img-9195.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9195-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9195",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9202-26bb411fe1",
+    "file": "countries/srilanka/columbo/img-9202.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9202-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9202",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9231-e5b007be03",
+    "file": "countries/srilanka/columbo/img-9231.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9231-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9231",
+    "width": 3024,
+    "height": 4032,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9273-f665120396",
+    "file": "countries/srilanka/columbo/img-9273.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9273-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9273",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9283-5cb4d8b651",
+    "file": "countries/srilanka/columbo/img-9283.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9283-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9283",
+    "width": 4032,
+    "height": 2456,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9372-025329c606",
+    "file": "countries/srilanka/columbo/img-9372.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9372-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9372",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9373-e59f5d1607",
+    "file": "countries/srilanka/columbo/img-9373.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9373-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9373",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9393-2cfc9ca6a8",
+    "file": "countries/srilanka/columbo/img-9393.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9393-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9393",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9406-3c8a334d3b",
+    "file": "countries/srilanka/columbo/img-9406.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9406-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9406",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "srilanka-columbo-img-9450-d33ccbecf4",
+    "file": "countries/srilanka/columbo/img-9450.avif",
+    "thumbnail": "countries/srilanka/columbo/img-9450-thumb.avif",
+    "country": "srilanka",
+    "place": "columbo",
+    "model": "",
+    "title": "IMG_9450",
+    "width": 4032,
+    "height": 3024,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
     "id": "uae-abudhabi-1v2a0174-1-ebe5bc0829",
     "file": "countries/uae/abudhabi/1v2a0174-1.avif",
     "thumbnail": "countries/uae/abudhabi/1v2a0174-1-thumb.avif",
