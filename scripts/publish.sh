@@ -8,6 +8,11 @@ cd "$ROOT"
 SOURCE="/Volumes/photo/vtrrk-photography"
 VENV="$ROOT/.venv-photo"
 
+# Cloudflare Pages has a 20,000-file limit. Keep this as a visible capacity
+# check so photography growth is caught before it becomes a deployment issue.
+FILE_LIMIT=20000
+WARNING_THRESHOLD=80
+
 # Keep the publisher safe: never start a publish while local main and
 # origin/main are out of sync. This prevents processing/committing a large
 # photography change that cannot subsequently be pushed cleanly.
@@ -75,11 +80,32 @@ source "$VENV/bin/activate"
 
 # Pillow handles the image processing; pillow-heif adds native HEIC/HEIF
 # support so Apple/iPhone originals can be published without conversion.
-python -m pip install -r <(printf 'Pillow>=11,<13\npillow-heif>=1.1,<2\n')
+python -m pip install --disable-pip-version-check -r <(printf 'Pillow>=11,<13\npillow-heif>=1.1,<2\n')
 
 echo
 echo "Publishing photography..."
 python scripts/publish.py
+echo
+
+PHOTO_COUNT=$(find public/photography -type f \( -name '*.avif' -o -name '*.webp' \) | wc -l | tr -d ' ')
+FILE_COUNT=$(find public/photography -type f | wc -l | tr -d ' ')
+USAGE_PERCENT=$(awk -v count="$FILE_COUNT" -v limit="$FILE_LIMIT" 'BEGIN { printf "%.1f", (count / limit) * 100 }')
+
+# A soft warning keeps the publisher successful while making capacity visible
+# once the published photography approaches the Cloudflare Pages file limit.
+if [ "$FILE_COUNT" -ge $((FILE_LIMIT * WARNING_THRESHOLD / 100)) ]; then
+    CAPACITY_STATUS="⚠ Soft warning: approaching Cloudflare Pages file limit."
+else
+    CAPACITY_STATUS="✓ Within Cloudflare Pages limits."
+fi
+
+echo "Photography storage:"
+echo "  Photographs : $PHOTO_COUNT"
+echo "  Files       : $FILE_COUNT"
+echo "  File limit  : $FILE_LIMIT"
+echo "  Usage       : ${USAGE_PERCENT}%"
+echo ""
+echo "  $CAPACITY_STATUS"
 echo
 
 if [ -n "$(git status --porcelain -- public/photography)" ]; then
