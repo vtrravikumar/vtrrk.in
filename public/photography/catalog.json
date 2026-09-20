@@ -1080,6 +1080,126 @@
     "published": true
   },
   {
+    "id": "italy-pisa-img-2016-00402-520908d4a2",
+    "file": "countries/italy/pisa/img-2016-00402.avif",
+    "thumbnail": "countries/italy/pisa/img-2016-00402-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2016_00402",
+    "width": 5124,
+    "height": 3020,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "italy-pisa-img-2663-098b06acd6",
+    "file": "countries/italy/pisa/img-2663.avif",
+    "thumbnail": "countries/italy/pisa/img-2663-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2663",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "italy-pisa-img-2668-e5a1bf534c",
+    "file": "countries/italy/pisa/img-2668.avif",
+    "thumbnail": "countries/italy/pisa/img-2668-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2668",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "italy-pisa-img-2678-90723a84d4",
+    "file": "countries/italy/pisa/img-2678.avif",
+    "thumbnail": "countries/italy/pisa/img-2678-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2678",
+    "width": 3265,
+    "height": 4898,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "italy-pisa-img-2682-2314208ff1",
+    "file": "countries/italy/pisa/img-2682.avif",
+    "thumbnail": "countries/italy/pisa/img-2682-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2682",
+    "width": 3265,
+    "height": 4898,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "italy-pisa-img-2736-3369b8abe8",
+    "file": "countries/italy/pisa/img-2736.avif",
+    "thumbnail": "countries/italy/pisa/img-2736-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2736",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "italy-pisa-img-2751-a6538ecb27",
+    "file": "countries/italy/pisa/img-2751.avif",
+    "thumbnail": "countries/italy/pisa/img-2751-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2751",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
+    "id": "italy-pisa-img-2764-fed7513e9a",
+    "file": "countries/italy/pisa/img-2764.avif",
+    "thumbnail": "countries/italy/pisa/img-2764-thumb.avif",
+    "country": "italy",
+    "place": "pisa",
+    "model": "",
+    "title": "IMG_2764",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true
+  },
+  {
     "id": "italy-venice-img-2899-1961b79f6c",
     "file": "countries/italy/venice/img-2899.avif",
     "thumbnail": "countries/italy/venice/img-2899-thumb.avif",
