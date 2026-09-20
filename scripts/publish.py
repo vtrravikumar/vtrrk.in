@@ -72,15 +72,25 @@ def main() -> None:
             f"Connect the NAS volume and make sure {SOURCE} exists."
         )
 
+    print("Scanning photography source...")
+    source_photos = [
+        photo for photo in sorted(SOURCE.rglob("*"))
+        if photo.is_file()
+        and photo.suffix.lower() in SUPPORTED
+        and not any(part in SKIP_DIRECTORIES for part in photo.relative_to(SOURCE).parts)
+    ]
+    print(f"Found {len(source_photos):,} source photograph(s).")
+    print("Publishing derivatives...")
+
     with tempfile.TemporaryDirectory(prefix="vtrrk-photography-") as temp_dir:
         temp_root = Path(temp_dir)
         temp_output = temp_root / "photography"
         temp_output.mkdir(parents=True, exist_ok=True)
         entries: list[dict[str, object]] = []
+        total_photos = len(source_photos)
+        progress_step = max(1, total_photos // 20)
 
-        for photo in sorted(SOURCE.rglob("*")):
-            if not photo.is_file() or photo.suffix.lower() not in SUPPORTED:
-                continue
+        for index, photo in enumerate(source_photos, start=1):
 
             relative = photo.relative_to(SOURCE)
             if any(part in SKIP_DIRECTORIES for part in relative.parts):
@@ -147,6 +157,10 @@ def main() -> None:
                     "published": True,
                 }
             )
+
+            if index == 1 or index % progress_step == 0 or index == total_photos:
+                percent = (index / total_photos * 100) if total_photos else 100
+                print(f"  Processed {index:,} / {total_photos:,} ({percent:5.1f}%)")
 
         catalog_path = temp_output / "catalog.json"
         catalog_path.write_text(json.dumps(entries, indent=2) + "\n", encoding="utf-8")
