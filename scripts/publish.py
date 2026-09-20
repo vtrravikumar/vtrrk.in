@@ -16,6 +16,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import os
 import shutil
 import tempfile
 from pathlib import Path
@@ -82,11 +83,40 @@ def main() -> None:
     print(f"Found {len(source_photos):,} source photograph(s).")
     print("Publishing derivatives...")
 
+    existing_catalog = {}
+    existing_catalog_path = OUTPUT / "catalog.json"
+    if existing_catalog_path.is_file():
+        try:
+            existing_entries = json.loads(existing_catalog_path.read_text(encoding="utf-8"))
+            existing_catalog = {
+                entry["id"]: entry
+                for entry in existing_entries
+                if isinstance(entry, dict) and "id" in entry
+            }
+        except (json.JSONDecodeError, OSError):
+            print("  Existing catalog could not be read; rebuilding published derivatives.")
+
     with tempfile.TemporaryDirectory(prefix="vtrrk-photography-") as temp_dir:
         temp_root = Path(temp_dir)
         temp_output = temp_root / "photography"
         temp_output.mkdir(parents=True, exist_ok=True)
+        if OUTPUT.is_dir():
+            for source_path in OUTPUT.rglob("*"):
+                relative_path = source_path.relative_to(OUTPUT)
+                target_path = temp_output / relative_path
+                if source_path.is_dir():
+                    target_path.mkdir(parents=True, exist_ok=True)
+                elif source_path.is_file():
+                    target_path.parent.mkdir(parents=True, exist_ok=True)
+                    try:
+                        os.link(source_path, target_path)
+                    except OSError:
+                        shutil.copy2(source_path, target_path)
+
         entries: list[dict[str, object]] = []
+        current_ids: set[str] = set()
+        skipped_count = 0
+        regenerated_count = 0
         total_photos = len(source_photos)
         progress_step = max(1, total_photos // 20)
 
@@ -126,25 +156,41 @@ def main() -> None:
                 model = ""
                 target_base = temp_output / category / slug(photo.stem)
 
-            extension = save_derivative(photo, target_base, WEB_MAX)
-            thumb_extension = save_derivative(
-                photo, target_base.with_name(target_base.name + "-thumb"), THUMB_MAX
+            entry_id = image_id(relative, category)
+            source_stat = photo.stat()
+            existing = existing_catalog.get(entry_id)
+            can_reuse = (
+                existing is not None
+                and existing.get("source_size") == source_stat.st_size
+                and existing.get("source_mtime_ns") == source_stat.st_mtime_ns
+                and isinstance(existing.get("file"), str)
+                and isinstance(existing.get("thumbnail"), str)
+                and (OUTPUT / existing["file"]).is_file()
+                and (OUTPUT / existing["thumbnail"]).is_file()
             )
 
-            published_file = target_base.with_suffix(extension).relative_to(temp_output).as_posix()
-            thumbnail_file = (
-                target_base.with_name(target_base.name + "-thumb")
-                .with_suffix(thumb_extension)
-                .relative_to(temp_output)
-                .as_posix()
-            )
+            if can_reuse:
+                entry = dict(existing)
+                skipped_count += 1
+            else:
+                extension = save_derivative(photo, target_base, WEB_MAX)
+                thumb_extension = save_derivative(
+                    photo, target_base.with_name(target_base.name + "-thumb"), THUMB_MAX
+                )
 
-            with Image.open(photo) as image:
-                width, height = ImageOps.exif_transpose(image).size
+                published_file = target_base.with_suffix(extension).relative_to(temp_output).as_posix()
+                thumbnail_file = (
+                    target_base.with_name(target_base.name + "-thumb")
+                    .with_suffix(thumb_extension)
+                    .relative_to(temp_output)
+                    .as_posix()
+                )
 
-            entries.append(
-                {
-                    "id": image_id(relative, category),
+                with Image.open(photo) as image:
+                    width, height = ImageOps.exif_transpose(image).size
+
+                entry = {
+                    "id": entry_id,
                     "file": published_file,
                     "thumbnail": thumbnail_file,
                     "country": slug(country),
@@ -155,12 +201,27 @@ def main() -> None:
                     "height": height,
                     "categories": [category],
                     "published": True,
+                    "source_size": source_stat.st_size,
+                    "source_mtime_ns": source_stat.st_mtime_ns,
                 }
-            )
+                regenerated_count += 1
+
+            current_ids.add(entry_id)
+            entries.append(entry)
 
             if index == 1 or index % progress_step == 0 or index == total_photos:
                 percent = (index / total_photos * 100) if total_photos else 100
-                print(f"  Processed {index:,} / {total_photos:,} ({percent:5.1f}%)")
+                print(f"  Scanned {index:,} / {total_photos:,} ({percent:5.1f}%) — regenerated {regenerated_count:,}, reused {skipped_count:,}")
+
+        for old_id, old_entry in existing_catalog.items():
+            if old_id in current_ids:
+                continue
+            for key in ("file", "thumbnail"):
+                old_file = old_entry.get(key)
+                if isinstance(old_file, str):
+                    stale_path = temp_output / old_file
+                    if stale_path.is_file():
+                        stale_path.unlink()
 
         catalog_path = temp_output / "catalog.json"
         catalog_path.write_text(json.dumps(entries, indent=2) + "\n", encoding="utf-8")
@@ -172,7 +233,9 @@ def main() -> None:
         OUTPUT.parent.mkdir(parents=True, exist_ok=True)
         shutil.move(str(temp_output), str(OUTPUT))
 
-    print(f"Published {len(entries)} photograph(s) to {OUTPUT}.")
+    print(f"Published {len(entries):,} photograph(s) to {OUTPUT}.")
+    print(f"  Regenerated : {regenerated_count:,}")
+    print(f"  Reused      : {skipped_count:,}")
 
 
 if __name__ == "__main__":
