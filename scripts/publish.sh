@@ -22,9 +22,9 @@ if [ "$(git branch --show-current)" != "main" ]; then
     exit 1
 fi
 
-if [ -n "$(git status --porcelain)" ]; then
+if [ -n "$(git status --porcelain -- . \':(exclude)public/photography/\')" ]; then
     echo "ERROR: Working tree is not clean."
-    echo "Commit or stash existing changes before publishing photography."
+    echo "Commit or stash existing changes outside public/photography before publishing."
     git status --short
     exit 1
 fi
