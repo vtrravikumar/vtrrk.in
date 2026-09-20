@@ -28,7 +28,7 @@ There was a useful contrast between these outings and the resort itself. The isl
 
 ## The waterfall we almost didn't find
 
-One of the most memorable outings came from something much less touristy. While looking at nearby attractions on Google, we found a waterfall that appeared to be close by. We followed the directions and eventually found ourselves driving through sugarcane plantations.
+One of the most memorable outings came from something much less touristy. While looking at nearby attractions on Google, we found a Rochester waterfall that appeared to be close by. We followed the directions and eventually found ourselves driving through sugarcane plantations.
 
 At that point I was a little concerned — not just about whether we were going in the right direction, but also about the safety of ourselves and the rental car. We decided to take a leap of faith and continued.
 
