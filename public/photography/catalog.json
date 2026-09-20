@@ -3995,6 +3995,771 @@
     "source_mtime_ns": 1789445472000000000
   },
   {
+    "id": "switzerland-zurich-img-3119-a391dd233a",
+    "file": "countries/switzerland/zurich/img-3119.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3119-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3119",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 6098379,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3240-ff0258e13d",
+    "file": "countries/switzerland/zurich/img-3240.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3240-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3240",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2477609,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3330-9975f7b2fa",
+    "file": "countries/switzerland/zurich/img-3330.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3330-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3330",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3559558,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3362-d7e5a820ac",
+    "file": "countries/switzerland/zurich/img-3362.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3362-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3362",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4198436,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3419-1526fbd0cc",
+    "file": "countries/switzerland/zurich/img-3419.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3419-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3419",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4967917,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3424-4315926d85",
+    "file": "countries/switzerland/zurich/img-3424.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3424-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3424",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3306306,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3489-d07c4f1850",
+    "file": "countries/switzerland/zurich/img-3489.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3489-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3489",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4868955,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3490-4d4e3d59c2",
+    "file": "countries/switzerland/zurich/img-3490.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3490-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3490",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3019684,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3510-09772bee12",
+    "file": "countries/switzerland/zurich/img-3510.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3510-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3510",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2998822,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3522-ae4c75be53",
+    "file": "countries/switzerland/zurich/img-3522.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3522-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3522",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4011617,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3523-56e2ba318d",
+    "file": "countries/switzerland/zurich/img-3523.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3523-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3523",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3749430,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3528-5642c4646b",
+    "file": "countries/switzerland/zurich/img-3528.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3528-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3528",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4011885,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3546-c9c078bb2d",
+    "file": "countries/switzerland/zurich/img-3546.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3546-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3546",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2894839,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3577-50851a062b",
+    "file": "countries/switzerland/zurich/img-3577.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3577-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3577",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4395396,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3599-86f2efe152",
+    "file": "countries/switzerland/zurich/img-3599.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3599-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3599",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4256976,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3606-a351e3759c",
+    "file": "countries/switzerland/zurich/img-3606.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3606-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3606",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3650137,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3622-06df9becfb",
+    "file": "countries/switzerland/zurich/img-3622.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3622-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3622",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4923165,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3625-3c5b28a661",
+    "file": "countries/switzerland/zurich/img-3625.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3625-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3625",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4741645,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3636-908b5c834d",
+    "file": "countries/switzerland/zurich/img-3636.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3636-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3636",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4130042,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3637-828f8fa157",
+    "file": "countries/switzerland/zurich/img-3637.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3637-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3637",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3111556,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3669-d2edccf7f6",
+    "file": "countries/switzerland/zurich/img-3669.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3669-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3669",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2959118,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3724-573d5de210",
+    "file": "countries/switzerland/zurich/img-3724.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3724-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3724",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3604344,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3741-6d9a479701",
+    "file": "countries/switzerland/zurich/img-3741.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3741-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3741",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2962313,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3743-128d02ceb3",
+    "file": "countries/switzerland/zurich/img-3743.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3743-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3743",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2802998,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3745-b5dd56b807",
+    "file": "countries/switzerland/zurich/img-3745.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3745-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3745",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2595569,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3785-98540c9da7",
+    "file": "countries/switzerland/zurich/img-3785.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3785-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3785",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2443292,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3820-7a6bb31c55",
+    "file": "countries/switzerland/zurich/img-3820.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3820-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3820",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2420250,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3822-f90bcc8a06",
+    "file": "countries/switzerland/zurich/img-3822.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3822-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3822",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2221208,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3824-23686d738e",
+    "file": "countries/switzerland/zurich/img-3824.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3824-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3824",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2439225,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3826-b71704c860",
+    "file": "countries/switzerland/zurich/img-3826.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3826-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3826",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2482617,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3832-a8ac775c5a",
+    "file": "countries/switzerland/zurich/img-3832.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3832-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3832",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2245558,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3867-7d5cb9be28",
+    "file": "countries/switzerland/zurich/img-3867.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3867-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3867",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2813733,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3876-af42c51cbe",
+    "file": "countries/switzerland/zurich/img-3876.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3876-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3876",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2920548,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3886-e07bdc54a8",
+    "file": "countries/switzerland/zurich/img-3886.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3886-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3886",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2847624,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3887-c27fc0f9f7",
+    "file": "countries/switzerland/zurich/img-3887.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3887-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3887",
+    "width": 4898,
+    "height": 2842,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2718330,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3891-2797bff702",
+    "file": "countries/switzerland/zurich/img-3891.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3891-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3891",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2782206,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3892-a2c399b960",
+    "file": "countries/switzerland/zurich/img-3892.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3892-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3892",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2745865,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3895-b2d2a6ca6d",
+    "file": "countries/switzerland/zurich/img-3895.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3895-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3895",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2589546,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3900-89b65c8b75",
+    "file": "countries/switzerland/zurich/img-3900.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3900-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3900",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 3033624,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3914-ae0579614c",
+    "file": "countries/switzerland/zurich/img-3914.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3914-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3914",
+    "width": 3265,
+    "height": 4898,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2666264,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3927-892f37a4cc",
+    "file": "countries/switzerland/zurich/img-3927.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3927-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3927",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2584722,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3959-3b50bb75d3",
+    "file": "countries/switzerland/zurich/img-3959.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3959-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3959",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2665273,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-3960-600393c4ae",
+    "file": "countries/switzerland/zurich/img-3960.avif",
+    "thumbnail": "countries/switzerland/zurich/img-3960-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_3960",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2858000,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-img-4044-a739f76a73",
+    "file": "countries/switzerland/zurich/img-4044.avif",
+    "thumbnail": "countries/switzerland/zurich/img-4044-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "IMG_4044",
+    "width": 4898,
+    "height": 3265,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 4400219,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
+    "id": "switzerland-zurich-panoramio-133197455-210bf81f4a",
+    "file": "countries/switzerland/zurich/panoramio-133197455.avif",
+    "thumbnail": "countries/switzerland/zurich/panoramio-133197455-thumb.avif",
+    "country": "switzerland",
+    "place": "zurich",
+    "model": "",
+    "title": "panoramio-133197455",
+    "width": 4608,
+    "height": 3456,
+    "categories": [
+      "countries"
+    ],
+    "published": true,
+    "source_size": 2477597,
+    "source_mtime_ns": 1789883304000000000
+  },
+  {
     "id": "uae-abudhabi-1v2a0174-1-ebe5bc0829",
     "file": "countries/uae/abudhabi/1v2a0174-1.avif",
     "thumbnail": "countries/uae/abudhabi/1v2a0174-1-thumb.avif",
