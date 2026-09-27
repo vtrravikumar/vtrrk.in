@@ -1,0 +1,55 @@
+title: Munnar
+country: India
+region: Kerala
+continent: Asia
+status: visited
+content_status: published
+banner: /images/travel/munnar.jpg
+photography: []
+metadata:
+  featured: false
+visits:
+  - title: A quiet escape to the hills
+    from: 2026-09-23
+    to: 2026-09-26
+    duration_days: 4
+    travelled_with:
+      - Pragati
+    travel_type: road trip
+    solo: false
+    origin: Chennai, India
+    route:
+      - Chennai
+      - Trichy
+      - Dindigul
+      - Theni
+      - Munnar
+      - Chennai
+    places_visited:
+      - Munnar
+      - Amritha Ayurvedic Spa
+      - Nearby chocolate factory
+    highlights:
+      - Sudden decision for a hill-station getaway
+      - Early morning drive from Chennai in our own car
+      - The Feel Munnar Resort
+      - 130-minute Ayurvedic spa session
+      - Amritha Ayurvedic Spa
+      - Le Montfort
+      - Dark chocolate and coffee from a nearby chocolate factory
+      - A deliberately slow holiday with very little sightseeing
+    flights: []
+    accommodation:
+      - place: Munnar
+        name: The Feel Munnar Resort
+        dates: 2026-09-23 to 2026-09-25
+        notes: Small, cozy resort with around 20 rooms, mostly with garden views and balconies
+      - place: Munnar
+        name: Le Montfort
+        dates: 2026-09-25 to 2026-09-26
+        notes: Former school converted into a hilltop resort with expansive views
+    transport:
+      - Own car from Chennai to Munnar and back
+    stays: []
+    occasion: null
+    notes: A deliberately relaxed hill-station holiday after more than six months without a holiday.
