@@ -370,8 +370,10 @@ Centralised page metadata now derives canonical URLs from the current page, uses
 
 ## SEO-002 — Add sitemap / robots foundations
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: SEO
+
+Configured the official Astro sitemap integration and added sitemap discovery metadata plus `public/robots.txt` pointing to the sitemap index. Verified locally: production build generated 472 pages, `dist/sitemap-index.xml`, `dist/sitemap-0.xml`, and `dist/robots.txt`. The sitemap dependency and lockfile are committed; working tree is clean.
 
 ## PERF-001 — Image optimisation
 - Priority: P1
