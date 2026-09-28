@@ -220,10 +220,10 @@ Create a curated project index.
 
 ## PROJ-002 — Create project detail model/pages
 - Priority: P1
-- Status: In Progress
+- Status: Done
 - Area: Projects
 
-Use the Projects Markdown collection as the single source for the index and detail pages. The schema supports title, description, purpose, status, links and optional hero image; the Markdown body carries the project narrative. Remove the duplicate TypeScript model and competing detail route after the collection-driven index is connected. Verify with a production build before marking Done.
+The Projects Markdown collection is the single source for the index and detail pages. The schema supports title, description, purpose, status, links and optional hero image; the Markdown body carries the project narrative. The duplicate TypeScript model and competing detail route have been removed. Production build verified: all three project detail pages are generated successfully.
 
 ## PROJ-003 — Connect current projects
 - Priority: P1
