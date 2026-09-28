@@ -241,21 +241,21 @@ The three projects have dedicated Markdown-backed detail pages. Added public des
 - Status: Done
 - Area: Photography
 
-V1 is defined as a lightweight gateway to external photographic platforms.
+The photography experience is a locally published portfolio organised by category, with country/place and model sub-portfolios where applicable. External platforms such as 500px and Instagram are optional outbound destinations, not the primary photography experience.
 
 ## PHOTO-002 — Build photography landing experience
 - Priority: P1
 - Status: Done
 - Area: Photography
 
-A lightweight landing page linking to 500px and Instagram is implemented. No full photo archive is hosted in V1.
+The photography portfolio is implemented using a local published catalog and optimised image derivatives. Category and portfolio pages provide curated discovery, with paginated galleries where applicable. The site does not rely on a third-party photo feed or embed to render its core experience.
 
 ## PHOTO-003 — Define selective image/embedding strategy
 - Priority: P2
-- Status: Planned
+- Status: Done
 - Area: Photography
 
-Determine when a small local image, external image reference or external embed is appropriate. External integrations must not be required for basic page rendering.
+Verified against the current implementation. The vtrrk_photography publishing workflow reads originals from the NAS and publishes locally served, web-optimised derivatives and public/photography/catalog.json. Pages use local image paths and catalog data; external platforms are optional outbound links rather than rendering dependencies. The publishing workflow supports AVIF with WebP fallback, creates thumbnails, and preserves the existing published output if processing fails.
 
 ## PHOTO-004 — Evaluate future dedicated photography site
 - Priority: P3
