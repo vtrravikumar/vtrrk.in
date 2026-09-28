@@ -351,7 +351,9 @@ Consider an interactive map after the narrative travelogue is established.
 
 ## QA-001 — Responsive audit
 - Priority: P1
-- Status: Planned
+- Status: Done
+
+Reviewed on iPhone, iPad and desktop. Ravi confirmed the site is responsive and displays as expected across these device classes.
 - Area: Quality
 
 ## QA-002 — Accessibility audit
