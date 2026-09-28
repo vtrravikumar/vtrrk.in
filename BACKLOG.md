@@ -106,7 +106,8 @@ Agreed direction:
 Decision:
 
 - Use Astro content collections for durable, narrative content and structured travel records, especially Travel and future Writing articles.
-- Keep small, curated site-wide presentation data in TypeScript modules where a content collection would add unnecessary complexity, including Books, Projects and Now.
+- Keep small, curated site-wide presentation data in TypeScript modules where a content collection would add unnecessary complexity, including Books and Now.
+- Use the Projects content collection because each project has a durable narrative detail page; derive both the index and detail pages from the same Markdown entries.
 - Keep the public site presentation simpler than the underlying travel metadata.
 - Do not introduce a CMS or database for ordinary V1 publishing.
 - The Travelogue redemption feature is a deliberate, narrow D1-backed exception for one-time download-code redemption.
@@ -219,10 +220,10 @@ Create a curated project index.
 
 ## PROJ-002 — Create project detail model/pages
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Projects
 
-Use a concise model covering what the project is, why it exists, current status and relevant links.
+The Projects Markdown collection is the single source for the index and detail pages. The schema supports title, description, purpose, status, links and optional hero image; the Markdown body carries the project narrative. The duplicate TypeScript model and competing detail route have been removed. Production build verified: all three project detail pages are generated successfully.
 
 ## PROJ-003 — Connect current projects
 - Priority: P1
