@@ -227,10 +227,10 @@ The Projects Markdown collection is the single source for the index and detail p
 
 ## PROJ-003 — Connect current projects
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Projects
 
-Create proper destinations for Ride Together, VTR Press and HomeLab Engineering where appropriate.
+The three projects have dedicated Markdown-backed detail pages. Added public destination links where appropriate: HomeLab Engineering links to its book page, and VTR Press links to its public repository. Ride Together remains self-contained until a public project destination is available.
 
 ---
 
