@@ -363,8 +363,10 @@ Reviewed on iPhone, iPad and desktop. Ravi confirmed the site is responsive and 
 
 ## SEO-001 — Complete metadata system
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: SEO
+
+Centralised page metadata now derives canonical URLs from the current page, uses the canonical URL for Open Graph, and provides Open Graph plus X/Twitter card metadata. A dedicated site-wide social preview image is committed at `public/images/social-preview.jpg`. Production build verified locally: Astro generated 472 pages successfully in 4.56 seconds, and the working tree is clean.
 
 ## SEO-002 — Add sitemap / robots foundations
 - Priority: P1
