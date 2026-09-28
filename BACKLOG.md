@@ -319,14 +319,14 @@ Implement the common template and reusable metadata model through the unified tr
 
 ## TRAVEL-007 — Curate initial travel destinations
 - Priority: P1
-- Status: In Progress
+- Status: Parked
 - Area: Travel
 
 Use the supplied country/status record as the initial planning data and continue adding destinations and Indian journeys through the established common travel model.
 
 ## TRAVEL-008 — Import/reconcile travel records
 - Priority: P1
-- Status: In Progress
+- Status: Parked
 - Area: Travel
 
 Review Ravi's available flight/travel records and identify useful factual metadata for the initial destinations. Preserve richer source data separately from public presentation where appropriate.
