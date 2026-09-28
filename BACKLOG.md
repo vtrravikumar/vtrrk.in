@@ -385,7 +385,9 @@ The site is predominantly static and uses only small amounts of client-side Java
 
 ## QA-003 — Production build verification
 - Priority: P0
-- Status: Planned
+- Status: Done
+
+Production build verified locally from `~/LocalRepos/vtrrk.in`: Astro completed successfully, generating 472 pages in 5.11 seconds. `git status --short` was clean after the build.
 - Area: Quality
 
 ---
