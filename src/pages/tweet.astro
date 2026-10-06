@@ -61,6 +61,16 @@ const topics = [
 <script>
   const API_URL = "https://tweetpilot-api.vtrravikumar.workers.dev/v1/tweet/generate";
   const DEFAULT_MAX_LENGTH = 140;
+  const USAGE_KEY_STORAGE = "vichar.usageKey";
+
+  function getUsageKey() {
+    const existing = window.localStorage.getItem(USAGE_KEY_STORAGE)?.trim();
+    if (existing && existing.length >= 20) return existing;
+
+    const key = crypto.randomUUID();
+    window.localStorage.setItem(USAGE_KEY_STORAGE, key);
+    return key;
+  }
 
   const topic = document.querySelector("#topic");
   const location = document.querySelector("#location");
@@ -99,7 +109,10 @@ const topics = [
     try {
       const response = await fetch(API_URL, {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${getUsageKey()}`,
+        },
         body: JSON.stringify({
           topic: selectedTopic,
           location: location.value.trim(),
@@ -111,7 +124,11 @@ const topics = [
       const payload = await response.json().catch(() => ({}));
 
       if (!response.ok || typeof payload.tweet !== "string") {
-        throw new Error(payload.error || "Tweet creation failed.");
+        const errorMessage =
+          payload?.error && typeof payload.error === "object"
+            ? payload.error.message
+            : payload?.error;
+        throw new Error(errorMessage || "Tweet creation failed.");
       }
 
       tweet.value = payload.tweet;
