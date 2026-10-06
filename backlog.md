@@ -477,7 +477,7 @@ The web client uses the production Cloudflare Worker session endpoint followed b
 - Status: Done
 - Area: Vichar
 
-The web page uses the approved Vichar artwork and the documented Vichar naming/palette. The canonical 128px artwork is mirrored into public/brand/ for the website.
+The web page uses the approved Vichar artwork and documented naming/palette. The public header now uses the approved Vichar lockup derived from the brand board, with English-only public messaging and the tagline From thought to expression.
 
 ## VICHAR-005 — Verify production Vichar end to end
 - Priority: P0
@@ -498,7 +498,7 @@ Add durable rate limiting or equivalent abuse/cost protection before broad publi
 - Status: Planned
 - Area: Vichar / Branding
 
-Derive and verify the remaining website/favicon/store asset sizes from the same approved artwork rather than creating independent variants.
+Derive and verify the remaining website/favicon/store asset sizes from the same approved artwork rather than creating independent variants. Keep primary public-facing branding English-first; do not surface the Sanskrit line in the public UI.
 
 ## VICHAR-008 — Assess repository rename
 - Priority: P3
