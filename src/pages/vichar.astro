@@ -19,11 +19,7 @@ const topics = [
     <header class="hero">
       <div class="brand-lockup" aria-label="Vichar — By VTRRK">
         <div class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 64" role="img">
-            <path class="mark-v" d="M7 12 20 52 32 29 44 52 57 12h-11L44 31 32 8 20 31 18 12Z"/>
-            <path class="mark-gold" d="M23 38c4-8 9-12 15-12 4 0 7 1 10 3-4 2-8 3-12 3-4 0-8 2-13 6Z"/>
-            <path class="mark-orange" d="M25 44c6-5 12-7 19-7 4 0 7 1 10 2-5 3-10 5-15 5-5 0-9 1-14 4Z"/>
-          </svg>
+          <img src="/brand/vichar-icon-128.png" alt="" width="58" height="58" />
         </div>
         <div>
           <div class="eyebrow">विचारं लभताम्</div>
@@ -192,10 +188,7 @@ const topics = [
   .hero{padding:3.25rem 0 2.5rem}
   .brand-lockup{display:flex;align-items:center;gap:1rem}
   .logo-mark{width:58px;height:58px;flex:0 0 58px;border-radius:16px;background:#DC143C;display:grid;place-items:center;overflow:hidden}
-  .logo-mark svg{width:49px;height:49px}
-  .mark-v{fill:#FFF4E6}
-  .mark-gold{fill:#FFC400}
-  .mark-orange{fill:#FF8A00}
+  .logo-mark img{display:block;width:58px;height:58px;object-fit:cover}
   .eyebrow{margin:0 0 .05rem;color:#DC143C;font-size:.68rem;font-weight:800;letter-spacing:.12em}
   .wordmark{font-size:clamp(3.2rem,8vw,5rem);line-height:.8;letter-spacing:-.075em;font-weight:900;color:#DC143C}
   .gold{color:#FFC400}.orange{color:#FF8A00}
@@ -233,7 +226,7 @@ const topics = [
     main{width:min(760px,calc(100% - 1.5rem))}
     .hero{padding:2.5rem 0 2rem}
     .logo-mark{width:50px;height:50px;flex-basis:50px;border-radius:14px}
-    .logo-mark svg{width:43px;height:43px}
+    .logo-mark img{width:50px;height:50px}
     .controls{grid-template-columns:1fr}
     .result-heading{align-items:flex-start;flex-direction:column;gap:.2rem}
   }
