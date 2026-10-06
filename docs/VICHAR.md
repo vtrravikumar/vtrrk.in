@@ -75,7 +75,7 @@ Approved messaging:
 - `विचारात् वाक्यं भवति`
 - **From thought to expression.**
 
-The website must consume the approved Vichar artwork rather than recreating a logo independently. The current website lockup asset is stored under `public/brand/`.
+The website must consume the approved Vichar artwork rather than recreating a logo independently. The current canonical website artwork asset is `public/brand/vichar-icon-128.png`, copied from the approved Vichar artwork source.
 
 ## What is complete
 
