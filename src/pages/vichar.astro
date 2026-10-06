@@ -1,0 +1,210 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const topics = [
+  "Technology & AI",
+  "Photography",
+  "Royal Enfield & Riding",
+  "Travel & Exploration",
+  "Life & Observations",
+  "Surprise me",
+];
+---
+
+<BaseLayout
+  title="Vichar — By VTRRK"
+  description="From thought to expression. Create concise, personalized posts in the voice of V.T.R. Ravi Kumar."
+>
+  <main>
+    <header class="hero">
+      <p class="eyebrow">विचारं लभताम्</p>
+      <div class="wordmark">V<span class="gold">i</span>ch<span class="orange">a</span>r</div>
+      <p class="byline">By VTRRK</p>
+      <p class="sanskrit">विचारात् वाक्यं भवति</p>
+      <h1>From thought to expression.</h1>
+      <p class="intro">A personal AI writing companion for turning an idea into something worth posting.</p>
+    </header>
+
+    <section class="creator" aria-label="Vichar creator">
+      <div class="controls">
+        <label>
+          <span>Topic</span>
+          <select id="topic">
+            {topics.map((topic) => <option value={topic}>{topic}</option>)}
+          </select>
+        </label>
+        <label>
+          <span>Location <em>optional</em></span>
+          <input id="location" type="text" placeholder="e.g. Chennai" maxlength="80" />
+        </label>
+      </div>
+
+      <div class="actions">
+        <button id="create" type="button">Create a thought</button>
+        <span id="status" role="status" aria-live="polite">Ready.</span>
+      </div>
+
+      <div id="result-wrap" class="result-wrap" hidden>
+        <label for="tweet">Your expression</label>
+        <textarea id="tweet" maxlength="140" rows="5" spellcheck="true"></textarea>
+        <div class="result-footer">
+          <span id="count">0 / 140</span>
+          <button id="copy" type="button" class="secondary">Copy</button>
+        </div>
+        <button id="another" type="button" class="text-button">Create another</button>
+      </div>
+
+      <p class="note">Review, edit and post yourself. Vichar never posts to X for you.</p>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  const API_URL = "https://tweetpilot-api.vtrravikumar.workers.dev/v1/tweet/generate";
+  const SESSION_URL = "https://tweetpilot-api.vtrravikumar.workers.dev/v1/web/session";
+  const MAX_LENGTH = 140;
+
+  const topic = document.querySelector("#topic");
+  const location = document.querySelector("#location");
+  const create = document.querySelector("#create");
+  const another = document.querySelector("#another");
+  const copy = document.querySelector("#copy");
+  const tweet = document.querySelector("#tweet");
+  const count = document.querySelector("#count");
+  const status = document.querySelector("#status");
+  const resultWrap = document.querySelector("#result-wrap");
+
+  const topics = Array.from(topic.options).map((option) => option.value);
+  let lastTopic = "";
+  let webToken = "";
+  let tokenExpiresAt = 0;
+
+  async function getWebToken() {
+    if (webToken && Date.now() < tokenExpiresAt - 30_000) return webToken;
+
+    const response = await fetch(SESSION_URL, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      cache: "no-store",
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok || typeof payload.token !== "string") {
+      throw new Error(payload?.error?.message || "Vichar web access is unavailable.");
+    }
+
+    webToken = payload.token;
+    tokenExpiresAt = Date.now() + Number(payload.expiresIn || 600) * 1000;
+    return webToken;
+  }
+
+  function updateCount() {
+    count.textContent = tweet.value.length + " / " + MAX_LENGTH;
+    count.toggleAttribute("data-over", tweet.value.length > MAX_LENGTH);
+  }
+
+  function chooseTopic() {
+    if (topic.value !== "Surprise me") return topic.value;
+    const choices = topics.filter((value) => value !== "Surprise me" && value !== lastTopic);
+    return choices[Math.floor(Math.random() * choices.length)] ?? topics[0];
+  }
+
+  async function generate() {
+    const selectedTopic = chooseTopic();
+    lastTopic = selectedTopic;
+    create.disabled = true;
+    another.disabled = true;
+    status.textContent = "Thinking…";
+    status.removeAttribute("data-error");
+
+    try {
+      const token = await getWebToken();
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({
+          topic: selectedTopic,
+          location: location.value.trim(),
+          style: "thoughtful",
+          maxLength: MAX_LENGTH,
+        }),
+      });
+
+      const payload = await response.json().catch(() => ({}));
+      if (response.status === 401) {
+        webToken = "";
+        tokenExpiresAt = 0;
+        throw new Error("Vichar web access expired. Please try again.");
+      }
+      if (!response.ok || typeof payload.tweet !== "string") {
+        throw new Error(payload?.error?.message || "Tweet creation failed.");
+      }
+
+      tweet.value = payload.tweet;
+      resultWrap.hidden = false;
+      updateCount();
+      status.textContent = selectedTopic === topic.value ? "Ready to review." : "Ready to review · " + selectedTopic;
+    } catch (error) {
+      status.textContent = error instanceof Error ? error.message : "Something went wrong.";
+      status.setAttribute("data-error", "");
+    } finally {
+      create.disabled = false;
+      another.disabled = false;
+    }
+  }
+
+  create.addEventListener("click", generate);
+  another.addEventListener("click", generate);
+  tweet.addEventListener("input", updateCount);
+
+  copy.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(tweet.value);
+      copy.textContent = "Copied";
+      window.setTimeout(() => { copy.textContent = "Copy"; }, 1400);
+    } catch {
+      tweet.focus();
+      tweet.select();
+      status.textContent = "Select the text and copy it manually.";
+    }
+  });
+</script>
+
+<style>
+  main{width:min(920px,calc(100% - 3rem));margin:0 auto}
+  .hero{padding:7rem 0 4rem;max-width:780px}
+  .eyebrow{color:#DC143C;font-size:.78rem;font-weight:800;letter-spacing:.14em}
+  .wordmark{font-size:clamp(4rem,11vw,8rem);line-height:.85;letter-spacing:-.07em;font-weight:900;color:#DC143C}
+  .gold{color:#FFC400}.orange{color:#FF8A00}
+  .byline{margin:.7rem 0 1rem;color:#7A1025;font-weight:800;letter-spacing:.08em}
+  .sanskrit{color:#7A1025;font-size:1.05rem;margin:0 0 2rem}
+  h1{margin:0;font-size:clamp(2.4rem,6vw,5rem);line-height:1;letter-spacing:-.045em}
+  .intro{max-width:650px;color:var(--muted);font-size:1.15rem;line-height:1.7}
+  .creator{border-top:2px solid #DC143C;padding:3rem 0 6rem}
+  .controls{display:grid;grid-template-columns:1.2fr .8fr;gap:1rem}
+  label{display:grid;gap:.55rem;color:var(--muted);font-size:.82rem;font-weight:700}
+  label em{font-style:normal;font-weight:400;opacity:.7}
+  select,input,textarea{width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:1rem;background:var(--surface);color:var(--foreground);font:inherit;outline:none}
+  select,input{height:3.2rem;padding:0 1rem}
+  textarea{min-height:9rem;padding:1.1rem 1.2rem;resize:vertical;line-height:1.55}
+  select:focus,input:focus,textarea:focus{border-color:#DC143C}
+  .actions{display:flex;align-items:center;gap:1rem;margin-top:1.5rem}
+  button{border:0;border-radius:999px;background:#DC143C;color:#FFF4E6;font:inherit;font-weight:800;padding:.85rem 1.25rem;cursor:pointer}
+  button:hover{background:#7A1025}
+  button:disabled{opacity:.45;cursor:wait}
+  .secondary{background:transparent;color:#DC143C;border:1px solid #DC143C}
+  .secondary:hover{background:#FFF4E6;color:#7A1025}
+  #status{color:var(--muted);font-size:.85rem}
+  #status[data-error]{color:#7A1025}
+  .result-wrap{margin-top:3rem}
+  .result-wrap>label{color:#7A1025;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+  .result-footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.8rem}
+  #count{color:var(--muted);font-size:.78rem}
+  #count[data-over]{color:#DC143C;font-weight:800}
+  .text-button{margin-top:1.5rem;background:transparent;color:#DC143C;padding:.3rem 0}
+  .text-button:hover{background:transparent;color:#7A1025}
+  .note{margin-top:3rem;color:var(--muted);font-size:.82rem}
+  @media(max-width:650px){main{width:min(100% - 2rem,920px)}.hero{padding:5rem 0 3rem}.controls{grid-template-columns:1fr}}
+</style>
