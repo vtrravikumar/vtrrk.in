@@ -488,10 +488,10 @@ Verify the deployed /vichar/ page after the latest logo/deployment changes, incl
 
 ## VICHAR-006 — Add durable public-use protection
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Vichar / Backend
 
-Add durable rate limiting or equivalent abuse/cost protection before broad public exposure of the generation endpoint. The backend currently has controlled CORS and bounded requests but does not yet have a durable shared rate limit.
+Durable public-use protection is implemented and deployed using a Cloudflare Durable Object with SQLite-backed usage counters. Production defaults are 10 generations per UTC day and 3 per minute. Extension installations use opaque installation keys; anonymous web users use a pseudonymous HMAC-derived client-IP identifier. Web usage fails closed when the required identity signal or secret is unavailable.
 
 ## VICHAR-007 — Complete canonical brand asset set
 - Priority: P2
@@ -502,17 +502,17 @@ Derive and verify the remaining website/favicon/store asset sizes from the same 
 
 ## VICHAR-008 — Assess repository rename
 - Priority: P3
-- Status: Planned
+- Status: Done
 - Area: Repository / Maintenance
 
-Assess renaming the vtrravikumar/tweetpilot repository to vtrravikumar/vichar. Do this only after confirming GitHub redirects, local remotes, Cloudflare/Worker deployment references, documentation links and any extension/build references can be migrated safely. This is optional and must not destabilise production.
+Decision: do not rename the repository. Keep `vtrravikumar/tweetpilot` as the engineering/backend repository while the public product remains **Vichar — By VTRRK**. This avoids unnecessary production and deployment churn.
 
 ## VICHAR-009 — Improve Vichar product hardening
 - Priority: P2
-- Status: Planned
+- Status: Done
 - Area: Vichar
 
-After the core workflow is stable, review duplicate-avoidance, error recovery, copy fallbacks, usage visibility and broader end-to-end validation. Keep enhancements subordinate to the simple human-controlled workflow.
+Core V1 hardening is complete: attribution is server-enforced and counted within `maxLength`, request bodies are capped, durable extension/web usage limits are active, usage identifiers are isolated, and regression coverage protects the controls. Production deployment and smoke testing confirmed the final attribution appears exactly once. Future UX refinements remain separate enhancements.
 
 ## VICHAR-010 — Add current-information / web-search generation
 - Priority: P3
