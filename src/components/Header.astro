@@ -7,7 +7,7 @@ const navigation = [
   { label: "Projects", href: "/projects/" },
   { label: "Travel", href: "/travel/" },
   { label: "Photography", href: "/photography/" },
-  { label: "Tweet", href: "/tweet/" },
+  { label: "Vichar", href: "/vichar/" },
 ];
 ---
 
@@ -21,45 +21,11 @@ const navigation = [
 </header>
 
 <style>
-  .site-header {
-    position:relative;
-    z-index:10;
-    width:min(1200px,calc(100% - 3rem));
-    margin:1rem auto 0;
-    padding:.7rem .8rem .7rem 1rem;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:1.5rem;
-    border:1px solid var(--border);
-    border-radius:999px;
-    background:var(--surface);
-    box-shadow:var(--glass-shadow);
-    backdrop-filter:blur(24px) saturate(150%);
-    -webkit-backdrop-filter:blur(24px) saturate(150%);
-  }
-  .brand {
-    font-size:.82rem;
-    font-weight:800;
-    letter-spacing:.14em;
-    text-decoration:none;
-    color:var(--foreground);
-    padding:.55rem .7rem;
-  }
-  .brand:hover { color:var(--accent); }
-  nav ul { display:flex; align-items:center; flex-wrap:wrap; gap:.15rem; list-style:none; margin:0; padding:0; }
-  nav a {
-    display:block;
-    color:var(--muted);
-    text-decoration:none;
-    font-size:.78rem;
-    padding:.55rem .65rem;
-    border-radius:999px;
-  }
-  nav a:hover, nav a[aria-current="page"] { color:var(--foreground); background:var(--accent-soft); }
-  @media (max-width:800px) {
-    .site-header { width:min(100% - 1.5rem,1200px); align-items:flex-start; flex-direction:column; border-radius:1.25rem; padding:.65rem; }
-    nav ul { gap:.05rem; }
-    nav a { padding:.45rem .55rem; }
-  }
+  .site-header {position:relative;z-index:10;width:min(1200px,calc(100% - 3rem));margin:1rem auto 0;padding:.7rem .8rem .7rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;border:1px solid var(--border);border-radius:999px;background:var(--surface);box-shadow:var(--glass-shadow);backdrop-filter:blur(24px) saturate(150%);-webkit-backdrop-filter:blur(24px) saturate(150%);}
+  .brand {font-size:.82rem;font-weight:800;letter-spacing:.14em;text-decoration:none;color:var(--foreground);padding:.55rem .7rem;}
+  .brand:hover {color:var(--accent);}
+  nav ul {display:flex;align-items:center;flex-wrap:wrap;gap:.15rem;list-style:none;margin:0;padding:0;}
+  nav a {display:block;color:var(--muted);text-decoration:none;font-size:.78rem;padding:.55rem .65rem;border-radius:999px;}
+  nav a:hover,nav a[aria-current="page"] {color:var(--foreground);background:var(--accent-soft);}
+  @media (max-width:800px){.site-header{width:min(100% - 1.5rem,1200px);align-items:flex-start;flex-direction:column;border-radius:1.25rem;padding:.65rem}nav ul{gap:.05rem}nav a{padding:.45rem .55rem}}
 </style>
