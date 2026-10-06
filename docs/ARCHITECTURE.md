@@ -67,7 +67,7 @@ Target structure:
 │   ├── pages/
 │   └── styles/
 ├── AGENTS.md
-├── BACKLOG.md
+├── backlog.md
 ├── README.md
 ├── SITE.md
 ├── astro.config.mjs
