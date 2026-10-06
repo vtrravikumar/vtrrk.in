@@ -19,6 +19,7 @@ The website currently brings together:
 - **Books** — information and supporting material for Ravi's published and developing books.
 - **Writing** — essays, notes, and other personal writing.
 - **Projects** — selected engineering and personal projects.
+- **Vichar** — a human-controlled AI writing companion for turning ideas into concise posts.
 
 ## Repository architecture
 
@@ -35,7 +36,7 @@ vtrrk.in/
 ├── scripts/             # Development and publishing utilities
 ├── README.md            # This document
 ├── SITE.md              # Site structure and content notes
-└── BACKLOG.md           # Development backlog
+└── backlog.md           # Development backlog
 ```
 
 The exact structure evolves as the site develops; the documentation files in the repository are the authoritative reference for implementation-specific decisions.
@@ -157,3 +158,8 @@ The goal is not to create a technology showcase for its own sake, but a durable 
 ---
 
 © V.T.R. Ravi Kumar
+
+
+## Vichar
+
+Vichar — By VTRRK is available at https://vtrrk.in/vichar/. It generates concise, personalized drafts for review and manual publication on X. The website integration is documented in `docs/VICHAR.md`; the backend/product implementation is maintained separately in the Vichar/TweetPilot repository.
