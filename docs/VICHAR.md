@@ -32,7 +32,7 @@ Vichar never clicks X's Post button and does not publish automatically.
 
 Implemented in `src/pages/vichar.astro`:
 
-- Vichar branding and tagline.
+- Vichar branding and English tagline.
 - Topic selection:
   - Technology & AI
   - Photography
@@ -69,13 +69,13 @@ Backend architecture, tests, deployment configuration and abuse-protection decis
 
 The canonical public name is **Vichar — By VTRRK**.
 
-Approved messaging:
+Approved public messaging:
 
-- `विचारं लभताम्`
-- `विचारात् वाक्यं भवति`
 - **From thought to expression.**
 
-The website must consume the approved Vichar artwork rather than recreating a logo independently. The current canonical website artwork asset is `public/brand/vichar-icon-128.png`, copied from the approved Vichar artwork source.
+The public website and extension use English-only primary branding. The Sanskrit phrase from the original brand board is not shown in the public UI; where useful for internal brand documentation, it may be referenced alongside an English translation.
+
+The website uses the approved Vichar artwork rather than recreating the logo independently. The current public website lockup is `public/brand/vichar-lockup-320.webp`, derived directly from the approved Vichar brand board.
 
 ## What is complete
 
@@ -86,15 +86,15 @@ The website must consume the approved Vichar artwork rather than recreating a lo
 - Character-counting/editor experience.
 - Copy workflow.
 - Responsive presentation.
-- Canonical Vichar artwork integration.
+- Approved Vichar lockup integration.
 - Documentation and backlog entry.
 
 ## Remaining work
 
 ### Immediate verification
 
-- Verify the latest production deployment after the canonical artwork fix.
-- Smoke-test generation, token acquisition, editing, Copy and Create Another.
+- Verify the latest production deployment after the branding fix.
+- Smoke-test generation, token acquisition, editing, character count, Copy and Create Another.
 - Check desktop and mobile presentation.
 
 ### Hardening
@@ -106,14 +106,15 @@ The website must consume the approved Vichar artwork rather than recreating a lo
 
 ### Branding
 
-- Derive remaining favicon/store/icon sizes from the approved artwork.
+- Derive and verify the remaining favicon/store/icon sizes from the same approved artwork.
 - Do not redraw or approximate the approved mark.
+- Keep primary public-facing branding English-first and globally understandable.
 
 ### Repository naming
 
 The website repository `vtrrk.in` should remain named after the website.
 
-The separate backend/product repository is currently `tweetpilot`. Renaming it to `vichar` is desirable for product consistency but optional. It should only be done after checking GitHub redirects, local remotes, Cloudflare Worker/deployment references, documentation links, extension references and any external automation.
+The separate backend/product repository is currently `tweetpilot`. Renaming it to `vichar` is optional and should only be done after checking GitHub redirects, local remotes, Cloudflare Worker/deployment references, documentation links, extension references and any external automation.
 
 ## Source of truth
 
@@ -122,7 +123,3 @@ The separate backend/product repository is currently `tweetpilot`. Renaming it t
 - Website backlog: `backlog.md`.
 - Product/backend implementation: `vtrravikumar/tweetpilot`.
 - Brand standard: `tweetpilot/docs/vichar-brand.md`.
-
-## Backlog
-
-The Vichar-specific website work is tracked under `VICHAR-*` items in `backlog.md`.
