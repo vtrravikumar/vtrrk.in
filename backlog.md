@@ -513,3 +513,18 @@ Assess renaming the vtrravikumar/tweetpilot repository to vtrravikumar/vichar. D
 - Area: Vichar
 
 After the core workflow is stable, review duplicate-avoidance, error recovery, copy fallbacks, usage visibility and broader end-to-end validation. Keep enhancements subordinate to the simple human-controlled workflow.
+
+## VICHAR-010 — Add current-information / web-search generation
+- Priority: P3
+- Status: Parked
+- Area: Vichar / Backend
+
+Allow Vichar to recognise requests that depend on current information and, when appropriate, use web search before generating the thought. Examples include latest news, local news, current trends, today's events and location-aware developments. The experience should distinguish current-information generation from ordinary creative generation rather than requiring users to formulate search instructions manually.
+
+Initial direction:
+- Use the user's topic and optional location to determine when current information is needed.
+- Perform web search server-side; never expose search/API credentials in the extension.
+- Preserve the existing human-controlled generate → review/edit → use/post workflow.
+- Consider a small free allowance for current-information searches and a larger allowance as a future paid/freemium entitlement, but defer pricing and entitlement design until the core Vichar V1 is stable.
+- Do not implement this feature as part of the current V1 path; revisit after planned extension, backend hardening and production validation work is complete.
+\n
