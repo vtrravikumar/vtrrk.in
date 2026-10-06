@@ -528,3 +528,11 @@ Initial direction:
 - Consider a small free allowance for current-information searches and a larger allowance as a future paid/freemium entitlement, but defer pricing and entitlement design until the core Vichar V1 is stable.
 - Do not implement this feature as part of the current V1 path; revisit after planned extension, backend hardening and production validation work is complete.
 \n
+
+## VICHAR-011 — Add Vichar attribution to generated drafts
+- Priority: P1
+- Status: Done
+- Area: Vichar / Product / Marketing
+
+Every generated Vichar draft ends with the exact final line **Vichar by @vtrrk**. The attribution is enforced server-side and counts within the requested character limit, so it cannot be accidentally omitted from generated drafts. The user remains free to edit or remove it before manually posting to X.
+\n
