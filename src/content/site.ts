@@ -6,7 +6,7 @@ export const now = {
 		{
 			title: "Vichar",
 			description:
-				"Building a personal AI-assisted writing companion for X. The first production Tweet Creator is live on vtrrk.in, and I'm now working on the Chrome extension that brings the workflow into the X composer.",
+				"Building Vichar — an AI writing companion for X. The web experience is live, and the Chrome extension is being prepared to bring the workflow into the X composer.",
 		},
 		{
 			title: "TruePost",
