@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Vichar Privacy Policy — VTRRK"
+  description="Privacy policy for Vichar — By VTRRK, the AI writing companion for the X composer."
+>
+  <main>
+    <header>
+      <p class="label">Vichar</p>
+      <h1>Privacy Policy</h1>
+      <p class="intro">Vichar — By VTRRK is designed to help you turn an idea into a concise draft while keeping you in control of what you publish.</p>
+      <p class="updated">Effective date: October 7, 2026</p>
+    </header>
+
+    <article>
+      <section>
+        <h2>What Vichar does</h2>
+        <p>Vichar is an AI writing companion for the X composer. It generates short draft suggestions that you can review, edit, copy, or place into an X draft. Vichar does not publish posts to X automatically.</p>
+      </section>
+
+      <section>
+        <h2>Information Vichar processes</h2>
+        <p>When you ask Vichar to generate a suggestion, the request can include:</p>
+        <ul>
+          <li>the topic you selected or entered;</li>
+          <li>an optional location that you manually type into Vichar, such as “Chennai”;</li>
+          <li>your selected writing style; and</li>
+          <li>the requested maximum length.</li>
+        </ul>
+        <p>The Chrome extension also stores an opaque, randomly generated installation identifier locally. This identifier is used by the Vichar backend to enforce extension usage limits. It is not your X account identity.</p>
+      </section>
+
+      <section>
+        <h2>Location</h2>
+        <p>Vichar does not request or access your device's GPS or browser geolocation. The optional location field is ordinary text that you choose to enter yourself. If you provide a location, it is included in the generation request.</p>
+      </section>
+
+      <section>
+        <h2>X page access</h2>
+        <p>The extension runs on X pages so it can detect the native composer and display the Vichar interface. It may inspect the composer DOM to determine whether a draft exists and to support the user-controlled “Use this” workflow.</p>
+        <p>Vichar does not intentionally transmit your existing X draft, X password, authentication credentials, cookies, browsing history, or X account identity to the Vichar backend.</p>
+      </section>
+
+      <section>
+        <h2>How generation works</h2>
+        <p>Generation requests are sent to the Vichar backend operated for VTRRK. The backend uses OpenAI's API to generate the requested draft. The OpenAI API credential is kept server-side and is not included in the browser extension.</p>
+        <p>Vichar does not use generation requests for advertising, user profiling, or unrelated purposes.</p>
+      </section>
+
+      <section>
+        <h2>Storage and usage limits</h2>
+        <p>The extension stores its opaque installation identifier locally. The Vichar backend uses this identifier to apply extension usage limits and does not require an X API credential.</p>
+        <p>The public Vichar web experience uses short-lived web session credentials rather than an OpenAI credential in the browser.</p>
+      </section>
+
+      <section>
+        <h2>Sharing</h2>
+        <p>Vichar does not sell or transfer user data for advertising or unrelated purposes. Generation requests are sent to the Vichar backend and, for generation, to OpenAI as the service used to produce the requested text.</p>
+      </section>
+
+      <section>
+        <h2>Security</h2>
+        <ul>
+          <li>The extension is distributed as a Manifest V3 extension.</li>
+          <li>The OpenAI API key is kept on the server.</li>
+          <li>Vichar does not use the X API or require X account credentials.</li>
+          <li>Vichar does not automatically publish posts.</li>
+          <li>The extension requests only the permissions needed for its current functionality.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Your control</h2>
+        <p>You decide what information to enter, whether to use a generated suggestion, how to edit it, and whether to publish it. Vichar does not make the final X posting decision for you.</p>
+      </section>
+
+      <section>
+        <h2>Changes to this policy</h2>
+        <p>If the Vichar data practices materially change, this policy will be updated before or when the relevant functionality is introduced.</p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>For questions about Vichar or this privacy policy, please use the <a href="/contact/">VTRRK contact page</a>.</p>
+      </section>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  main{width:min(820px,calc(100% - 3rem));margin:0 auto}
+  header{padding:6rem 0 3rem}
+  .label{margin:0 0 .8rem;color:var(--muted);font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  h1{margin:0;font-size:clamp(2.8rem,7vw,5rem);line-height:1;letter-spacing:-.05em}
+  .intro{max-width:700px;margin:1rem 0 0;color:var(--muted);font-size:1.08rem;line-height:1.6}
+  .updated{margin:1rem 0 0;color:var(--muted);font-size:.78rem}
+  article{border-top:2px solid #DC143C;padding:2rem 0 5rem}
+  section{padding:0 0 2rem}
+  h2{margin:0 0 .7rem;font-size:1.25rem;letter-spacing:-.02em}
+  p,li{color:var(--muted);line-height:1.7}
+  ul{padding-left:1.3rem}
+  a{color:var(--foreground);text-decoration:underline;text-underline-offset:.18em}
+  @media(max-width:600px){
+    main{width:min(100% - 2rem,820px)}
+    header{padding:4.5rem 0 2.5rem}
+  }
+</style>
