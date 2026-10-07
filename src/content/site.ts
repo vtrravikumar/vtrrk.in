@@ -4,7 +4,7 @@ export const now = {
 		"Writing, building, exploring and learning — one project at a time.",
 	items: [
 		{
-			title: "TweetPilot",
+			title: "Vichar",
 			description:
 				"Building a personal AI-assisted writing companion for X. The first production Tweet Creator is live on vtrrk.in, and I'm now working on the Chrome extension that brings the workflow into the X composer.",
 		},
