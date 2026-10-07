@@ -6,7 +6,7 @@
 
 The public Vichar experience is available at `/vichar/` on vtrrk.in. It is a human-controlled AI writing companion: it creates a short draft, the user reviews/edits it, and the user manually posts to X.
 
-The Vichar backend is maintained separately in the `vtrravikumar/tweetpilot` repository and is deployed as a Cloudflare Worker. The GitHub repository retains its historical name; the public product name is Vichar.
+The Vichar backend is maintained separately in the `the Vichar backend repository` repository and is deployed as a Cloudflare Worker. The GitHub repository retains its historical name; the public product name is Vichar.
 
 ## Current workflow
 
@@ -121,5 +121,5 @@ The separate backend/product repository is currently `tweetpilot`. Renaming it t
 - Website implementation: this repository, `src/pages/vichar.astro`.
 - Website Vichar integration notes: this document.
 - Website backlog: `backlog.md`.
-- Product/backend implementation: `vtrravikumar/tweetpilot`.
+- Product/backend implementation: `the Vichar backend repository`.
 - Brand standard: `tweetpilot/docs/vichar-brand.md`.
