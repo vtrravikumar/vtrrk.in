@@ -449,7 +449,7 @@ Only revisit if there is a clear publishing/distribution strategy.
 
 # Phase 9 — Vichar Integration
 
-Vichar is the personal AI writing companion exposed at /vichar/. It is backed by the separately maintained vtrravikumar/tweetpilot repository and its production Cloudflare Worker. The public product name is **Vichar — By VTRRK**.
+Vichar is the personal AI writing companion exposed at /vichar/. It is backed by the separately maintained the Vichar backend repository repository and its production Cloudflare Worker. The public product name is **Vichar — By VTRRK**.
 
 ## VICHAR-001 — Establish Vichar web product integration
 - Priority: P0
@@ -505,7 +505,7 @@ Derive and verify the remaining website/favicon/store asset sizes from the same 
 - Status: Done
 - Area: Repository / Maintenance
 
-Decision: do not rename the repository. Keep `vtrravikumar/tweetpilot` as the engineering/backend repository while the public product remains **Vichar — By VTRRK**. This avoids unnecessary production and deployment churn.
+Decision: do not rename the repository. Keep `the Vichar backend repository` as the engineering/backend repository while the public product remains **Vichar — By VTRRK**. This avoids unnecessary production and deployment churn.
 
 ## VICHAR-009 — Improve Vichar product hardening
 - Priority: P2
