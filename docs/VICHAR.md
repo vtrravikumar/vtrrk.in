@@ -6,7 +6,7 @@
 
 The public Vichar experience is available at `/vichar/` on vtrrk.in. It is a human-controlled AI writing companion: it creates a short draft, the user reviews/edits it, and the user manually posts to X.
 
-The Vichar backend is maintained separately in the `vtrravikumar/tweetpilot` repository and is deployed as a Cloudflare Worker. The product name is Vichar even though historical infrastructure names still use TweetPilot.
+The Vichar backend is maintained separately in the `vtrravikumar/tweetpilot` repository and is deployed as a Cloudflare Worker. The GitHub repository retains its historical name; the public product name is Vichar.
 
 ## Current workflow
 
@@ -48,7 +48,7 @@ Implemented in `src/pages/vichar.astro`:
 - Editable generated text.
 - Character counter.
 - Create Another.
-- Copy to clipboard.
+- Send the edited text to the X composer for final review.
 - User-facing error status.
 - Responsive layout.
 
@@ -73,7 +73,7 @@ Approved public messaging:
 
 - **From thought to expression.**
 
-The public website and extension use English-only primary branding. The Sanskrit phrase from the original brand board is not shown in the public UI; where useful for internal brand documentation, it may be referenced alongside an English translation.
+The public website and extension use English-first primary branding. The Vichar website also uses the approved Sanskrit brand signature **विचारय। आकारय। स्वकीयं कुरु।** (*Think it. Shape it. Make it yours.*) and explains **विचार (Vicāra)** as meaning thought, reflection, consideration, deliberation, or idea.
 
 The website uses the approved Vichar artwork rather than recreating the logo independently. The current public website lockup is `public/brand/vichar-lockup-320.webp`, derived directly from the approved Vichar brand board.
 
