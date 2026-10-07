@@ -114,7 +114,7 @@ The website uses the approved Vichar artwork rather than recreating the logo ind
 
 The website repository `vtrrk.in` should remain named after the website.
 
-The separate backend/product repository is currently `tweetpilot`. Renaming it to `vichar` is optional and should only be done after checking GitHub redirects, local remotes, Cloudflare Worker/deployment references, documentation links, extension references and any external automation.
+The engineering repository retains its historical GitHub name; this is intentionally not exposed as the public product identity.
 
 ## Source of truth
 
@@ -122,4 +122,4 @@ The separate backend/product repository is currently `tweetpilot`. Renaming it t
 - Website Vichar integration notes: this document.
 - Website backlog: `backlog.md`.
 - Product/backend implementation: `the Vichar backend repository`.
-- Brand standard: `tweetpilot/docs/vichar-brand.md`.
+- Brand standard: the Vichar branding documentation in the engineering repository.
