@@ -477,7 +477,7 @@ The web client uses the production Cloudflare Worker session endpoint followed b
 - Status: Done
 - Area: Vichar
 
-The web page uses the approved Vichar artwork and documented naming/palette. The public header now uses the approved Vichar lockup derived from the brand board, with English-only public messaging and the tagline From thought to expression.
+The web page uses the approved Vichar artwork and documented naming/palette. The public header uses the approved Vichar lockup, with the English tagline From thought to expression and the Sanskrit brand signature where appropriate.
 
 ## VICHAR-005 — Verify production Vichar end to end
 - Priority: P0
