@@ -498,7 +498,7 @@ Durable public-use protection is implemented and deployed using a Cloudflare Dur
 - Status: Planned
 - Area: Vichar / Branding
 
-Derive and verify the remaining website/favicon/store asset sizes from the same approved artwork rather than creating independent variants. Keep primary public-facing branding English-first; do not surface the Sanskrit line in the public UI.
+Derive and verify the remaining website/favicon/store asset sizes from the same approved artwork rather than creating independent variants. Keep primary public-facing branding English-first, while using the Sanskrit brand signature in suitable Vichar surfaces.
 
 ## VICHAR-008 — Assess repository rename
 - Priority: P3
