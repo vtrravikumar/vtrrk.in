@@ -68,7 +68,7 @@ const topics = [
           </div>
           <textarea id="tweet" maxlength="140" rows="4" spellcheck="true"></textarea>
           <div class="result-footer">
-            <button id="copy" type="button" class="secondary">Copy</button>
+            <button id="tweet-this" type="button" class="secondary">Tweet this ↗</button>
             <button id="another" type="button" class="text-button">Create another →</button>
           </div>
         </div>
@@ -103,7 +103,7 @@ const topics = [
   const location = document.querySelector("#location");
   const create = document.querySelector("#create");
   const another = document.querySelector("#another");
-  const copy = document.querySelector("#copy");
+  const tweetThis = document.querySelector("#tweet-this");
   const tweet = document.querySelector("#tweet");
   const count = document.querySelector("#count");
   const status = document.querySelector("#status");
@@ -198,16 +198,11 @@ const topics = [
   another.addEventListener("click", generate);
   tweet.addEventListener("input", updateCount);
 
-  copy.addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText(tweet.value);
-      copy.textContent = "Copied";
-      window.setTimeout(() => { copy.textContent = "Copy"; }, 1400);
-    } catch {
-      tweet.focus();
-      tweet.select();
-      status.textContent = "Select the text and copy it manually.";
-    }
+  tweetThis.addEventListener("click", () => {
+    const text = tweet.value.trim();
+    if (!text) return;
+    const url = "https://x.com/intent/post?text=" + encodeURIComponent(text);
+    window.open(url, "_blank", "noopener,noreferrer");
   });
 
   updateCustomTopicVisibility();
