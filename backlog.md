@@ -456,7 +456,7 @@ Vichar is the personal AI writing companion exposed at /vichar/. It is backed by
 - Status: Done
 - Area: Vichar
 
-The vtrrk.in site now provides a dedicated Vichar web creator with topic selection, optional location context, AI generation, editable output, character counting, Create Another and Copy actions.
+The vtrrk.in site now provides a dedicated Vichar web creator with topic selection, optional location context, AI generation, editable output, character counting, Create Another and an action that opens the edited text in the X composer.
 
 ## VICHAR-002 — Enforce human-controlled publishing workflow
 - Priority: P0
