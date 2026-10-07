@@ -162,4 +162,4 @@ The goal is not to create a technology showcase for its own sake, but a durable 
 
 ## Vichar
 
-Vichar — By VTRRK is available at https://vtrrk.in/vichar/. It generates concise, personalized drafts for review and manual publication on X. The website integration is documented in `docs/VICHAR.md`; the backend/product implementation is maintained separately in the Vichar/TweetPilot repository.
+Vichar — By VTRRK is available at https://vtrrk.in/vichar/. It generates concise, personalized drafts for review and manual publication on X. The website integration is documented in `docs/VICHAR.md`; the backend/product implementation is maintained separately in the Vichar backend repository.
