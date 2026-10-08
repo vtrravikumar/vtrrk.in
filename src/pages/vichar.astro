@@ -63,7 +63,7 @@ const topics = [
 
         <div id="result-wrap" class="result-wrap" hidden>
           <div class="result-heading">
-            <div><p class="section-kicker">Your expression</p><span class="review-hint">Edit it. Make it yours.</span></div>
+            <div><p class="section-kicker">Your expression</p><span class="review-hint">Edit it. Make it yours.</span><span id="style-used" class="style-used" hidden></span></div>
             <span id="count">0 / 140</span>
           </div>
           <textarea id="tweet" maxlength="140" rows="4" spellcheck="true"></textarea>
@@ -100,7 +100,7 @@ const topics = [
 </BaseLayout>
 
 <script>
-  const API_URL = "https://api.vtrrk.in/vichar/v1/tweet/generate";
+  const API_URL = "https://api.vtrrk.in/vichar/v2/tweet/generate";
   const SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
   const MAX_LENGTH = 140;
 
@@ -117,6 +117,7 @@ const topics = [
   const count = document.querySelector("#count");
   const status = document.querySelector("#status");
   const resultWrap = document.querySelector("#result-wrap");
+  const styleUsed = document.querySelector("#style-used");
 
   const topicOptions = Array.from(topic.options).map((option) => option.value);
   let lastTopic = "";
@@ -191,6 +192,13 @@ const topics = [
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       tweet.value = payload.tweet;
+      if (typeof payload.style === "string" && payload.style.trim()) {
+        styleUsed.textContent = "Style used: " + payload.style;
+        styleUsed.hidden = false;
+      } else {
+        styleUsed.textContent = "";
+        styleUsed.hidden = true;
+      }
       resultWrap.hidden = false;
       updateCount();
       status.textContent = "Ready to review.";
@@ -258,6 +266,7 @@ const topics = [
   .result-heading{display:flex;align-items:end;justify-content:space-between;gap:1rem;margin-bottom:.65rem}
   .result-heading .section-kicker{margin:0}
   .review-hint{display:block;color:var(--muted);font-size:.75rem}
+  .style-used{display:block;margin-top:.35rem;color:var(--accent);font-size:.7rem;font-weight:700;letter-spacing:.02em}
   #count{color:var(--muted);font-size:.72rem}
   #count[data-over]{color:#b42318;font-weight:800}
   .result-footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.65rem}
