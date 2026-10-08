@@ -58,8 +58,8 @@ The 140-character value is a current UI configuration, not a permanent product l
 
 The website calls:
 
-- Session: `https://tweetpilot-api.vtrravikumar.workers.dev/v1/web/session`
-- Generation: `https://tweetpilot-api.vtrravikumar.workers.dev/v1/tweet/generate`
+- Session: `https://api.vtrrk.in/vichar/v1/web/session`
+- Generation: `https://api.vtrrk.in/vichar/v1/tweet/generate`
 
 The browser receives a short-lived web token, not the OpenAI API key. The backend owns provider credentials and generation policy.
 
