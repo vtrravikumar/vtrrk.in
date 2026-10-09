@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import packageJson from "../../package.json";
+
+const vicharVersion = `V${packageJson.version.split(".").slice(0, 2).join(".")}`;
 
 // Cloudflare Pages exposes the source commit for each production build.
 const vicharBuild = (globalThis as typeof globalThis & { process?: { env?: Record<string, string | undefined> } }).process?.env?.CF_PAGES_COMMIT_SHA?.slice(0, 7) ?? "unavailable";
@@ -49,7 +52,7 @@ const topics = [
               <p class="section-kicker">Your writing space</p>
               <h2 id="create-heading">Create with Vichar</h2>
             </div>
-            <span class="version-pill"><span class="live-dot"></span> News-aware · V3</span>
+            <span class="version-pill"><span class="live-dot"></span> News-aware · {vicharVersion}</span>
           </div>
 
           <div class="controls">
@@ -136,7 +139,7 @@ const topics = [
 
     <footer class="vichar-footer">
       <div class="footer-brand"><strong>Vichar — विचार</strong><span class="footer-divider">|</span><span>By VTRRK</span><em>Think it. Shape it. Make it yours.</em></div>
-      <div class="footer-build"><span class="version-badge">V3</span><span class="footer-separator" aria-hidden="true">·</span><span class="build-label" title="Cloudflare Pages source commit">Build <code>{vicharBuild}</code></span><span class="footer-separator" aria-hidden="true">·</span><span>vtrrk.in/vichar</span></div>
+      <div class="footer-build"><span class="version-badge">{vicharVersion}</span><span class="footer-separator" aria-hidden="true">·</span><span class="build-label" title="Cloudflare Pages source commit">Build <code>{vicharBuild}</code></span><span class="footer-separator" aria-hidden="true">·</span><span>vtrrk.in/vichar</span></div>
       <div class="footer-links"><a href="/vichar/privacy/">Privacy Policy</a><a href="mailto:hello@vtrrk.in">Contact</a></div>
     </footer>
   </main>
