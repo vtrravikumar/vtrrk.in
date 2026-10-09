@@ -70,10 +70,14 @@ const topics = [
                 <div id="style-used" class="static-field"><span class="field-icon" aria-hidden="true">✧</span><span>Random — revealed after generation</span></div>
               </label>
               <label>
-                <span>Location <em>optional</em></span>
-                <input id="location" type="text" placeholder="e.g. Chennai" maxlength="80" />
+                <span>Location <em>optional · worldwide</em></span>
+                <input id="location" type="text" placeholder="e.g. Tokyo or Chennai" maxlength="80" />
               </label>
             </div>
+            <label class="news-toggle" for="use-news">
+              <input id="use-news" type="checkbox" />
+              <span>Use recent news <em>Only stories from the last 48 hours</em></span>
+            </label>
           </div>
 
           <div class="actions">
@@ -81,6 +85,8 @@ const topics = [
             <span id="status" role="status" aria-live="polite">Ready when you are.</span>
           </div>
           <p class="topic-hints"><span aria-hidden="true">✧</span> Try: AI, photography, travel, productivity, everyday observations…</p>
+
+          <div id="news-sources" class="news-sources" hidden aria-label="News sources"></div>
 
           <div id="result-wrap" class="result-wrap" hidden>
             <div class="result-heading">
@@ -141,13 +147,15 @@ const topics = [
   const SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
   const MAX_LENGTH = 140;
 
-  const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist", "news"];
+  const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist"];
 
   const topic = document.querySelector("#topic-input");
   const customTopicWrap = document.querySelector("#custom-topic-wrap");
   const customTopic = document.querySelector("#custom-topic");
   const topicCount = document.querySelector("#topic-count");
   const location = document.querySelector("#location");
+  const useNews = document.querySelector("#use-news");
+  const newsSources = document.querySelector("#news-sources");
   const create = document.querySelector("#create");
   const another = document.querySelector("#another");
   const tweetThis = document.querySelector("#tweet-this");
@@ -224,7 +232,7 @@ const topics = [
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "content-type": "application/json", authorization: "Bearer " + token },
-        body: JSON.stringify({ topic: selectedTopic, location: location.value.trim(), style: pickRandomStyle(), maxLength: MAX_LENGTH }),
+        body: JSON.stringify({ topic: selectedTopic, location: location.value.trim(), style: pickRandomStyle(), maxLength: MAX_LENGTH, useNews: useNews.checked }),
       });
       const payload = await response.json().catch(() => ({}));
       if (response.status === 401) {
