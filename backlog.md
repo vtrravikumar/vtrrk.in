@@ -481,10 +481,10 @@ The web page uses the approved Vichar artwork and documented naming/palette. The
 
 ## VICHAR-005 — Verify production Vichar end to end
 - Priority: P0
-- Status: In Progress
+- Status: Done
 - Area: Vichar
 
-Verify the deployed /vichar/ page after the latest logo/deployment changes, including logo loading, session acquisition, generation, editing, character count, Copy and mobile/desktop behaviour.
+Ravi confirmed production end-to-end verification: generation, editing, character count, Copy, X composer behaviour, mobile/desktop layout and deployed web build identifier. The latest /vichar/ experience is accepted; no further changes are needed without a specific issue.
 
 ## VICHAR-006 — Add durable public-use protection
 - Priority: P1
