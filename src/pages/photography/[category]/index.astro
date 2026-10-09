@@ -2,6 +2,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { photoLinkLabel } from "../../../content/photo-label";
 
 const PAGE_SIZE = 6;
 
@@ -47,7 +48,7 @@ const models = category === "model"
   : [];
 ---
 <BaseLayout title={`${title} Photography — V.T.R. Ravi Kumar`} description={`${title} photography by V.T.R. Ravi Kumar.`}>
-  <main>
+  <main id="main-content" tabindex="-1">
     <header>
       <a class="back" href="/photography/">← Photography</a>
       <p class="label">Photography / {title}</p>
@@ -79,10 +80,10 @@ const models = category === "model"
       </section>
     ) : (
       <section class="gallery" aria-label={`${title} photographs`}>
-        {pagePhotos.map((photo) => (
+        {pagePhotos.map((photo, index: number) => (
           <figure>
             <a class="photo" href={`/photography/photo/${photo.id}/`}>
-              <img src={`/photography/${photo.thumbnail}`} alt="" width={photo.width} height={photo.height} loading="lazy" />
+              <img src={`/photography/${photo.thumbnail}`} alt={photoLinkLabel(photo, index, pagePhotos.length)} width={photo.width} height={photo.height} loading="lazy" />
             </a>
             <figcaption><span>{photo.place}</span><span>{photo.country}</span></figcaption>
           </figure>

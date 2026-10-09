@@ -113,7 +113,7 @@ const nextBanner = nextJourney?.data.banner ?? "/images/travel/default.jpg";
 const nextHref = nextSlug ? `/travel/${nextSlug}/` : undefined;
 ---
 <BaseLayout title={`${title} — Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${title}${isIndia ? ", India" : ""}`}>
-  <main>
+  <main id="main-content" tabindex="-1">
     <a class="back" href={backHref}>{backLabel}</a>
     <section class="hero"><img class="banner" src={banner} alt={`${title} travel banner`} /><div class="hero-copy"><p class="label">{isIndia ? "India" : region} · {isIndia ? region : title}</p><h1>{title}</h1><p class="intro">A personal travelogue from {title}.</p>{hasPhotography && <a class="hero-photography" href={photographyHref}>Explore {photographyLabel} photography →</a>}</div></section>
     {photography.some((photo) => photo.url) && (

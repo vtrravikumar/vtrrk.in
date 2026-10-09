@@ -2,6 +2,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import BaseLayout from "../../../../../layouts/BaseLayout.astro";
+import { photoLinkLabel } from "../../../../../content/photo-label";
 
 export async function getStaticPaths() {
   const catalogPath = join(process.cwd(), "public/photography/catalog.json");
@@ -29,7 +30,7 @@ export async function getStaticPaths() {
 const { country, place, photos } = Astro.props;
 ---
 <BaseLayout title={`${place}, ${country} Photography — V.T.R. Ravi Kumar`} description={`Photography from ${place}, ${country} by V.T.R. Ravi Kumar.`}>
-  <main>
+  <main id="main-content" tabindex="-1">
     <header>
       <a class="back" href={`/photography/countries/${Astro.params.country}/`}>← {country}</a>
       <p class="label">Photography / Countries / {country} / {place}</p>
@@ -38,10 +39,10 @@ const { country, place, photos } = Astro.props;
     </header>
 
     <section class="gallery" aria-label={`${place} photographs`}>
-      {photos.map((photo) => (
+      {photos.map((photo, index: number) => (
         <figure>
           <a class="photo" href={`/photography/photo/${photo.id}/`}>
-            <img src={`/photography/${photo.thumbnail}`} alt="" width={photo.width} height={photo.height} loading="lazy" />
+            <img src={`/photography/${photo.thumbnail}`} alt={photoLinkLabel(photo, index, photos.length)} width={photo.width} height={photo.height} loading="lazy" />
           </a>
         </figure>
       ))}

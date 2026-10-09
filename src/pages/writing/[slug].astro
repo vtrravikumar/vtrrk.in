@@ -16,7 +16,7 @@ const { Content } = await render(entry);
 const { title, description, date, type, tags, heroImage } = entry.data;
 ---
 <BaseLayout title={`${title} — Writing — V.T.R. Ravi Kumar`} description={description}>
-  <main>
+  <main id="main-content" tabindex="-1">
     <a class="back" href="/writing/">← Writing</a>
 
     <article>

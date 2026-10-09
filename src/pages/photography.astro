@@ -23,7 +23,7 @@ function pickRandomPhoto(photos) {
 }
 ---
 <BaseLayout title="Photography — V.T.R. Ravi Kumar" description="Photography by V.T.R. Ravi Kumar.">
-  <main>
+  <main id="main-content" tabindex="-1">
     <header>
       <p class="label">Photography</p>
       <h1>Photography lives where the photographs belong.</h1>
@@ -39,8 +39,8 @@ function pickRandomPhoto(photos) {
             <span>{category.title}</span>
           </a>
         ) : (
-          <div class="category empty" aria-label={`${category.title}, coming soon`}>
-            <span>{category.title}</span>
+          <div class="category empty">
+            <span>{category.title}<span class="sr-only">, coming soon</span></span>
           </div>
         );
       })}

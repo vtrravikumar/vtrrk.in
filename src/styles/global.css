@@ -9,9 +9,9 @@
 	--surface: rgba(255, 255, 255, 0.62);
 	--surface-elevated: rgba(255, 255, 255, 0.82);
 	--foreground: #1d1d1f;
-	--muted: #6e6e73;
+	--muted: #636366;
 	--border: rgba(0, 0, 0, 0.09);
-	--accent: #0071e3;
+	--accent: #0062c4;
 	--accent-creative: #ff5a36;
 	--accent-soft: rgba(0, 113, 227, 0.1);
 	--accent-creative-soft: rgba(255, 90, 54, 0.1);
@@ -37,6 +37,68 @@
 
 html {
 	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+
+	a:hover,
+	button:hover {
+		transform: none !important;
+	}
+}
+
+/* Visually hidden, but still available to assistive technology. */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* Bypass block: hidden until it receives keyboard focus. */
+.skip-link {
+	position: absolute;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 100;
+	padding: 0.65rem 1rem;
+	border-radius: 999px;
+	background: var(--foreground);
+	color: var(--background);
+	font-size: 0.85rem;
+	font-weight: 650;
+	text-decoration: none;
+	transform: translateY(-300%);
+	transition: none;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+	transform: none;
+	color: var(--background);
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+/* Keep main from showing a focus ring when the skip link moves focus to it. */
+main:focus {
+	outline: none;
 }
 
 body {

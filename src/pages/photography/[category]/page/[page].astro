@@ -2,6 +2,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
+import { photoLinkLabel } from "../../../../content/photo-label";
 
 const PAGE_SIZE = 6;
 const categoryNames = { countries: "Countries", portraits: "Portraits", landscapes: "Landscapes", model: "Model Portfolio", street: "Street", abstract: "Abstract" };
@@ -29,7 +30,7 @@ const pageCount = Math.ceil(photos.length / PAGE_SIZE);
 const pagePhotos = photos.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 ---
 <BaseLayout title={`${title} Photography — Page ${page} — V.T.R. Ravi Kumar`} description={`${title} photography by V.T.R. Ravi Kumar.`}>
-  <main>
+  <main id="main-content" tabindex="-1">
     <header>
       <a class="back" href={`/photography/${category}/`}>← {title}</a>
       <p class="label">Photography / {title}</p>
@@ -38,10 +39,10 @@ const pagePhotos = photos.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
     </header>
 
     <section class="gallery" aria-label={`${title} photographs, page ${page}`}>
-      {pagePhotos.map((photo) => (
+      {pagePhotos.map((photo, index: number) => (
         <figure>
           <a class="photo" href={`/photography/photo/${photo.id}/`}>
-            <img src={`/photography/${photo.thumbnail}`} alt="" width={photo.width} height={photo.height} loading="lazy" />
+            <img src={`/photography/${photo.thumbnail}`} alt={photoLinkLabel(photo, index, pagePhotos.length)} width={photo.width} height={photo.height} loading="lazy" />
           </a>
           <figcaption><span>{photo.place}</span><span>{photo.country}</span></figcaption>
         </figure>

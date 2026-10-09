@@ -28,7 +28,7 @@ const places = [...new Set(photos.map((photo) => photo.place).filter(Boolean))].
 }));
 ---
 <BaseLayout title={`${country} Photography — V.T.R. Ravi Kumar`} description={`Photography from ${country} by V.T.R. Ravi Kumar.`}>
-  <main>
+  <main id="main-content" tabindex="-1">
     <header>
       <a class="back" href="/photography/countries/">← Countries</a>
       <p class="label">Photography / Countries / {country}</p>
