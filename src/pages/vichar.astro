@@ -217,7 +217,7 @@ const topics = [
     newsSources.hidden = true;
   }
 
-  function renderNewsSources(sources) {
+  function renderNewsSources(sources: unknown) {
     clearNewsSources();
     if (!Array.isArray(sources) || sources.length === 0) return;
     const heading = document.createElement("p");
@@ -245,7 +245,7 @@ const topics = [
         // Ignore malformed source metadata; never create unsafe links.
       }
     }
-    newsSources.hidden = newsSources.childElementCount === 0;
+    newsSources.hidden = !newsSources.querySelector("a");
   }
 
   async function generate() {
@@ -367,6 +367,15 @@ const topics = [
   textarea{min-height:6.8rem;padding:.8rem .9rem;resize:vertical;line-height:1.5}
   select:focus,input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
   .field-row{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+  .news-toggle{display:flex;align-items:center;gap:.7rem;margin-top:.1rem}
+  .news-toggle input{width:1rem;height:1rem;flex:0 0 1rem;margin:0;accent-color:var(--accent)}
+  .news-toggle span{display:grid;gap:.2rem}
+  .news-toggle em{color:var(--muted);font-size:.7rem;font-weight:450}
+  .news-sources{display:grid;gap:.35rem;margin-top:1rem;padding:.8rem .9rem;border:1px solid var(--border);border-radius:.85rem;background:var(--surface)}
+  .news-sources[hidden]{display:none}
+  .news-sources-heading{margin:0;color:var(--muted);font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .news-sources a{color:var(--accent);font-size:.8rem;line-height:1.4;overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:.15em}
+  .news-source-time{color:var(--muted);font-size:.68rem;margin-bottom:.25rem}
   .static-field{height:2.8rem;box-sizing:border-box;display:flex;align-items:center;gap:.6rem;padding:0 .8rem;border:1px solid var(--border);border-radius:.75rem;background:rgba(255,255,255,.55);color:var(--foreground);font-size:.85rem;font-weight:500}
   .field-icon{font-size:1.15rem;color:var(--accent)}
   .custom-topic[hidden]{display:none}
