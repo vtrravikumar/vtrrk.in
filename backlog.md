@@ -604,3 +604,18 @@ The Vichar backend and Chrome extension are owned by the separate repository: [`
 - Implementation owner: `vtrravikumar/tweetpilot` for backend/API changes; this repository for website integration.
 
 Use this item as a coordination placeholder, not as permission to build speculative features. When a specific Vichar web requirement needs a backend change, create a distinct implementation item in the TweetPilot backlog, label its consumer `Website` (or `Both` if the extension is also affected), and link both items. No new backend feature is implied by this placeholder.
+
+
+## VICHAR-WEB-002 — Integrate Vichar V4.0 News mode in the website
+
+- Priority: P2
+- Status: Planned
+- Area: Vichar web / Product integration
+- Backend dependency: [`vtrravikumar/tweetpilot` — VICHAR-010B, Backend News mode](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
+- Related backend client contract: VICHAR-010C (website integration is tracked here; backend implementation is owned by TweetPilot).
+
+Add an explicit News mode to the Vichar web creator, separate from the existing writing-style selector. When enabled, the website requests news-grounded generation and displays the returned headline, publisher, and article link alongside the editable draft. Handle no-suitable-news and news-provider-unavailable outcomes clearly; do not present a generic draft as if it were grounded in current news.
+
+When News mode is off, preserve current generation behaviour and randomised writing styles. The website remains a human-controlled drafting experience; publishing stays manual.
+
+**Contract:** `useNews: true|false` is independent of `style`. Backend response metadata and error semantics must be agreed/available before website integration is implemented. Test website behaviour independently from backend and extension completion.
