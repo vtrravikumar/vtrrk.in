@@ -66,8 +66,8 @@ const topics = [
             </label>
             <div class="field-row">
               <label>
-                <span>Style <em>varies each time</em></span>
-                <div class="static-field"><span class="field-icon" aria-hidden="true">✧</span> Surprise me</div>
+                <span>Style</span>
+                <div id="style-used" class="static-field"><span class="field-icon" aria-hidden="true">✧</span><span>Random — revealed after generation</span></div>
               </label>
               <label>
                 <span>Location <em>optional</em></span>
@@ -154,6 +154,7 @@ const topics = [
   const count = document.querySelector("#count");
   const status = document.querySelector("#status");
   const resultWrap = document.querySelector("#result-wrap");
+  const styleUsed = document.querySelector("#style-used");
   let webToken = "";
   let lastTopic = "";
 
@@ -226,6 +227,15 @@ const topics = [
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       tweet.value = payload.tweet;
+      if (typeof payload.style === "string" && payload.style.trim()) {
+        const styleLabel = document.createElement("span");
+        styleLabel.textContent = "Style used: " + payload.style;
+        styleUsed.replaceChildren(styleUsed.firstElementChild, styleLabel);
+      } else {
+        const styleLabel = document.createElement("span");
+        styleLabel.textContent = "Style used: not provided";
+        styleUsed.replaceChildren(styleUsed.firstElementChild, styleLabel);
+      }
       resultWrap.hidden = false;
       updateCount();
       status.textContent = "Ready to review.";
