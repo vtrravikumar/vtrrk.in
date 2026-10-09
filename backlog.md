@@ -576,3 +576,31 @@ Initial direction:
 
 Every generated Vichar draft ends with the exact final line **Vichar by @vtrrk**. The attribution is enforced server-side and counts within the requested character limit, so it cannot be accidentally omitted from generated drafts. The user remains free to edit or remove it before manually posting to X.
 \n
+
+---
+
+# Repository Ownership & Cross-Repository Dependencies
+
+## Ownership rule
+
+This repository owns the **vtrrk.in website**, including the Vichar web experience at `/vichar/`. Website layout, accessibility, performance, SEO, content, browser-side UX, and website-specific integration/testing belong here.
+
+The Vichar backend and Chrome extension are owned by the separate repository: [`vtrravikumar/tweetpilot`](https://github.com/vtrravikumar/tweetpilot).
+
+## Cross-repository rules
+
+1. Keep website implementation tasks in this backlog; keep backend/API and extension implementation tasks in the TweetPilot backlog.
+2. If a website requirement needs a backend/API change, record the website outcome here and create or reference the implementation item in TweetPilot. Do not duplicate backend implementation work here.
+3. Every shared backend item must declare its consumers explicitly: `Website`, `Chrome extension`, or `Both`. If only one consumer is affected, do not imply the other is included.
+4. Cross-references must include the other repository, its backlog item ID/title, and a link when an item exists. If the implementation item has not yet been created, say so rather than inventing an ID.
+5. Track each side independently: a backend item being Done does not complete the website integration or verification item, and a website UI change does not complete a backend dependency.
+6. Keep website and extension releases independently verifiable. Validate all declared consumers when a shared API contract or behaviour changes.
+
+## VICHAR-WEB-001 — Track Vichar web dependencies on shared backend capabilities
+
+- Priority: P2, when a concrete dependency is identified
+- Status: Planned
+- Area: Vichar web / Cross-repository coordination
+- Implementation owner: `vtrravikumar/tweetpilot` for backend/API changes; this repository for website integration.
+
+Use this item as a coordination placeholder, not as permission to build speculative features. When a specific Vichar web requirement needs a backend change, create a distinct implementation item in the TweetPilot backlog, label its consumer `Website` (or `Both` if the extension is also affected), and link both items. No new backend feature is implied by this placeholder.
