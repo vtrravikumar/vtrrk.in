@@ -609,7 +609,7 @@ Use this item as a coordination placeholder, not as permission to build speculat
 ## VICHAR-WEB-002 — Integrate Vichar V4.0 News mode in the website
 
 - Priority: P2
-- Status: In Progress
+- Status: Done
 - Area: Vichar web / Product integration
 - Backend dependency: [`vtrravikumar/tweetpilot` — VICHAR-010B, Backend News mode](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
 - Related backend client contract: VICHAR-010C (website integration is tracked here; backend implementation is owned by TweetPilot).
@@ -619,3 +619,12 @@ Add an explicit News mode to the Vichar web creator, separate from the existing 
 When News mode is off, preserve current generation behaviour and randomised writing styles. The website remains a human-controlled drafting experience; publishing stays manual.
 
 **Contract:** `useNews: true|false` is independent of `style`. Backend response metadata and error semantics must be agreed/available before website integration is implemented. Test website behaviour independently from backend and extension completion.
+
+
+## VICHAR-WEB-003 — Align Vichar surfaces with the site theme
+
+- Priority: P1
+- Status: Done
+- Area: Vichar web / Accessibility and visual quality
+
+The Vichar creator card, form controls, feature tiles and trust strip now use the site's shared theme-aware surface tokens rather than fixed light backgrounds. Dark-mode refinements cover remaining decorative surfaces and status/error colours. Both Vichar pages have valid `#main-content` targets for the shared skip link. The change was merged in PR [#10](https://github.com/vtrravikumar/vtrrk.in/pull/10) on 2026-10-09. Ravi manually checked production in both light and dark modes and confirmed the page looks better in both. This item records Vichar-specific verification only; the broader site accessibility audit QA-002 remains In Progress until its other listed checks are complete.
