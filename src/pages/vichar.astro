@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 // Cloudflare Pages exposes the source commit for each production build.
-const vicharBuild = process.env.CF_PAGES_COMMIT_SHA?.slice(0, 7) ?? "build id unavailable";
+const vicharBuild = (globalThis as typeof globalThis & { process?: { env?: Record<string, string | undefined> } }).process?.env?.CF_PAGES_COMMIT_SHA?.slice(0, 7) ?? "build id unavailable";
 
 const topics = [
   "Technology & AI",
