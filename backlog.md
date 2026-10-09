@@ -614,7 +614,7 @@ Use this item as a coordination placeholder, not as permission to build speculat
 - Backend dependency: [`vtrravikumar/tweetpilot` — VICHAR-010B, Backend News mode](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
 - Related backend client contract: VICHAR-010C (website integration is tracked here; backend implementation is owned by TweetPilot).
 
-Add an explicit News mode to the Vichar web creator, separate from the existing writing-style selector. When enabled, the website requests news-grounded generation and displays the returned headline, publisher, and article link alongside the editable draft. Handle no-suitable-news and news-provider-unavailable outcomes clearly; do not present a generic draft as if it were grounded in current news.
+Add an explicit News mode to the Vichar web creator, separate from the existing writing-style selector. The backend's initial recency window is 48 hours: stories older than this or without a valid publication timestamp do not qualify. The topic and optional location may refer to anywhere in the world; do not imply India-only coverage. When recent news is found, display the returned headline, publisher, article link and publication time alongside the editable draft. If no qualifying news is found, display: “No recent news found for this topic. We've generated a normal Vichar instead.” If retrieval fails, display a distinct message that news retrieval was unavailable. Never present a fallback draft as news-grounded.
 
 When News mode is off, preserve current generation behaviour and randomised writing styles. The website remains a human-controlled drafting experience; publishing stays manual.
 
