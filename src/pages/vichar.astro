@@ -154,8 +154,8 @@ const topics = [
   const customTopic = document.querySelector("#custom-topic");
   const topicCount = document.querySelector("#topic-count");
   const location = document.querySelector("#location");
-  const useNews = document.querySelector("#use-news");
-  const newsSources = document.querySelector("#news-sources");
+  const useNews = document.querySelector<HTMLInputElement>("#use-news")!;
+  const newsSources = document.querySelector<HTMLDivElement>("#news-sources")!;
   const create = document.querySelector("#create");
   const another = document.querySelector("#another");
   const tweetThis = document.querySelector("#tweet-this");
@@ -212,6 +212,42 @@ const topics = [
     return VICHAR_STYLES[Math.floor(Math.random() * VICHAR_STYLES.length)];
   }
 
+  function clearNewsSources() {
+    newsSources.replaceChildren();
+    newsSources.hidden = true;
+  }
+
+  function renderNewsSources(sources) {
+    clearNewsSources();
+    if (!Array.isArray(sources) || sources.length === 0) return;
+    const heading = document.createElement("p");
+    heading.className = "news-sources-heading";
+    heading.textContent = "Recent sources";
+    newsSources.appendChild(heading);
+    for (const source of sources) {
+      try {
+        const url = new URL(source.url);
+        if (url.protocol !== "https:" || typeof source.title !== "string" || typeof source.publisher !== "string") continue;
+        const link = document.createElement("a");
+        link.href = url.toString();
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.textContent = source.publisher + ": " + source.title;
+        newsSources.appendChild(link);
+        const published = new Date(source.publishedAt);
+        if (Number.isFinite(published.getTime())) {
+          const time = document.createElement("span");
+          time.className = "news-source-time";
+          time.textContent = published.toLocaleString();
+          newsSources.appendChild(time);
+        }
+      } catch {
+        // Ignore malformed source metadata; never create unsafe links.
+      }
+    }
+    newsSources.hidden = newsSources.childElementCount === 0;
+  }
+
   async function generate() {
     let selectedTopic;
     try { selectedTopic = chooseTopic(); }
@@ -226,6 +262,7 @@ const topics = [
     another.disabled = true;
     status.textContent = "Thinking…";
     status.removeAttribute("data-error");
+    clearNewsSources();
 
     try {
       const token = await getWebToken();
@@ -253,10 +290,22 @@ const topics = [
       }
       resultWrap.hidden = false;
       updateCount();
-      status.textContent = "Ready to review.";
+      if (payload.mode === "news") {
+        status.textContent = "Recent news found. Review the source below and edit your Vichar.";
+        renderNewsSources(payload.sources);
+      } else if (payload.fallbackReason === "no_recent_news") {
+        status.textContent = "No recent news found for this topic. We've generated a normal Vichar instead.";
+        clearNewsSources();
+      } else if (payload.fallbackReason === "news_unavailable") {
+        status.textContent = "News retrieval was unavailable. We've generated a normal Vichar instead.";
+        clearNewsSources();
+      } else {
+        status.textContent = "Ready to review.";
+      }
     } catch (error) {
       status.textContent = error instanceof Error ? error.message : "Something went wrong.";
       status.setAttribute("data-error", "");
+      clearNewsSources();
     } finally {
       create.disabled = false;
       another.disabled = false;
