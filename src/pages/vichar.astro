@@ -57,10 +57,6 @@ const topics = [
               <span>Topic or idea</span>
               <textarea id="topic-input" placeholder="What's on your mind?" maxlength="160" rows="2"></textarea>
             </label>
-            <label id="custom-topic-wrap" class="custom-topic" hidden>
-              <span>Your topic</span>
-              <input id="custom-topic" type="text" placeholder="e.g. What AI means for everyday creativity" maxlength="160" />
-            </label>
             <div class="field-row">
               <label>
                 <span>Style <em>varies each time</em></span>
@@ -140,9 +136,7 @@ const topics = [
 
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist", "news"];
 
-  const topic = document.querySelector("#topic");
-  const customTopicWrap = document.querySelector("#custom-topic-wrap");
-  const customTopic = document.querySelector("#custom-topic");
+  const topic = document.querySelector("#topic-input");
   const location = document.querySelector("#location");
   const create = document.querySelector("#create");
   const another = document.querySelector("#another");
@@ -153,18 +147,8 @@ const topics = [
   const resultWrap = document.querySelector("#result-wrap");
   const styleUsed = document.querySelector("#style-used");
 
-  const topicOptions = Array.from(topic.options).map((option) => option.value);
-  let lastTopic = "";
   let webToken = "";
   let tokenExpiresAt = 0;
-
-  function updateCustomTopicVisibility() {
-    const isCustom = topic.value === "__custom__";
-    customTopicWrap.hidden = !isCustom;
-    if (isCustom) customTopic.focus();
-  }
-
-  topic.addEventListener("change", updateCustomTopicVisibility);
 
   async function getWebToken() {
     if (webToken && Date.now() < tokenExpiresAt - 30_000) return webToken;
@@ -182,14 +166,9 @@ const topics = [
   }
 
   function chooseTopic() {
-    if (topic.value === "__custom__") {
-      const value = customTopic.value.trim();
-      if (!value) throw new Error("Please enter a topic.");
-      return value;
-    }
-    if (topic.value !== "Surprise me") return topic.value;
-    const choices = topicOptions.filter((value) => value !== "Surprise me" && value !== lastTopic && value !== "__custom__");
-    return choices[Math.floor(Math.random() * choices.length)] ?? topicOptions[0];
+    const value = topic.value.trim();
+    if (!value) throw new Error("Please enter a topic or idea.");
+    return value;
   }
 
   function pickRandomStyle() {
@@ -205,7 +184,6 @@ const topics = [
       return;
     }
 
-    lastTopic = selectedTopic;
     create.disabled = true;
     another.disabled = true;
     status.textContent = "Thinking…";
@@ -256,7 +234,6 @@ const topics = [
     window.open(url, "_blank", "noopener,noreferrer");
   });
 
-  updateCustomTopicVisibility();
 </script>
 <style>
   .vichar-page{width:min(1440px,calc(100% - 4.5rem));margin:0 auto;padding:1.2rem 0 1.5rem;color:var(--foreground)}
