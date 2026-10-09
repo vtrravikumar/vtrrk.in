@@ -609,7 +609,7 @@ Use this item as a coordination placeholder, not as permission to build speculat
 ## VICHAR-WEB-002 — Integrate Vichar V4.0 News mode in the website
 
 - Priority: P2
-- Status: Planned
+- Status: In Progress
 - Area: Vichar web / Product integration
 - Backend dependency: [`vtrravikumar/tweetpilot` — VICHAR-010B, Backend News mode](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
 - Related backend client contract: VICHAR-010C (website integration is tracked here; backend implementation is owned by TweetPilot).
