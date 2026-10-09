@@ -61,8 +61,8 @@ const topics = [
               </select>
             </label>
             <label id="custom-topic-wrap" class="custom-topic" hidden>
-              <span>Your topic</span>
-              <textarea id="custom-topic" placeholder="Write your own topic or idea…" maxlength="100" rows="2"></textarea>
+              <span>Your topic <em id="topic-count">0 / 40</em></span>
+              <textarea id="custom-topic" placeholder="A few words, e.g. AI and creativity" maxlength="40" rows="1"></textarea>
             </label>
             <div class="field-row">
               <label>
@@ -146,6 +146,7 @@ const topics = [
   const topic = document.querySelector("#topic-input");
   const customTopicWrap = document.querySelector("#custom-topic-wrap");
   const customTopic = document.querySelector("#custom-topic");
+  const topicCount = document.querySelector("#topic-count");
   const location = document.querySelector("#location");
   const create = document.querySelector("#create");
   const another = document.querySelector("#another");
@@ -165,6 +166,12 @@ const topics = [
   }
 
   topic.addEventListener("change", updateCustomTopicVisibility);
+
+  function updateTopicCount() {
+    topicCount.textContent = customTopic.value.length + " / 40";
+  }
+
+  customTopic.addEventListener("input", updateTopicCount);
   let tokenExpiresAt = 0;
 
   async function getWebToken() {
@@ -295,7 +302,9 @@ const topics = [
   .controls{display:grid;grid-template-columns:1fr;gap:.8rem}
   label{display:grid;gap:.45rem;color:var(--muted);font-size:.75rem;font-weight:700}
   label em{font-style:normal;font-size:.67rem;font-weight:450;opacity:.78}
-  .topic-field textarea{min-height:3.5rem;max-height:7rem;resize:vertical}
+  .topic-field textarea{min-height:3.5rem;max-height:3.5rem;resize:none}
+  .custom-topic textarea{min-height:2.8rem;max-height:2.8rem;resize:none}
+  #topic-count{margin-left:.35rem;font-variant-numeric:tabular-nums;font-weight:500}
   select,input,textarea{width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:.75rem;background:rgba(255,255,255,.82);color:var(--foreground);font:inherit;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
   select,input{height:2.8rem;padding:0 .8rem}
   textarea{min-height:6.8rem;padding:.8rem .9rem;resize:vertical;line-height:1.5}
