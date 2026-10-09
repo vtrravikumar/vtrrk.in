@@ -154,6 +154,13 @@ Basic About page is implemented; final editorial refinement may still be folded 
 
 Footer, Elsewhere and Contact are implemented and verified. Footer content is aligned to the site's main 1000px visual grid; the secondary destinations remain deliberately simple and separate from the primary navigation.
 
+## UX-001 — Add explicit Home link to interior-page navigation
+- Priority: P2
+- Status: Done
+- Area: Navigation / UX
+
+Added a clearly labelled Home link as the first navigation item on all pages except the homepage. The homepage navigation remains unchanged, and the existing clickable VTRRK brand link is preserved. The change was committed directly to GitHub in `13d243b` on 9 October 2026 and Ravi confirmed the live behaviour is working as intended.
+
 ---
 
 # Phase 3 — Books & Writing
