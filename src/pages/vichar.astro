@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+// Cloudflare Pages exposes the source commit for each production build.
+const vicharBuild = process.env.CF_PAGES_COMMIT_SHA?.slice(0, 7) ?? "build id unavailable";
+
 const topics = [
   "Technology & AI",
   "Photography",
@@ -94,7 +97,7 @@ const topics = [
     </section>
 
     <footer class="vichar-footer">
-      <span>Vichar — By VTRRK</span><span aria-hidden="true">·</span><a href="/vichar/privacy/">Privacy Policy</a>
+      <span>Vichar — By VTRRK</span><span aria-hidden="true">·</span><span class="version-label" title="News-aware generation V3; build identifier from Cloudflare Pages">Web V3 · {vicharBuild}</span><span aria-hidden="true">·</span><a href="/vichar/privacy/">Privacy Policy</a>
     </footer>
   </main>
 </BaseLayout>
