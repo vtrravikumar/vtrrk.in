@@ -1,5 +1,8 @@
 ---
+const isHomePage = Astro.url.pathname === "/";
+
 const navigation = [
+  ...(!isHomePage ? [{ label: "Home", href: "/" }] : []),
   { label: "About", href: "/about/" },
   { label: "Now", href: "/now/" },
   { label: "Books", href: "/books/" },
