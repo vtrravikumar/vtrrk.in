@@ -77,6 +77,12 @@ The public website and extension use English-first primary branding. The Vichar 
 
 The website uses the approved Vichar artwork rather than recreating the logo independently. The current public website lockup is `public/brand/vichar-lockup-320.webp`, derived directly from the approved Vichar brand board.
 
+## Version visibility
+
+The public Vichar footer displays **Web V3** (the news-aware generation milestone) and the short Cloudflare Pages source commit SHA. The build identifier is read from `CF_PAGES_COMMIT_SHA` at build time, so the deployed site can be matched to its source commit. If that environment variable is unavailable, the footer explicitly says the build ID is unavailable rather than inventing one.
+
+When the generation milestone changes, update the displayed Web version and this note in the same change. The short SHA identifies the exact website build independently of the milestone label.
+
 ## What is complete
 
 - Product identity and public route.
