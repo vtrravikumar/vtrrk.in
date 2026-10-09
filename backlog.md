@@ -154,6 +154,14 @@ Basic About page is implemented; final editorial refinement may still be folded 
 
 Footer, Elsewhere and Contact are implemented and verified. Footer content is aligned to the site's main 1000px visual grid; the secondary destinations remain deliberately simple and separate from the primary navigation.
 
+
+## UX-002 — Audit site-wide typography scale and consistency
+- Priority: P2
+- Status: Planned
+- Area: Visual consistency / Accessibility
+
+Audit font sizes across the main site and key pages, including Vichar, Books, Writing, Travel and Photography. Inventory heading levels, body text, captions, labels, navigation, buttons and responsive overrides; identify duplicate or conflicting values and outliers. Propose a small, coherent type scale and apply only evidence-based fixes after review. Preserve intentional display typography and verify mobile layouts, readability and zoom/reflow after changes.
+
 ## UX-001 — Add explicit Home link to interior-page navigation
 - Priority: P2
 - Status: Done
