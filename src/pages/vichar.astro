@@ -279,12 +279,12 @@ const topics = [
   .static-field{height:2.8rem;box-sizing:border-box;display:flex;align-items:center;gap:.6rem;padding:0 .8rem;border:1px solid var(--border);border-radius:.75rem;background:rgba(255,255,255,.55);color:var(--foreground);font-size:.85rem;font-weight:500}
   .field-icon{font-size:1.15rem;color:var(--accent)}
   .custom-topic[hidden]{display:none}
-  .actions{display:flex;align-items:center;gap:.8rem;margin-top:1rem}
+  .actions{display:flex;align-items:stretch;flex-direction:column;gap:.55rem;margin-top:1rem}
   button{border:0;border-radius:999px;font:inherit;font-weight:750;padding:.78rem 1rem;cursor:pointer;transition:transform .2s ease,opacity .2s ease,background .2s ease}
   button:hover{transform:translateY(-1px)}
   button:disabled{opacity:.45;cursor:wait;transform:none}
   #create{width:100%;display:flex;align-items:center;justify-content:center;gap:.6rem;color:#fff;background:linear-gradient(105deg,#1477ff,#0754d8);box-shadow:0 8px 20px rgba(20,119,255,.16)}
-  #status{color:var(--muted);font-size:.75rem;flex-shrink:0}
+  #status{color:var(--muted);font-size:.75rem;flex-shrink:0;min-height:1.1em}
   #status[data-error]{color:#b42318}
   .topic-hints{margin:.75rem 0 0;font-size:.74rem;line-height:1.5;color:var(--muted)}
   .topic-hints span{color:var(--accent)}
