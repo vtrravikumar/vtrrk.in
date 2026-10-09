@@ -55,7 +55,14 @@ const topics = [
           <div class="controls">
             <label class="topic-field">
               <span>Topic or idea</span>
-              <textarea id="topic-input" placeholder="What's on your mind?" maxlength="160" rows="2"></textarea>
+              <select id="topic-input">
+                {topics.map((item) => <option value={item}>{item}</option>)}
+                <option value="__custom__">Write your own…</option>
+              </select>
+            </label>
+            <label id="custom-topic-wrap" class="custom-topic" hidden>
+              <span>Your topic</span>
+              <textarea id="custom-topic" placeholder="Write your own topic or idea…" maxlength="160" rows="2"></textarea>
             </label>
             <div class="field-row">
               <label>
@@ -137,6 +144,8 @@ const topics = [
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist", "news"];
 
   const topic = document.querySelector("#topic-input");
+  const customTopicWrap = document.querySelector("#custom-topic-wrap");
+  const customTopic = document.querySelector("#custom-topic");
   const location = document.querySelector("#location");
   const create = document.querySelector("#create");
   const another = document.querySelector("#another");
@@ -145,9 +154,16 @@ const topics = [
   const count = document.querySelector("#count");
   const status = document.querySelector("#status");
   const resultWrap = document.querySelector("#result-wrap");
-  const styleUsed = document.querySelector("#style-used");
-
   let webToken = "";
+  let lastTopic = "";
+
+  function updateCustomTopicVisibility() {
+    const isCustom = topic.value === "__custom__";
+    customTopicWrap.hidden = !isCustom;
+    if (isCustom) customTopic.focus();
+  }
+
+  topic.addEventListener("change", updateCustomTopicVisibility);
   let tokenExpiresAt = 0;
 
   async function getWebToken() {
@@ -166,9 +182,14 @@ const topics = [
   }
 
   function chooseTopic() {
-    const value = topic.value.trim();
-    if (!value) throw new Error("Please enter a topic or idea.");
-    return value;
+    if (topic.value === "__custom__") {
+      const value = customTopic.value.trim();
+      if (!value) throw new Error("Please enter your own topic or idea.");
+      return value;
+    }
+    if (topic.value !== "Surprise me") return topic.value;
+    const choices = topics.filter((value) => value !== "Surprise me" && value !== lastTopic);
+    return choices[Math.floor(Math.random() * choices.length)] ?? topics[0];
   }
 
   function pickRandomStyle() {
@@ -184,6 +205,7 @@ const topics = [
       return;
     }
 
+    lastTopic = selectedTopic;
     create.disabled = true;
     another.disabled = true;
     status.textContent = "Thinking…";
@@ -204,13 +226,6 @@ const topics = [
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       tweet.value = payload.tweet;
-      if (typeof payload.style === "string" && payload.style.trim()) {
-        styleUsed.textContent = "Style used: " + payload.style;
-        styleUsed.hidden = false;
-      } else {
-        styleUsed.textContent = "";
-        styleUsed.hidden = true;
-      }
       resultWrap.hidden = false;
       updateCount();
       status.textContent = "Ready to review.";
