@@ -358,8 +358,33 @@ Reviewed on iPhone, iPad and desktop. Ravi confirmed the site is responsive and 
 
 ## QA-002 — Accessibility audit
 - Priority: P1
-- Status: Planned
+- Status: In Progress
 - Area: Quality
+
+Accessibility improvements implemented and pushed in commit `796780b` on 9 October 2026. The patch was adapted from a different repository revision; header and Vichar-specific changes from the original patch were excluded. The current production build succeeds with 476 pages, and `git diff --check` reported no whitespace errors. These checks do not establish WCAG conformance.
+
+Implemented:
+- Added a "Skip to main content" link in `BaseLayout.astro`.
+- Added `id="main-content"` and `tabindex="-1"` to page main elements so the skip link has a destination.
+- Added reduced-motion CSS support and an `.sr-only` utility.
+- Adjusted light-theme muted and accent colour tokens.
+- Travelogue redeem form: associated the invalid-code error with the input using `aria-invalid` and `aria-describedby`; strengthened the input focus indicator.
+- Photography: improved gallery thumbnail link labels, added visually hidden headings to photo pages, and introduced metadata-derived photo labels in `src/content/photo-label.ts`.
+- Updated applicable page-level accessibility markup from the patch.
+
+Not included or not independently verified:
+- Header accessibility changes and Vichar-specific form/dark-mode changes were excluded from this patch and were not independently verified as part of this accessibility work.
+- Claude's reported axe-core scan, keyboard audit and static scan of 476 pages have not been independently verified against this checkout.
+
+Remaining work:
+- Improve photo captions and alt text where metadata is insufficient; remove stray separators when place/country metadata is missing.
+- Review creative-accent hover contrast and form-field border contrast.
+- Check travel tag-cloud target size and overlap.
+- Visually check white text over photography cards.
+- Manually test keyboard navigation, VoiceOver/NVDA, 200%/400% zoom and reflow, forced-colours mode, and third-party Instagram embeds.
+- Consider adding `astro check` and automated accessibility checks to CI.
+
+Keep QA-002 In Progress until the remaining applicable fixes and manual checks are completed and documented.
 
 ## SEO-001 — Complete metadata system
 - Priority: P1
