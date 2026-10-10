@@ -152,6 +152,9 @@ const topics = [
 
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist"];
 
+  // Astro frontmatter variables are not available in the browser script.
+  const TOPICS = ["Technology & AI", "Photography", "Royal Enfield & Riding", "Travel & Exploration", "Life & Observations"];
+
   const topic = document.querySelector("#topic-input");
   const customTopicWrap = document.querySelector("#custom-topic-wrap");
   const customTopic = document.querySelector("#custom-topic");
@@ -207,8 +210,8 @@ const topics = [
       return value;
     }
     if (topic.value !== "Surprise me") return topic.value;
-    const choices = topics.filter((value) => value !== "Surprise me" && value !== lastTopic);
-    return choices[Math.floor(Math.random() * choices.length)] ?? topics[0];
+    const choices = TOPICS.filter((value) => value !== lastTopic);
+    return choices[Math.floor(Math.random() * choices.length)] ?? TOPICS[0];
   }
 
   function pickRandomStyle() {
