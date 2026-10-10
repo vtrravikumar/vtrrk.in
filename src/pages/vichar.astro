@@ -55,13 +55,6 @@ const topics = [
             <span class="version-pill"><span class="live-dot"></span> News-aware · {vicharVersion}</span>
           </div>
 
-          <section id="license-panel" class="license-panel" aria-labelledby="license-heading">
-            <div class="license-panel-heading"><div><p class="section-kicker">Owner access</p><h3 id="license-heading">Activate your Vichar license</h3></div><span id="license-badge" class="license-badge">Not activated</span></div>
-            <p class="license-help">Use the same license key as the Vichar extension. Owner access is verified by the backend; the key is not embedded in this website's source.</p>
-            <div class="license-controls"><label class="license-input-label" for="license-key">License key</label><input id="license-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Vichar license key" /><button id="activate-license" type="button" class="secondary-button">Activate</button></div>
-            <p id="license-status" role="status" aria-live="polite">Enter your key to activate owner access on this browser.</p>
-          </section>
-
           <div class="controls">
             <label class="topic-field">
               <span>Topic or idea</span>
@@ -154,8 +147,7 @@ const topics = [
 
 <script>
   const API_URL = "https://api.vtrrk.in/vichar/v1/tweet/generate";
-  const LICENSE_ACTIVATE_URL = "https://api.vtrrk.in/vichar/v1/license/activate";
-  const LICENSE_STORAGE_KEY = "vichar.licenseKey";
+  const WEB_SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
   const MAX_LENGTH = 140;
 
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist"];
@@ -178,12 +170,9 @@ const topics = [
   const status = document.querySelector("#status");
   const resultWrap = document.querySelector("#result-wrap");
   const styleUsed = document.querySelector("#style-used");
-  const licenseKeyInput = document.querySelector<HTMLInputElement>("#license-key")!;
-  const activateLicenseButton = document.querySelector<HTMLButtonElement>("#activate-license")!;
-  const licenseStatus = document.querySelector<HTMLParagraphElement>("#license-status")!;
-  const licenseBadge = document.querySelector<HTMLSpanElement>("#license-badge")!;
-  const licensePanel = document.querySelector<HTMLElement>("#license-panel")!;
-  let activeLicenseKey = "";
+  let webSessionToken = "";
+  let webSessionExpiresAt = 0;
+  let sessionPromise: Promise<string> | null = null;
   let lastTopic = "";
 
   function updateCustomTopicVisibility() {
@@ -199,44 +188,32 @@ const topics = [
   }
 
   customTopic.addEventListener("input", updateTopicCount);
-  function setLicenseStatus(message: string, active = false) {
-    licenseStatus.textContent = message;
-    licenseBadge.textContent = active ? "Activated" : "Not activated";
-    licenseBadge.toggleAttribute("data-active", active);
-    licensePanel.hidden = active;
-  }
+  async function getWebSessionToken(): Promise<string> {
+    if (webSessionToken && Date.now() < webSessionExpiresAt - 30_000) return webSessionToken;
+    if (sessionPromise) return sessionPromise;
 
-  async function activateLicense(key: string, announce = true) {
-    const normalizedKey = key.trim();
-    if (!/^vichar_[A-Za-z0-9_-]{43}$/.test(normalizedKey)) throw new Error("Enter a valid Vichar license key.");
-    const response = await fetch(LICENSE_ACTIVATE_URL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ licenseKey: normalizedKey }), cache: "no-store" });
-    const payload = await response.json().catch(() => ({}));
-    if (!response.ok || payload.active !== true) throw new Error(payload?.error?.message || "Unable to activate this license.");
-    activeLicenseKey = normalizedKey;
-    localStorage.setItem(LICENSE_STORAGE_KEY, normalizedKey);
-    licenseKeyInput.value = normalizedKey;
-    setLicenseStatus(payload.owner === true && payload.unlimited === true ? "Owner access active · unlimited generations." : typeof payload.balance === "number" ? "License active · " + payload.balance + " generations remaining." : "License activated.", true);
-    if (announce) status.textContent = "Vichar license activated.";
-  }
+    sessionPromise = (async () => {
+      const response = await fetch(WEB_SESSION_URL, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: "{}",
+        cache: "no-store",
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok || typeof payload.token !== "string" || typeof payload.expiresIn !== "number") {
+        throw new Error(payload?.error?.message || "Vichar is temporarily unavailable. Please try again.");
+      }
+      webSessionToken = payload.token;
+      webSessionExpiresAt = Date.now() + payload.expiresIn * 1000;
+      return webSessionToken;
+    })();
 
-  activateLicenseButton.addEventListener("click", async () => {
-    activateLicenseButton.disabled = true;
-    setLicenseStatus("Verifying license…");
-    try { await activateLicense(licenseKeyInput.value); }
-    catch (error) { setLicenseStatus(error instanceof Error ? error.message : "Unable to activate this license."); }
-    finally { activateLicenseButton.disabled = false; }
-  });
-  licenseKeyInput.addEventListener("keydown", (event) => { if (event.key === "Enter") activateLicenseButton.click(); });
-
-  void (async () => {
     try {
-      const savedKey = localStorage.getItem(LICENSE_STORAGE_KEY);
-      if (savedKey) { licenseKeyInput.value = savedKey; await activateLicense(savedKey, false); }
-    } catch {
-      activeLicenseKey = "";
-      setLicenseStatus("Saved license could not be verified. Please activate it again.");
+      return await sessionPromise;
+    } finally {
+      sessionPromise = null;
     }
-  })();
+  }
 
   function updateCount() {
     count.textContent = tweet.value.length + " / " + MAX_LENGTH;
@@ -311,18 +288,17 @@ const topics = [
     clearNewsSources();
 
     try {
-      if (!activeLicenseKey) throw new Error("Activate your Vichar license above before creating ideas.");
+      const sessionToken = await getWebSessionToken();
       const response = await fetch(API_URL, {
         method: "POST",
-        headers: { "content-type": "application/json", authorization: "Bearer " + activeLicenseKey },
+        headers: { "content-type": "application/json", authorization: "Bearer " + sessionToken },
         body: JSON.stringify({ topic: selectedTopic, location: location.value.trim(), style: pickRandomStyle(), maxLength: MAX_LENGTH, useNews: useNews.checked }),
       });
       const payload = await response.json().catch(() => ({}));
       if (response.status === 401 || response.status === 403) {
-        activeLicenseKey = "";
-        localStorage.removeItem(LICENSE_STORAGE_KEY);
-        setLicenseStatus("License rejected or expired. Please activate it again.");
-        throw new Error("Vichar license could not be verified. Please activate it again.");
+        webSessionToken = "";
+        webSessionExpiresAt = 0;
+        throw new Error("Your Vichar session expired. Please try again.");
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       tweet.value = payload.tweet;
@@ -372,19 +348,6 @@ const topics = [
 
 </script>
 <style>
-  .license-panel[hidden]{display:none!important}
-  .license-panel{margin:1rem 0 1.25rem;padding:1rem;border:1px solid var(--border);border-radius:1rem;background:color-mix(in srgb,var(--surface) 88%,var(--accent-soft))}
-  .license-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-  .license-panel-heading h3{margin:0;font-size:1.05rem;letter-spacing:-.025em}
-  .license-panel .section-kicker{margin-bottom:.3rem}
-  .license-badge{flex:none;padding:.3rem .55rem;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.68rem;font-weight:700}
-  .license-badge[data-active]{border-color:color-mix(in srgb,#16866b 45%,var(--border));color:#16866b;background:color-mix(in srgb,#16866b 8%,var(--surface))}
-  .license-help{margin:.65rem 0;color:var(--muted);font-size:.82rem;line-height:1.5}
-  .license-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.5rem;align-items:end}
-  .license-input-label{grid-column:1/-1;font-size:.78rem;font-weight:650}
-  .license-controls input{min-width:0;width:100%;padding:.7rem .8rem;border:1px solid var(--border);border-radius:.6rem;background:var(--background);color:var(--foreground);font:inherit;font-size:.85rem}
-  .license-controls button{grid-column:2;grid-row:2;white-space:nowrap}
-  #license-status{margin:.55rem 0 0;color:var(--muted);font-size:.78rem;line-height:1.45}
   .vichar-page{width:min(1080px,calc(100% - 3rem));margin:0 auto;padding:1.2rem 0 1.5rem;color:var(--foreground)}
   .hero{display:grid;grid-template-columns:minmax(330px,.72fr) minmax(0,1.45fr);gap:clamp(2rem,4vw,4.5rem);align-items:start;padding:1.2rem 0 2.2rem;position:relative}
   .hero::before{content:"";position:absolute;z-index:-1;inset:0 -2rem;background:radial-gradient(ellipse at 72% 38%,rgba(57,137,255,.14),transparent 42%),radial-gradient(ellipse at 15% 95%,rgba(83,181,255,.1),transparent 38%);pointer-events:none}
