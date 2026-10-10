@@ -55,7 +55,7 @@ const topics = [
             <span class="version-pill"><span class="live-dot"></span> News-aware · {vicharVersion}</span>
           </div>
 
-          <section class="license-panel" aria-labelledby="license-heading">
+          <section id="license-panel" class="license-panel" aria-labelledby="license-heading">
             <div class="license-panel-heading"><div><p class="section-kicker">Owner access</p><h3 id="license-heading">Activate your Vichar license</h3></div><span id="license-badge" class="license-badge">Not activated</span></div>
             <p class="license-help">Use the same license key as the Vichar extension. Owner access is verified by the backend; the key is not embedded in this website's source.</p>
             <div class="license-controls"><label class="license-input-label" for="license-key">License key</label><input id="license-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Vichar license key" /><button id="activate-license" type="button" class="secondary-button">Activate</button></div>
@@ -182,6 +182,7 @@ const topics = [
   const activateLicenseButton = document.querySelector<HTMLButtonElement>("#activate-license")!;
   const licenseStatus = document.querySelector<HTMLParagraphElement>("#license-status")!;
   const licenseBadge = document.querySelector<HTMLSpanElement>("#license-badge")!;
+  const licensePanel = document.querySelector<HTMLElement>("#license-panel")!;
   let activeLicenseKey = "";
   let lastTopic = "";
 
@@ -202,6 +203,7 @@ const topics = [
     licenseStatus.textContent = message;
     licenseBadge.textContent = active ? "Activated" : "Not activated";
     licenseBadge.toggleAttribute("data-active", active);
+    licensePanel.hidden = active;
   }
 
   async function activateLicense(key: string, announce = true) {
@@ -370,6 +372,7 @@ const topics = [
 
 </script>
 <style>
+  .license-panel[hidden]{display:none!important}
   .license-panel{margin:1rem 0 1.25rem;padding:1rem;border:1px solid var(--border);border-radius:1rem;background:color-mix(in srgb,var(--surface) 88%,var(--accent-soft))}
   .license-panel-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem}
   .license-panel-heading h3{margin:0;font-size:1.05rem;letter-spacing:-.025em}
