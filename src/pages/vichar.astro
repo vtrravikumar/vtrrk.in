@@ -226,10 +226,15 @@ const topics = [
   });
   licenseKeyInput.addEventListener("keydown", (event) => { if (event.key === "Enter") activateLicenseButton.click(); });
 
-  try {
-    const savedKey = localStorage.getItem(LICENSE_STORAGE_KEY);
-    if (savedKey) { licenseKeyInput.value = savedKey; await activateLicense(savedKey, false); }
-  } catch { activeLicenseKey = ""; setLicenseStatus("Saved license could not be verified. Please activate it again."); }
+  void (async () => {
+    try {
+      const savedKey = localStorage.getItem(LICENSE_STORAGE_KEY);
+      if (savedKey) { licenseKeyInput.value = savedKey; await activateLicense(savedKey, false); }
+    } catch {
+      activeLicenseKey = "";
+      setLicenseStatus("Saved license could not be verified. Please activate it again.");
+    }
+  })();
 
   function updateCount() {
     count.textContent = tweet.value.length + " / " + MAX_LENGTH;
