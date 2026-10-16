@@ -137,6 +137,20 @@ const topics = [
       <div class="trust-sanskrit"><p lang="sa">विचारः सृजनस्य प्रेरणा।</p><span>Vicāraḥ sṛjanasya preraṇā.</span><em>Thought is the inspiration for creation.</em></div>
     </section>
 
+    <section class="support-panel" aria-labelledby="support-title">
+      <div class="support-icon" aria-hidden="true">♡</div>
+      <div class="support-copy">
+        <h2 id="support-title">Enjoying Vichar?</h2>
+        <p>Vichar is free to use. If it has been useful to you, you can support its continued development.</p>
+      </div>
+      <div class="support-action">
+        <a class="support-link" href="https://razorpay.me/@vtr" target="_blank" rel="noopener noreferrer">
+          Support Vichar <span aria-hidden="true">↗</span>
+        </a>
+        <span class="support-note">Completely optional</span>
+      </div>
+    </section>
+
     <footer class="vichar-footer">
       <div class="footer-brand"><strong>Vichar — विचार</strong><span class="footer-divider">|</span><span>By VTRRK</span><em>Think it. Shape it. Make it yours.</em></div>
       <div class="footer-build"><span class="version-badge">{vicharVersion}</span><span class="footer-separator" aria-hidden="true">·</span><span class="build-label" title="Cloudflare Pages source commit">Build <code>{vicharBuild}</code></span><span class="footer-separator" aria-hidden="true">·</span><span>vtrrk.in/vichar</span></div>
@@ -434,6 +448,15 @@ const topics = [
   .trust-sanskrit{border-left:2px solid var(--accent);padding-left:1rem;text-align:center}
   .trust-sanskrit p{margin:0;font-size:1.15rem;color:var(--foreground)}
   .trust-sanskrit span,.trust-sanskrit em{display:block;color:var(--muted);font-size:.75rem;font-style:italic;line-height:1.5}
+  .support-panel{display:flex;align-items:center;gap:1rem;margin:.35rem 0 1.2rem;padding:1.25rem 1.4rem;border:1px solid var(--border);border-radius:1.1rem;background:var(--surface)}
+  .support-icon{display:grid;place-items:center;flex:0 0 2.8rem;width:2.8rem;height:2.8rem;border-radius:.85rem;background:var(--accent-soft);color:var(--accent);font-size:2rem;line-height:1}
+  .support-copy{flex:1;min-width:0}
+  .support-copy h2{margin:0;font-size:1.08rem;letter-spacing:-.03em}
+  .support-copy p{max-width:42rem;margin:.3rem 0 0;color:var(--muted);font-size:.84rem;line-height:1.55}
+  .support-action{display:flex;align-items:center;flex-direction:column;gap:.4rem;flex-shrink:0}
+  .support-link{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.72rem 1rem;border-radius:999px;background:linear-gradient(110deg,#1477ff,#0754d8);box-shadow:0 6px 16px rgba(20,119,255,.14);color:#fff;text-decoration:none;font-size:.82rem;font-weight:750;transition:transform .18s ease,box-shadow .18s ease}
+  .support-link:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(20,119,255,.22)}
+  .support-note{color:var(--muted);font-size:.68rem}
   .vichar-footer{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-top:1px solid var(--border);padding:1rem .5rem .2rem;color:var(--muted);font-size:.74rem}
   .footer-brand,.footer-build,.footer-links{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
   .footer-brand strong{color:var(--foreground)}
@@ -475,6 +498,9 @@ const topics = [
     .feature-card{padding:1rem}
     .trust-strip{grid-template-columns:1fr;gap:.9rem}
     .trust-sanskrit{text-align:left}
+    .support-panel{align-items:flex-start;flex-wrap:wrap;padding:1rem}
+    .support-copy{flex-basis:calc(100% - 4rem)}
+    .support-action{align-items:flex-start;margin-left:3.8rem}
     .vichar-footer{align-items:flex-start;flex-direction:column}
     .footer-build{order:2}
     .footer-links{order:3}
