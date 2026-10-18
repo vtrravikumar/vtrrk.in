@@ -175,9 +175,12 @@ const topics = [
 </BaseLayout>
 
 <script>
-  const API_URL = "https://api.vtrrk.in/vichar/v1/tweet/generate";
-  const CARTOON_API_URL = "https://api.vtrrk.in/vichar/v1/cartoon/generate";
-  const WEB_SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
+  // Set PUBLIC_VICHAR_API_BASE in a local .env file to test against Wrangler dev.
+  // Production defaults to the existing API hostname and path.
+  const API_BASE_URL = (import.meta.env.PUBLIC_VICHAR_API_BASE ?? "https://api.vtrrk.in/vichar").replace(/\/+$/, "");
+  const API_URL = `${API_BASE_URL}/v1/tweet/generate`;
+  const CARTOON_API_URL = `${API_BASE_URL}/v1/cartoon/generate`;
+  const WEB_SESSION_URL = `${API_BASE_URL}/v1/web/session`;
   const MAX_LENGTH = 140;
 
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist"];
