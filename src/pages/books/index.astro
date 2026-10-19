@@ -13,7 +13,7 @@ import { books } from "../../content/books";
   <section class="books">
     {books.map((book, index) => (
       <article>
-        <div class="cover-wrap"><img class={book.slug === "the-white-envelope" ? "cover-crop" : undefined} src={book.cover} alt={`Cover of ${book.title}`} /></div>
+        <div class="cover-wrap"><img class={book.slug === "the-white-envelope" ? "cover-crop" : undefined} src={book.cover} alt={`Cover of ${book.title}`} loading={index === 0 ? undefined : "lazy"} /></div>
         <div class="book-copy">
           <p class="book-number">0{index + 1} · {book.edition === "free-digital" ? "Free digital edition" : "Published book"}</p>
           <h2>{book.title}</h2>

@@ -141,7 +141,7 @@ const nextHref = nextSlug ? `/travel/${nextSlug}/` : undefined;
       </section>
     )}
     {instagramPhotos.length > 0 && <InstagramEmbedLoader />}
-    {nextJourney && <nav class="next-journey" aria-label="Next journey"><div><p class="next-label">Next journey</p><p class="next-bucket">{isIndia ? "India" : "Rest of world"}</p></div><a class="next-card" href={nextHref}><img src={nextBanner} alt="" /><div><span>{isIndia ? "India" : nextJourney.data.continent ?? "Travel"}</span><h2>{nextTitle}</h2><strong>Read journey <b>→</b></strong></div></a></nav>}
+    {nextJourney && <nav class="next-journey" aria-label="Next journey"><div><p class="next-label">Next journey</p><p class="next-bucket">{isIndia ? "India" : "Rest of world"}</p></div><a class="next-card" href={nextHref}><img src={nextBanner} alt="" loading="lazy" /><div><span>{isIndia ? "India" : nextJourney.data.continent ?? "Travel"}</span><h2>{nextTitle}</h2><strong>Read journey <b>→</b></strong></div></a></nav>}
   </main>
 </BaseLayout>
 <style>
