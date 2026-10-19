@@ -120,7 +120,13 @@ a {
 }
 
 a:hover {
-	color: var(--accent-creative);
+	color: var(--accent);
+}
+
+/* Keep keyboard focus visible, including on controls with custom field styles. */
+:focus-visible {
+	outline: 3px solid var(--accent);
+	outline-offset: 3px;
 }
 
 /* Site-wide editorial typography scale. Page-specific styles can override where needed. */

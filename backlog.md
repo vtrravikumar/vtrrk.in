@@ -376,7 +376,7 @@ Reviewed on iPhone, iPad and desktop. Ravi confirmed the site is responsive and 
 - Status: In Progress
 - Area: Quality
 
-Accessibility improvements implemented and pushed in commit `796780b` on 9 October 2026. The patch was adapted from a different repository revision; header and Vichar-specific changes from the original patch were excluded. The current production build succeeds with 476 pages, and `git diff --check` reported no whitespace errors. These checks do not establish WCAG conformance.
+Accessibility improvements were implemented in commit `796780b` on 9 October 2026 and extended in this QA pass. `npm run build` succeeds with 476 pages and `git diff --check` reports no whitespace errors. The build emitted existing warnings for the empty Writing collection and the `/books/travelogue` dynamic-route conflict. These checks do not establish WCAG conformance.
 
 Implemented:
 - Added a "Skip to main content" link in `BaseLayout.astro`.
@@ -386,18 +386,23 @@ Implemented:
 - Travelogue redeem form: associated the invalid-code error with the input using `aria-invalid` and `aria-describedby`; strengthened the input focus indicator.
 - Photography: improved gallery thumbnail link labels, added visually hidden headings to photo pages, and introduced metadata-derived photo labels in `src/content/photo-label.ts`.
 - Updated applicable page-level accessibility markup from the patch.
+- Added a site-wide theme-aware `:focus-visible` outline; ordinary link hover uses the theme accent, while Vichar gradient CTA links retain white hover text.
+- Raised Vichar and Travelogue input border mixes to 55% foreground. Source-based colour calculations put the border at 3.72:1 against the light field surface and at least 4.41:1 against the modeled dark Vichar field surface; browser rendering remains to be checked. Vichar fields no longer suppress their keyboard focus outline.
+- Raised Travel place-tag link hit areas to at least 24 CSS pixels high.
+- Photography detail pages now use a metadata-derived page title and a caption fallback, avoiding empty place/country separators when location metadata is absent.
 
 Not included or not independently verified:
-- Header accessibility changes and Vichar-specific form/dark-mode changes were excluded from this patch and were not independently verified as part of this accessibility work.
-- Claude's reported axe-core scan, keyboard audit and static scan of 476 pages have not been independently verified against this checkout.
+- No automated accessibility scanner or assistive technology audit was run in this pass; the successful build and static source review are not WCAG conformance evidence.
+- Photography metadata cannot provide a useful visual description for 100 of 388 photos (place and country are blank). Their current category/model fallback labels are generic; accurate alt text requires reviewing the photographs and adding descriptions.
 
 Remaining work:
-- Improve photo captions and alt text where metadata is insufficient; remove stray separators when place/country metadata is missing.
-- Review creative-accent hover contrast and form-field border contrast.
-- Check travel tag-cloud target size and overlap.
-- Visually check white text over photography cards.
-- Manually test keyboard navigation, VoiceOver/NVDA, 200%/400% zoom and reflow, forced-colours mode, and third-party Instagram embeds.
-- Consider adding `astro check` and automated accessibility checks to CI.
+- Review photographs with generic metadata-derived alt text and add accurate descriptions where needed.
+- Check Travel tag-cloud targets for overlap at narrow widths; links have a 24 CSS pixel minimum height in source.
+- Manually verify focus order and visible focus by keyboard across the site, including skip-link behavior, Vichar controls, and Travelogue invalid-code feedback.
+- Test representative pages at 200% and 400% zoom and narrow viewport reflow; check text-spacing overrides and forced-colours mode.
+- Inspect white text over Photography cards and the Travel featured image in light and dark themes.
+- Test with VoiceOver or NVDA and verify the third-party Instagram embeds on travel pages.
+- Run a page-wide accessibility scan and review its findings manually; consider adding `astro check` and accessibility checks to CI.
 
 Keep QA-002 In Progress until the remaining applicable fixes and manual checks are completed and documented.
 

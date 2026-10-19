@@ -29,12 +29,13 @@ const { photo, travelHref, travelLabel } = Astro.props;
 const pageUrl = `https://vtrrk.in/photography/photo/${photo.id}/`;
 const imageUrl = `https://vtrrk.in/photography/${photo.file}`;
 const accessibleLabel = photoLabel(photo);
-const shareText = `${photo.place} · ${photo.country}`;
+const caption = [photo.place, photo.country].filter(Boolean).join(" · ") || accessibleLabel;
+const shareText = caption;
 const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
 ---
 <BaseLayout
-  title="V T R Ravi kumar"
-  description={`Photography from ${photo.place}, ${photo.country}.`}
+  title={`${caption} — Photography — V.T.R. Ravi Kumar`}
+  description={`Photography: ${caption}.`}
   ogUrl={pageUrl}
   ogImage={imageUrl}
 >
@@ -55,7 +56,7 @@ const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(page
           draggable="false"
         />
       </div>
-      <figcaption>{photo.place} · {photo.country}</figcaption>
+      <figcaption>{caption}</figcaption>
     </figure>
 
     <nav class="actions" aria-label="Photo actions">

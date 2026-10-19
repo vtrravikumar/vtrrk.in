@@ -385,6 +385,7 @@ const topics = [
   .primary-link{padding:.8rem 1rem;color:#fff;background:linear-gradient(110deg,#1477ff,#0754d8);box-shadow:0 8px 22px rgba(20,119,255,.16)}
   .secondary-link{padding:.75rem .9rem;border:1px solid var(--border);color:var(--foreground);background:var(--surface)}
   .primary-link:hover,.secondary-link:hover{transform:translateY(-1px)}
+  .primary-link:hover,.support-link:hover{color:#fff}
   .chrome-mark{font-size:1.15rem;color:#ffcf4a}
   .human-control-note{margin:.8rem 0 0;color:var(--muted);font-size:.75rem;line-height:1.5}
   .creator{min-width:0;scroll-margin-top:1rem}
@@ -399,7 +400,7 @@ const topics = [
   .topic-field textarea{min-height:3.5rem;max-height:3.5rem;resize:none}
   .custom-topic textarea{min-height:2.8rem;max-height:2.8rem;resize:none}
   #topic-count{margin-left:.35rem;font-variant-numeric:tabular-nums;font-weight:500}
-  select,input,textarea{width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:.75rem;background:var(--surface-elevated);color:var(--foreground);font:inherit;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+  select,input,textarea{width:100%;box-sizing:border-box;border:1px solid color-mix(in srgb,var(--foreground) 55%,var(--background));border-radius:.75rem;background:var(--surface-elevated);color:var(--foreground);font:inherit;transition:border-color .2s ease,box-shadow .2s ease}
   select,input{height:2.8rem;padding:0 .8rem}
   textarea{min-height:6.8rem;padding:.8rem .9rem;resize:vertical;line-height:1.5}
   select:focus,input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
