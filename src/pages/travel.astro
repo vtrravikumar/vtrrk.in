@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import TravelBanner from "../components/TravelBanner.astro";
 import { getCollection } from "astro:content";
 import { travelCountries } from "../content/travel-countries";
+import { getTravelBannerSources } from "../utils/travel-banners";
 
 type JourneyEntry = Awaited<ReturnType<typeof getCollection<"travel">>>[number];
 
@@ -109,6 +111,7 @@ const featuredCandidates = [
     slug: journey.slug,
     title: journey.title,
     banner: journey.banner,
+    imageSources: getTravelBannerSources(journey.banner),
     meta: `India · ${journey.region ?? "Journey"}`,
     href: `/travel/india/${journey.slug.split("/").pop()}/`,
   })),
@@ -116,6 +119,7 @@ const featuredCandidates = [
     slug: country.slug,
     title: country.title ?? country.name,
     banner: country.banner,
+    imageSources: getTravelBannerSources(country.banner),
     meta: country.continent,
     href: `/travel/${country.slug}/`,
   })),
@@ -124,11 +128,13 @@ const featuredCandidates = [
         slug: "united-arab-emirates",
         title: visit.title!,
         banner: uaeEntry?.data.banner,
+        imageSources: getTravelBannerSources(uaeEntry?.data.banner),
         meta: `United Arab Emirates · ${visit.emirate ?? "Scene"}`,
         href: "/travel/united-arab-emirates/",
       }))
     : []),
 ];
+const featuredBannerSizes = "(max-width: 700px) calc(100vw - 32px), (max-width: 1128px) calc((100vw - 48px) * 0.54), 583px";
 ---
 <BaseLayout title="Travel — V.T.R. Ravi Kumar" description="Travel stories, journeys and practical notes from V.T.R. Ravi Kumar.">
   <main id="main-content" tabindex="-1">
@@ -145,7 +151,7 @@ const featuredCandidates = [
     </section>
     <section class="featured" aria-labelledby="featured-heading">
       <div class="section-heading"><p class="label" id="featured-heading">Featured travel</p><p class="section-note">A story from somewhere on the road</p></div>
-      <a class="featured-card" href={featuredCandidates[0]?.href ?? "#"} data-featured-card data-featured-candidates={JSON.stringify(featuredCandidates)}><img src={featuredCandidates[0]?.banner ?? "/images/travel/default.jpg"} alt={`${featuredCandidates[0]?.title ?? "Travel"} travel banner`} data-featured-image /><div class="featured-copy"><p class="featured-continent" data-featured-meta>{featuredCandidates[0]?.meta ?? "Travel"}</p><h2 data-featured-name>{featuredCandidates[0]?.title ?? "Travel stories"}</h2><p class="featured-link">Read the travelogue <span>→</span></p></div></a>
+      <a class="featured-card" href={featuredCandidates[0]?.href ?? "#"} data-featured-card data-featured-candidates={JSON.stringify(featuredCandidates)}><TravelBanner avifSrcset={featuredCandidates[0]?.imageSources?.avif} sizes={featuredBannerSizes} featured><img src={featuredCandidates[0]?.banner ?? "/images/travel/default.jpg"} srcset={featuredCandidates[0]?.imageSources?.jpeg} sizes={featuredBannerSizes} alt={`${featuredCandidates[0]?.title ?? "Travel"} travel banner`} data-featured-image /></TravelBanner><div class="featured-copy"><p class="featured-continent" data-featured-meta>{featuredCandidates[0]?.meta ?? "Travel"}</p><h2 data-featured-name>{featuredCandidates[0]?.title ?? "Travel stories"}</h2><p class="featured-link">Read the travelogue <span>→</span></p></div></a>
     </section>
     <section class="index">
       <div class="index-intro"><p class="label">Travel index</p><h2>India, UAE &amp; {international.length} countries</h2><p>India is organised by state and region, the United Arab Emirates by emirate, and the rest of the world by continent and country. A green marker means a published travelogue is available; a grey marker means the journey is recorded but the story is still to be written.</p></div>
@@ -201,10 +207,17 @@ const featuredCandidates = [
     if (candidates.length) {
       const featured = candidates[Math.floor(Math.random() * candidates.length)];
       const image = featuredCard.querySelector('[data-featured-image]');
+      const avifSource = featuredCard.querySelector('[data-featured-avif]');
       const meta = featuredCard.querySelector('[data-featured-meta]');
       const name = featuredCard.querySelector('[data-featured-name]');
       featuredCard.setAttribute('href', featured.href);
+      if (avifSource) {
+        if (featured.imageSources?.avif) avifSource.setAttribute('srcset', featured.imageSources.avif);
+        else avifSource.removeAttribute('srcset');
+      }
       if (image) {
+        if (featured.imageSources?.jpeg) image.setAttribute('srcset', featured.imageSources.jpeg);
+        else image.removeAttribute('srcset');
         image.setAttribute('src', featured.banner || '/images/travel/default.jpg');
         image.setAttribute('alt', `${featured.title} travel banner`);
       }

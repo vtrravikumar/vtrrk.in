@@ -1,5 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import TravelBanner from "../../../components/TravelBanner.astro";
+import { getTravelBannerSources } from "../../../utils/travel-banners";
 import { getCollection } from "astro:content";
 
 type JourneyEntry = Awaited<ReturnType<typeof getCollection<"travel">>>[number];
@@ -19,6 +21,10 @@ const journeys = allJourneys
   });
 
 const featuredJourney = journeys.length ? journeys[Math.floor(Math.random() * journeys.length)] : undefined;
+const featuredBanner = featuredJourney?.banner ?? (featuredJourney ? `/images/travel/${featuredJourney.slug}.jpg` : undefined);
+const featuredBannerSizes = "(max-width: 700px) calc(100vw - 32px), (max-width: 1048px) calc((100vw - 48px) / 2), 476px";
+const journeyBannerSizes = "(max-width: 700px) calc(100vw - 32px), 280px";
+const featuredBannerSources = getTravelBannerSources(featuredBanner);
 const formatDate = (value: string | Date) => (value instanceof Date ? value : new Date(`${value}T00:00:00`)).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
 const formatDateRange = (journey: { from?: string | Date | null; to?: string | Date | null }) => {
   if (journey.from && journey.to) return `${formatDate(journey.from)} – ${formatDate(journey.to)}`;
@@ -34,8 +40,8 @@ const formatDateRange = (journey: { from?: string | Date | null; to?: string | D
       <h1>Journeys across India.</h1>
       <p>India, one journey at a time — the places we've been, the moments we remember, and the stories that stayed with us.</p>
     </header>
-    {featuredJourney && <section class="featured" aria-labelledby="featured-heading"><p class="label" id="featured-heading">Featured journey</p><a class="featured-card" href={`/travel/india/${featuredJourney.slug}/`}><img src={featuredJourney.banner ?? `/images/travel/${featuredJourney.slug}.jpg`} alt={`${featuredJourney.title} travel banner`} /><div class="featured-copy"><p class="journey-region">India · {featuredJourney.region ?? "Journey"}</p><h2>{featuredJourney.title}</h2><p>{formatDateRange(featuredJourney)}</p><span>Read the travelogue →</span></div></a></section>}
-    <section class="journeys"><div class="section-heading"><p class="label">India index</p><h2>{journeys.length} {journeys.length === 1 ? "journey" : "journeys"}</h2></div>{journeys.length ? <div class="journey-list">{journeys.map((journey) => <a class="journey-card" href={`/travel/india/${journey.slug}/`}><img src={journey.banner ?? "/images/travel/default.jpg"} alt="" loading="lazy" /><div class="copy"><p class="journey-region">India · {journey.region ?? "Journey"}</p><h3>{journey.title}</h3><p>{formatDateRange(journey)}</p><span>Read the travelogue →</span></div></a>)}</div> : <p class="empty">The first India journey is next. As more trips are added, this page will become a collection of stories from across the country.</p>}</section>
+    {featuredJourney && <section class="featured" aria-labelledby="featured-heading"><p class="label" id="featured-heading">Featured journey</p><a class="featured-card" href={`/travel/india/${featuredJourney.slug}/`}><TravelBanner avifSrcset={featuredBannerSources?.avif} sizes={featuredBannerSizes}><img src={featuredBanner!} srcset={featuredBannerSources?.jpeg} sizes={featuredBannerSources ? featuredBannerSizes : undefined} alt={`${featuredJourney.title} travel banner`} /></TravelBanner><div class="featured-copy"><p class="journey-region">India · {featuredJourney.region ?? "Journey"}</p><h2>{featuredJourney.title}</h2><p>{formatDateRange(featuredJourney)}</p><span>Read the travelogue →</span></div></a></section>}
+    <section class="journeys"><div class="section-heading"><p class="label">India index</p><h2>{journeys.length} {journeys.length === 1 ? "journey" : "journeys"}</h2></div>{journeys.length ? <div class="journey-list">{journeys.map((journey) => { const src = journey.banner ?? "/images/travel/default.jpg"; const sources = getTravelBannerSources(src); return <a class="journey-card" href={`/travel/india/${journey.slug}/`}><TravelBanner avifSrcset={sources?.avif} sizes={journeyBannerSizes}><img src={src} srcset={sources?.jpeg} sizes={sources ? journeyBannerSizes : undefined} alt="" loading="lazy" /></TravelBanner><div class="copy"><p class="journey-region">India · {journey.region ?? "Journey"}</p><h3>{journey.title}</h3><p>{formatDateRange(journey)}</p><span>Read the travelogue →</span></div></a>; })}</div> : <p class="empty">The first India journey is next. As more trips are added, this page will become a collection of stories from across the country.</p>}</section>
   </main>
 </BaseLayout>
 <style>

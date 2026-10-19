@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "generate:travel-banners": "node scripts/generate-travel-banners.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },

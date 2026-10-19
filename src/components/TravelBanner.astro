@@ -1,0 +1,34 @@
+---
+interface Props {
+  avifSrcset?: string;
+  sizes: string;
+  featured?: boolean;
+}
+
+const { avifSrcset, sizes, featured = false } = Astro.props;
+const usePicture = Boolean(avifSrcset || featured);
+---
+
+{usePicture ? (
+  <picture data-featured-picture={featured ? "" : undefined}>
+    {(avifSrcset || featured) && (
+      <source
+        type="image/avif"
+        srcset={avifSrcset}
+        sizes={sizes}
+        data-featured-avif={featured ? "" : undefined}
+      />
+    )}
+    <slot />
+  </picture>
+) : (
+  <slot />
+)}
+
+<style>
+  picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -2,6 +2,8 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import TravelBanner from "../../components/TravelBanner.astro";
+import { getTravelBannerSources } from "../../utils/travel-banners";
 import InstagramEmbedLoader from "../../components/InstagramEmbedLoader.astro";
 import { getCollection } from "astro:content";
 import { travelCountries } from "../../content/travel-countries";
@@ -91,6 +93,8 @@ const dateLabel = hasMultipleVisits ? uniqueYears.join(" · ") : (hasDateRange ?
 const durationDays = hasMultipleVisits ? undefined : (firstVisit?.duration_days ?? data.duration_days ?? (hasDateRange && from && to ? Math.round((toDate(to).getTime() - toDate(from).getTime()) / 86400000) + 1 : undefined));
 const durationLabel = hasMultipleVisits ? `${visits.length} visits` : (durationDays !== undefined ? `${durationDays} days` : undefined);
 const banner = data.banner ?? "/images/travel/default.jpg";
+const bannerSizes = "(max-width: 700px) calc(100vw - 32px), (max-width: 1128px) calc(100vw - 48px), 1080px";
+const bannerSources = getTravelBannerSources(banner);
 const photography = data.photography ?? [];
 const instagramPhotos = photography.filter((photo) => photo.url && /instagram\.com\/p\//.test(photo.url));
 const backHref = isIndia ? "/travel/india/" : "/travel/";
@@ -111,12 +115,14 @@ const nextParts = nextJourney?.id.split("/");
 const nextSlug = nextParts ? (nextParts[0] === "india" ? `india/${nextParts[1]}` : nextParts[0]) : undefined;
 const nextTitle = nextJourney?.data.title ?? nextJourney?.data.country;
 const nextBanner = nextJourney?.data.banner ?? "/images/travel/default.jpg";
+const nextBannerSizes = "(max-width: 700px) 120px, 240px";
+const nextBannerSources = getTravelBannerSources(nextBanner);
 const nextHref = nextSlug ? `/travel/${nextSlug}/` : undefined;
 ---
 <BaseLayout title={`${title} — Travel — V.T.R. Ravi Kumar`} description={`A personal travelogue from ${title}${isIndia ? ", India" : ""}`}>
   <main id="main-content" tabindex="-1">
     <a class="back" href={backHref}>{backLabel}</a>
-    <section class="hero"><img class="banner" src={banner} alt={`${title} travel banner`} /><div class="hero-copy"><p class="label">{isIndia ? "India" : region} · {isIndia ? region : title}</p><h1>{title}</h1><p class="intro">A personal travelogue from {title}.</p>{hasPhotography && <a class="hero-photography" href={photographyHref}>Explore {photographyLabel} photography →</a>}</div></section>
+    <section class="hero"><TravelBanner avifSrcset={bannerSources?.avif} sizes={bannerSizes}><img class="banner" src={banner} srcset={bannerSources?.jpeg} sizes={bannerSources ? bannerSizes : undefined} alt={`${title} travel banner`} /></TravelBanner><div class="hero-copy"><p class="label">{isIndia ? "India" : region} · {isIndia ? region : title}</p><h1>{title}</h1><p class="intro">A personal travelogue from {title}.</p>{hasPhotography && <a class="hero-photography" href={photographyHref}>Explore {photographyLabel} photography →</a>}</div></section>
     {photography.some((photo) => photo.url) && (
       <nav class="photography-links" aria-label="Photography links">
         {photography.filter((photo) => photo.url).map((photo) => (
@@ -141,7 +147,7 @@ const nextHref = nextSlug ? `/travel/${nextSlug}/` : undefined;
       </section>
     )}
     {instagramPhotos.length > 0 && <InstagramEmbedLoader />}
-    {nextJourney && <nav class="next-journey" aria-label="Next journey"><div><p class="next-label">Next journey</p><p class="next-bucket">{isIndia ? "India" : "Rest of world"}</p></div><a class="next-card" href={nextHref}><img src={nextBanner} alt="" loading="lazy" /><div><span>{isIndia ? "India" : nextJourney.data.continent ?? "Travel"}</span><h2>{nextTitle}</h2><strong>Read journey <b>→</b></strong></div></a></nav>}
+    {nextJourney && <nav class="next-journey" aria-label="Next journey"><div><p class="next-label">Next journey</p><p class="next-bucket">{isIndia ? "India" : "Rest of world"}</p></div><a class="next-card" href={nextHref}><TravelBanner avifSrcset={nextBannerSources?.avif} sizes={nextBannerSizes}><img src={nextBanner} srcset={nextBannerSources?.jpeg} sizes={nextBannerSources ? nextBannerSizes : undefined} alt="" loading="lazy" /></TravelBanner><div><span>{isIndia ? "India" : nextJourney.data.continent ?? "Travel"}</span><h2>{nextTitle}</h2><strong>Read journey <b>→</b></strong></div></a></nav>}
   </main>
 </BaseLayout>
 <style>
