@@ -157,10 +157,12 @@ Footer, Elsewhere and Contact are implemented and verified. Footer content is al
 
 ## UX-002 — Audit site-wide typography scale and consistency
 - Priority: P2
-- Status: Planned
+- Status: In Progress
 - Area: Visual consistency / Accessibility
 
-Audit font sizes across the main site and key pages, including Vichar, Books, Writing, Travel and Photography. Inventory heading levels, body text, captions, labels, navigation, buttons and responsive overrides; identify duplicate or conflicting values and outliers. Propose a small, coherent type scale and apply only evidence-based fixes after review. Preserve intentional display typography and verify mobile layouts, readability and zoom/reflow after changes.
+The read-only source audit is complete and documented in [docs/UX-002-typography-audit.md](docs/UX-002-typography-audit.md). It identified a high-priority cascade conflict between the global `h1 !important` rule and page-level heading declarations, plus inconsistent body baselines and repeated local typography styles. The proposed role scale is not yet approved or implemented.
+
+Next: agree on the semantic type roles and staged migration, then implement and verify in the browser. Preserve the homepage display treatment, Vichar product typography, book-cover artwork, and Travel/Photography image-overlay roles. Verify mobile layouts, long titles, readability, and zoom/reflow before marking Done.
 
 ## UX-001 — Add explicit Home link to interior-page navigation
 - Priority: P2
