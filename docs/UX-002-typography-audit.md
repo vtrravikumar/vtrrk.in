@@ -3,7 +3,7 @@
 - Repository: `vtrravikumar/vtrrk.in`
 - Audited baseline: `main` at the time of review, 20 October 2026
 - Audit method: read-only source inspection; no code changes made during the audit
-- Status: audit complete; implementation and browser verification pending
+- Status: audit complete; implementation direction agreed; implementation scope awaiting review; browser verification pending
 
 ## Summary
 
@@ -75,3 +75,31 @@ These values are a starting proposal for review, not yet implemented.
 ## Limitations
 
 This audit confirms source declarations and CSS cascade behaviour. It does not confirm visual clipping, awkward wrapping, or readability in a rendered browser. Those require viewport-based inspection. No files were changed during the read-only audit.
+
+
+## Agreed direction and implementation scope (20 October 2026)
+
+Ravi's decisions for UX-002:
+
+- **Font strategy:** Keep the system font stack. Do not add or download a web font as part of this task. The existing unused “Plus Jakarta Sans” entry should be reviewed and either removed or clearly documented if it is not actually loaded; do not introduce a font asset.
+- **Approach:** Use a balanced, shared semantic typography system. Establish consistent body defaults and shared visual roles, migrate ordinary page typography in focused batches, and preserve intentional display styles.
+- **Scope state:** The direction is agreed. The implementation scope below is prepared for review; no implementation code has been changed as part of this planning update.
+
+### Proposed implementation scope for approval
+
+1. **Shared foundation:** Review src/styles/global.css and define a small set of CSS custom properties and/or semantic utility roles for display, page, section and card headings; body, intro and long-form copy; small text/captions; labels; navigation; and controls. Use the existing system font stack.
+2. **Body baseline:** Introduce a consistent body font-size and line-height baseline, with explicit long-form and intro roles. Keep the established 720px long-form text measure unless browser review demonstrates a specific problem.
+3. **Heading cascade:** Resolve the global h1 !important conflict as part of a deliberate migration, not as an isolated deletion. Standard page headings should use the page-heading role; large section headings and image overlays should use explicit display roles rather than depending on the HTML tag alone.
+4. **Focused migration:** Update ordinary page headings and repeated typography patterns across the site in small, reviewable batches. Then handle labels/metadata, navigation, captions and controls. Avoid blanket rules that force every instance of an HTML heading tag to look the same.
+5. **Preserved exceptions:** Keep the homepage split-name hero and its tight display styling; Vichar's distinct product/Sanskrit typography and compact UI; book-cover artwork; Photography and Travel image-overlay titles, tag-cloud variation and photo captions; and the long-form image/text-measure relationship.
+6. **Validation:** Run repository tests and the production build; check whitespace/diff quality and route coverage. Inspect desktop and narrow viewports (including 320px and 430–700px), long place/book/article titles, navigation wrapping, controls/captions, browser zoom/reflow and long-form readability. Automated build success alone is not visual verification.
+7. **Out of scope:** No redesign, new font, typography-only content edits, Vichar feature changes, image/artwork changes, or unrelated refactoring. Do not mark UX-002 Done until implementation checks and the required visual review are recorded.
+
+### Proposed execution sequence
+
+- **Pass A — Foundation:** Add the shared tokens/roles and body baseline while preserving current page-specific appearance wherever possible.
+- **Pass B — Standard headings:** Migrate standard page headings and remove the conflicting global h1 !important behaviour only when the relevant pages have explicit roles.
+- **Pass C — Supporting text:** Consolidate repeated intro, long-form, label/metadata, navigation, caption and control styles where the visual role genuinely matches.
+- **Pass D — Regression review:** Build/test, inspect the diff and routes, then perform viewport-based visual checks and adjust only demonstrated regressions.
+
+The exact token values are a starting point based on the proposed scale above and should be confirmed against the current source and rendered layouts during implementation. This scope is a proposal for review, not authorization to begin coding.
