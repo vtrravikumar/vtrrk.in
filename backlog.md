@@ -422,7 +422,7 @@ Configured the official Astro sitemap integration and added sitemap discovery me
 
 ## PERF-001 — Image optimisation
 - Priority: P1
-- Status: Planned
+- Status: Done
 - Area: Performance
 
 Optimise locally served imagery without turning the site into a photo-hosting platform.
