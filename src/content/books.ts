@@ -9,6 +9,10 @@ export interface Book {
   subtitle?: string;
   description: string;
   cover: string;
+  coverVariants: {
+    avif: string;
+    webp: string;
+  };
   edition: "published" | "free-digital";
   access: {
     type: "amazon" | "free";
@@ -25,6 +29,10 @@ export const books: Book[] = [
     subtitle: "Rediscovering the Engineer Beyond the Workplace",
     description: "An engineering memoir about rediscovering the engineer within after leaving the traditional workplace. From decades in technology to building a home lab, this is a story about curiosity, experimentation, failure, and the enduring mindset of an engineer.",
     cover: "/images/books/engineering-home.png",
+    coverVariants: {
+      avif: "/images/books/optimized/engineering-home.avif",
+      webp: "/images/books/optimized/engineering-home.webp",
+    },
     edition: "published",
     access: {
       type: "amazon",
@@ -38,6 +46,10 @@ export const books: Book[] = [
     subtitle: "Generation Zero",
     description: "A candid exploration of growing up and finding your place in a world shaped by technology, changing expectations, and a generation that has inherited a very different future. Written for Gen Z, but with something to say to anyone trying to understand them.",
     cover: "/images/books/gen-z.png",
+    coverVariants: {
+      avif: "/images/books/optimized/gen-z.avif",
+      webp: "/images/books/optimized/gen-z.webp",
+    },
     edition: "published",
     access: {
       type: "amazon",
@@ -50,6 +62,10 @@ export const books: Book[] = [
     title: "The White Envelope",
     description: "A story of choices, uncertainty, relationships, and the moments that can quietly change the course of a life. The White Envelope is a personal story about what lies behind an ordinary-looking envelope — and the consequences that follow.",
     cover: "/images/books/the-white-envelope.png",
+    coverVariants: {
+      avif: "/images/books/optimized/the-white-envelope.avif",
+      webp: "/images/books/optimized/the-white-envelope.webp",
+    },
     edition: "published",
     access: {
       type: "amazon",
@@ -62,6 +78,10 @@ export const books: Book[] = [
     title: "Travelogue",
     description: "Twenty years of journeys, captured through memories, photographs, people and moments that stayed behind long after the bags were unpacked. A personal travelogue across India and the world.",
     cover: "/images/books/travelogue.png",
+    coverVariants: {
+      avif: "/images/books/optimized/travelogue.avif",
+      webp: "/images/books/optimized/travelogue.webp",
+    },
     edition: "free-digital",
     access: {
       type: "free",

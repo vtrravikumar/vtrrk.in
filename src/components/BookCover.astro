@@ -1,0 +1,23 @@
+---
+import type { Book } from "../content/books";
+
+interface Props {
+  book: Book;
+  loading?: "eager" | "lazy";
+  class?: string;
+}
+
+const { book, loading, class: imageClass } = Astro.props;
+---
+
+<picture>
+  <source srcset={book.coverVariants.avif} type="image/avif" />
+  <source srcset={book.coverVariants.webp} type="image/webp" />
+  <img class={imageClass} src={book.cover} alt={`Cover of ${book.title}`} loading={loading} />
+</picture>
+
+<style>
+picture {
+  display: block;
+}
+</style>
