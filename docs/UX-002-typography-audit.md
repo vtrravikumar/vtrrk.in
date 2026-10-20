@@ -3,7 +3,7 @@
 - Repository: `vtrravikumar/vtrrk.in`
 - Audited baseline: `main` at the time of review, 20 October 2026
 - Audit method: read-only source inspection; no code changes made during the audit
-- Status: audit complete; implementation direction agreed; implementation scope awaiting review; browser verification pending
+- Status: implementation and required verification complete; UX-002 Done; uncovered content-type limitations are documented below
 
 ## Summary
 
@@ -106,7 +106,7 @@ The exact token values are a starting point based on the proposed scale above an
 
 ## Implementation record (20 October 2026)
 
-Implementation was made on `main` after synchronization to `5d719da525a6d1a608e54814c1fee184702ca229`. The worktree was clean at the start. UX-002 remains **In Progress** because the browser review is partial; 200% zoom/reflow, dark mode, and full keyboard traversal remain outstanding.
+Implementation was made on `main` after synchronization to `5d719da525a6d1a608e54814c1fee184702ca229`. The implementation and required verification are complete; UX-002 is **Done**. The remaining coverage limitations are recorded below and do not imply that every content variation or every page's keyboard sequence was tested.
 
 ### Changes
 
@@ -143,6 +143,12 @@ Browser inspection of the built site used the browser's default light color sche
 
 **Overflow recheck:** `/vichar/` measured 341px document width at 320px and 721px at 700px. In both cases `.hero::before` has `inset: 0 -32px`, its parent overflows by 32px, and the document extends 21px beyond the viewport. These values match the earlier browser report. The Vichar page file is unchanged; the only Vichar-relevant global change is the approved body baseline/removal of global h1 sizing, neither of which changes the decorative pseudo-element inset or parent width. This is an existing overflow, not a demonstrated UX-002 regression, and it was left untouched.
 
-**Final verification limitations:** Actual 200% browser zoom/reflow could not be applied: the available browser automation exposes viewport sizing but no zoom control, and keyboard shortcut attempts left the measured viewport scale unchanged. Dark mode could not be activated because the browser interface provided no appearance emulation and the site has no theme toggle; only light mode was inspected. Full keyboard traversal across every page was not completed. The article check did not exercise images, lists, blockquotes, links or in-body headings because those elements are absent from the available writing samples. These limitations remain outstanding; keep UX-002 **In Progress** while required visual checks remain outstanding. Navigation remains at `.78rem`; the proposed `.875rem` increase was not adopted.
+### Final user-confirmed visual verification
+
+After the earlier browser session, the user confirmed that representative site pages were checked in Chrome at actual 200% zoom and appeared correct, with no apparent clipping, overlap or horizontal scrolling. The user also confirmed that dark-mode visual verification passed and keyboard navigation looked good, including the previously traversed homepage navigation and Vichar form controls. These are user-reported visual results; the earlier browser automation could not change zoom or emulate dark mode, so it did not produce independent measurements for those checks. The exact inventory of pages inspected at 200% and in dark mode was not supplied, and this record does not imply every route was individually tested in those states.
+
+**Coverage limitations:** Full keyboard traversal across every page was not completed. The article check did not exercise images, lists, blockquotes, links or in-body headings because those elements are absent from the available writing samples. These content-specific styles remain unverified on article examples. The previously documented responsive browser inspections and long-form measurements remain source/browser observations for the routes and widths listed above. Navigation remains at `.78rem`; the proposed `.875rem` increase was not adopted.
+
+UX-002 is marked **Done** based on the implemented shared typography system, successful build and route checks, responsive and long-form browser checks, and the user's final confirmation of 200% zoom, dark mode and keyboard behavior. This closure records the agreed verification scope; it does not claim exhaustive coverage of every route, keyboard path or possible article content type.
 
 The final `npm run build` passed with 479 generated pages; the two earlier routing warnings are resolved. `git diff --check` passed. No commit, push or deployment was made.
