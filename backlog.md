@@ -160,9 +160,11 @@ Footer, Elsewhere and Contact are implemented and verified. Footer content is al
 - Status: In Progress
 - Area: Visual consistency / Accessibility
 
-The read-only source audit is complete and documented in [docs/UX-002-typography-audit.md](docs/UX-002-typography-audit.md). It identified a high-priority cascade conflict between the global `h1 !important` rule and page-level heading declarations, plus inconsistent body baselines and repeated local typography styles. The proposed role scale is not yet approved or implemented.
+The read-only source audit is complete and documented in [docs/UX-002-typography-audit.md](docs/UX-002-typography-audit.md). It identified a high-priority cascade conflict between the global `h1 !important` rule and page-level heading declarations, plus inconsistent body baselines and repeated local typography styles.
 
-Next: agree on the semantic type roles and staged migration, then implement and verify in the browser. Preserve the homepage display treatment, Vichar product typography, book-cover artwork, and Travel/Photography image-overlay roles. Verify mobile layouts, long titles, readability, and zoom/reflow before marking Done.
+**Agreed direction (20 October 2026):** keep the system font stack; use balanced shared semantic typography roles; establish consistent body defaults; migrate ordinary page typography in focused stages; preserve intentional display styles. No web font will be added.
+
+The proposed implementation scope is recorded in the audit report and is awaiting review before coding. It covers shared tokens/roles and body baseline, a staged standard-heading migration to resolve the `h1 !important` conflict, then supporting text/navigation/control styles, followed by build/test and responsive visual regression checks. Preserve the homepage display treatment, Vichar product/Sanskrit typography, book-cover artwork, and Travel/Photography image-overlay and caption roles. UX-002 remains In Progress; do not begin implementation until the scope is approved, and do not mark Done until visual verification is recorded.
 
 ## UX-001 — Add explicit Home link to interior-page navigation
 - Priority: P2
