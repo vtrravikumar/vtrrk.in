@@ -34,7 +34,7 @@ const { country, place, photos } = Astro.props;
     <header>
       <a class="back" href={`/photography/countries/${Astro.params.country}/`}>← {country}</a>
       <p class="label">Photography / Countries / {country} / {place}</p>
-      <h1>{place}</h1>
+      <h1 class="type-editorial-heading">{place}</h1>
       <p>{photos.length} photographs from {place}.</p>
     </header>
 
@@ -54,7 +54,7 @@ main{width:min(1200px,calc(100% - 3rem));margin:0 auto}
 header{padding:5rem 0 4rem;max-width:850px}
 .back{display:inline-block;margin-bottom:3rem;color:var(--muted);text-decoration:none}
 .label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-h1{margin:0;font-size:clamp(3.5rem,8vw,7rem);line-height:.9;letter-spacing:-.06em}
+h1{margin:0;line-height:.9;letter-spacing:-.06em}
 header>p:last-child{color:var(--muted);font-size:1.1rem}
 .gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
 figure{margin:0}.photo{display:block;overflow:hidden;aspect-ratio:3 / 2;border-radius:1.25rem;background:color-mix(in srgb,var(--foreground) 5%,transparent)}img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}

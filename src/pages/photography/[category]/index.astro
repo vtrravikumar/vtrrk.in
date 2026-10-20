@@ -52,7 +52,7 @@ const models = category === "model"
     <header>
       <a class="back" href="/photography/">← Photography</a>
       <p class="label">Photography / {title}</p>
-      <h1>{title}</h1>
+      <h1 class="type-editorial-heading">{title}</h1>
       <p>{category === "countries" ? `${countries.length} countries in this portfolio.` : category === "model" ? `${models.length} models in this portfolio.` : `${photos.length} photographs in this portfolio.`}</p>
     </header>
 
@@ -103,7 +103,7 @@ main{width:min(1200px,calc(100% - 3rem));margin:0 auto}
 header{padding:5rem 0 4rem;max-width:850px}
 .back{display:inline-block;margin-bottom:3rem;color:var(--muted);text-decoration:none}
 .label{color:var(--muted);font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-h1{margin:0;font-size:clamp(3.5rem,8vw,7rem);line-height:.9;letter-spacing:-.06em}
+h1{margin:0;line-height:.9;letter-spacing:-.06em}
 header>p:last-child{color:var(--muted);font-size:1.1rem}
 .country-grid,.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem}
 .country{display:block;color:inherit;text-decoration:none}.country-photo{position:relative;overflow:hidden;aspect-ratio:3 / 2;border-radius:1.25rem;background:color-mix(in srgb,var(--foreground) 5%,transparent)}

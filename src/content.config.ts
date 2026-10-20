@@ -15,7 +15,7 @@ const books = defineCollection({
 });
 
 const writing = defineCollection({
-  type: "content",
+  loader: glob({ pattern: "**/*.md", base: "./src/content/writing" }),
   schema: z.object({
     title: z.string(),
     description: z.string(),

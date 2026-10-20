@@ -1,6 +1,6 @@
 :root {
 	font-family:
-		-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Plus Jakarta Sans", "Segoe UI", sans-serif;
+		-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", sans-serif;
 
 	color-scheme: light dark;
 
@@ -16,6 +16,25 @@
 	--accent-soft: rgba(0, 113, 227, 0.1);
 	--accent-creative-soft: rgba(255, 90, 54, 0.1);
 	--glass-shadow: 0 18px 50px rgba(0, 0, 0, 0.08);
+
+	/* Semantic typography roles. Values remain conservative until browser review. */
+	--type-display-size: clamp(3.25rem, 8vw, 7rem);
+	--type-page-size: clamp(2.5rem, 5vw, 4rem);
+	--type-section-size: clamp(1.75rem, 3.5vw, 2.75rem);
+	--type-card-size: clamp(1.125rem, 1.5vw, 1.5rem);
+	--type-body-size: 1rem;
+	--type-body-leading: 1.65;
+	--type-intro-size: clamp(1.125rem, 1.5vw, 1.25rem);
+	--type-intro-leading: 1.65;
+	--type-longform-size: 1.0625rem;
+	--type-longform-leading: 1.8;
+	--type-small-size: 0.875rem;
+	--type-label-size: 0.75rem;
+	--type-meta-size: 0.8125rem;
+	--type-navigation-size: 0.78rem;
+	--type-control-size: 1rem;
+	--type-story-heading-size: clamp(3rem, 7vw, 5.4rem);
+	--type-story-content-heading-size: 1.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -104,6 +123,8 @@ main:focus {
 body {
 	margin: 0;
 	min-width: 320px;
+	font-size: var(--type-body-size);
+	line-height: var(--type-body-leading);
 	background:
 		radial-gradient(circle at 75% 8%, var(--background-glow), transparent 28rem),
 		var(--background);
@@ -129,11 +150,23 @@ a:hover {
 	outline-offset: 3px;
 }
 
-/* Site-wide editorial typography scale. Page-specific styles can override where needed. */
-h1 {
-	font-size: clamp(2.5rem, 5vw, 4rem) !important;
-	line-height: 1.02;
-	letter-spacing: -0.04em;
+.type-display-heading { font-size: var(--type-display-size); line-height: 0.9; letter-spacing: -0.06em; }
+.type-page-heading { font-size: var(--type-page-size); line-height: 1.02; letter-spacing: -0.04em; }
+.type-section-heading { font-size: var(--type-section-size); line-height: 1.1; letter-spacing: -0.03em; }
+.type-card-heading { font-size: var(--type-card-size); line-height: 1.2; }
+.type-body { font-size: var(--type-body-size); line-height: var(--type-body-leading); }
+.type-intro { font-size: var(--type-intro-size); line-height: var(--type-intro-leading); }
+.type-longform { font-size: var(--type-longform-size); line-height: var(--type-longform-leading); }
+.type-small { font-size: var(--type-small-size); line-height: 1.5; }
+.type-label { font-size: var(--type-label-size); font-weight: 650; letter-spacing: 0.1em; text-transform: uppercase; }
+.type-meta { font-size: var(--type-meta-size); line-height: 1.5; }
+.type-navigation { font-size: var(--type-navigation-size); }
+.type-control { font-size: var(--type-control-size); }
+.type-editorial-heading { font-size: var(--type-display-size); line-height: 0.9; letter-spacing: -0.06em; }
+.type-travel-heading { font-size: var(--type-story-heading-size); line-height: 0.96; letter-spacing: -0.045em; }
+
+@media (max-width: 700px) {
+	.type-travel-heading { font-size: clamp(2.6rem, 13vw, 4rem); }
 }
 
 h2 {
