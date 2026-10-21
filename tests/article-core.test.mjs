@@ -6,7 +6,7 @@ import os from "node:os";
 import path from "node:path";
 import {
   DEFAULT_BANNER, defaultsFor, descriptionFromBody, imageFormat, normalizeTerm,
-  parseMarkdown, publishSafetyError, publishedArticleFiles, serializeMarkdown,
+  parseMarkdown, proposedChangePreview, publishSafetyError, publishedArticleFiles, serializeMarkdown,
   slugify, stagedPathError, suggestGlossaryTerms, validateArticle,
 } from "../scripts/article-core.mjs";
 import { shareIntentUrl, SHARE_TEXT_LIMIT } from "../src/utils/share-intent.mjs";
@@ -124,4 +124,12 @@ test("publisher Git guard and exact-path staging reject unsafe states", () => {
   assert.equal(stagedPathError(["article.md", "image.jpg"], ["article.md", "image.jpg"]), undefined);
   assert.match(stagedPathError(["article.md", "README.md"], ["article.md"]), /Unexpected staged file/);
   assert.match(stagedPathError(["article.md"], ["article.md", "image.jpg"]), /was not staged/);
+});
+
+test("publication confirmation preview shows Markdown content and binary asset size", () => {
+  const markdown = proposedChangePreview("src/content/writing/example.md", "title: Example\n\nBody text.\n");
+  assert.match(markdown, /new file mode/);
+  assert.match(markdown, /\+title: Example/);
+  assert.match(markdown, /\+Body text\./);
+  assert.equal(proposedChangePreview("public/images/example.jpg", Buffer.from([1, 2, 3])), "Binary asset public/images/example.jpg (3 bytes)");
 });

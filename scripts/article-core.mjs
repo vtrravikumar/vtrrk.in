@@ -25,6 +25,22 @@ export function stagedPathError(staged, intended) {
   return undefined;
 }
 
+export function proposedChangePreview(filePath, contents) {
+  const buffer = Buffer.isBuffer(contents) ? contents : Buffer.from(contents);
+  if (!filePath.toLowerCase().endsWith(".md")) return `Binary asset ${filePath} (${buffer.length} bytes)`;
+  const text = buffer.toString("utf8");
+  const lines = text.split("\n");
+  if (lines.at(-1) === "") lines.pop();
+  return [
+    `diff --git a/${filePath} b/${filePath}`,
+    "new file mode 100644",
+    "--- /dev/null",
+    `+++ b/${filePath}`,
+    `@@ -0,0 +1,${lines.length} @@`,
+    ...lines.map((line) => `+${line}`),
+  ].join("\n");
+}
+
 const stopWords = new Set((
   "a an and are as at be been but by can for from had has have he her here hers him his how i if in into is it its me more most my no not of on or our out she so than that the their them then there these they this to too us was we were what when where which who will with you your"
 ).split(" "));

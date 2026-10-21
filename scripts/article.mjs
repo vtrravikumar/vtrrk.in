@@ -16,6 +16,7 @@ import {
   normalizeTerm,
   parseMarkdown,
   publishedArticleFiles,
+  proposedChangePreview,
   publishSafetyError,
   serializeMarkdown,
   shareIntentUrl,
@@ -321,6 +322,14 @@ function unexpectedChanges(expected) {
   return unexpected;
 }
 
+function showProposedChanges(files) {
+  console.log("\nProposed changes for review");
+  for (const file of [...new Set(files)].sort()) {
+    const contents = readFileSync(path.join(root, file));
+    console.log(`\n${proposedChangePreview(file, contents)}`);
+  }
+}
+
 async function verifyLive(url, imageUrl) {
   let last = "The live site has not reflected the publish yet.";
   for (let attempt = 0; attempt < 12; attempt += 1) {
@@ -391,6 +400,7 @@ async function publish(sourcePath) {
     run("npm", ["run", "build"], { inherit: true });
     const unexpected = unexpectedChanges([...new Set(created)]);
     if (unexpected.length) throw new Error(`Unexpected changed files detected; nothing will be staged:\n${unexpected.join("\n")}`);
+    showProposedChanges(created);
     const rl = createInterface({ input: stdin, output: stdout });
     let answer;
     try { answer = await rl.question("Commit and push exactly these files to origin/main? [y/N] "); } finally { rl.close(); }
