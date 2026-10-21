@@ -8,6 +8,7 @@ tags:
   - cameras
   - smartphones
   - creativity
+heroImage: "/images/writing/slr-smartphone-golden-hour.jpg"
 ---
 
 *The phone captures the moment. The camera teaches you to see it.*
