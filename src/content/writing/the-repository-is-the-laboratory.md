@@ -2,6 +2,7 @@
 title: "The Repository Is the Laboratory"
 description: "What happens when a software repository stops being a backup and becomes the place where engineering actually happens."
 type: "Essay"
+sortOrder: 2
 tags:
   - engineering
   - HomeLab

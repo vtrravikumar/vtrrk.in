@@ -2,6 +2,7 @@
 title: "Recovery Is an Engineering Skill"
 description: "Why designing for failure is only half the job — a HomeLab recovery taught me that resilience depends on knowing how to rebuild."
 type: "Essay"
+sortOrder: 3
 tags:
   - engineering
   - resilience

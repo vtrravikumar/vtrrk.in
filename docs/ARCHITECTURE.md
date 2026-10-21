@@ -111,10 +111,17 @@ Book pages should use a concise reusable presentation template.
 - slug
 - date
 - description/dek
+- optional subtitle, type and tags
+- creation and modification dates where useful
 - body
-- optional hero image
-- optional tags/categories
+- optional hero image and descriptive alt text (shared Writing banner is the fallback)
+- optional share text
+- approved glossary term slugs
 - related content
+
+The Markdown Writing collection is the sole source of truth for article routes and the Writing index. New articles are drafted in Git-ignored `.local/writing-drafts/`, previewed through the shared article component, validated by `scripts/article.mjs`, then selectively committed and pushed to `main` after explicit confirmation. Draft collection entries and the preview route are excluded from production output. Approved glossary Markdown is stored in `src/content/glossary`; suggested terms do not become public until the author approves and defines them. See the Writing workflow in `README.md` for the CLI and recovery steps.
+
+The publisher has no database, web dashboard, analytics tracking, public counters, comments or moderation queue. These remain future product decisions, separate from article Markdown.
 
 ### Project
 

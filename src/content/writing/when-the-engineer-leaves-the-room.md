@@ -2,6 +2,7 @@
 title: "When the Engineer Leaves the Room"
 description: "The quiet measure of a dependable system is not how often its engineer watches it, but how little it needs to be watched."
 type: "Essay"
+sortOrder: 4
 tags:
   - engineering
   - reliability

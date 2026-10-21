@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import WordCloud from "../../components/WordCloud.astro";
+
+const terms = await getCollection("glossary");
+const articles = await getCollection("writing", ({ data }) => !import.meta.env.PROD || data.draft !== true);
+const termStats = terms.map((term) => ({
+  term,
+  articleCount: articles.filter((article) => article.data.glossaryTerms.includes(term.id)).length,
+}));
+const maxCount = Math.max(1, ...termStats.map(({ articleCount }) => articleCount));
+const cloudWords = termStats.map(({ term, articleCount }) => ({
+  name: term.data.term,
+  href: `/glossary/${term.id}/`,
+  size: 0.95 + (articleCount / maxCount) * 0.85,
+  count: articleCount,
+}));
+---
+<BaseLayout title="Glossary — V.T.R. Ravi Kumar" description="A glossary of ideas and terms found in Ravi Kumar's writing.">
+  <main id="main-content" tabindex="-1">
+    <header><p class="label">Writing</p><h1 class="type-page-heading">Glossary</h1><p>Terms and ideas that connect the writing.</p></header>
+    {cloudWords.length > 0 && <section aria-labelledby="topics-heading"><h2 id="topics-heading">Explore topics</h2><WordCloud label="Writing topics" words={cloudWords} /></section>}
+    <section class="glossary" aria-labelledby="glossary-heading">
+      <h2 id="glossary-heading">All terms</h2>
+      {terms.length > 0 ? <label class="search">Search terms<input type="search" id="glossary-search" placeholder="Search terms and definitions" /></label> : <p>No glossary terms have been approved yet.</p>}
+      <ul id="glossary-list">{terms.map((entry) => <li data-search={`${entry.data.term} ${entry.data.definition} ${entry.data.aliases.join(" ")}`.toLocaleLowerCase("en")}><a href={`/glossary/${entry.id}/`}>{entry.data.term}</a><p>{entry.data.definition}</p></li>)}</ul>
+    </section>
+  </main>
+</BaseLayout>
+<script>
+  const search = document.querySelector<HTMLInputElement>("#glossary-search");
+  const items = [...document.querySelectorAll<HTMLElement>("#glossary-list > li")];
+  search?.addEventListener("input", () => {
+    const query = search.value.trim().toLocaleLowerCase("en");
+    items.forEach((item) => { item.hidden = !item.dataset.search?.includes(query); });
+  });
+</script>
+<style>
+main{width:min(900px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}header{padding:8rem 0 4rem}.label{margin:0 0 .8rem;color:var(--muted);font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}h1{margin:0 0 1rem;line-height:.96}header>p:last-child{color:var(--muted);font-size:1.1rem;line-height:1.7}section{margin:0 0 4rem}h2{font-size:1.5rem;letter-spacing:-.02em}.search{display:grid;gap:.5rem;max-width:520px;color:var(--muted);font-size:.85rem}.search input{min-height:44px;padding:.65rem .8rem;border:1px solid var(--border);border-radius:.35rem;background:var(--surface);color:var(--foreground);font:inherit}.glossary ul{padding:0;list-style:none}.glossary li{padding:1rem 0;border-bottom:1px solid var(--border)}.glossary li a{color:var(--foreground);font-size:1.15rem;font-weight:600;text-underline-offset:.2em}.glossary li p{max-width:700px;margin:.4rem 0 0;color:var(--muted);line-height:1.6}@media(max-width:600px){main{width:min(100% - 2rem,900px)}header{padding:5rem 0 3rem}}
+</style>

@@ -97,6 +97,30 @@ Build the production site:
 npm run build
 ```
 
+### Writing articles
+
+Writing articles live in `src/content/writing` as Markdown. The Writing index and article routes are derived from this collection; do not add entries to a second hand-maintained index.
+
+Create and work with a private local draft:
+
+```bash
+npm run article:new -- --title "A considered title"
+npm run article:new -- --source ./article.md --banner ./banner.jpg --alt "Describe the banner"
+npm run article:check -- .local/writing-drafts/a-considered-title.md
+npm run article:preview -- .local/writing-drafts/a-considered-title.md
+npm run article:list
+```
+
+Draft Markdown and its assets stay under the Git-ignored `.local/writing-drafts/` directory. The preview uses the article template, is marked `noindex`, and is excluded from production routes. Stop its background server with `npx astro dev stop`.
+
+Frontmatter requires `title` and `description` in published content. Optional fields include `subtitle`, `date`, `createdAt`, `updatedAt`, `type`, `tags`, `heroImage`, `heroImageAlt`, `shareText`, and approved `glossaryTerms`. The article template uses the site author by default; date, type and description defaults are prepared when staging a draft. A custom banner needs meaningful `heroImageAlt`, must exist, use a supported image format, and be no larger than 10 MB. Otherwise, the shared Writing banner at `/images/travel/default.jpg` is used.
+
+`npm run article:publish -- .local/writing-drafts/a-considered-title.md` validates the draft, asks which suggested glossary terms to approve and requests definitions for new public terms, builds and tests the site, then shows the exact files and asks before committing and pushing. It only publishes from a clean, synchronized `main` checkout. Validation, test or build failures leave the private draft in place and remove the publication files created by that attempt. If the process is interrupted or a commit/push fails, inspect `git status` and preserve the generated article and assets for recovery. Never remove or stage other changes to bypass a safety check. The final report includes remote commit verification and a live URL check when reachable.
+
+Glossary suggestions are local and deterministic. Only manually approved entries with a definition are written to `src/content/glossary`; each approved term has a searchable page and links only to articles that explicitly reference its slug. Analytics, a publishing dashboard, databases, public counters, and comments remain future work.
+
+Run the available automated checks with `npm test` and `npm run build`. The production build clears Astro's content cache first so removed local drafts or glossary fixtures cannot linger as generated pages.
+
 Preview the production build locally:
 
 ```bash

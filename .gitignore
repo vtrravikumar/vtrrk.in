@@ -33,3 +33,7 @@ assets/image/
 
 # private Travelogue download-code inventory
 scripts/travelogue-codes.yaml
+
+# Local-only Writing drafts and assets
+/.local/writing-drafts/*
+!/.local/writing-drafts/.gitkeep

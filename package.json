@@ -7,7 +7,13 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro sync --force && astro build",
+    "test": "node --test",
+    "article:new": "node scripts/article.mjs new",
+    "article:check": "node scripts/article.mjs check",
+    "article:preview": "node scripts/article.mjs preview",
+    "article:publish": "node scripts/article.mjs publish",
+    "article:list": "node scripts/article.mjs list",
     "generate:book-covers": "node scripts/generate-book-covers.mjs",
     "generate:travel-banners": "node scripts/generate-travel-banners.mjs",
     "preview": "astro preview",
@@ -15,6 +21,7 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.2.4"
+    "astro": "^7.2.4",
+    "yaml": "^2.9.1"
   }
 }

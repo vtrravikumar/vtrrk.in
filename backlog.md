@@ -226,6 +226,47 @@ A reusable `[...slug]` Astro route now renders individual Markdown entries from 
 
 Three genuine standalone essays were curated from the HomeLab-Engineering source repository and added as Markdown content: “The Repository Is the Laboratory”, “Recovery Is an Engineering Skill”, and “When the Engineer Leaves the Room”. The Writing index now links each curated entry to its individual article page. Placeholder writing entries were replaced rather than inventing new material.
 
+### Writing publishing system — proposed PUB identifiers awaiting reconciliation
+
+The publishing-system request refers to an approved `PUB-*` proposal list, but no task definitions or identifier mapping exist in this repository or the request artifact available for this implementation. To avoid inventing identifiers or silently repurposing existing backlog items, the accepted scope below is recorded without fabricated `PUB-*` numbers. Reconcile identifiers when the source proposal list is available.
+
+#### Local draft lifecycle and safe publisher
+- Priority: P0
+- Status: Done
+- Area: Writing / Developer workflow
+- Acceptance: title/source-based draft creation, private ignored storage, duplicate checks, actionable validation, real-template noindex preview, clean synchronized `main` guard, exact-path staging, explicit confirmation, remote commit verification and live-deployment status reporting.
+- Dependencies: Existing Astro Writing collection and GitHub remote.
+
+#### Collection-derived Writing index, article metadata, banner and sharing
+- Priority: P0
+- Status: Done
+- Area: Writing / SEO
+- Acceptance: articles remain compatible with the content schema; routes and index derive from published Markdown; optional subtitle/custom banner/alt/share text and default banner render consistently; canonical, Open Graph and Twitter metadata use absolute image URLs; X compose intent contains the canonical URL and bounded editable text; production sitemap excludes drafts.
+- Dependencies: Local draft lifecycle.
+
+#### Approved glossary and reusable accessible word cloud
+- Priority: P1
+- Status: Done
+- Area: Writing / Travel / Accessibility
+- Acceptance: deterministic local term suggestions; explicit approval and definitions before public glossary pages; searchable glossary index and related article links; reusable keyboard-accessible responsive word cloud with a text alternative; Travel data and links remain separate.
+- Dependencies: Collection-derived Writing model.
+
+#### Publishing regression coverage and documentation
+- Priority: P1
+- Status: Done
+- Area: Quality / Documentation
+- Acceptance: tests cover metadata, slug collisions, images, draft exclusion, generated routes and social metadata, X URL encoding, glossary approval/relationships, Travel word-cloud behavior, Git safety and exact staging; README and architecture document lifecycle, recovery and constraints.
+- Dependencies: The preceding publishing features.
+
+Verification: `npm test` passes all eight Node tests, including image/date/slug/route validation, deterministic term suggestions, X intent encoding, clean-main/upstream/divergence checks and exact staging. The final forced-cache production build passes with 481 routes. A temporary `draft: true` article was verified absent from production routes, Writing index, glossary relationships and sitemap, while a temporary approved term generated its term page; removing those fixtures and rebuilding removed their generated pages and sitemap entries. Generated SLR HTML contains the hero image with descriptive alt text, subtitle, canonical route, and absolute Open Graph/Twitter image URL. The local preview returned HTTP 200, showed the shared fallback banner and `noindex`, and was inspected at desktop and 390px mobile widths. Keyboard focus reached the skip link and then the home link. Travel's generated word cloud contains its list alternative. Browser verification is limited to the stated preview and checks; it is not an exhaustive audit of every page or input path.
+
+#### Explicitly deferred publishing capabilities
+- Priority: P3
+- Status: Parked
+- Area: Future product decisions
+- Acceptance: future analytics remain separate from Markdown; no analytics tracker/dashboard, publishing web UI, database solely for publishing, public view counters, comments or moderation queue are added without a separate approved scope.
+- Dependencies: Separate product approval.
+
 ---
 
 # Phase 4 — Projects

@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import WritingArticle from "../../../components/WritingArticle.astro";
+
+export async function getStaticPaths() {
+  if (import.meta.env.PROD) return [];
+  const entries = await getCollection("writingDrafts");
+  return entries.map((entry) => {
+    let previewHeroImage: string | undefined;
+    const source = entry.data.heroImage;
+    if (source?.startsWith("/")) previewHeroImage = source;
+    else if (source) {
+      const sourcePath = path.resolve(".local/writing-drafts", `${entry.id}.md`);
+      const assetPath = path.resolve(path.dirname(sourcePath), source);
+      const extension = path.extname(assetPath).toLowerCase();
+      const mime = extension === ".jpg" || extension === ".jpeg" ? "image/jpeg"
+        : extension === ".png" ? "image/png"
+        : extension === ".webp" ? "image/webp"
+        : extension === ".avif" ? "image/avif"
+        : "application/octet-stream";
+      previewHeroImage = `data:${mime};base64,${readFileSync(assetPath).toString("base64")}`;
+    }
+    return { params: { slug: entry.id }, props: { entry, previewHeroImage } };
+  });
+}
+
+const { entry, previewHeroImage } = Astro.props;
+---
+<WritingArticle entry={entry} preview previewHeroImage={previewHeroImage} />

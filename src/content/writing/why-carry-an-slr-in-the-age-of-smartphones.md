@@ -3,12 +3,14 @@ title: "Why Carry an SLR in the Age of Smartphones?"
 description: "A personal reflection on why dedicated cameras still matter in the age of smartphones, exploring creative control, deliberate photography, and the joy of learning to see."
 date: 2026-10-21
 type: "Photography"
+subtitle: "The phone captures the moment. The camera teaches you to see it."
 tags:
   - photography
   - cameras
   - smartphones
   - creativity
 heroImage: "/images/writing/slr-smartphone-golden-hour.jpg"
+heroImageAlt: "A DSLR camera and smartphone overlooking a coastal sunset"
 ---
 
 *The phone captures the moment. The camera teaches you to see it.*

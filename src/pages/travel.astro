@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TravelBanner from "../components/TravelBanner.astro";
+import WordCloud from "../components/WordCloud.astro";
 import { getCollection } from "astro:content";
 import { travelCountries } from "../content/travel-countries";
 import { getTravelBannerSources } from "../utils/travel-banners";
@@ -145,9 +146,7 @@ const featuredBannerSizes = "(max-width: 700px) calc(100vw - 32px), (max-width: 
     <section class="travel-snapshot" aria-labelledby="travel-snapshot-heading">
       <p class="label" id="travel-snapshot-heading">A little travel arithmetic</p>
       <p class="travel-snapshot-copy">Across the journeys recorded here, I've taken {flightsTaken} {flightLabel} and {trainJourneys} {trainLabel}, with trips ranging from {shortestTrip?.duration_days ?? "—"} days to {longestTrip?.duration_days ?? "—"} days. The latest journey was {latestJourneyLabel}, while some places have been worth returning to — sometimes years apart, and sometimes with a completely different story.</p>
-      <div class="tag-cloud" role="group" aria-label="Places from the journeys">
-        {tagCloud.map((tag) => <a href={tag.href} style={`--tag-size:${tag.size}rem;--tag-rotation:${tag.rotation}deg`}>{tag.name}</a>)}
-      </div>
+      <WordCloud label="Places from the journeys" words={tagCloud.map((tag) => ({ name: tag.name, href: tag.href, size: tag.size, rotation: tag.rotation, count: tag.count }))} randomize />
     </section>
     <section class="featured" aria-labelledby="featured-heading">
       <div class="section-heading"><p class="label" id="featured-heading">Featured travel</p><p class="section-note">A story from somewhere on the road</p></div>
@@ -194,13 +193,6 @@ const featuredBannerSizes = "(max-width: 700px) calc(100vw - 32px), (max-width: 
   </main>
 </BaseLayout>
 <script>
-  const tagCloud = document.querySelector('.tag-cloud');
-  if (tagCloud) {
-    [...tagCloud.children]
-      .sort(() => Math.random() - 0.5)
-      .forEach((tag) => tagCloud.appendChild(tag));
-  }
-
   const featuredCard = document.querySelector('[data-featured-card]');
   if (featuredCard) {
     const candidates = JSON.parse(featuredCard.getAttribute('data-featured-candidates') || '[]');

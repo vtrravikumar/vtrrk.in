@@ -1,0 +1,34 @@
+---
+interface Word {
+  name: string;
+  href: string;
+  size: number;
+  rotation?: number;
+  count?: number;
+}
+
+interface Props {
+  label: string;
+  words: Word[];
+  randomize?: boolean;
+}
+
+const { label, words, randomize = false } = Astro.props;
+---
+<div class="word-cloud" role="group" aria-label={label} data-randomize={randomize ? "true" : undefined}>
+  {words.map((word) => <a href={word.href} style={`--word-size:${word.size}rem;--word-rotation:${word.rotation ?? 0}deg`}>{word.name}</a>)}
+</div>
+<details class="word-list">
+  <summary>View {label.toLocaleLowerCase("en")} as a list</summary>
+  <ul>{words.map((word) => <li><a href={word.href}>{word.name}</a>{word.count ? <span> · {word.count}</span> : null}</li>)}</ul>
+</details>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.word-cloud[data-randomize="true"]').forEach((cloud) => {
+    [...cloud.children].sort(() => Math.random() - 0.5).forEach((word) => cloud.appendChild(word));
+  });
+</script>
+
+<style>
+.word-cloud{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem 1.1rem;padding-top:1.5rem;border-top:1px solid color-mix(in srgb,var(--foreground) 10%,transparent)}.word-cloud a{display:inline-flex;align-items:center;min-height:24px;padding:0 .1rem;color:var(--muted);font-size:var(--word-size);font-weight:450;line-height:1.25;text-decoration:none;transform:rotate(var(--word-rotation));transition:transform .2s ease,color .2s ease}.word-cloud a:nth-child(6n+1){color:color-mix(in srgb,#66758a 80%,var(--foreground))}.word-cloud a:nth-child(6n+2){color:color-mix(in srgb,#7a6f64 80%,var(--foreground))}.word-cloud a:nth-child(6n+3){color:color-mix(in srgb,#6f7f73 80%,var(--foreground))}.word-cloud a:nth-child(6n+4){color:color-mix(in srgb,#8a6f73 80%,var(--foreground))}.word-cloud a:nth-child(6n+5){color:color-mix(in srgb,#7b7a5f 80%,var(--foreground))}.word-cloud a:nth-child(6n){color:var(--muted)}.word-cloud a:hover{color:var(--foreground);transform:rotate(0deg) scale(1.04)}.word-list{margin-top:.75rem;color:var(--muted);font-size:.85rem}.word-list summary{min-height:24px;cursor:pointer;text-decoration:underline;text-underline-offset:.2em}.word-list ul{columns:2;padding-left:1.2rem;line-height:1.7}.word-list a{color:var(--foreground);text-underline-offset:.2em}@media(max-width:600px){.word-cloud{gap:.35rem .85rem}.word-list ul{columns:1}}@media(prefers-reduced-motion:reduce){.word-cloud a{transition:none}}
+</style>

@@ -14,15 +14,42 @@ const books = defineCollection({
   }),
 });
 
+const writingFields = {
+  title: z.string(),
+  description: z.string(),
+  subtitle: z.string().optional(),
+  date: z.coerce.date().optional(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional(),
+  type: z.string().optional(),
+  tags: z.string().array().default([]),
+  heroImage: z.string().optional(),
+  heroImageAlt: z.string().optional(),
+  shareText: z.string().optional(),
+  glossaryTerms: z.string().array().default([]),
+  sortOrder: z.number().optional(),
+  draft: z.boolean().default(false),
+};
+
 const writing = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/writing" }),
+  schema: z.object(writingFields),
+});
+
+const writingDrafts = defineCollection({
+  loader: glob({ pattern: "*.md", base: "./.local/writing-drafts" }),
   schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    date: z.coerce.date().optional(),
-    type: z.string().optional(),
-    tags: z.string().array().optional(),
-    heroImage: z.string().optional(),
+    ...writingFields,
+    candidateGlossaryTerms: z.string().array().default([]),
+  }),
+});
+
+const glossary = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/glossary" }),
+  schema: z.object({
+    term: z.string(),
+    definition: z.string(),
+    aliases: z.string().array().default([]),
   }),
 });
 
@@ -74,4 +101,4 @@ const travel = defineCollection({
   }).passthrough(),
 });
 
-export const collections = { books, writing, projects, travel };
+export const collections = { books, writing, writingDrafts, glossary, projects, travel };

@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  return (await getCollection("glossary")).map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const articles = await getCollection("writing", ({ data }) => !import.meta.env.PROD || data.draft !== true);
+const relatedArticles = articles.filter((article) => article.data.glossaryTerms.includes(entry.id));
+---
+<BaseLayout title={`${entry.data.term} — Glossary — V.T.R. Ravi Kumar`} description={entry.data.definition}>
+  <main id="main-content" tabindex="-1">
+    <a href="/glossary/" class="back">← Glossary</a>
+    <article>
+      <p class="label">Writing glossary</p>
+      <h1 class="type-page-heading">{entry.data.term}</h1>
+      <p class="definition">{entry.data.definition}</p>
+      {entry.data.aliases.length > 0 && <p class="aliases">Also known as: {entry.data.aliases.join(", ")}</p>}
+      <section aria-labelledby="related-heading"><h2 id="related-heading">Related writing</h2>{relatedArticles.length > 0 ? <ul>{relatedArticles.map((article) => <li><a href={`/writing/${article.id}/`}>{article.data.title}</a><p>{article.data.description}</p></li>)}</ul> : <p>No published articles are linked to this term yet.</p>}</section>
+    </article>
+  </main>
+</BaseLayout>
+<style>
+main{width:min(800px,calc(100% - 3rem));margin:0 auto;padding-bottom:7rem}.back{display:inline-block;margin:2rem 0 3rem;color:var(--muted);font-size:.9rem}.label{margin:0 0 .8rem;color:var(--muted);font-size:.75rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}h1{margin:0;line-height:.96}.definition{font-size:1.2rem;line-height:1.8}.aliases{color:var(--muted);font-size:.9rem}section{margin-top:4rem;border-top:1px solid var(--border)}h2{font-size:1.4rem}ul{padding:0;list-style:none}li{padding:1rem 0;border-bottom:1px solid var(--border)}li a{color:var(--foreground);font-size:1.1rem;text-underline-offset:.2em}li p{margin:.5rem 0 0;color:var(--muted);line-height:1.6}@media(max-width:600px){main{width:min(100% - 2rem,800px)}}
+</style>
