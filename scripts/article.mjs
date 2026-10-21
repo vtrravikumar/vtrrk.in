@@ -208,7 +208,7 @@ function printCheck(result) {
   for (const warning of result.warnings) console.log(`Warning: ${warning}`);
   for (const error of result.errors) console.error(`Error: ${error}`);
   const glossary = readGlossary();
-  const candidates = result.candidateGlossaryTerms.map((term) => ({ term, slug: existingGlossarySlug(term, glossary) }));
+  const candidates = (result.candidateGlossaryTerms ?? []).map((term) => ({ term, slug: existingGlossarySlug(term, glossary) }));
   if (candidates.length) console.log(`Glossary candidates: ${candidates.map(({ term, slug }) => slug ? `${term} (approved: ${slug})` : term).join(", ")}`);
   return candidates;
 }

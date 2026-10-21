@@ -1,5 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -25,6 +26,21 @@ test("frontmatter parses and serializes without changing article body", () => {
   assert.deepEqual(parseMarkdown(serializeMarkdown(parsed.data, parsed.body)), parsed);
   assert.throws(() => parseMarkdown("# Missing frontmatter"), /frontmatter/);
   assert.throws(() => parseMarkdown("---\ntitle: [\n---\nbody"));
+});
+
+test("article check reports malformed YAML without a secondary crash", () => {
+  const directory = mkdtempSync(path.join(os.tmpdir(), "article-check-"));
+  const file = path.join(directory, "malformed.md");
+  try {
+    writeFileSync(file, "---\ntitle: [\n---\nBody text.");
+    const result = spawnSync(process.execPath, ["scripts/article.mjs", "check", file], { encoding: "utf8" });
+    assert.equal(result.status, 1);
+    const output = `${result.stdout}\n${result.stderr}`;
+    assert.match(output, /Error: Flow sequence in block collection/);
+    assert.doesNotMatch(output, /Cannot read properties of undefined.*map/);
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
 });
 
 test("metadata defaults and descriptions are useful", () => {
