@@ -139,13 +139,13 @@ test("glossary candidates are deterministic and exclude common filler", () => {
   assert.ok(!first.includes("the"));
 });
 
-test("glossary candidates filter contraction fragments and retain useful riding terms", () => {
+test("glossary candidates filter contractions from the Royal Enfield draft and retain useful riding terms", () => {
   const article = { title: "The Joy of Riding a Royal Enfield in Your 50s", description: "Motorcycle rides and dug dug", tags: ["Royal Enfield"] };
-  const candidates = suggestGlossaryTerms(article, "Royal Enfield motorcycle. Royal Enfield motorcycle. The engine goes dug dug, dug dug. It doesn t matter if it doesn t.", 30);
+  const candidates = suggestGlossaryTerms(article, "My Classic 350 doesn't need to carry me to an office every morning. The dream doesn't need to become a checklist today. Royal Enfield motorcycle. Royal Enfield motorcycle. The engine goes dug dug, dug dug.", 30);
   assert.ok(candidates.includes("royal enfield"));
   assert.ok(candidates.includes("motorcycle"));
   assert.ok(candidates.includes("dug dug"));
-  assert.ok(!candidates.includes("doesn t"));
+  assert.ok(!candidates.some((term) => /doesn t/.test(term)));
   assert.ok(!candidates.includes("doesn"));
   assert.ok(!candidates.includes("t"));
 });

@@ -120,7 +120,8 @@ export function defaultsFor(data, body, now = new Date()) {
 }
 
 function words(value) {
-  return String(value ?? "").toLocaleLowerCase("en").match(/[\p{L}][\p{L}\p{N}'’-]*/gu) ?? [];
+  const tokens = String(value ?? "").toLocaleLowerCase("en").match(/[\p{L}][\p{L}\p{N}'’-]*/gu) ?? [];
+  return tokens.filter((token) => !/n['’]t$/u.test(token));
 }
 
 export function suggestGlossaryTerms(article, body, limit = 8) {
