@@ -1,5 +1,12 @@
 export const writing = [
 	{
+		title: "Why Carry an SLR in the Age of Smartphones?",
+		description:
+			"A personal reflection on why dedicated cameras still matter in the age of smartphones, exploring creative control, deliberate photography, and the joy of learning to see.",
+		type: "Photography",
+		slug: "why-carry-an-slr-in-the-age-of-smartphones",
+	},
+	{
 		title: "The Repository Is the Laboratory",
 		description:
 			"What happens when a software repository stops being a backup and becomes the place where engineering actually happens.",
