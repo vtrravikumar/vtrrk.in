@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
-import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import {
@@ -43,6 +43,39 @@ test("article check reports malformed YAML without a secondary crash", () => {
   }
 });
 
+test("article:new passes required --alt through when staging a custom banner privately", () => {
+  const root = path.resolve(import.meta.dirname, "..");
+  const directory = mkdtempSync(path.join(os.tmpdir(), "article-new-alt-"));
+  const source = path.join(directory, "source.md");
+  const banner = path.join(directory, "banner.jpg");
+  const slug = "cli-banner-alt-regression";
+  const draft = path.join(root, ".local/writing-drafts", `${slug}.md`);
+  let stagedImage;
+  try {
+    writeFileSync(source, serializeMarkdown({ title: "CLI Banner Alt Regression", description: "A test draft" }, "Private body."));
+    writeFileSync(banner, minimalJpeg);
+    const result = spawnSync(process.execPath, ["scripts/article.mjs", "new", "--source", source, "--banner", banner, "--alt", "Camera and phone at sunset"], { cwd: root, encoding: "utf8" });
+    assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+    const created = parseMarkdown(readFileSync(draft, "utf8"));
+    assert.equal(created.data.heroImageAlt, "Camera and phone at sunset");
+    assert.match(created.data.heroImage, /^assets\/cli-banner-alt-regression\//);
+    stagedImage = path.join(root, ".local/writing-drafts", created.data.heroImage);
+    assert.equal(readFileSync(stagedImage).toString("hex"), minimalJpeg.toString("hex"));
+    assert.equal(existsSync(path.join(root, "public/images/writing", `${slug}-banner`)), false);
+
+    const missingAltSource = path.join(directory, "missing-alt.md");
+    writeFileSync(missingAltSource, serializeMarkdown({ title: "CLI Missing Alt Regression" }, "Private body."));
+    const missing = spawnSync(process.execPath, ["scripts/article.mjs", "new", "--source", missingAltSource, "--banner", banner], { cwd: root, encoding: "utf8" });
+    assert.equal(missing.status, 1);
+    assert.match(`${missing.stdout}\n${missing.stderr}`, /Provide non-empty --alt text when using --banner/);
+    assert.equal(existsSync(path.join(root, ".local/writing-drafts/cli-missing-alt-regression.md")), false);
+  } finally {
+    rmSync(draft, { force: true });
+    if (stagedImage) rmSync(path.dirname(stagedImage), { recursive: true, force: true });
+    rmSync(directory, { recursive: true, force: true });
+  }
+});
+
 test("metadata defaults and descriptions are useful", () => {
   const fixed = new Date(2026, 9, 21, 12);
   const metadata = defaultsFor({ title: "  New article  " }, "A useful opening paragraph.", fixed);
@@ -76,6 +109,7 @@ test("article validation catches missing, unsupported, oversized images and coll
   };
   try {
     assert.match(writeArticle("missing.jpg").errors.join(" "), /does not exist/);
+    assert.match(writeArticle("/../drafts/missing.jpg").errors.join(" "), /must stay within public/);
     writeFileSync(path.join(sourceDir, "bad.jpg"), "not a jpeg");
     assert.match(writeArticle("bad.jpg").errors.join(" "), /invalid image format/);
     writeFileSync(path.join(sourceDir, "large.jpg"), Buffer.concat([minimalJpeg, Buffer.alloc(10 * 1024 * 1024 + 1)]));
@@ -103,6 +137,17 @@ test("glossary candidates are deterministic and exclude common filler", () => {
   assert.deepEqual(first, suggestGlossaryTerms(article, "Camera practice rewards deliberate camera practice. Camera practice helps."));
   assert.ok(first.includes("camera practice"));
   assert.ok(!first.includes("the"));
+});
+
+test("glossary candidates filter contraction fragments and retain useful riding terms", () => {
+  const article = { title: "The Joy of Riding a Royal Enfield in Your 50s", description: "Motorcycle rides and dug dug", tags: ["Royal Enfield"] };
+  const candidates = suggestGlossaryTerms(article, "Royal Enfield motorcycle. Royal Enfield motorcycle. The engine goes dug dug, dug dug. It doesn t matter if it doesn t.", 30);
+  assert.ok(candidates.includes("royal enfield"));
+  assert.ok(candidates.includes("motorcycle"));
+  assert.ok(candidates.includes("dug dug"));
+  assert.ok(!candidates.includes("doesn t"));
+  assert.ok(!candidates.includes("doesn"));
+  assert.ok(!candidates.includes("t"));
 });
 
 test("X intent encodes canonical URL and limits suggested text", () => {

@@ -42,7 +42,7 @@ export function proposedChangePreview(filePath, contents) {
 }
 
 const stopWords = new Set((
-  "a an and are as at be been but by can for from had has have he her here hers him his how i if in into is it its me more most my no not of on or our out she so than that the their them then there these they this to too us was we were what when where which who will with you your"
+  "a an and are as at be been but by can for from had has have he her here hers him his how i if in into is it its me more most my no not of on or out s she so than that the their them then there these they this to too t us was we were what when where which who will with you your doesn"
 ).split(" "));
 
 export function slugify(value) {
@@ -181,7 +181,15 @@ export function checkImage(filePath) {
 
 export function imagePathFor(value, sourcePath, root) {
   if (!value) return undefined;
-  if (value.startsWith("/")) return path.resolve(root, "public", `.${value}`);
+  if (value.startsWith("/")) {
+    const publicRoot = path.resolve(root, "public");
+    const resolved = path.resolve(publicRoot, value.slice(1));
+    const relative = path.relative(publicRoot, resolved);
+    if (relative === ".." || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)) {
+      throw new Error(`Public image path must stay within public/: ${value}`);
+    }
+    return resolved;
+  }
   return path.resolve(path.dirname(sourcePath), value);
 }
 
@@ -241,9 +249,11 @@ export function validateArticle(sourcePath, root, { publishing = false } = {}) {
 
   let bannerPath;
   if (data.heroImage) {
-    bannerPath = imagePathFor(String(data.heroImage), sourcePath, root);
-    const image = checkImage(bannerPath);
-    if (image.error) errors.push(image.error);
+    try {
+      bannerPath = imagePathFor(String(data.heroImage), sourcePath, root);
+      const image = checkImage(bannerPath);
+      if (image.error) errors.push(image.error);
+    } catch (error) { errors.push(error.message); }
     if (!String(data.heroImageAlt ?? "").trim()) errors.push("Add heroImageAlt for the informative article banner.");
   }
 

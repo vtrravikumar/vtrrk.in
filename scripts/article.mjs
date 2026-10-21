@@ -157,7 +157,7 @@ function checkImageBuffer(buffer) {
   return { format };
 }
 
-function stageDraft(sourcePath, { bannerPath } = {}) {
+function stageDraft(sourcePath, { bannerPath, altText } = {}) {
   ensureDraftRoot();
   const absolute = path.resolve(sourcePath);
   if (!existsSync(absolute)) throw new Error(`Draft file not found: ${absolute}`);
@@ -177,7 +177,10 @@ function stageDraft(sourcePath, { bannerPath } = {}) {
     ? imagePathFor(String(data.heroImage), absolute, root)
     : undefined;
   if (localBanner) {
-    if (bannerPath && !data.heroImageAlt) throw new Error("Provide --alt for the informative banner image.");
+    if (bannerPath) {
+      if (!String(altText ?? "").trim()) throw new Error("Provide non-empty --alt text when using --banner.");
+      data.heroImageAlt = String(altText).trim();
+    }
     data.heroImage = copyLocalImage(localBanner, slug, "banner", draftRoot);
   }
   const inline = rewriteLocalImages(body, absolute, slug, draftRoot, "preview", destination);
@@ -220,7 +223,7 @@ function printUsage() {
 
 function newArticle(options) {
   if (options.source) {
-    const staged = stageDraft(options.source, { bannerPath: options.banner });
+    const staged = stageDraft(options.source, { bannerPath: options.banner, altText: options.alt });
     console.log(`Draft copied to ${path.relative(root, staged)}`);
     return;
   }
