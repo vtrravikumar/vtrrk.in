@@ -77,6 +77,16 @@ https://github.com/vtrravikumar/vtr-press
 
 VTR Press provides the publishing pipeline for structured Markdown manuscripts and supports outputs such as PDF and EPUB. The website may publish selected book information and supporting material, but the manuscript and publishing engine remain separate concerns.
 
+## Publishing content
+
+Use the guide that matches what you want to publish:
+
+- [Writing article publishing](docs/article-publishing-guide.md) — create a private draft, validate, preview and publish an article.
+- [Photography publishing](docs/photography-publishing-guide.md) — curate photographs on the mounted photo volume and publish optimized gallery assets.
+- [Travel story publishing](docs/travel-publishing-guide.md) — edit a destination's structured metadata and narrative, preview locally and publish.
+
+These guides describe the current workflows. Article and photography publishing have dedicated safety checks; Travel publishing remains a more manual process.
+
 ## Development
 
 Install the Node.js dependencies:
