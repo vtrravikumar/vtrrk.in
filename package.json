@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro sync --force && astro build",
+    "build": "node scripts/generate-writing-banners.mjs prepare && astro sync --force && astro build && node scripts/generate-writing-banners.mjs emit",
     "test": "node --test",
     "article:new": "node scripts/article.mjs new",
     "article:check": "node scripts/article.mjs check",
@@ -22,6 +22,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.2.4",
+    "sharp": "^0.35.3",
     "yaml": "^2.9.1"
   }
 }

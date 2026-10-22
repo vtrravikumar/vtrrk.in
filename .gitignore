@@ -1,5 +1,7 @@
 # build output
 dist/
+.local/writing-banner-variants/
+.local/writing-banner-variants.json
 # generated types
 .astro/
 
