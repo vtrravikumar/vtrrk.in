@@ -28,7 +28,7 @@ const topics = [
         <h1 id="hero-title">Vichar<span class="hero-dash"> — </span><span class="hero-sanskrit" lang="sa">विचार</span></h1>
         <p class="hero-tagline">From thought to expression.</p>
         <p class="intro">Have an idea? Vichar helps turn it into a concise, engaging post while leaving the final words — and the final decision — to you.</p>
-        <p id="generation-counter" class="generation-counter" aria-live="polite">500+ thoughts created with Vichar</p>
+        <p id="generation-counter" class="generation-counter" aria-live="polite">500 thoughts created with Vichar</p>
 
         <blockquote class="sanskrit-quote">
           <span class="quote-mark" aria-hidden="true">“</span>
@@ -252,7 +252,7 @@ const topics = [
       if (!response.ok) return;
       const payload = await response.json();
       if (Number.isSafeInteger(payload.generations) && payload.generations >= 500) {
-        generationCounter.textContent = payload.generations.toLocaleString() + "+ thoughts created with Vichar";
+        generationCounter.textContent = payload.generations.toLocaleString() + " thoughts created with Vichar";
       }
     } catch {
       // Keep the launch-baseline label visible if the public stats endpoint is unavailable.
