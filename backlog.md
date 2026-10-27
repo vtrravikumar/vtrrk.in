@@ -683,10 +683,20 @@ The Vichar creator card, form controls, feature tiles and trust strip now use th
 ## VICHAR-WEB-004 — Generate Vichar in English, Hindi and Tamil
 
 - Priority: P1
-- Status: Implemented on feature branch; deployment verification pending
+- Status: Done
 - Area: Vichar website UI and API integration
 - Consumers: Website
 
-Add an English/Hindi/Tamil selector to `vtrrk.in/vichar/` and pass the selected language to the existing generation endpoint. English remains the default for backwards compatibility. The backend must generate directly in the selected language with a single generation request; no separate translation request. Keep the Chrome extension unchanged in this delivery. Its language selector is tracked separately in `vtrravikumar/tweetpilot` backlog item VICHAR-LANG-EXT-001.
+Added an English/Hindi/Tamil selector to `vtrrk.in/vichar/` and passed the selected language to the existing generation endpoint. English remains the default for backwards compatibility. The backend generates directly in the selected language with a single generation request; no separate translation request. The Chrome extension remains unchanged in this delivery. Its language selector is tracked separately in `vtrravikumar/tweetpilot` backlog item VICHAR-LANG-EXT-001.
 
-Acceptance: selector is keyboard accessible and responsive; selected language is sent in the request; returned text receives the matching `lang` attribute; existing session, news, editing, character-limit, and manual-posting behaviour remains intact; build and tests pass; production deployment is verified.
+Acceptance verified: selector is keyboard accessible and responsive; selected language is sent in the request; returned text receives the matching `lang` attribute; existing session, news, editing, character-limit, and manual-posting behaviour remains intact; tests/build and production deployment were verified.
+
+
+## VICHAR-WEB-005 — Publish Vichar version history and capability label
+
+- Priority: P2
+- Status: Done
+- Area: Vichar web / Release communication
+- Consumers: Website
+
+Bumped the website package version to 4.1.0, updated the capability label to Multilingual · News-aware · V4.1, and added a small footer link to the public version history at `/vichar/changelog/`. The page records the v4.1 multilingual release and the v4.0 news-aware release. Regression tests and documentation were included. The Chrome extension remains unchanged. Merged in [PR #17](https://github.com/vtrravikumar/vtrrk.in/pull/17); the preview build and production deployment were verified.
