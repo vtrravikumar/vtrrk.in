@@ -700,3 +700,23 @@ Acceptance verified: selector is keyboard accessible and responsive; selected la
 - Consumers: Website
 
 Bumped the website package version to 4.1.0, updated the capability label to Multilingual · News-aware · V4.1, and added a small footer link to the public version history at `/vichar/changelog/`. The page records the v4.1 multilingual release and the v4.0 news-aware release. Regression tests and documentation were included. The Chrome extension remains unchanged. Merged in [PR #17](https://github.com/vtrravikumar/vtrrk.in/pull/17); the preview build and production deployment were verified.
+
+
+## VICHAR-WEB-006 — Multi-platform Vichar drafts and assisted sharing
+
+- Priority: P4
+- Status: Parked
+- Area: Vichar website UI and sharing
+- Consumers: Website
+- Related backend/product item: [vtrravikumar/tweetpilot — VICHAR-SOCIAL-001](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
+
+Explore extending the Vichar website beyond X-oriented drafts so one original thought can be adapted into platform-specific versions for X, Facebook, and WhatsApp Status. The initial scope is draft generation, editing, copying, and assisted sharing—not autonomous publishing.
+
+- Facebook personal profiles: provide copy/share assistance; do not promise direct automated publishing through an unsupported official API.
+- Facebook Pages: consider optional official Graph API publishing only after permissions, app review, authentication, and page-management requirements are assessed.
+- WhatsApp Status: prepare short text and optionally portrait image cards, then hand off for the user to review and publish. Do not rely on unofficial Status automation.
+- Preserve the existing manual review-before-posting workflow and the free website product boundary.
+- Keep platform-specific copy and formatting distinct; do not simply duplicate the X draft.
+- Verify current platform API and sharing capabilities before implementation.
+
+This is a discovery/backlog item only; no multi-platform publishing behaviour is committed or implemented by this entry.
