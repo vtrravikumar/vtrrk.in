@@ -35,6 +35,7 @@ Vichar never clicks X's Post button and does not publish automatically.
 Implemented in `src/pages/vichar.astro`:
 
 - Vichar branding and English tagline.
+- Multilingual generation in English, Hindi, and Tamil, with English as the default.
 - Topic selection and custom topic entry.
 - Optional location context.
 - Optional recent-news mode.
@@ -92,9 +93,9 @@ The website uses the approved Vichar artwork rather than recreating the logo ind
 
 ## Version visibility
 
-The public Vichar footer displays the version derived from the first two segments of the website package version and the short Cloudflare Pages source commit SHA. The build identifier is read from `CF_PAGES_COMMIT_SHA` at build time, so the deployed site can be matched to its source commit. If that environment variable is unavailable, the footer explicitly says the build ID is unavailable rather than inventing one.
+The public Vichar capability pill identifies the web generator as multilingual and news-aware. The public Vichar footer displays the version derived from the first two segments of the website package version and the short Cloudflare Pages source commit SHA. The build identifier is read from `CF_PAGES_COMMIT_SHA` at build time, so the deployed site can be matched to its source commit. If that environment variable is unavailable, the footer explicitly says the build ID is unavailable rather than inventing one.
 
-When the generation milestone changes, update the displayed Web version and this note in the same change. The short SHA identifies the exact website build independently of the milestone label.
+Version 4.1 marks the addition of direct English, Hindi, and Tamil generation on the web. When the generation milestone changes, update the displayed Web version and this note in the same change. The short SHA identifies the exact website build independently of the milestone label.
 
 ## What is complete
 
