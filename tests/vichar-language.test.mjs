@@ -16,6 +16,12 @@ test("Vichar web generator sends the selected language to the existing API", () 
   assert.match(page, /tweet\.lang = language\.value === "hi" \? "hi" : language\.value === "ta" \? "ta" : "en"/);
 });
 
+test("Vichar web generator uses V2 so the selected random style is returned", () => {
+  assert.match(page, /const API_URL = "https:\/\/api\.vtrrk\.in\/vichar\/v2\/tweet\/generate";/);
+  assert.match(page, /style: pickRandomStyle\(\)/);
+  assert.match(page, /typeof payload\.style === "string" && payload\.style\.trim\(\)/);
+});
+
 test("Vichar identifies the web generator as multilingual and news-aware", () => {
   assert.match(page, /Multilingual · News-aware · \{vicharVersion\}/);
 });
