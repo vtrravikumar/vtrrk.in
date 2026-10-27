@@ -15,3 +15,7 @@ test("Vichar web generator sends the selected language to the existing API", () 
   assert.match(page, /language: language\.value/);
   assert.match(page, /tweet\.lang = language\.value === "hi" \? "hi" : language\.value === "ta" \? "ta" : "en"/);
 });
+
+test("Vichar identifies the web generator as multilingual and news-aware", () => {
+  assert.match(page, /Multilingual · News-aware · \{vicharVersion\}/);
+});
