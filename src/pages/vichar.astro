@@ -28,6 +28,7 @@ const topics = [
         <h1 id="hero-title">Vichar<span class="hero-dash"> — </span><span class="hero-sanskrit" lang="sa">विचार</span></h1>
         <p class="hero-tagline">From thought to expression.</p>
         <p class="intro">Have an idea? Vichar helps turn it into a concise, engaging post while leaving the final words — and the final decision — to you.</p>
+        <p id="generation-counter" class="generation-counter" aria-live="polite">500+ thoughts created with Vichar</p>
 
         <blockquote class="sanskrit-quote">
           <span class="quote-mark" aria-hidden="true">“</span>
@@ -170,6 +171,7 @@ const topics = [
 <script>
   const API_URL = "https://api.vtrrk.in/vichar/v2/tweet/generate";
   const WEB_SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
+  const STATS_URL = "https://api.vtrrk.in/vichar/v1/stats";
   const MAX_LENGTH = 140;
 
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist"];
@@ -193,6 +195,7 @@ const topics = [
   const status = document.querySelector("#status");
   const resultWrap = document.querySelector("#result-wrap");
   const styleUsed = document.querySelector("#style-used");
+  const generationCounter = document.querySelector<HTMLParagraphElement>("#generation-counter")!;
   let webSessionToken = "";
   let webSessionExpiresAt = 0;
   let sessionPromise: Promise<string> | null = null;
@@ -242,6 +245,21 @@ const topics = [
     count.textContent = tweet.value.length + " / " + MAX_LENGTH;
     count.toggleAttribute("data-over", tweet.value.length > MAX_LENGTH);
   }
+
+  async function refreshGenerationCount() {
+    try {
+      const response = await fetch(STATS_URL, { cache: "no-store" });
+      if (!response.ok) return;
+      const payload = await response.json();
+      if (Number.isSafeInteger(payload.generations) && payload.generations >= 500) {
+        generationCounter.textContent = payload.generations.toLocaleString() + "+ thoughts created with Vichar";
+      }
+    } catch {
+      // Keep the launch-baseline label visible if the public stats endpoint is unavailable.
+    }
+  }
+
+  void refreshGenerationCount();
 
   function chooseTopic() {
     if (topic.value === "__custom__") {
@@ -324,6 +342,7 @@ const topics = [
         throw new Error("Your Vichar session expired. Please try again.");
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
+      void refreshGenerationCount();
       tweet.value = payload.tweet;
       tweet.lang = language.value === "hi" ? "hi" : language.value === "ta" ? "ta" : "en";
       if (typeof payload.style === "string" && payload.style.trim()) {
@@ -387,6 +406,7 @@ const topics = [
   .hero-sanskrit{color:var(--accent);letter-spacing:-.04em}
   .hero-tagline{margin:.3rem 0 1rem;font-size:clamp(1.7rem,2.7vw,2.65rem);line-height:1.12;letter-spacing:-.05em}
   .intro{max-width:37rem;margin:0;font-size:clamp(1rem,1.25vw,1.18rem);line-height:1.55;color:var(--foreground)}
+  .generation-counter{display:inline-flex;align-items:center;gap:.45rem;margin:.85rem 0 0;padding:.48rem .75rem;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--accent);font-size:.78rem;font-weight:750;font-variant-numeric:tabular-nums}
   .sanskrit-quote{display:flex;gap:.7rem;margin:1.35rem 0 1.35rem;padding:0;border:0}
   .quote-mark{font-family:Georgia,serif;font-size:4rem;line-height:.9;color:#b9d8ff}
   .sanskrit-quote p{margin:0}
