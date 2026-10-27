@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Vichar Version History — By VTRRK"
+  description="A concise history of Vichar web releases and the capabilities introduced in each version."
+>
+  <main id="main-content" tabindex="-1">
+    <header>
+      <p class="eyebrow">Vichar — By VTRRK</p>
+      <h1 class="type-page-heading">Version history</h1>
+      <p class="intro">A short record of what changed in each Vichar web release.</p>
+      <p><a href="/vichar/">← Back to Vichar</a></p>
+    </header>
+
+    <ol class="releases">
+      <li class="release current">
+        <div class="release-heading">
+          <h2>v4.1</h2>
+          <span class="current-label">Current release</span>
+        </div>
+        <p class="release-summary">Multilingual generation</p>
+        <ul>
+          <li>Generate thoughts directly in English, Hindi, or Tamil.</li>
+          <li>Choose the output language before generating; English remains the default.</li>
+          <li>Keep news-aware generation and the existing review-and-edit workflow.</li>
+        </ul>
+      </li>
+      <li class="release">
+        <div class="release-heading"><h2>v4.0</h2></div>
+        <p class="release-summary">News-aware Vichar</p>
+        <ul>
+          <li>Added an optional recent-news mode for timely, context-aware drafts.</li>
+          <li>Show available news source links with generated drafts.</li>
+          <li>Retained human review, editing, and manual posting to X.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <p class="note">Vichar is continuously improved. This page records notable web-product changes, not every maintenance update.</p>
+  </main>
+</BaseLayout>
+
+<style>
+  main{width:min(820px,calc(100% - 3rem));margin:0 auto;padding-bottom:4rem}
+  header{padding:5rem 0 2rem}
+  .eyebrow{margin:0 0 .8rem;color:var(--accent);font-size:.75rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+  h1{margin:0;line-height:1;letter-spacing:-.05em}
+  .intro{max-width:680px;margin:1rem 0;color:var(--muted);font-size:1.05rem;line-height:1.65}
+  a{color:var(--accent);text-underline-offset:.18em}
+  .releases{list-style:none;padding:0;margin:1.5rem 0;display:grid;gap:1rem}
+  .release{padding:1.35rem 1.5rem;border:1px solid var(--border);border-radius:1rem;background:var(--surface)}
+  .release.current{border-color:var(--accent)}
+  .release-heading{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  h2{margin:0;font-size:1.4rem;letter-spacing:-.035em}
+  .current-label{font-size:.7rem;font-weight:800;color:var(--accent);border-radius:999px;background:var(--accent-soft);padding:.35rem .6rem}
+  .release-summary{margin:.5rem 0;color:var(--foreground);font-weight:750}
+  li li{margin:.35rem 0;color:var(--muted);line-height:1.6}
+  .note{color:var(--muted);font-size:.8rem;line-height:1.6}
+  @media(max-width:600px){main{width:min(100% - 2rem,820px)}header{padding:4rem 0 1.5rem}.release{padding:1rem}}
+</style>

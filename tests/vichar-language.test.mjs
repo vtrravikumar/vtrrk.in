@@ -15,3 +15,18 @@ test("Vichar web generator sends the selected language to the existing API", () 
   assert.match(page, /language: language\.value/);
   assert.match(page, /tweet\.lang = language\.value === "hi" \? "hi" : language\.value === "ta" \? "ta" : "en"/);
 });
+
+test("Vichar identifies the web generator as multilingual and news-aware", () => {
+  assert.match(page, /Multilingual · News-aware · \{vicharVersion\}/);
+});
+
+const changelog = await readFile(new URL("../src/pages/vichar/changelog.astro", import.meta.url), "utf8");
+
+test("Vichar footer links to a public version history page", () => {
+  assert.match(page, /href="\/vichar\/changelog\/">Version history<\/a>/);
+  assert.match(changelog, /title="Vichar Version History — By VTRRK"/);
+  assert.match(changelog, /v4\.1/);
+  assert.match(changelog, /v4\.0/);
+  assert.match(changelog, /English, Hindi, or Tamil/);
+  assert.match(changelog, /News-aware Vichar/);
+});
