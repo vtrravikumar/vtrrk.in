@@ -84,6 +84,15 @@ const topics = [
                 <option value="en" selected>English</option>
                 <option value="hi">Hindi — हिन्दी</option>
                 <option value="ta">Tamil — தமிழ்</option>
+                <option value="es">Spanish — Español</option>
+                <option value="pt-BR">Portuguese — Português (Brasil)</option>
+                <option value="ja">Japanese — 日本語</option>
+                <option value="id">Indonesian — Bahasa Indonesia</option>
+                <option value="ar">Arabic — العربية</option>
+                <option value="fr">French — Français</option>
+                <option value="tr">Turkish — Türkçe</option>
+                <option value="ko">Korean — 한국어</option>
+                <option value="de">German — Deutsch</option>
               </select>
             </label>
             <label class="news-toggle" for="use-news">
@@ -344,7 +353,7 @@ const topics = [
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       void refreshGenerationCount();
       tweet.value = payload.tweet;
-      tweet.lang = language.value === "hi" ? "hi" : language.value === "ta" ? "ta" : "en";
+      tweet.lang = language.value;
       if (typeof payload.style === "string" && payload.style.trim()) {
         const styleLabel = document.createElement("span");
         styleLabel.textContent = "Style used: " + payload.style;
@@ -381,7 +390,7 @@ const topics = [
   create.addEventListener("click", generate);
   another.addEventListener("click", generate);
   language.addEventListener("change", () => {
-    tweet.lang = language.value === "hi" ? "hi" : language.value === "ta" ? "ta" : "en";
+    tweet.lang = language.value;
   });
   tweet.addEventListener("input", updateCount);
 
