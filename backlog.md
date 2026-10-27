@@ -678,3 +678,15 @@ When News mode is off, preserve current generation behaviour and randomised writ
 - Area: Vichar web / Accessibility and visual quality
 
 The Vichar creator card, form controls, feature tiles and trust strip now use the site's shared theme-aware surface tokens rather than fixed light backgrounds. Dark-mode refinements cover remaining decorative surfaces and status/error colours. Both Vichar pages have valid `#main-content` targets for the shared skip link. The change was merged in PR [#10](https://github.com/vtrravikumar/vtrrk.in/pull/10) on 2026-10-09. Ravi manually checked production in both light and dark modes and confirmed the page looks better in both. This item records Vichar-specific verification only; the broader site accessibility audit QA-002 remains In Progress until its other listed checks are complete.
+
+
+## VICHAR-WEB-004 — Generate Vichar in English, Hindi and Tamil
+
+- Priority: P1
+- Status: Implemented on feature branch; deployment verification pending
+- Area: Vichar website UI and API integration
+- Consumers: Website
+
+Add an English/Hindi/Tamil selector to `vtrrk.in/vichar/` and pass the selected language to the existing generation endpoint. English remains the default for backwards compatibility. The backend must generate directly in the selected language with a single generation request; no separate translation request. Keep the Chrome extension unchanged in this delivery. Its language selector is tracked separately in `vtrravikumar/tweetpilot` backlog item VICHAR-LANG-EXT-001.
+
+Acceptance: selector is keyboard accessible and responsive; selected language is sent in the request; returned text receives the matching `lang` attribute; existing session, news, editing, character-limit, and manual-posting behaviour remains intact; build and tests pass; production deployment is verified.

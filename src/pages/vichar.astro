@@ -77,6 +77,14 @@ const topics = [
                 <input id="location" type="text" placeholder="e.g. Tokyo or Chennai" maxlength="80" />
               </label>
             </div>
+            <label class="language-field">
+              <span>Vichar language <em>Generate directly in your chosen language</em></span>
+              <select id="language" name="language">
+                <option value="en" selected>English</option>
+                <option value="hi">Hindi — हिन्दी</option>
+                <option value="ta">Tamil — தமிழ்</option>
+              </select>
+            </label>
             <label class="news-toggle" for="use-news">
               <input id="use-news" type="checkbox" />
               <span>Use recent news <em>Only stories from the last 48 hours</em></span>
@@ -173,7 +181,8 @@ const topics = [
   const customTopicWrap = document.querySelector("#custom-topic-wrap");
   const customTopic = document.querySelector("#custom-topic");
   const topicCount = document.querySelector("#topic-count");
-  const location = document.querySelector("#location");
+  const location = document.querySelector<HTMLInputElement>("#location")!;
+  const language = document.querySelector<HTMLSelectElement>("#language")!;
   const useNews = document.querySelector<HTMLInputElement>("#use-news")!;
   const newsSources = document.querySelector<HTMLDivElement>("#news-sources")!;
   const create = document.querySelector("#create");
@@ -306,7 +315,7 @@ const topics = [
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "content-type": "application/json", authorization: "Bearer " + sessionToken },
-        body: JSON.stringify({ topic: selectedTopic, location: location.value.trim(), style: pickRandomStyle(), maxLength: MAX_LENGTH, useNews: useNews.checked }),
+        body: JSON.stringify({ topic: selectedTopic, location: location.value.trim(), style: pickRandomStyle(), language: language.value, maxLength: MAX_LENGTH, useNews: useNews.checked }),
       });
       const payload = await response.json().catch(() => ({}));
       if (response.status === 401 || response.status === 403) {
@@ -316,6 +325,7 @@ const topics = [
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       tweet.value = payload.tweet;
+      tweet.lang = language.value === "hi" ? "hi" : language.value === "ta" ? "ta" : "en";
       if (typeof payload.style === "string" && payload.style.trim()) {
         const styleLabel = document.createElement("span");
         styleLabel.textContent = "Style used: " + payload.style;
@@ -351,6 +361,9 @@ const topics = [
 
   create.addEventListener("click", generate);
   another.addEventListener("click", generate);
+  language.addEventListener("change", () => {
+    tweet.lang = language.value === "hi" ? "hi" : language.value === "ta" ? "ta" : "en";
+  });
   tweet.addEventListener("input", updateCount);
 
   tweetThis.addEventListener("click", () => {
