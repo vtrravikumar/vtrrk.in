@@ -535,6 +535,7 @@ Only revisit if there is a clear publishing/distribution strategy.
 7. The backlog describes planned work; completed implementation should not be mistaken for completed product intent.
 8. Keep public presentation simpler than the underlying data where richer source records are useful.
 9. Avoid further architectural changes unless a demonstrated requirement shows that the current foundation cannot support the feature.
+10. **Release versioning:** update `package.json` and `package-lock.json` for every release. For major/minor releases (`X.0` / `X.Y`), show the public version on the Vichar page and record the release in version history. For patch releases (`X.Y.Z`), keep the visible Vichar page label at `X.Y` and record the patch only in version history; do not add patch-level noise to the main page.
 
 
 # Phase 9 — Vichar Integration
@@ -725,7 +726,7 @@ This is a discovery/backlog item only; no multi-platform publishing behaviour is
 ## VICHAR-WEB-007 — Localise the Create ideas button
 
 - Priority: P2
-- Status: In Progress
+- Status: Done
 - Release: Vichar web v4.1.1
 - Area: Vichar web / Multilingual UX
 - Consumers: Website
@@ -733,3 +734,16 @@ This is a discovery/backlog item only; no multi-platform publishing behaviour is
 Update the primary generation button immediately when the selected Vichar language changes. Provide native-language labels for every language offered by the website selector (English, Hindi, Tamil, Spanish, Brazilian Portuguese, Japanese, Indonesian, Arabic, French, Turkish, Korean and German). Keep the sparkle icon and existing generation behaviour unchanged. Fall back to the English label for an unsupported language code.
 
 Acceptance: changing the language updates the button without generating a draft; labels are covered by automated regression tests; production build and live deployment are verified. No Chrome extension or backend changes.
+
+
+## VICHAR-WEB-008 — Improve Vichar hero identity and usage-counter visibility
+
+- Priority: P2
+- Status: Done
+- Release: Vichar web v4.1.2
+- Area: Vichar web / Hero UX and social proof
+- Consumers: Website
+
+Added the approved fictional Vichar companion portrait beside the hero heading, retaining the full square composition including the Vichar mug and using responsive sizing plus descriptive alt text. Moved the existing thought-generation counter directly below the heading and styled it as a more visible green-accent pill. The counter continues to use the existing dynamic update logic.
+
+Ravi checked ChatGPT usage and observed 599 thoughts created; the displayed count was approximately 541. The small difference is accepted as non-material for this social-proof element, so no further counter work is required. PR [#24](https://github.com/vtrravikumar/vtrrk.in/pull/24) was merged on 2026-10-28 and Ravi confirmed the production deployment and visible changes.
