@@ -13,7 +13,7 @@ test("Vichar web generator offers English, Hindi, and Tamil", () => {
 
 test("Vichar web generator sends the selected language to the existing API", () => {
   assert.match(page, /language: language\.value/);
-  assert.match(page, /tweet\.lang = language\.value === "hi" \? "hi" : language\.value === "ta" \? "ta" : "en"/);
+  assert.match(page, /tweet\.lang = language\.value;/);
 });
 
 test("Vichar web generator uses V2 so the selected random style is returned", () => {
