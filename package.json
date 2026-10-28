@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/generate-writing-banners.mjs prepare && astro sync --force && astro build && node scripts/generate-writing-banners.mjs emit",
+    "build": "node scripts/optimize-vichar-portrait.mjs && node scripts/generate-writing-banners.mjs prepare && astro sync --force && astro build && node scripts/generate-writing-banners.mjs emit",
     "test": "node --test",
     "article:new": "node scripts/article.mjs new",
     "article:check": "node scripts/article.mjs check",
