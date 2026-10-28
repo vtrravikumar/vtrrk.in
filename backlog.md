@@ -747,3 +747,16 @@ Acceptance: changing the language updates the button without generating a draft;
 Added the approved fictional Vichar companion portrait beside the hero heading, retaining the full square composition including the Vichar mug and using responsive sizing plus descriptive alt text. Moved the existing thought-generation counter directly below the heading and styled it as a more visible green-accent pill. The counter continues to use the existing dynamic update logic.
 
 Ravi checked ChatGPT usage and observed 599 thoughts created; the displayed count was approximately 541. The small difference is accepted as non-material for this social-proof element, so no further counter work is required. PR [#24](https://github.com/vtrravikumar/vtrrk.in/pull/24) was merged on 2026-10-28 and Ravi confirmed the production deployment and visible changes.
+
+
+## VICHAR-WEB-009 — Make generated Vichar results more noticeable and compact the form
+
+- Priority: P1
+- Status: Done
+- Release: Vichar web v4.1.3
+- Area: Vichar web / Creation flow and responsive UX
+- Consumers: Website
+
+After successful generation, visually highlight the result box with an accent border/background and a brief pulse, then smoothly scroll it into view so users can tell their Vichar was created. Respect reduced-motion preferences. Place the topic and output-language selectors side by side on wider screens to reduce the form's vertical height, with a stacked layout on narrow screens. Preserve the existing generation, editing, language selection, news, and manual-posting behaviours.
+
+Acceptance: automated tests and production build pass; Cloudflare preview is successful; verify the generated result remains visible and readable at desktop and mobile widths.

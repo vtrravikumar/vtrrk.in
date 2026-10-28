@@ -36,3 +36,18 @@ test("Vichar footer links to a public version history page", () => {
   assert.match(changelog, /English, Hindi, or Tamil/);
   assert.match(changelog, /News-aware Vichar/);
 });
+
+
+test("Vichar creation highlights the generated result and brings it into view", () => {
+  assert.match(page, /resultWrap\.classList\.add\("result-ready"\)/);
+  assert.match(page, /resultWrap\.scrollIntoView\(/);
+  assert.match(page, /prefers-reduced-motion: reduce/);
+  assert.match(page, /\.result-wrap\.result-ready/);
+  assert.match(page, /@keyframes result-attention/);
+});
+
+test("Vichar topic and language selectors share a responsive row", () => {
+  assert.match(page, /class="topic-language-row"/);
+  assert.match(page, /grid-template-columns:minmax\(0,1\.1fr\) minmax\(0,\.9fr\)/);
+  assert.match(page, /\.field-row,\.topic-language-row\{grid-template-columns:1fr\}/);
+});
