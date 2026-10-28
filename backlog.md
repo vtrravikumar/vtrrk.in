@@ -720,3 +720,15 @@ Explore extending the Vichar website beyond X-oriented drafts so one original th
 - Verify current platform API and sharing capabilities before implementation.
 
 This is a discovery/backlog item only; no multi-platform publishing behaviour is committed or implemented by this entry.
+
+
+## VICHAR-WEB-007 — Localise the Create ideas button
+
+- Priority: P2
+- Status: In Progress
+- Area: Vichar web / Multilingual UX
+- Consumers: Website
+
+Update the primary generation button immediately when the selected Vichar language changes. Provide native-language labels for every language offered by the website selector (English, Hindi, Tamil, Spanish, Brazilian Portuguese, Japanese, Indonesian, Arabic, French, Turkish, Korean and German). Keep the sparkle icon and existing generation behaviour unchanged. Fall back to the English label for an unsupported language code.
+
+Acceptance: changing the language updates the button without generating a draft; labels are covered by automated regression tests; production build and live deployment are verified. No Chrome extension or backend changes.

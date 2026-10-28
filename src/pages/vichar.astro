@@ -102,7 +102,7 @@ const topics = [
           </div>
 
           <div class="actions">
-            <button id="create" type="button"><span>Create ideas</span><span aria-hidden="true">✦</span></button>
+            <button id="create" type="button"><span id="create-label">Create ideas</span><span aria-hidden="true">✦</span></button>
             <span id="status" role="status" aria-live="polite">Ready when you are.</span>
           </div>
           <p class="topic-hints"><span aria-hidden="true">✧</span> Try: AI, photography, travel, productivity, everyday observations…</p>
@@ -178,6 +178,8 @@ const topics = [
 </BaseLayout>
 
 <script>
+  import { getCreateIdeasLabel } from "../utils/vichar-language-labels.js";
+
   const API_URL = "https://api.vtrrk.in/vichar/v2/tweet/generate";
   const WEB_SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
   const STATS_URL = "https://api.vtrrk.in/vichar/v1/stats";
@@ -389,9 +391,15 @@ const topics = [
 
   create.addEventListener("click", generate);
   another.addEventListener("click", generate);
+  const createLabel = document.querySelector<HTMLSpanElement>("#create-label")!;
+  function updateCreateLabel() {
+    createLabel.textContent = getCreateIdeasLabel(language.value);
+  }
   language.addEventListener("change", () => {
     tweet.lang = language.value;
+    updateCreateLabel();
   });
+  updateCreateLabel();
   tweet.addEventListener("input", updateCount);
 
   tweetThis.addEventListener("click", () => {
