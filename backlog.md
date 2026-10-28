@@ -726,6 +726,7 @@ This is a discovery/backlog item only; no multi-platform publishing behaviour is
 
 - Priority: P2
 - Status: In Progress
+- Release: Vichar web v4.1.1
 - Area: Vichar web / Multilingual UX
 - Consumers: Website
 
