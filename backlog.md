@@ -752,7 +752,7 @@ Ravi checked ChatGPT usage and observed 599 thoughts created; the displayed coun
 ## VICHAR-WEB-009 — Make generated Vichar results more noticeable and compact the form
 
 - Priority: P1
-- Status: In Progress
+- Status: Done
 - Release: Vichar web v4.1.3
 - Area: Vichar web / Creation flow and responsive UX
 - Consumers: Website
