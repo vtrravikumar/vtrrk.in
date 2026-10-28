@@ -25,10 +25,13 @@ const topics = [
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-copy">
         <p class="eyebrow"><span class="eyebrow-dot"></span> AI writing companion for X</p>
-        <h1 id="hero-title">Vichar<span class="hero-dash"> — </span><span class="hero-sanskrit" lang="sa">विचार</span></h1>
+        <div class="hero-title-row">
+          <img class="hero-portrait" src="/images/vichar-hero-portrait.webp" alt="Vichar’s fictional creative companion in a blue patterned top beside a laptop and Vichar mug" width="120" height="120" fetchpriority="high" />
+          <h1 id="hero-title">Vichar<span class="hero-dash"> — </span><span class="hero-sanskrit" lang="sa">विचार</span></h1>
+        </div>
+        <p id="generation-counter" class="generation-counter" aria-live="polite"><span class="counter-dot" aria-hidden="true"></span> 500 thoughts created with Vichar</p>
         <p class="hero-tagline">From thought to expression.</p>
         <p class="intro">Have an idea? Vichar helps turn it into a concise, engaging post while leaving the final words — and the final decision — to you.</p>
-        <p id="generation-counter" class="generation-counter" aria-live="polite">500 thoughts created with Vichar</p>
 
         <blockquote class="sanskrit-quote">
           <span class="quote-mark" aria-hidden="true">“</span>
@@ -418,12 +421,16 @@ const topics = [
   .eyebrow,.section-kicker{margin:0 0 .8rem;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
   .eyebrow{display:inline-flex;align-items:center;gap:.5rem;padding:.42rem .7rem;border-radius:999px;background:var(--accent-soft)}
   .eyebrow-dot,.live-dot{width:.48rem;height:.48rem;display:inline-block;border-radius:50%;background:#1aaf83}
-  .hero h1{margin:.45rem 0 .1rem;font-size:clamp(3rem,4.6vw,4.8rem)!important;line-height:.98;letter-spacing:-.075em}
+  .hero-title-row{display:flex;align-items:center;gap:1rem;margin:.45rem 0 .1rem}
+  .hero-portrait{display:block;width:clamp(88px,10vw,120px);height:auto;aspect-ratio:1;object-fit:contain;flex:0 0 auto;border:1px solid var(--border);border-radius:1.1rem;background:var(--surface);box-shadow:0 8px 24px rgba(30,70,120,.12)}
+  .hero-title-row h1{min-width:0;margin:0;font-size:clamp(2.4rem,3.8vw,4.2rem)!important;line-height:1.02;letter-spacing:-.075em}
   .hero-dash{color:var(--accent);font-weight:400}
   .hero-sanskrit{color:var(--accent);letter-spacing:-.04em}
   .hero-tagline{margin:.3rem 0 1rem;font-size:clamp(1.7rem,2.7vw,2.65rem);line-height:1.12;letter-spacing:-.05em}
   .intro{max-width:37rem;margin:0;font-size:clamp(1rem,1.25vw,1.18rem);line-height:1.55;color:var(--foreground)}
-  .generation-counter{display:inline-flex;align-items:center;gap:.45rem;margin:.85rem 0 0;padding:.48rem .75rem;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--accent);font-size:.78rem;font-weight:750;font-variant-numeric:tabular-nums}
+  .generation-counter{display:inline-flex;align-items:center;gap:.5rem;margin:.7rem 0 .25rem;padding:.62rem .9rem;border:1px solid rgba(26,175,131,.32);border-radius:999px;background:var(--accent-soft);color:var(--text);font-size:.9rem;font-weight:800;font-variant-numeric:tabular-nums;box-shadow:0 4px 14px rgba(26,175,131,.08)}
+  .counter-dot{width:.55rem;height:.55rem;display:inline-block;flex:0 0 auto;border-radius:50%;background:#1aaf83;box-shadow:0 0 0 3px rgba(26,175,131,.13)}
+  .generation-counter::first-line{font-weight:800}
   .sanskrit-quote{display:flex;gap:.7rem;margin:1.35rem 0 1.35rem;padding:0;border:0}
   .quote-mark{font-family:Georgia,serif;font-size:4rem;line-height:.9;color:#b9d8ff}
   .sanskrit-quote p{margin:0}
@@ -530,7 +537,9 @@ const topics = [
   @media(max-width:1100px){
     .vichar-page{width:min(1080px,calc(100% - 2rem))}
     .hero{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:1.5rem}
-    .hero h1{font-size:clamp(2.8rem,4.4vw,4.1rem)!important}
+    .hero-title-row{gap:.8rem}
+    .hero-portrait{width:clamp(82px,10vw,108px)}
+    .hero-title-row h1{font-size:clamp(2.3rem,3.6vw,3.7rem)!important}
     .hero-tagline{font-size:clamp(1.5rem,2.4vw,2.1rem)}
     .trust-strip{grid-template-columns:1fr 1fr}
     .trust-sanskrit{border-left:0;border-top:1px solid rgba(20,119,255,.2);padding:1rem 0 0}
@@ -539,7 +548,9 @@ const topics = [
     .vichar-page{width:calc(100% - 1.4rem);padding-top:.6rem}
     .hero{grid-template-columns:1fr;gap:1rem;padding-top:.5rem}
     .hero-copy{padding:.4rem .2rem}
-    .hero h1{font-size:clamp(2.7rem,10vw,3.8rem)!important}
+    .hero-title-row{gap:.75rem}
+    .hero-portrait{width:clamp(76px,23vw,104px);border-radius:.9rem}
+    .hero-title-row h1{font-size:clamp(2rem,7.6vw,3rem)!important;overflow-wrap:anywhere}
     .hero-tagline{font-size:clamp(1.7rem,7vw,2.3rem)}
     .sanskrit-quote{margin:1rem 0}
     .creator-card{padding:1rem}
