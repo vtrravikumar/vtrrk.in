@@ -11,6 +11,7 @@ test("Vichar marks custom topics without changing the generation endpoint", asyn
   assert.match(page, /topic: selectedTopic/);
   assert.match(page, /language: language\.value/);
   assert.match(page, /useNews: useNews\.checked/);
+  assert.match(page, /Please avoid entering personal or sensitive information in your topic/);
 });
 
 test("Vichar 4.1.4 keeps the visible V4.1 label and documents topic analytics", async () => {
