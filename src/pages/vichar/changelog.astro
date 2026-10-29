@@ -17,11 +17,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <ol class="releases">
       <li class="release current">
         <div class="release-heading">
-          <h2>v4.1.4</h2>
+          <h2>v4.1.5</h2>
           <span class="current-label">Current release</span>
         </div>
-        <p class="release-summary">Behind-the-scenes topic analytics</p>
+        <p class="release-summary">Custom-topic recording counter</p>
         <ul>
+          <li>When using “Write your own”, see the number of custom-topic generations recorded over the last 90 days.</li>
+          <li>The counter uses a public count-only endpoint; topic names and detailed analytics remain private.</li>
+          <li>The count refreshes after generation and may take a moment to reflect asynchronous recording.</li>
           <li>Custom topics may be included in privacy-conscious, aggregate product analysis to help improve Vichar.</li>
           <li>Generated drafts, location context and user identifiers are not included in topic analytics records.</li>
           <li>No change to generation behaviour, response format, or the visible V4.1 capability label.</li>

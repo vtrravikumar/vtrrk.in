@@ -90,6 +90,7 @@ const topics = [
               <span>Your topic <em id="topic-count">0 / 40</em></span>
               <textarea id="custom-topic" placeholder="A few words, e.g. AI and creativity" maxlength="40" rows="1"></textarea>
               <span class="custom-topic-note">Please avoid entering personal or sensitive information in your topic.</span>
+              <p id="custom-topic-counter" class="custom-topic-counter" hidden aria-live="polite"></p>
             </label>
             <div class="field-row">
               <label>
@@ -189,6 +190,7 @@ const topics = [
   const API_URL = "https://api.vtrrk.in/vichar/v2/tweet/generate";
   const WEB_SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
   const STATS_URL = "https://api.vtrrk.in/vichar/v1/stats";
+  const CUSTOM_TOPIC_COUNT_URL = "https://api.vtrrk.in/vichar/v1/stats/custom-topics";
   const MAX_LENGTH = 140;
 
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist"];
@@ -199,6 +201,7 @@ const topics = [
   const topic = document.querySelector("#topic-input");
   const customTopicWrap = document.querySelector("#custom-topic-wrap");
   const customTopic = document.querySelector("#custom-topic");
+  const customTopicCounter = document.querySelector<HTMLParagraphElement>("#custom-topic-counter")!;
   const topicCount = document.querySelector("#topic-count");
   const location = document.querySelector<HTMLInputElement>("#location")!;
   const language = document.querySelector<HTMLSelectElement>("#language")!;
@@ -221,6 +224,7 @@ const topics = [
   function updateCustomTopicVisibility() {
     const isCustom = topic.value === "__custom__";
     customTopicWrap.hidden = !isCustom;
+    customTopicCounter.hidden = !isCustom || !customTopicCounter.textContent;
     if (isCustom) customTopic.focus();
   }
 
@@ -276,7 +280,28 @@ const topics = [
     }
   }
 
+  async function refreshCustomTopicCount(retries = 0) {
+    try {
+      const response = await fetch(CUSTOM_TOPIC_COUNT_URL);
+      if (!response.ok) throw new Error("Custom-topic count unavailable");
+      const payload = await response.json();
+      if (!Number.isSafeInteger(payload.totalEvents) || payload.totalEvents < 0 || payload.periodDays !== 90) {
+        throw new Error("Invalid custom-topic count response");
+      }
+      customTopicCounter.textContent = "Custom topics recorded: " + payload.totalEvents.toLocaleString() + " in the last 90 days";
+      customTopicCounter.hidden = topic.value !== "__custom__";
+    } catch {
+      // The counter is optional; never show a guessed or locally incremented value.
+      customTopicCounter.hidden = true;
+      if (retries > 0) {
+        await new Promise((resolve) => window.setTimeout(resolve, 800));
+        await refreshCustomTopicCount(retries - 1);
+      }
+    }
+  }
+
   void refreshGenerationCount();
+  void refreshCustomTopicCount();
 
   function chooseTopic() {
     if (topic.value === "__custom__") {
@@ -360,6 +385,12 @@ const topics = [
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       void refreshGenerationCount();
+      if (topic.value === "__custom__") {
+        void (async () => {
+          await new Promise((resolve) => window.setTimeout(resolve, 900));
+          await refreshCustomTopicCount(2);
+        })();
+      }
       tweet.value = payload.tweet;
       tweet.lang = language.value;
       if (typeof payload.style === "string" && payload.style.trim()) {
@@ -488,6 +519,8 @@ const topics = [
   .field-icon{font-size:1.15rem;color:var(--accent)}
   .custom-topic[hidden]{display:none}
   .custom-topic-note{margin:-.45rem 0 0;color:var(--muted);font-size:.7rem;line-height:1.45}
+  .custom-topic-counter{margin:-.35rem 0 0;color:var(--muted);font-size:.75rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.45}
+  .custom-topic-counter[hidden]{display:none}
   .actions{display:flex;align-items:stretch;flex-direction:column;gap:.55rem;margin-top:1rem}
   button{border:0;border-radius:999px;font:inherit;font-weight:750;padding:.78rem 1rem;cursor:pointer;transition:transform .2s ease,opacity .2s ease,background .2s ease}
   button:hover{transform:translateY(-1px)}

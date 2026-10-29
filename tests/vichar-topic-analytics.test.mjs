@@ -12,17 +12,20 @@ test("Vichar marks custom topics without changing the generation endpoint", asyn
   assert.match(page, /language: language\.value/);
   assert.match(page, /useNews: useNews\.checked/);
   assert.match(page, /Please avoid entering personal or sensitive information in your topic/);
+  assert.ok(page.includes('const CUSTOM_TOPIC_COUNT_URL = "https://api.vtrrk.in/vichar/v1/stats/custom-topics";'));
+  assert.match(page, /Custom topics recorded:/);
+  assert.match(page, /customTopicCounter\.hidden = topic\.value !== "__custom__"/);
 });
 
-test("Vichar 4.1.4 keeps the visible V4.1 label and documents topic analytics", async () => {
+test("Vichar 4.1.5 keeps the visible V4.1 label and documents topic analytics", async () => {
   const pkg = JSON.parse(await read("../package.json"));
   const lock = JSON.parse(await read("../package-lock.json"));
   const changelog = await read("../src/pages/vichar/changelog.astro");
   const privacy = await read("../src/pages/vichar/privacy.astro");
 
-  assert.equal(pkg.version, "4.1.4");
-  assert.equal(lock.version, "4.1.4");
-  assert.match(changelog, /<h2>v4\.1\.4<\/h2>/);
+  assert.equal(pkg.version, "4.1.5");
+  assert.equal(lock.version, "4.1.5");
+  assert.match(changelog, /<h2>v4\.1\.5<\/h2>/);
   assert.match(changelog, /visible V4\.1 capability label/);
   assert.match(privacy, /selected output language may be recorded for product analysis/);
   assert.match(privacy, /90 days/);
