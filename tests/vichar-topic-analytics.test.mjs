@@ -12,9 +12,7 @@ test("Vichar marks custom topics without changing the generation endpoint", asyn
   assert.match(page, /language: language\.value/);
   assert.match(page, /useNews: useNews\.checked/);
   assert.match(page, /Please avoid entering personal or sensitive information in your topic/);
-  assert.ok(page.includes('const CUSTOM_TOPIC_COUNT_URL = "https://api.vtrrk.in/vichar/v1/stats/custom-topics";'));
-  assert.match(page, /Custom topics recorded:/);
-  assert.match(page, /customTopicCounter\.hidden = topic\.value !== "__custom__"/);
+  assert.doesNotMatch(page, /CUSTOM_TOPIC_COUNT_URL|custom-topic-counter|Custom topics recorded:/);
 });
 
 test("Vichar 4.1.5 keeps the visible V4.1 label and documents topic analytics", async () => {
