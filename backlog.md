@@ -778,7 +778,7 @@ Acceptance criteria:
 - [ ] Only authenticated website custom-topic requests are captured; preset topics and extension requests are not.
 - [ ] Topic analytics do not include generated text, location, account identifiers, IP addresses, or licence keys.
 - [ ] Private aggregate analytics are available only to the owner; no public raw-topic endpoint.
-- [ ] Raw topics are normalized and retained for no more than the 90-day analytics window, with opportunistic cleanup and query-time filtering.
+- [ ] Raw topics are normalized and physically expire after 90 days using the existing Durable Object alarm; analytics queries exclude expired records.
 - [ ] Privacy policy and version history disclose the purpose and retention.
 - [ ] Website tests/build and backend tests/typecheck pass; Cloudflare preview is verified before production deployment.
 - [ ] Confirm visible capability label remains V4.1 and package/lock versions are synchronized at 4.1.4.
