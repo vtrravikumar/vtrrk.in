@@ -31,3 +31,14 @@ test("Vichar 4.1.5 keeps the visible V4.1 label and documents topic analytics", 
   assert.match(privacy, /90 days/);
   assert.match(privacy, /not used for advertising or model training/);
 });
+
+
+test("Vichar displays recent news sources after the generated Vichar result", async () => {
+  const page = await read("../src/pages/vichar.astro");
+  const resultPosition = page.indexOf('id="result-wrap"');
+  const sourcesPosition = page.indexOf('id="news-sources"');
+
+  assert.notEqual(resultPosition, -1, "generated result container exists");
+  assert.notEqual(sourcesPosition, -1, "recent sources container exists");
+  assert.ok(sourcesPosition > resultPosition, "recent sources container follows the generated result in document order");
+});
