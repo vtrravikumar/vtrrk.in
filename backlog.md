@@ -760,3 +760,26 @@ Ravi checked ChatGPT usage and observed 599 thoughts created; the displayed coun
 After successful generation, visually highlight the result box with an accent border/background and a brief pulse, then smoothly scroll it into view so users can tell their Vichar was created. Respect reduced-motion preferences. Place the topic and output-language selectors side by side on wider screens to reduce the form's vertical height, with a stacked layout on narrow screens. Preserve the existing generation, editing, language selection, news, and manual-posting behaviours.
 
 Acceptance: automated tests and production build pass; Cloudflare preview is successful; verify the generated result remains visible and readable at desktop and mobile widths.
+
+
+## VICHAR-WEB-010 — Integrate generic custom-topic analytics
+
+- Priority: P2
+- Status: In progress — implementation on branch `feat/custom-topic-analytics`
+- Release target: v4.1.4 (visible capability label remains V4.1)
+- Area: Vichar website / product analytics / privacy
+- Consumers: Website
+- Backend dependency: [`vtrravikumar/tweetpilot` — VICHAR-ANALYTICS-001, Generic topic analytics events](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
+
+Mark website requests as custom-topic or preset without changing the generation response contract. Only successful, authenticated website generations using “Write your own” are eligible. The backend records a minimal versioned topic event asynchronously; analytics failures must never delay or fail generation. No extension changes, new analytics vendor, database service, or paid Cloudflare resource.
+
+Acceptance criteria:
+- [ ] Website sends a source classification while preserving existing topic/language/news/location/style behaviour.
+- [ ] Only authenticated website custom-topic requests are captured; preset topics and extension requests are not.
+- [ ] Topic analytics do not include generated text, location, account identifiers, IP addresses, or licence keys.
+- [ ] Private aggregate analytics are available only to the owner; no public raw-topic endpoint.
+- [ ] Raw topics are normalized and retained for no more than the 90-day analytics window, with opportunistic cleanup and query-time filtering.
+- [ ] Privacy policy and version history disclose the purpose and retention.
+- [ ] Website tests/build and backend tests/typecheck pass; Cloudflare preview is verified before production deployment.
+- [ ] Confirm visible capability label remains V4.1 and package/lock versions are synchronized at 4.1.4.
+- [ ] Verify no extension code, manifest, package, or store release changes.
