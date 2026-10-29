@@ -765,8 +765,8 @@ Acceptance: automated tests and production build pass; Cloudflare preview is suc
 ## VICHAR-WEB-010 — Integrate generic custom-topic analytics
 
 - Priority: P2
-- Status: In progress — implementation on branch `feat/custom-topic-analytics`
-- Release target: v4.1.4 (visible capability label remains V4.1)
+- Status: Done
+- Released: 2026-10-29; website package/lock version 4.1.5 (visible capability label remains V4.1)
 - Area: Vichar website / product analytics / privacy
 - Consumers: Website
 - Backend dependency: [`vtrravikumar/tweetpilot` — VICHAR-ANALYTICS-001, Generic topic analytics events](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
@@ -774,12 +774,22 @@ Acceptance: automated tests and production build pass; Cloudflare preview is suc
 Mark website requests as custom-topic or preset without changing the generation response contract. Only successful, authenticated website generations using “Write your own” are eligible. The backend records a minimal versioned topic event asynchronously; analytics failures must never delay or fail generation. No extension changes, new analytics vendor, database service, or paid Cloudflare resource.
 
 Acceptance criteria:
-- [ ] Website sends a source classification while preserving existing topic/language/news/location/style behaviour.
-- [ ] Only authenticated website custom-topic requests are captured; preset topics and extension requests are not.
-- [ ] Topic analytics do not include generated text, location, account identifiers, IP addresses, or licence keys.
-- [ ] Private aggregate analytics are available only to the owner; no public raw-topic endpoint.
-- [ ] Raw topics are normalized and physically expire after 90 days using the existing Durable Object alarm; analytics queries exclude expired records.
-- [ ] Privacy policy and version history disclose the purpose and retention.
-- [ ] Website tests/build and backend tests/typecheck pass; Cloudflare preview is verified before production deployment.
-- [ ] Confirm visible capability label remains V4.1 and package/lock versions are synchronized at 4.1.4.
-- [ ] Verify no extension code, manifest, package, or store release changes.
+- [x] Website sends a source classification while preserving existing topic/language/news/location/style behaviour.
+- [x] Only authenticated website custom-topic requests are captured; preset topics and extension requests are not.
+- [x] Topic analytics do not include generated text, location, account identifiers, IP addresses, or licence keys.
+- [x] Private aggregate analytics are available only to the owner; the public endpoint exposes only a count and 90-day period, never raw topics.
+- [x] Raw topics are normalized and physically expire after 90 days using the existing Durable Object alarm; analytics queries exclude expired records.
+- [x] Privacy policy and version history disclose the purpose and retention.
+- [x] Website tests/build and backend tests/typecheck pass; Cloudflare preview and production deployment are verified.
+- [x] Confirm visible capability label remains V4.1 and package/lock versions are synchronized at 4.1.5.
+- [x] Verify no extension code, manifest, package, or store release changes.
+
+
+## VICHAR-WEB-011 — Review custom-topic trends after data accumulation
+
+- Priority: P3
+- Status: Parked
+- Area: Vichar website / Product discovery
+- Backend dependency: [`vtrravikumar/tweetpilot` — VICHAR-ANALYTICS-002, Review aggregate custom-topic trends](https://github.com/vtrravikumar/tweetpilot/blob/main/backlog.md)
+
+Let the 90-day rolling custom-topic event dataset accumulate for several weeks before deciding whether it has useful patterns. At a later review, assess whether aggregate, privacy-conscious insights could support a topic tag cloud or editorial/promotion ideas based on frequently used words. No implementation is approved yet. Keep the current public counter count-only; do not expose individual topic names or raw events without a separate product and privacy review.
