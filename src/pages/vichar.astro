@@ -385,7 +385,12 @@ const topics = [
       }
       if (!response.ok || typeof payload.tweet !== "string") throw new Error(payload?.error?.message || "Tweet creation failed.");
       void refreshGenerationCount();
-      if (topic.value === "__custom__") void refreshCustomTopicCount(2);
+      if (topic.value === "__custom__") {
+        void (async () => {
+          await new Promise((resolve) => window.setTimeout(resolve, 900));
+          await refreshCustomTopicCount(2);
+        })();
+      }
       tweet.value = payload.tweet;
       tweet.lang = language.value;
       if (typeof payload.style === "string" && payload.style.trim()) {
