@@ -349,7 +349,7 @@ const topics = [
       const response = await fetch(API_URL, {
         method: "POST",
         headers: { "content-type": "application/json", authorization: "Bearer " + sessionToken },
-        body: JSON.stringify({ topic: selectedTopic, location: location.value.trim(), style: pickRandomStyle(), language: language.value, maxLength: MAX_LENGTH, useNews: useNews.checked }),
+        body: JSON.stringify({ topic: selectedTopic, topicSource: topic.value === "__custom__" ? "custom" : "preset", location: location.value.trim(), style: pickRandomStyle(), language: language.value, maxLength: MAX_LENGTH, useNews: useNews.checked }),
       });
       const payload = await response.json().catch(() => ({}));
       if (response.status === 401 || response.status === 403) {
