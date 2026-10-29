@@ -90,6 +90,7 @@ const topics = [
               <span>Your topic <em id="topic-count">0 / 40</em></span>
               <textarea id="custom-topic" placeholder="A few words, e.g. AI and creativity" maxlength="40" rows="1"></textarea>
             </label>
+            <p class="custom-topic-note">Please avoid entering personal or sensitive information in your topic.</p>
             <div class="field-row">
               <label>
                 <span>Style</span>
@@ -486,6 +487,7 @@ const topics = [
   .static-field{height:2.8rem;box-sizing:border-box;display:flex;align-items:center;gap:.6rem;padding:0 .8rem;border:1px solid var(--border);border-radius:.75rem;background:var(--surface);color:var(--foreground);font-size:.85rem;font-weight:500}
   .field-icon{font-size:1.15rem;color:var(--accent)}
   .custom-topic[hidden]{display:none}
+  .custom-topic-note{margin:-.45rem 0 0;color:var(--muted);font-size:.7rem;line-height:1.45}
   .actions{display:flex;align-items:stretch;flex-direction:column;gap:.55rem;margin-top:1rem}
   button{border:0;border-radius:999px;font:inherit;font-weight:750;padding:.78rem 1rem;cursor:pointer;transition:transform .2s ease,opacity .2s ease,background .2s ease}
   button:hover{transform:translateY(-1px)}
