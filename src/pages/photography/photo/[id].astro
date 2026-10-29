@@ -5,6 +5,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import { photoLabel } from "../../../content/photo-label";
 import { getCollection } from "astro:content";
 import { travelCountries } from "../../../content/travel-countries";
+import { shareIntentUrl } from "../../../utils/share-intent.mjs";
 
 export async function getStaticPaths() {
   const catalogPath = join(process.cwd(), "public/photography/catalog.json");
@@ -31,7 +32,7 @@ const imageUrl = `https://vtrrk.in/photography/${photo.file}`;
 const accessibleLabel = photoLabel(photo);
 const caption = [photo.place, photo.country].filter(Boolean).join(" · ") || accessibleLabel;
 const shareText = caption;
-const shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(shareText)}`;
+const shareUrl = shareIntentUrl(pageUrl, `Photography: ${caption}`, shareText);
 ---
 <BaseLayout
   title={`${caption} — Photography — V.T.R. Ravi Kumar`}
