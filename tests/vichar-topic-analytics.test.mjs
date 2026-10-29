@@ -12,9 +12,7 @@ test("Vichar marks custom topics without changing the generation endpoint", asyn
   assert.match(page, /language: language\.value/);
   assert.match(page, /useNews: useNews\.checked/);
   assert.match(page, /Please avoid entering personal or sensitive information in your topic/);
-  assert.ok(page.includes('const CUSTOM_TOPIC_COUNT_URL = "https://api.vtrrk.in/vichar/v1/stats/custom-topics";'));
-  assert.match(page, /Custom topics recorded:/);
-  assert.match(page, /customTopicCounter\.hidden = topic\.value !== "__custom__"/);
+  assert.doesNotMatch(page, /CUSTOM_TOPIC_COUNT_URL|custom-topic-counter|Custom topics recorded:/);
 });
 
 test("Vichar 4.1.5 keeps the visible V4.1 label and documents topic analytics", async () => {
@@ -30,4 +28,15 @@ test("Vichar 4.1.5 keeps the visible V4.1 label and documents topic analytics", 
   assert.match(privacy, /selected output language may be recorded for product analysis/);
   assert.match(privacy, /90 days/);
   assert.match(privacy, /not used for advertising or model training/);
+});
+
+
+test("Vichar displays recent news sources after the generated Vichar result", async () => {
+  const page = await read("../src/pages/vichar.astro");
+  const resultPosition = page.indexOf('id="result-wrap"');
+  const sourcesPosition = page.indexOf('id="news-sources"');
+
+  assert.notEqual(resultPosition, -1, "generated result container exists");
+  assert.notEqual(sourcesPosition, -1, "recent sources container exists");
+  assert.ok(sourcesPosition > resultPosition, "recent sources container follows the generated result in document order");
 });
