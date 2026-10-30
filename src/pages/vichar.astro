@@ -110,6 +110,7 @@ const topics = [
           <div class="actions">
             <button id="create" type="button"><span id="create-label">Create ideas</span><span aria-hidden="true">✦</span></button>
             <span id="status" role="status" aria-live="polite">Ready when you are.</span>
+            <div id="turnstile-container" aria-label="Security verification"></div>
           </div>
           <p class="topic-hints"><span aria-hidden="true">✧</span> Try: AI, photography, travel, productivity, everyday observations…</p>
 
@@ -189,7 +190,27 @@ const topics = [
   const API_URL = "https://api.vtrrk.in/vichar/v2/tweet/generate";
   const WEB_SESSION_URL = "https://api.vtrrk.in/vichar/v1/web/session";
   const STATS_URL = "https://api.vtrrk.in/vichar/v1/stats";
+  const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || "";
+  const TURNSTILE_ACTION = "vichar_web_session";
   const MAX_LENGTH = 140;
+
+  type TurnstileApi = {
+    render: (container: HTMLElement, options: {
+      sitekey: string;
+      action: string;
+      execution: "execute";
+      appearance: "interaction-only";
+      callback: (token: string) => void;
+      "error-callback": () => void;
+      "expired-callback": () => void;
+    }) => string;
+    execute: (widgetId: string) => void;
+    reset: (widgetId: string) => void;
+  };
+
+  declare global {
+    interface Window { turnstile?: TurnstileApi }
+  }
 
   const VICHAR_STYLES = ["thoughtful", "conversational", "witty", "observational", "curious", "provocative", "inspirational", "minimalist"];
 
@@ -216,6 +237,8 @@ const topics = [
   let webSessionToken = "";
   let webSessionExpiresAt = 0;
   let sessionPromise: Promise<string> | null = null;
+  let turnstilePromise: Promise<TurnstileApi> | null = null;
+  let turnstileWidgetId = "";
   let lastTopic = "";
 
   function updateCustomTopicVisibility() {
@@ -231,15 +254,58 @@ const topics = [
   }
 
   customTopic.addEventListener("input", updateTopicCount);
+
+  function loadTurnstile(): Promise<TurnstileApi> {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (turnstilePromise) return turnstilePromise;
+    turnstilePromise = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => window.turnstile ? resolve(window.turnstile) : reject(new Error("Website verification is unavailable. Please try again."));
+      script.onerror = () => reject(new Error("Website verification is unavailable. Please try again."));
+      document.head.appendChild(script);
+    }).catch((error) => {
+      turnstilePromise = null;
+      throw error;
+    });
+    return turnstilePromise;
+  }
+
+  async function getTurnstileResponseToken(): Promise<string> {
+    if (!TURNSTILE_SITE_KEY) throw new Error("Website verification is not configured. Please try again later.");
+    const turnstile = await loadTurnstile();
+    const container = document.querySelector<HTMLElement>("#turnstile-container")!;
+    return new Promise((resolve, reject) => {
+      const fail = () => reject(new Error("Website verification could not be completed. Please try again."));
+      if (!turnstileWidgetId) {
+        turnstileWidgetId = turnstile.render(container, {
+          sitekey: TURNSTILE_SITE_KEY,
+          action: TURNSTILE_ACTION,
+          execution: "execute",
+          appearance: "interaction-only",
+          callback: (token) => resolve(token),
+          "error-callback": fail,
+          "expired-callback": fail,
+        });
+      } else {
+        turnstile.reset(turnstileWidgetId);
+      }
+      turnstile.execute(turnstileWidgetId);
+    });
+  }
+
   async function getWebSessionToken(): Promise<string> {
     if (webSessionToken && Date.now() < webSessionExpiresAt - 30_000) return webSessionToken;
     if (sessionPromise) return sessionPromise;
 
     sessionPromise = (async () => {
+      const turnstileToken = await getTurnstileResponseToken();
       const response = await fetch(WEB_SESSION_URL, {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: "{}",
+        body: JSON.stringify({ turnstileToken }),
         cache: "no-store",
       });
       const payload = await response.json().catch(() => ({}));

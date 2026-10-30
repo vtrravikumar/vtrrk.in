@@ -40,3 +40,13 @@ test("Vichar displays recent news sources after the generated Vichar result", as
   assert.notEqual(sourcesPosition, -1, "recent sources container exists");
   assert.ok(sourcesPosition > resultPosition, "recent sources container follows the generated result in document order");
 });
+
+test("Vichar obtains a managed Turnstile token before requesting a web session", async () => {
+  const page = await read("../src/pages/vichar.astro");
+  assert.match(page, /PUBLIC_TURNSTILE_SITE_KEY/);
+  assert.match(page, /action: TURNSTILE_ACTION/);
+  assert.match(page, /appearance: "interaction-only"/);
+  assert.match(page, /execution: "execute"/);
+  assert.match(page, /body: JSON\.stringify\(\{ turnstileToken \}\)/);
+  assert.match(page, /turnstile\.reset\(turnstileWidgetId\)/);
+});
