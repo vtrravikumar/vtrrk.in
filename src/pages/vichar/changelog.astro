@@ -17,8 +17,20 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     <ol class="releases">
       <li class="release current">
         <div class="release-heading">
-          <h2>v4.1.5</h2>
+          <h2>v4.1.6</h2>
           <span class="current-label">Current release</span>
+        </div>
+        <p class="release-summary">Turnstile verification and safer public access</p>
+        <ul>
+          <li>Adds a managed Cloudflare Turnstile check before creating a website session.</li>
+          <li>The API verifies each one-use token server-side and applies per-IP and global usage limits.</li>
+          <li>Production rollout was verified with a successful challenge and Vichar generation.</li>
+          <li>Generation remains public; no account or license key is required.</li>
+        </ul>
+      </li>
+      <li class="release">
+        <div class="release-heading">
+          <h2>v4.1.5</h2>
         </div>
         <p class="release-summary">Custom-topic recording counter</p>
         <ul>
