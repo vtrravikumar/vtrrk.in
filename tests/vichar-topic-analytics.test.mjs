@@ -15,14 +15,14 @@ test("Vichar marks custom topics without changing the generation endpoint", asyn
   assert.doesNotMatch(page, /CUSTOM_TOPIC_COUNT_URL|custom-topic-counter|Custom topics recorded:/);
 });
 
-test("Vichar 4.1.5 keeps the visible V4.1 label and documents topic analytics", async () => {
+test("Vichar 4.1.6 keeps the visible V4.1 label and documents topic analytics", async () => {
   const pkg = JSON.parse(await read("../package.json"));
   const lock = JSON.parse(await read("../package-lock.json"));
   const changelog = await read("../src/pages/vichar/changelog.astro");
   const privacy = await read("../src/pages/vichar/privacy.astro");
 
-  assert.equal(pkg.version, "4.1.5");
-  assert.equal(lock.version, "4.1.5");
+  assert.equal(pkg.version, "4.1.6");
+  assert.equal(lock.version, "4.1.6");
   assert.match(changelog, /<h2>v4\.1\.5<\/h2>/);
   assert.match(changelog, /visible V4\.1 capability label/);
   assert.match(privacy, /selected output language may be recorded for product analysis/);
