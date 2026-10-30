@@ -58,14 +58,16 @@ The 140-character value is a current UI configuration, not a permanent product l
 
 The website does **not** ask visitors to enter or store a Vichar license key. The browser requests a short-lived session from the backend and keeps the returned token in memory.
 
-1. The frontend sends `POST https://api.vtrrk.in/vichar/v1/web/session` from the allowed first-party origin `https://vtrrk.in`.
-2. The Worker validates the exact `Origin` and uses the server-side `VICHAR_WEB_SECRET` to sign a token with audience `vichar-web` and a 10-minute lifetime.
+1. The browser runs a Cloudflare Turnstile Managed widget in interaction-only appearance and sends its one-use response to `POST https://api.vtrrk.in/vichar/v1/web/session` from the allowed production or Pages preview origin.
+2. The Worker treats `Origin` as a browser/CORS policy signal, independently validates the Turnstile response with Siteverify, checks hostname and action, rejects token reuse, then uses the server-side `VICHAR_WEB_SECRET` to sign a token with audience `vichar-web` and a maximum 10-minute lifetime.
 3. The frontend sends the token as a Bearer token to `POST /v1/tweet/generate`.
 4. The Worker verifies the signature, audience, expiry and first-party origin.
-5. A valid website session is mapped server-side to the existing owner entitlement. Successful generation is unlimited, omits the free-tier `Vichar by @vtrrk` attribution, and remains subject to the shared owner burst guard.
+5. A valid website session is mapped server-side to the existing owner entitlement. Successful generation omits the free-tier `Vichar by @vtrrk` attribution and is subject to per-IP burst/daily limits and an atomic global daily website budget.
 6. If owner entitlement is not configured, web generation fails closed rather than falling back to free extension usage.
 
 The owner license key remains in Cloudflare Worker secret configuration and is never sent to the browser. The web token is short-lived and is not persisted in localStorage. The backend's secrets are documented in the TweetPilot repository's deployment and web-auth documentation.
+
+The public Turnstile site key is configured as Cloudflare Pages build variable `PUBLIC_TURNSTILE_SITE_KEY`. The Turnstile secret is configured only as Worker secret `TURNSTILE_SECRET_KEY`; it must never be added to this website repository or client bundle. Set the widget action to `vichar_web_session` and allow `vtrrk.in` plus approved preview hostnames in the Turnstile dashboard.
 
 This website entitlement is separate from Chrome extension customer licensing. Free and paid extension keys continue to use their server-side credit balance and attribution rules; the website session does not consume extension credits.
 
