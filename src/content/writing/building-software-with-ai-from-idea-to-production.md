@@ -48,6 +48,10 @@ This article explains how to build real software with AI---from a small
 utility to a production service---without confusing impressive
 demonstrations with dependable engineering.
 
+### Watch the companion video
+
+I also walk through the same ideas in this video. If you prefer a visual explanation, [watch the video on YouTube](https://www.youtube.com/watch?v=MFdo7viXA9A).
+
 ------------------------------------------------------------------------
 
 ## 1. What does "building software with AI" actually mean?
