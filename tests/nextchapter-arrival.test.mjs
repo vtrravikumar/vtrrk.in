@@ -52,3 +52,24 @@ test("NextChapter public counter is explicitly labelled as visits, not unique us
   assert.ok(docs.includes("not unique visitors or people"));
   assert.ok(docs.includes("No IP address, cookie, user-agent, referrer"));
 });
+
+
+test("NextChapter uses plain numeric countdown counters and Indian-English total seconds", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  for (const id of ["days", "hours", "minutes", "seconds"]) {
+    assert.ok(page.includes('id="' + id + '"'));
+  }
+  assert.ok(page.includes('class="time-value seconds-highlight"'));
+  assert.ok(!page.includes("renderSplitFlap("));
+  assert.ok(page.includes("function numberToIndianWords(value)"));
+  assert.ok(page.includes('[10000000, "crore"], [100000, "lakh"], [1000, "thousand"]'));
+});
+
+test("NextChapter highlights only the final spoken number phrase and leaves 'and' and 'seconds' white", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  assert.ok(page.includes('const startsWithAnd = finalGroup.startsWith("and ");'));
+  assert.ok(page.includes('? finalGroup.slice(4)'));
+  assert.ok(page.includes('highlightedNumber.className = "seconds-number-highlight"'));
+  assert.ok(page.includes('document.createTextNode(" seconds")'));
+  assert.ok(page.includes(":global(.seconds-number-highlight){color:#ff626b"));
+});
