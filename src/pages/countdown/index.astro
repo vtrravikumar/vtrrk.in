@@ -406,7 +406,8 @@ const initialMessage = getDailyMessage(new Date());
       const url = createShareUrl();
       const text = getShareMessage();
       $("whatsapp-share").href = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
-      $("x-share").href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+      const xText = `${text} @vtrrk`;
+      $("x-share").href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(xText)}&url=${encodeURIComponent(url)}`;
     }
 
     async function shareEvent() {
