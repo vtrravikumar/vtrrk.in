@@ -20,7 +20,7 @@ self.addEventListener("fetch", (event) => {
   if (request.method !== "GET" || new URL(request.url).origin !== self.location.origin) return;
   event.respondWith(
     fetch(request).then((response) => {
-      if (response.ok && (request.mode === "navigate" || APP_SHELL.includes(new URL(request.url).pathname))) {
+      if (response.ok && (request.mode === "navigate" || APP_SHELL.includes(new URL(request.url).pathname) || /\\.(?:js|css|svg|webmanifest)$/.test(new URL(request.url).pathname))) {
         const copy = response.clone();
         caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
       }
