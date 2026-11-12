@@ -61,7 +61,7 @@ const initialMessage = getDailyMessage(new Date());
 <body>
   <div class="shell">
     <header class="topbar">
-      <a class="wordmark" href="/countdown/" aria-label="NextChapter home"><span class="mark" aria-hidden="true">↗</span><span>NextChapter<span>.</span></span></a>
+      <a class="wordmark" href="/" aria-label="VTRRK home"><span class="mark" aria-hidden="true">↗</span><span>NextChapter<span>.</span></span></a>
       <div class="top-actions">
         <button class="icon-button" id="install-button" type="button" hidden>Install app</button>
         <a class="quiet-link" href="/" aria-label="Back to VTRRK website">A project by VTRRK ↗</a>
@@ -71,7 +71,7 @@ const initialMessage = getDailyMessage(new Date());
     <main id="main-content">
       <section class="hero" aria-labelledby="hero-title">
         <div class="eyebrow" id="event-eyebrow">THE COUNTDOWN TO {nextYear}</div>
-        <h1 id="hero-title"><span>A new chapter</span><span>awaits.</span></h1>
+        <h1 id="hero-title">A new chapter<br /><span>awaits.</span></h1>
         <p class="hero-copy" id="hero-copy">Every ending makes room for a new beginning. Take a moment to look ahead — and make today count.</p>
         <p class="event-date" id="event-date">New Year's Day · {dateLabel} · India Standard Time</p>
 
@@ -265,7 +265,7 @@ const initialMessage = getDailyMessage(new Date());
         ? `THE COUNTDOWN TO ${date.getUTCFullYear() + 1}`
         : "A MOMENT WORTH LOOKING FORWARD TO";
       $("hero-title").innerHTML = isNewYearEvent(event)
-        ? "<span>A new chapter</span><span>awaits.</span>"
+        ? "A new chapter<br /><span>awaits.</span>"
         : `<span id="event-title-line"></span><span>is getting closer.</span>`;
       const titleLine = $("event-title-line");
       if (titleLine) titleLine.textContent = event.title;
