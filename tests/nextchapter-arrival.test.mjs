@@ -61,3 +61,13 @@ test("NextChapter highlights the top seconds value and total-seconds unit word",
   assert.ok(page.includes(".seconds-unit-word{color:#ff626b"));
   assert.ok(page.includes('secondsWord.textContent = "seconds"'));
 });
+
+
+test("NextChapter highlights the final number group, not the seconds unit", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  assert.ok(page.includes("const finalGroupStart = spokenSeconds.lastIndexOf(",") + 1;"));
+  assert.ok(page.includes('highlightedNumber.className = "seconds-number-highlight"'));
+  assert.ok(page.includes('document.createTextNode(" seconds")'));
+  assert.ok(page.includes(":global(.seconds-number-highlight){color:#ff626b"));
+  assert.ok(!page.includes("seconds-unit-word"));
+});
