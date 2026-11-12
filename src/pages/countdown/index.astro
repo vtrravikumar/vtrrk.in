@@ -305,8 +305,13 @@ const initialMessage = getDailyMessage(new Date());
         return;
       }
       if (kind === "christmas") {
-        const year = nowYear();
-        setEvent({ title: `Christmas ${year}`, target: Date.UTC(year, 11, 25), kind: "preset", timeZone: "UTC" });
+        let year = nowYear();
+        let target = Date.UTC(year, 11, 24, 18, 30);
+        if (target <= Date.now()) {
+          year += 1;
+          target = Date.UTC(year, 11, 24, 18, 30);
+        }
+        setEvent({ title: `Christmas ${year}`, target, kind: "preset", timeZone: "Asia/Kolkata" });
       } else {
         setEvent(defaultEvent());
       }
