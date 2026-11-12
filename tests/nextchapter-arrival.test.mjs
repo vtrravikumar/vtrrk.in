@@ -10,6 +10,9 @@ test("NextChapter switches to a branded arrival card at zero", async () => {
   assert.ok(page.includes('Happy New Year ${year}!'));
   assert.ok(page.includes('The moment is here!'));
   assert.ok(page.includes('class="arrival-watermark"'));
+  assert.ok(page.includes('id="whatsapp-share"'));
+  assert.ok(page.includes('id="x-share"'));
+  assert.ok(page.includes("isNewYearEvent(state.event)"));
   assert.ok(page.includes("vtrrk.in"));
   assert.ok(page.includes("if (completed)"));
   assert.ok(page.includes('id="next-countdown-button"'));
