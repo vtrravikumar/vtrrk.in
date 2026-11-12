@@ -327,12 +327,19 @@ const initialMessage = getDailyMessage(new Date());
       const spokenSeconds = secondsInWords.charAt(0).toUpperCase() + secondsInWords.slice(1);
       const finalGroupStart = spokenSeconds.lastIndexOf(",") + 1;
       const finalGroup = spokenSeconds.slice(finalGroupStart).trim();
+      const startsWithAnd = finalGroup.startsWith("and ");
       const finalAndIndex = finalGroup.lastIndexOf(" and ");
-      const highlightedPart = finalAndIndex >= 0
-        ? finalGroup.slice(finalAndIndex + 5)
-        : finalGroup;
-      const leadingText = spokenSeconds.slice(0, finalGroupStart) +
-        (finalAndIndex >= 0 ? finalGroup.slice(0, finalAndIndex + 5) : "");
+      const highlightedPart = startsWithAnd
+        ? finalGroup.slice(4)
+        : finalAndIndex >= 0
+          ? finalGroup.slice(finalAndIndex + 5)
+          : finalGroup;
+      const whitePrefix = startsWithAnd
+        ? "and "
+        : finalAndIndex >= 0
+          ? finalGroup.slice(0, finalAndIndex + 5)
+          : "";
+      const leadingText = spokenSeconds.slice(0, finalGroupStart) + whitePrefix;
       const finalNumberGroup = highlightedPart;
       $("total-seconds").replaceChildren(document.createTextNode(leadingText));
       const highlightedNumber = document.createElement("span");
