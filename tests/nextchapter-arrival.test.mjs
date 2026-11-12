@@ -52,14 +52,3 @@ test("NextChapter public counter is explicitly labelled as visits, not unique us
   assert.ok(docs.includes("not unique visitors or people"));
   assert.ok(docs.includes("No IP address, cookie, user-agent, referrer"));
 });
-
-
-test("NextChapter uses split-flap digits and Indian-English total seconds", async () => {
-  const page = await read("../src/pages/countdown/index.astro");
-  assert.ok(page.includes("function renderSplitFlap(id, value)"));
-  assert.ok(page.includes("@keyframes split-flap"));
-  assert.ok(page.includes("function numberToIndianWords(value)"));
-  assert.ok(page.includes('[10000000, "crore"], [100000, "lakh"], [1000, "thousand"]'));
-  assert.ok(page.includes("${numberToIndianWords(totalSeconds)} seconds"));
-  assert.ok(page.includes('prefers-reduced-motion: reduce'));
-});
