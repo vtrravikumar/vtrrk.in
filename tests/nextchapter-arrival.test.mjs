@@ -1,73 +1,639 @@
-import test from "node:test";
-import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+---
+import { getDailyMessage, getNewYearTarget, getYearProgress } from "../../utils/countdown-core.mjs";
 
-const read = (path) => readFile(new URL(path, import.meta.url), "utf8");
+const progress = getYearProgress(Date.now());
+const nextYear = progress.year + 1;
+const initialTarget = getNewYearTarget(nextYear);
+const initialDate = new Date(initialTarget);
+const dateLabel = new Intl.DateTimeFormat("en-IN", {
+  timeZone: "Asia/Kolkata",
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(initialDate);
+const initialMessage = getDailyMessage(new Date());
+---
 
-test("NextChapter switches to a branded arrival card at zero", async () => {
-  const page = await read("../src/pages/countdown/index.astro");
-  assert.ok(page.includes('id="arrival-card"'));
-  assert.ok(page.includes('Happy New Year ${year}!'));
-  assert.ok(page.includes('The moment is here!'));
-  assert.ok(page.includes('class="arrival-watermark"'));
-  assert.ok(page.includes('id="whatsapp-share"'));
-  assert.ok(page.includes('id="x-share"'));
-  assert.ok(page.includes("isNewYearEvent(state.event)"));
-  assert.ok(page.includes("vtrrk.in"));
-  assert.ok(page.includes("if (completed)"));
-  assert.ok(page.includes('id="next-countdown-button"'));
-  assert.ok(page.includes("prefers-reduced-motion:reduce"));
-});
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#08111f" />
+  <meta name="description" content="A thoughtful countdown to the moments that matter. Count down to New Year, create your own milestones, and make every second count." />
+  <meta name="author" content="NextChapter by VTRRK" />
+  <link rel="canonical" href="https://vtrrk.in/countdown/" />
+  <link rel="manifest" href="/nextchapter.webmanifest" />
+  <link rel="icon" type="image/svg+xml" href="/countdown/icon.svg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="NextChapter — Every Second Counts" />
+  <meta property="og:description" content="A thoughtful countdown to the moments that matter." />
+  <meta property="og:url" content="https://vtrrk.in/countdown/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="NextChapter — Every Second Counts" />
+  <meta name="twitter:description" content="Don't just count the days. Make the days count." />
+  <title>NextChapter — Every Second Counts</title>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "NextChapter",
+    url: "https://vtrrk.in/countdown/",
+    description: "A thoughtful countdown to the moments that matter.",
+    applicationCategory: "UtilitiesApplication",
+    operatingSystem: "Any",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+  })} />
+  <style>
+    :root{color-scheme:dark;--bg:#08111f;--bg-soft:#0d1a2b;--panel:rgba(18,34,53,.78);--panel-strong:#14243a;--line:rgba(167,194,224,.14);--text:#f4f8ff;--muted:#9aacc2;--subtle:#6f849e;--accent:#78d7e8;--accent-2:#819cff;--glow:rgba(91,190,225,.18);--shadow:0 24px 80px rgba(0,0,0,.24);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}html{min-width:320px;scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);background:radial-gradient(ellipse at 50% -18%,rgba(67,122,180,.23),transparent 48%),radial-gradient(ellipse at 100% 54%,rgba(70,118,186,.08),transparent 34%),var(--bg);font-feature-settings:"ss01" on}button,input{font:inherit}button{cursor:pointer}a{color:inherit}.shell{width:min(1120px,calc(100% - 40px));margin:0 auto}.topbar{display:flex;align-items:center;justify-content:space-between;padding:26px 0 18px;border-bottom:1px solid var(--line)}.wordmark{display:inline-flex;align-items:center;gap:11px;text-decoration:none;font-size:1.05rem;font-weight:750;letter-spacing:-.04em}.mark{width:32px;height:32px;border:1px solid rgba(120,215,232,.38);border-radius:11px;display:grid;place-items:center;color:var(--accent);background:linear-gradient(145deg,rgba(120,215,232,.15),rgba(129,156,255,.08));font-size:1rem}.wordmark span:last-child{color:var(--accent)}.top-actions{display:flex;align-items:center;gap:8px}.quiet-link,.icon-button{border:1px solid var(--line);background:rgba(255,255,255,.025);color:var(--muted);border-radius:999px;padding:9px 13px;text-decoration:none;font-size:.78rem;transition:.2s}.quiet-link:hover,.icon-button:hover{color:var(--text);border-color:rgba(120,215,232,.4);background:rgba(120,215,232,.07)}.hero{position:relative;text-align:center;padding:78px 0 38px;isolation:isolate}.hero:before{content:"";position:absolute;z-index:-1;left:50%;top:22px;transform:translateX(-50%);width:min(660px,90vw);height:380px;background:radial-gradient(ellipse,rgba(64,137,188,.17),transparent 68%);filter:blur(12px);pointer-events:none}.eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--accent);font-size:.68rem;font-weight:750;letter-spacing:.18em;text-transform:uppercase}.eyebrow:before,.eyebrow:after{content:"";width:20px;height:1px;background:currentColor;opacity:.65}.hero h1{margin:20px 0 12px;font-size:clamp(2.8rem,7vw,5.5rem);line-height:.98;letter-spacing:-.075em;font-weight:760}.hero h1 span{display:block;color:transparent;background:linear-gradient(100deg,#f5f8ff 15%,#a8c3dc 85%);background-clip:text;-webkit-background-clip:text}.hero-copy{margin:0 auto;max-width:520px;color:var(--muted);font-size:clamp(.96rem,2vw,1.1rem);line-height:1.7}.event-date{margin-top:18px;color:var(--subtle);font-size:.76rem;letter-spacing:.04em}.seconds-total{position:relative;overflow:hidden;width:min(760px,100%);margin:14px auto 0;padding:19px 24px 17px;border:1px solid rgba(120,215,232,.22);border-radius:18px;background:linear-gradient(110deg,rgba(22,48,72,.88),rgba(17,30,53,.82));box-shadow:0 14px 44px rgba(0,0,0,.16);text-align:center}.seconds-total:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(120,215,232,.13),transparent 68%);pointer-events:none}.seconds-caption{position:relative;color:var(--accent);font-size:.62rem;font-weight:800;letter-spacing:.2em}.seconds-number{position:relative;display:block;max-width:700px;margin:9px auto 7px;color:var(--text);font-size:clamp(1.05rem,2.65vw,1.8rem);font-weight:680;letter-spacing:-.025em;line-height:1.5;text-wrap:balance;text-shadow:0 0 28px rgba(120,215,232,.12)}.seconds-note{position:relative;color:var(--muted);font-size:.65rem;letter-spacing:.08em}.seconds-total[hidden]{display:none}.countdown{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;width:min(760px,100%);margin:44px auto 0}.time-unit{position:relative;min-width:0;overflow:hidden;padding:22px 12px 18px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(155deg,rgba(24,46,69,.88),rgba(13,27,44,.72));box-shadow:var(--shadow);backdrop-filter:blur(16px)}.time-unit:before{content:"";position:absolute;left:15%;right:15%;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:.55}.time-value{display:block;font-variant-numeric:tabular-nums;font-size:clamp(2.2rem,6vw,4rem);line-height:1;font-weight:680;letter-spacing:-.065em;font-variant-numeric:tabular-nums;font-size:clamp(2.2rem,6vw,4rem);line-height:1;font-weight:680;letter-spacing:-.065em}.time-label{display:block;margin-top:12px;color:var(--muted);font-size:.62rem;font-weight:700;letter-spacing:.17em}.time-value.seconds-highlight{color:#ff626b;text-shadow:0 0 22px rgba(255,76,91,.2)}:global(.seconds-number-highlight){color:#ff626b!important;-webkit-text-fill-color:#ff626b;text-shadow:0 0 18px rgba(255,76,91,.3)}.hero-tools{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:24px}.button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.035);color:var(--text);font-size:.78rem;font-weight:650;transition:transform .2s,border-color .2s,background .2s}.button:hover{transform:translateY(-2px);border-color:rgba(120,215,232,.5);background:rgba(120,215,232,.08)}.button.primary{border-color:transparent;background:linear-gradient(110deg,#83dce9,#8aa7ff);color:#071321;box-shadow:0 8px 28px rgba(91,190,225,.16)}.button.primary:hover{background:linear-gradient(110deg,#a1edf3,#a4b8ff)}.button.small{min-height:36px;padding:0 13px;font-size:.72rem}.button:focus-visible,.icon-button:focus-visible,.quiet-link:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.progress-section{width:min(700px,100%);margin:44px auto 0;text-align:left}.progress-heading{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--muted);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.progress-heading strong{color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:0}.progress-track{height:5px;margin-top:12px;border-radius:99px;background:rgba(150,177,208,.15);overflow:hidden}.progress-fill{height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent-2));box-shadow:0 0 18px var(--glow);transition:width .6s ease}.progress-note{margin:9px 0 0;color:var(--subtle);font-size:.7rem}.section{padding:48px 0;border-top:1px solid var(--line)}.section-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}.section-kicker{margin:0 0 8px;color:var(--accent);font-size:.64rem;font-weight:750;letter-spacing:.16em;text-transform:uppercase}.section h2{margin:0;font-size:clamp(1.45rem,3vw,2rem);letter-spacing:-.055em}.section-intro{max-width:450px;margin:8px 0 0;color:var(--muted);font-size:.84rem;line-height:1.6}.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.quick-card{min-height:132px;padding:18px;text-align:left;border:1px solid var(--line);border-radius:17px;background:var(--panel);color:var(--text);transition:transform .2s,border-color .2s,background .2s}.quick-card:hover{transform:translateY(-3px);border-color:rgba(120,215,232,.38);background:var(--panel-strong)}.quick-icon{display:block;margin-bottom:15px;color:var(--accent);font-size:1.15rem}.quick-card strong{display:block;font-size:.93rem}.quick-card small{display:block;margin-top:5px;color:var(--muted);font-size:.72rem}.two-column{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.glass-card{padding:24px;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:0 12px 40px rgba(0,0,0,.1)}.glass-card h3{margin:0;font-size:1.1rem;letter-spacing:-.035em}.glass-card>p{margin:8px 0 20px;color:var(--muted);font-size:.8rem;line-height:1.6}.field{display:grid;gap:7px;margin-top:14px}.field label{color:var(--muted);font-size:.7rem;font-weight:650}.field input{width:100%;min-height:44px;padding:0 13px;border:1px solid var(--line);border-radius:11px;background:rgba(3,11,20,.48);color:var(--text);color-scheme:dark}.form-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.moment-list{display:grid;gap:9px}.moment-empty{padding:16px;border:1px dashed var(--line);border-radius:13px;color:var(--muted);font-size:.78rem;line-height:1.6}.moment-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 13px;border:1px solid var(--line);border-radius:13px;background:rgba(255,255,255,.025)}.moment-item button{border:0;background:none;color:var(--text);text-align:left;min-width:0}.moment-item strong{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.8rem}.moment-item small{display:block;margin-top:4px;color:var(--muted);font-size:.68rem}.moment-delete{flex:none!important;color:var(--subtle)!important;font-size:.72rem!important}.daily-card{position:relative;overflow:hidden;min-height:180px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(125deg,rgba(24,48,73,.88),rgba(16,30,50,.75))}.daily-card:after{content:"“";position:absolute;right:20px;top:-40px;color:rgba(120,215,232,.12);font-family:Georgia,serif;font-size:15rem;line-height:1;pointer-events:none}.daily-quote{position:relative;z-index:1;max-width:520px;margin:18px 0 22px;font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.35;letter-spacing:-.045em}.daily-footer{position:relative;z-index:1;color:var(--muted);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase}.theme-options{display:flex;flex-wrap:wrap;gap:8px}.theme-chip{padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:.7rem}.theme-chip[aria-pressed="true"]{border-color:rgba(120,215,232,.55);background:rgba(120,215,232,.1);color:var(--text)}.footer{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 0 34px;border-top:1px solid var(--line);color:var(--subtle);font-size:.7rem}.footer a{color:var(--muted);text-decoration:none}.footer a:hover{color:var(--accent)}.toast{position:fixed;z-index:20;left:50%;bottom:24px;transform:translate(-50%,20px);padding:11px 16px;border:1px solid rgba(120,215,232,.28);border-radius:999px;background:#14283c;color:var(--text);font-size:.76rem;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    [data-theme="aurora"]{--bg:#07191d;--bg-soft:#0b2528;--panel:rgba(15,48,49,.78);--panel-strong:#123a3b;--accent:#8de6ce;--accent-2:#82c6ef;--glow:rgba(100,226,190,.18)}
+    [data-theme="violet"]{--bg:#100d20;--bg-soft:#1a1530;--panel:rgba(35,28,62,.78);--panel-strong:#282044;--accent:#c2a5ff;--accent-2:#7fc7ff;--glow:rgba(170,133,255,.2)}
+    @media(max-width:760px){.hero{padding-top:60px}.two-column{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.section{padding:38px 0}.glass-card{padding:20px}}
+    @media(max-width:480px){.shell{width:calc(100% - 28px)}.topbar{padding-top:18px}.quiet-link{padding:8px 10px;font-size:.7rem}.hero{padding-top:48px}.countdown{gap:7px;margin-top:32px}.time-unit{padding:18px 5px 15px;border-radius:14px}.time-value{font-size:clamp(1.8rem,10vw,2.8rem)}.time-label{font-size:.52rem;letter-spacing:.1em}.hero-tools .button{flex:1}.quick-grid{gap:8px}.quick-card{min-height:118px;padding:14px}.section-heading{align-items:flex-start;flex-direction:column}.footer{align-items:flex-start;flex-direction:column;gap:9px}}
+    .arrival-card{position:relative;isolation:isolate;overflow:hidden;width:min(820px,100%);margin:40px auto 0;padding:clamp(30px,6vw,66px) 24px 34px;border:1px solid rgba(120,215,232,.32);border-radius:28px;background:radial-gradient(ellipse at 18% 12%,rgba(120,215,232,.17),transparent 42%),radial-gradient(ellipse at 84% 8%,rgba(160,145,255,.18),transparent 38%),linear-gradient(145deg,rgba(22,47,72,.96),rgba(9,20,36,.98));box-shadow:0 28px 90px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.08);text-align:center}
+    .arrival-card[hidden]{display:none}.arrival-card:before,.arrival-card:after{content:"";position:absolute;z-index:-1;width:190px;height:190px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(120,215,232,.0) 0deg 8deg,rgba(120,215,232,.72) 9deg 10deg,rgba(120,215,232,0) 11deg 22deg);mask:radial-gradient(circle,transparent 0 12%,#000 13% 14%,transparent 15% 100%);opacity:.35;animation:arrival-bloom 5s ease-in-out infinite alternate}
+    .arrival-card:before{top:-82px;left:8%}.arrival-card:after{top:-94px;right:7%;background:repeating-conic-gradient(from 18deg,rgba(0,0,0,0) 0deg 8deg,rgba(170,155,255,.8) 9deg 10deg,rgba(0,0,0,0) 11deg 22deg);animation-delay:-2.5s}
+    @keyframes arrival-bloom{from{transform:scale(.8) rotate(-12deg);opacity:.18}to{transform:scale(1.12) rotate(12deg);opacity:.45}}
+    .arrival-kicker{margin:0 0 18px;color:var(--accent);font-size:.68rem;font-weight:800;letter-spacing:.24em}.arrival-card h2{margin:0 auto;max-width:680px;font-size:clamp(2.5rem,8vw,5.7rem);line-height:1.02;letter-spacing:-.075em;background:linear-gradient(105deg,#fff 15%,#a8e8ed 52%,#c4b7ff 90%);background-clip:text;-webkit-background-clip:text;color:transparent}.arrival-subtitle{max-width:560px;margin:20px auto 28px;color:#c0cfe0;font-size:clamp(.95rem,2vw,1.12rem);line-height:1.7}.arrival-watermark{display:inline-flex;align-items:center;gap:10px;padding:9px 16px;border:1px solid rgba(120,215,232,.28);border-radius:999px;color:#d8f4f5;font-size:.78rem;font-weight:750;letter-spacing:.13em;background:rgba(120,215,232,.07)}.arrival-watermark:before{content:"✦";color:var(--accent)}.arrival-next{margin-top:24px}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="wordmark" href="/" aria-label="VTRRK home"><span class="mark" aria-hidden="true">↗</span><span>NextChapter<span>.</span></span></a>
+      <div class="top-actions">
+        <button class="icon-button" id="install-button" type="button" hidden>Install app</button>
+        <a class="quiet-link" href="/" aria-label="Back to VTRRK website">A project by VTRRK ↗</a>
+      </div>
+    </header>
 
-test("completed countdown share graphics carry the greeting and VTRRK watermark", async () => {
-  const page = await read("../src/pages/countdown/index.astro");
-  assert.ok(page.includes("HAPPY NEW YEAR"));
-  assert.ok(page.includes("THE MOMENT IS HERE!"));
-  assert.ok(page.includes('context.fillText("vtrrk.in", 88, 584)'));
-  assert.ok(page.includes("canvas.width = 1200"));
-  assert.ok(page.includes("canvas.height = 630"));
-  assert.ok(page.includes('trackMetric("card_download")'));
-});
+    <main id="main-content">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow" id="event-eyebrow">THE COUNTDOWN TO {nextYear}</div>
+        <h1 id="hero-title">A new chapter<br /><span>awaits.</span></h1>
+        <p class="hero-copy" id="hero-copy">Every ending makes room for a new beginning. Take a moment to look ahead — and make today count.</p>
+        <p class="event-date" id="event-date">New Year's Day · {dateLabel} · India Standard Time</p>
 
-test("NextChapter tracks only allowlisted aggregate events", async () => {
-  const endpoint = await read("../functions/api/countdown/metrics.ts");
-  const migration = await read("../docs/nextchapter-analytics.sql");
-  for (const event of ["page_view", "share_click", "card_download", "arrival_view"]) {
-    assert.ok(endpoint.includes(`"${event}"`));
-  }
-  assert.ok(endpoint.includes("ON CONFLICT(metric_date, event)"));
-  assert.ok(endpoint.includes("SUM(event_count)"));
-  assert.ok(endpoint.includes("origin !== new URL(request.url).origin"));
-  assert.ok(!endpoint.includes("cf-connecting-ip"));
-  assert.ok(!endpoint.includes("user-agent"));
-  assert.ok(migration.includes("CREATE TABLE IF NOT EXISTS nextchapter_metrics"));
-  assert.ok(migration.includes("PRIMARY KEY (metric_date, event)"));
-});
+        <div class="countdown" id="countdown" role="timer" aria-label="Live countdown" aria-live="off">
+          <div class="time-unit"><span class="time-value" id="days">000</span><span class="time-label">DAYS</span></div>
+          <div class="time-unit"><span class="time-value" id="hours">00</span><span class="time-label">HOURS</span></div>
+          <div class="time-unit"><span class="time-value" id="minutes">00</span><span class="time-label">MINUTES</span></div>
+          <div class="time-unit"><span class="time-value seconds-highlight" id="seconds">00</span><span class="time-label">SECONDS</span></div>
+        </div>
 
-test("NextChapter public counter is explicitly labelled as visits, not unique users", async () => {
-  const page = await read("../src/pages/countdown/index.astro");
-  const docs = await read("../docs/nextchapter-analytics.md");
-  assert.ok(page.includes("Visits to NextChapter"));
-  assert.ok(page.includes('fetch("/api/countdown/metrics"'));
-  assert.ok(docs.includes("not unique visitors or people"));
-  assert.ok(docs.includes("No IP address, cookie, user-agent, referrer"));
-});
+        <section class="seconds-total" id="seconds-total" aria-label="Total seconds remaining"><span class="seconds-caption">EVERY SECOND COUNTS</span><strong class="seconds-number" id="total-seconds" aria-live="off">—</strong><span class="seconds-note">SECONDS LEFT UNTIL YOUR NEXT CHAPTER</span></section>
+
+        <section class="arrival-card" id="arrival-card" aria-live="polite" aria-atomic="true" hidden>
+          <p class="arrival-kicker">THE WAIT IS OVER</p>
+          <h2 id="arrival-title">Happy New Year 2027!</h2>
+          <p class="arrival-subtitle" id="arrival-subtitle">A new chapter begins. Wishing you a year filled with possibility.</p>
+          <span class="arrival-watermark">vtrrk.in</span>
+          <div class="arrival-next"><button class="button" id="next-countdown-button" type="button">Start another countdown →</button></div>
+        </section>
+
+        <div class="hero-tools">
+          <a class="button" id="whatsapp-share" href="#" target="_blank" rel="noopener">WhatsApp ↗</a>
+          <a class="button" id="x-share" href="#" target="_blank" rel="noopener">Post on X ↗</a>
+          <button class="button primary" id="share-button" type="button">↗ <span>Share this moment</span></button>
+          <button class="button" id="image-button" type="button">▧ <span>Create share card</span></button>
+          <button class="button" id="fullscreen-button" type="button">⛶ <span>Focus mode</span></button>
+        </div>
+
+        <div class="progress-section" id="progress-section" aria-label="Year progress">
+          <div class="progress-heading"><span id="progress-label">2026 YEAR PROGRESS</span><strong id="progress-value">0%</strong></div>
+          <div class="progress-track" role="progressbar" id="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Year completed"><div class="progress-fill" id="progress-fill"></div></div>
+          <p class="progress-note" id="progress-note">A year is made of moments. Make yours matter.</p>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="quick-title">
+        <div class="section-heading">
+          <div><p class="section-kicker">Look ahead</p><h2 id="quick-title">Moments worth counting.</h2><p class="section-intro">A few dates to get you started. Choose one to make it your countdown.</p></div>
+        </div>
+        <div class="quick-grid">
+          <button class="quick-card" type="button" data-quick="new-year"><span class="quick-icon" aria-hidden="true">✳</span><strong>New Year {nextYear}</strong><small>A fresh page. A new possibility.</small></button>
+          <button class="quick-card" type="button" data-quick="christmas"><span class="quick-icon" aria-hidden="true">✧</span><strong>Christmas {progress.year}</strong><small>A little festive anticipation.</small></button>
+          <button class="quick-card" type="button" data-quick="custom"><span class="quick-icon" aria-hidden="true">＋</span><strong>Your next big thing</strong><small>Create a countdown of your own.</small></button>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="moments-title">
+        <div class="section-heading">
+          <div><p class="section-kicker">Make it yours</p><h2 id="moments-title">Your moments.</h2><p class="section-intro">Create a personal countdown and share the link. No account needed — your saved moments stay in this browser.</p></div>
+        </div>
+        <div class="two-column">
+          <form class="glass-card" id="event-form">
+            <h3>Create a countdown</h3>
+            <p>Give the moment a name and choose when it happens.</p>
+            <div class="field"><label for="event-name">What are you looking forward to?</label><input id="event-name" name="title" type="text" maxlength="70" placeholder="A trip, birthday, big day…" required /></div>
+            <div class="field"><label for="event-date-input">Date and time (your local timezone)</label><input id="event-date-input" name="date" type="datetime-local" required /></div>
+            <div class="form-actions"><button class="button primary" type="submit">Create my countdown →</button><button class="button" id="reset-event" type="button">Back to New Year</button></div>
+          </form>
+          <div class="glass-card">
+            <h3>Saved on this device</h3>
+            <p>Your personal milestones are stored privately in this browser.</p>
+            <div class="moment-list" id="moment-list"><div class="moment-empty">Your saved moments will appear here. Create one to get started.</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="daily-title">
+        <div class="section-heading"><div><p class="section-kicker">A thought for today</p><h2 id="daily-title">The daily chapter.</h2></div></div>
+        <article class="glass-card daily-card">
+          <p class="daily-quote" id="daily-quote">{initialMessage}</p>
+          <div class="daily-footer" id="daily-date">A SMALL REMINDER FOR TODAY</div>
+        </article>
+      </section>
+
+      <section class="section" aria-labelledby="appearance-title">
+        <div class="section-heading"><div><p class="section-kicker">Make it yours</p><h2 id="appearance-title">Choose your atmosphere.</h2><p class="section-intro">A different mood for the same moment. Your preference is remembered on this device.</p></div></div>
+        <div class="theme-options" role="group" aria-label="Countdown theme">
+          <button class="theme-chip" type="button" data-theme-choice="midnight" aria-pressed="true">Midnight blue</button>
+          <button class="theme-chip" type="button" data-theme-choice="aurora" aria-pressed="false">Aurora</button>
+          <button class="theme-chip" type="button" data-theme-choice="violet" aria-pressed="false">After hours</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer"><span>NextChapter · Every second counts.</span><span id="visit-counter" hidden>Visits to NextChapter: <strong id="visit-count">—</strong></span><span>Made with curiosity by <a href="https://vtrrk.in/">VTRRK</a></span></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module">
+    import {
+      createCountdownShareUrl,
+      getCountdownParts,
+      getDailyMessage,
+      getNewYearTarget,
+      getYearProgress,
+      normaliseEventTitle,
+      parseSharedCountdown,
+    } from "../../utils/countdown-core.mjs";
+
+    const $ = (id) => document.getElementById(id);
+    const storageKey = "nextchapter.v1";
+    const indiaFormatter = new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata", dateStyle: "long", timeStyle: "short",
+    });
+    const localFormatter = new Intl.DateTimeFormat(undefined, {
+      dateStyle: "long", timeStyle: "short",
+    });
+    const state = { event: null, interval: null, installPrompt: null, saved: [], completed: false };
+    const nowYear = () => getYearProgress(Date.now()).year;
+
+    function defaultEvent() {
+      const year = nowYear() + 1;
+      return { title: `New Year ${year}`, target: getNewYearTarget(year), kind: "new-year", timeZone: "Asia/Kolkata" };
+    }
+
+    function trackMetric(event) {
+      return fetch("/api/countdown/metrics", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ event }),
+        keepalive: true,
+      }).catch(() => null);
+    }
+
+    async function loadVisitCount() {
+      try {
+        const response = await fetch("/api/countdown/metrics", { headers: { accept: "application/json" } });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (Number.isFinite(data.visits)) {
+          $("visit-count").textContent = data.visits.toLocaleString();
+          $("visit-counter").hidden = false;
+        }
+      } catch { /* Analytics are optional; the countdown remains fully usable. */ }
+    }
+
+    function isNewYearEvent(event) {
+      return event?.kind === "new-year" || /^New Year \d{4}$/i.test(event?.title || "");
+    }
+
+    function showToast(message) {
+      const toast = $("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(showToast.timeout);
+      showToast.timeout = setTimeout(() => toast.classList.remove("show"), 2600);
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(storageKey, JSON.stringify({
+          theme: document.documentElement.dataset.theme || "midnight",
+          saved: state.saved.slice(0, 12),
+        }));
+      } catch { /* Private browsing or storage limits: the app still works. */ }
+    }
+
+    function loadState() {
+      try {
+        const stored = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        state.saved = Array.isArray(stored.saved) ? stored.saved.filter((item) =>
+          item && typeof item.title === "string" && Number.isFinite(item.target) && item.target > 0
+        ).slice(0, 12) : [];
+        setTheme(stored.theme || "midnight", false);
+      } catch {
+        state.saved = [];
+        setTheme("midnight", false);
+      }
+    }
+
+    function setTheme(theme, persist = true) {
+      const allowed = ["midnight", "aurora", "violet"];
+      const selected = allowed.includes(theme) ? theme : "midnight";
+      if (selected === "midnight") delete document.documentElement.dataset.theme;
+      else document.documentElement.dataset.theme = selected;
+      document.querySelectorAll("[data-theme-choice]").forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.themeChoice === selected));
+      });
+      if (persist) saveState();
+    }
+
+    function renderEvent() {
+      const event = state.event;
+      state.completed = false;
+      $("arrival-card").hidden = true;
+      $("countdown").hidden = false;
+      $("progress-section").hidden = false;
+      $("hero-title").hidden = false;
+      $("hero-copy").hidden = false;
+      $("event-date").hidden = false;
+      const date = new Date(event.target);
+      $("event-eyebrow").textContent = isNewYearEvent(event)
+        ? `THE COUNTDOWN TO ${date.getUTCFullYear() + 1}`
+        : "A MOMENT WORTH LOOKING FORWARD TO";
+      $("hero-title").innerHTML = isNewYearEvent(event)
+        ? "A new chapter<br /><span>awaits.</span>"
+        : `<span id="event-title-line"></span><span>is getting closer.</span>`;
+      const titleLine = $("event-title-line");
+      if (titleLine) titleLine.textContent = event.title;
+      $("hero-copy").textContent = isNewYearEvent(event)
+        ? "Every ending makes room for a new beginning. Take a moment to look ahead — and make today count."
+        : "Some moments are worth looking forward to. Here's to the anticipation, the preparation and the day itself.";
+      $("event-date").textContent = isNewYearEvent(event)
+        ? `New Year's Day · ${indiaFormatter.format(date)} · India Standard Time`
+        : `${localFormatter.format(date)} · ${event.timeZone || Intl.DateTimeFormat().resolvedOptions().timeZone}`;
+      document.title = `${event.title} countdown · NextChapter`;
+      updateCountdown();
+    }
 
 
-test("NextChapter highlights the top seconds value and total-seconds unit word", async () => {
-  const page = await read("../src/pages/countdown/index.astro");
-  assert.match(page, /id="seconds"[^>]*class="time-value seconds-highlight"|class="time-value seconds-highlight"[^>]*id="seconds"/);
-  assert.ok(page.includes(".time-value.seconds-highlight{color:#ff626b"));
-  assert.ok(page.includes(".seconds-unit-word{color:#ff626b"));
-  assert.ok(page.includes('secondsWord.textContent = "seconds"'));
-});
+    function numberToIndianWords(value) {
+      const small = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+      const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+      const underHundred = (number) => number < 20 ? small[number] : tens[Math.floor(number / 10)] + (number % 10 ? "-" + small[number % 10] : "");
+      const underThousand = (number) => {
+        const hundreds = Math.floor(number / 100);
+        const remainder = number % 100;
+        if (!hundreds) return underHundred(remainder);
+        return small[hundreds] + " hundred" + (remainder ? " and " + underHundred(remainder) : "");
+      };
+      let remaining = Math.floor(Math.max(0, value));
+      if (remaining === 0) return "zero";
+      const parts = [];
+      for (const [size, label] of [[10000000, "crore"], [100000, "lakh"], [1000, "thousand"]]) {
+        const group = Math.floor(remaining / size);
+        if (group) {
+          parts.push(underThousand(group) + " " + label);
+          remaining %= size;
+        }
+      }
+      if (remaining) parts.push(underThousand(remaining));
+      if (parts.length > 1 && remaining > 0 && remaining < 100) {
+        const last = parts.pop();
+        parts.push("and " + last);
+      }
+      return parts.join(", ");
+    }
 
+    function updateCountdown() {
+      if (!state.event) return;
+      const parts = getCountdownParts(state.event.target, Date.now());
+      $("days").textContent = String(parts.days).padStart(3, "0");
+      $("hours").textContent = String(parts.hours).padStart(2, "0");
+      $("minutes").textContent = String(parts.minutes).padStart(2, "0");
+      $("seconds").textContent = String(parts.seconds).padStart(2, "0");
+      const completed = parts.complete;
+      $("arrival-card").hidden = !completed;
+      $("countdown").hidden = completed;
+      $("progress-section").hidden = completed;
+      $("seconds-total").hidden = completed;
+      const totalSeconds = Math.max(0, Math.ceil((state.event.target - Date.now()) / 1000));
+      const secondsInWords = numberToIndianWords(totalSeconds);
+      const spokenSeconds = secondsInWords.charAt(0).toUpperCase() + secondsInWords.slice(1);
+      const finalGroupStart = spokenSeconds.lastIndexOf(",") + 1;
+      const finalGroup = spokenSeconds.slice(finalGroupStart).trim();
+      const finalAndIndex = finalGroup.lastIndexOf(" and ");
+      const highlightedPart = finalAndIndex >= 0
+        ? finalGroup.slice(finalAndIndex + 5)
+        : finalGroup;
+      const leadingText = spokenSeconds.slice(0, finalGroupStart) +
+        (finalAndIndex >= 0 ? finalGroup.slice(0, finalAndIndex + 5) : "");
+      const finalNumberGroup = highlightedPart;
+      $("total-seconds").replaceChildren(document.createTextNode(leadingText));
+      const highlightedNumber = document.createElement("span");
+      highlightedNumber.className = "seconds-number-highlight";
+      highlightedNumber.textContent = finalNumberGroup;
+      $("total-seconds").append(highlightedNumber, document.createTextNode(" seconds"));
+      $("total-seconds").setAttribute("aria-label", `${spokenSeconds} seconds remaining`);
+      $("hero-title").hidden = completed;
+      $("hero-copy").hidden = completed;
+      $("event-date").hidden = completed;
+      if (completed) {
+        const year = new Date(state.event.target + 5.5 * 60 * 60 * 1000).getUTCFullYear();
+        const isNewYear = isNewYearEvent(state.event);
+        $("event-eyebrow").textContent = isNewYear ? "A BRAND NEW CHAPTER BEGINS" : "THIS IS YOUR MOMENT";
+        $("arrival-title").textContent = isNewYear ? `Happy New Year ${year}!` : "The moment is here!";
+        $("arrival-subtitle").textContent = isNewYear
+          ? "May this new chapter bring fresh possibilities, meaningful moments and plenty of reasons to smile."
+          : `${state.event.title} has arrived. Take it in, celebrate the moment, and make a memory.`;
+        if (!state.completed) trackMetric("arrival_view");
+      }
+      state.completed = completed;
+      refreshSocialLinks();
+      const progress = getYearProgress(Date.now());
+      $("progress-label").textContent = `${progress.year} YEAR PROGRESS`;
+      $("progress-value").textContent = `${progress.percentage.toFixed(1)}%`;
+      $("progress-fill").style.width = `${progress.percentage}%`;
+      $("progress-bar").setAttribute("aria-valuenow", progress.percentage.toFixed(1));
+      $("progress-note").textContent = `${(365.2425 * (1 - progress.percentage / 100)).toFixed(0)} days of this year remain. Make yours matter.`;
+    }
 
-test("NextChapter highlights the final number group, not the seconds unit", async () => {
-  const page = await read("../src/pages/countdown/index.astro");
-  assert.ok(page.includes("const finalGroupStart = spokenSeconds.lastIndexOf(",") + 1;"));
-  assert.ok(page.includes('highlightedNumber.className = "seconds-number-highlight"'));
-  assert.ok(page.includes('document.createTextNode(" seconds")'));
-  assert.ok(page.includes(":global(.seconds-number-highlight){color:#ff626b"));
-  assert.ok(!page.includes("seconds-unit-word"));
-});
+    function setEvent(event, persist = false) {
+      state.event = { ...event, target: Number(event.target) };
+      if (persist) {
+        const key = `${state.event.title}|${state.event.target}`;
+        state.saved = [state.event, ...state.saved.filter((item) => `${item.title}|${item.target}` !== key)].slice(0, 12);
+        saveState();
+        renderSaved();
+      }
+      renderEvent();
+    }
+
+    function renderSaved() {
+      const list = $("moment-list");
+      list.replaceChildren();
+      if (!state.saved.length) {
+        const empty = document.createElement("div");
+        empty.className = "moment-empty";
+        empty.textContent = "Your saved moments will appear here. Create one to get started.";
+        list.append(empty);
+        return;
+      }
+      state.saved.forEach((event, index) => {
+        const row = document.createElement("div");
+        row.className = "moment-item";
+        const select = document.createElement("button");
+        select.type = "button";
+        const title = document.createElement("strong");
+        title.textContent = event.title;
+        const date = document.createElement("small");
+        date.textContent = localFormatter.format(new Date(event.target));
+        select.append(title, date);
+        select.addEventListener("click", () => setEvent(event));
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "moment-delete";
+        remove.textContent = "Remove";
+        remove.setAttribute("aria-label", `Remove ${event.title}`);
+        remove.addEventListener("click", () => {
+          state.saved.splice(index, 1);
+          saveState();
+          renderSaved();
+        });
+        row.append(select, remove);
+        list.append(row);
+      });
+    }
+
+    function setQuickEvent(kind) {
+      if (kind === "custom") {
+        $("event-name").focus();
+        $("event-form").scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+      if (kind === "christmas") {
+        let year = nowYear();
+        let target = Date.UTC(year, 11, 24, 18, 30);
+        if (target <= Date.now()) {
+          year += 1;
+          target = Date.UTC(year, 11, 24, 18, 30);
+        }
+        setEvent({ title: `Christmas ${year}`, target, kind: "preset", timeZone: "Asia/Kolkata" });
+      } else {
+        setEvent(defaultEvent());
+      }
+    }
+
+    function createShareUrl() {
+      return createCountdownShareUrl({
+        title: state.event.title,
+        target: state.event.target,
+        origin: window.location.origin,
+      });
+    }
+
+    function getShareMessage() {
+      const completed = getCountdownParts(state.event.target, Date.now()).complete;
+      if (completed) {
+        return isNewYearEvent(state.event)
+          ? `Happy New Year! ${state.event.title} has arrived. Every second counts.`
+          : `${state.event.title} is here! Every second counts.`;
+      }
+      return `I'm counting down to ${state.event.title} with NextChapter. Every second counts.`;
+    }
+
+    function refreshSocialLinks() {
+      const url = createShareUrl();
+      const text = getShareMessage();
+      $("whatsapp-share").href = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
+      const xText = `${text} @vtrrk`;
+      $("x-share").href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(xText)}&url=${encodeURIComponent(url)}`;
+    }
+
+    async function shareEvent() {
+      const url = createShareUrl();
+      const text = getShareMessage();
+      trackMetric("share_click");
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: `${state.event.title} · NextChapter`, text, url });
+          return;
+        } catch (error) {
+          if (error?.name === "AbortError") return;
+        }
+      }
+      try {
+        await navigator.clipboard.writeText(url);
+        showToast("Countdown link copied. Share the moment!");
+      } catch {
+        window.prompt("Copy your countdown link:", url);
+      }
+    }
+
+    function drawShareCard() {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1200;
+      canvas.height = 630;
+      const context = canvas.getContext("2d");
+      const gradient = context.createLinearGradient(0, 0, 1200, 630);
+      gradient.addColorStop(0, "#08111f");
+      gradient.addColorStop(1, document.documentElement.dataset.theme === "aurora" ? "#103b3a" : document.documentElement.dataset.theme === "violet" ? "#21183d" : "#142b46");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, 1200, 630);
+      const glow = context.createRadialGradient(860, 160, 20, 860, 160, 500);
+      glow.addColorStop(0, "rgba(120,215,232,.22)");
+      glow.addColorStop(1, "rgba(120,215,232,0)");
+      context.fillStyle = glow;
+      context.fillRect(0, 0, 1200, 630);
+      const parts = getCountdownParts(state.event.target, Date.now());
+      const completed = parts.complete;
+      context.fillStyle = "#78d7e8";
+      context.font = "700 22px Arial";
+      context.fillText("NEXTCHAPTER  ·  EVERY SECOND COUNTS", 88, 104);
+      context.fillStyle = "#f4f8ff";
+      context.font = completed ? "700 72px Arial" : "700 64px Arial";
+      const year = new Date(state.event.target + 5.5 * 60 * 60 * 1000).getUTCFullYear();
+      const isNewYear = isNewYearEvent(state.event);
+      const title = completed
+        ? (isNewYear ? `HAPPY NEW YEAR ${year}!` : "THE MOMENT IS HERE!")
+        : (state.event.title.length > 27 ? `${state.event.title.slice(0, 26)}…` : state.event.title);
+      context.fillText(title, 88, 235);
+      context.fillStyle = "#b8c8dc";
+      context.font = "30px Arial";
+      context.fillText(completed
+        ? (isNewYear ? "A new chapter begins. Make it extraordinary." : state.event.title)
+        : `Only ${parts.days.toLocaleString()} days to go. Make every second count.`, 90, 315);
+      if (!completed) {
+        context.fillStyle = "#f4f8ff";
+        context.font = "700 112px Arial";
+        context.fillText(String(parts.days).padStart(3, "0"), 88, 430);
+        context.fillStyle = "#9aacc2";
+        context.font = "700 22px Arial";
+        context.fillText("DAYS TO GO", 94, 478);
+      } else {
+        for (const [cx, cy, radius, color] of [[930,160,78,"rgba(120,215,232,.85)"],[1035,320,54,"rgba(170,155,255,.85)"],[810,370,44,"rgba(255,207,130,.8)"]]) {
+          const burst = context.createRadialGradient(cx,cy,2,cx,cy,radius);
+          burst.addColorStop(0,color); burst.addColorStop(1,"rgba(120,215,232,0)");
+          context.fillStyle=burst; context.fillRect(cx-radius,cy-radius,radius*2,radius*2);
+        }
+      }
+      context.fillStyle = "#b8c8dc";
+      context.font = "28px Arial";
+      context.fillText(completed ? "May the moments ahead be worth remembering." : "Don't just count the days. Make the days count.", 88, 535);
+      context.fillStyle = "#78d7e8";
+      context.font = "700 22px Arial";
+      context.fillText("vtrrk.in", 88, 584);
+      return canvas;
+    }
+
+    async function downloadShareCard() {
+      const canvas = drawShareCard();
+      trackMetric("card_download");
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+      if (!blob) {
+        showToast("Couldn't create the image on this device.");
+        return;
+      }
+      const file = new File([blob], "nextchapter-countdown.png", { type: "image/png" });
+      if (navigator.canShare?.({ files: [file] }) && navigator.share) {
+        try {
+          await navigator.share({ files: [file], title: "My NextChapter countdown" });
+          return;
+        } catch (error) {
+          if (error?.name === "AbortError") return;
+        }
+      }
+      const link = document.createElement("a");
+      link.download = "nextchapter-countdown.png";
+      link.href = URL.createObjectURL(blob);
+      link.click();
+      URL.revokeObjectURL(link.href);
+      showToast("Your countdown card is ready.");
+    }
+
+    $("event-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const title = normaliseEventTitle($("event-name").value);
+      const target = new Date($("event-date-input").value).getTime();
+      if (!title || !Number.isFinite(target) || target <= Date.now()) {
+        showToast("Choose a name and a future date.");
+        return;
+      }
+      setEvent({
+        title,
+        target,
+        kind: "custom",
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      }, true);
+      history.replaceState({}, "", createShareUrl());
+      showToast("Your countdown is ready. Share it with someone!");
+    });
+
+    $("reset-event").addEventListener("click", () => {
+      setEvent(defaultEvent());
+      history.replaceState({}, "", window.location.pathname);
+    });
+    document.querySelectorAll("[data-quick]").forEach((button) =>
+      button.addEventListener("click", () => setQuickEvent(button.dataset.quick)),
+    );
+    document.querySelectorAll("[data-theme-choice]").forEach((button) =>
+      button.addEventListener("click", () => setTheme(button.dataset.themeChoice)),
+    );
+    $("share-button").addEventListener("click", shareEvent);
+    $("whatsapp-share").addEventListener("click", () => trackMetric("share_click"));
+    $("x-share").addEventListener("click", () => trackMetric("share_click"));
+    $("image-button").addEventListener("click", downloadShareCard);
+    $("next-countdown-button").addEventListener("click", () => {
+      setEvent(defaultEvent());
+      history.replaceState({}, "", window.location.pathname);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    $("fullscreen-button").addEventListener("click", async () => {
+      try {
+        if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+        else await document.exitFullscreen();
+      } catch { showToast("Focus mode isn't available in this browser."); }
+    });
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      state.installPrompt = event;
+      $("install-button").hidden = false;
+    });
+    $("install-button").addEventListener("click", async () => {
+      if (!state.installPrompt) return;
+      state.installPrompt.prompt();
+      await state.installPrompt.userChoice;
+      state.installPrompt = null;
+      $("install-button").hidden = true;
+    });
+
+    loadState();
+    renderSaved();
+    const shared = parseSharedCountdown(window.location.search);
+    if (shared) {
+      setEvent({ title: shared.title, target: shared.target, kind: "shared", timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone });
+      $("event-name").value = shared.title;
+    } else {
+      setEvent(defaultEvent());
+    }
+    $("daily-quote").textContent = getDailyMessage(new Date());
+    $("daily-date").textContent = new Intl.DateTimeFormat(undefined, { dateStyle: "full" }).format(new Date()).toUpperCase();
+    const localDefault = new Date(Date.now() + 48 * 60 * 60 * 1000);
+    const pad = (value) => String(value).padStart(2, "0");
+    $("event-date-input").value = `${localDefault.getFullYear()}-${pad(localDefault.getMonth() + 1)}-${pad(localDefault.getDate())}T${pad(localDefault.getHours())}:${pad(localDefault.getMinutes())}`;
+    updateCountdown();
+    trackMetric("page_view").finally(loadVisitCount);
+    state.interval = window.setInterval(updateCountdown, 1000);
+
+    if ("serviceWorker" in navigator && location.protocol === "https:") {
+      navigator.serviceWorker.register("/countdown/sw.js", { scope: "/countdown/" }).catch(() => {});
+    }
+  </script>
+</body>
+</html>
