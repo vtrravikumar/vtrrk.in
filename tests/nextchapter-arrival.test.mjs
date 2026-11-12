@@ -52,3 +52,12 @@ test("NextChapter public counter is explicitly labelled as visits, not unique us
   assert.ok(docs.includes("not unique visitors or people"));
   assert.ok(docs.includes("No IP address, cookie, user-agent, referrer"));
 });
+
+
+test("NextChapter highlights the top seconds value and total-seconds unit word", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  assert.match(page, /id="seconds"[^>]*class="time-value seconds-highlight"|class="time-value seconds-highlight"[^>]*id="seconds"/);
+  assert.ok(page.includes(".time-value.seconds-highlight{color:#ff626b"));
+  assert.ok(page.includes(".seconds-unit-word{color:#ff626b"));
+  assert.ok(page.includes('secondsWord.textContent = "seconds"'));
+});
