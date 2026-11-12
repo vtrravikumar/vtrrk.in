@@ -54,12 +54,13 @@ test("NextChapter public counter is explicitly labelled as visits, not unique us
 });
 
 
-test("NextChapter uses fixed split-flap digit counts and English total seconds", async () => {
+test("NextChapter uses plain numeric countdown counters and Indian-English total seconds", async () => {
   const page = await read("../src/pages/countdown/index.astro");
-  assert.ok(page.includes('renderSplitFlap("days", parts.days, 3)'));
-  assert.ok(page.includes('renderSplitFlap("hours", parts.hours, 2)'));
-  assert.ok(page.includes('renderSplitFlap("minutes", parts.minutes, 2)'));
-  assert.ok(page.includes('renderSplitFlap("seconds", parts.seconds, 2)'));
+  for (const id of ["days", "hours", "minutes", "seconds"]) {
+    assert.ok(page.includes('id="' + id + '"'));
+  }
+  assert.ok(page.includes('class="time-value seconds-highlight"'));
+  assert.ok(!page.includes("renderSplitFlap("));
   assert.ok(page.includes("function numberToIndianWords(value)"));
   assert.ok(page.includes('[10000000, "crore"], [100000, "lakh"], [1000, "thousand"]'));
 });
