@@ -91,6 +91,8 @@ const initialMessage = getDailyMessage(new Date());
         </section>
 
         <div class="hero-tools">
+          <a class="button" id="whatsapp-share" href="#" target="_blank" rel="noopener">WhatsApp ↗</a>
+          <a class="button" id="x-share" href="#" target="_blank" rel="noopener">Post on X ↗</a>
           <button class="button primary" id="share-button" type="button">↗ <span>Share this moment</span></button>
           <button class="button" id="image-button" type="button">▧ <span>Create share card</span></button>
           <button class="button" id="fullscreen-button" type="button">⛶ <span>Focus mode</span></button>
@@ -204,6 +206,10 @@ const initialMessage = getDailyMessage(new Date());
       } catch { /* Analytics are optional; the countdown remains fully usable. */ }
     }
 
+    function isNewYearEvent(event) {
+      return event?.kind === "new-year" || /^New Year \d{4}$/i.test(event?.title || "");
+    }
+
     function showToast(message) {
       const toast = $("toast");
       toast.textContent = message;
@@ -255,18 +261,18 @@ const initialMessage = getDailyMessage(new Date());
       $("hero-copy").hidden = false;
       $("event-date").hidden = false;
       const date = new Date(event.target);
-      $("event-eyebrow").textContent = event.kind === "new-year"
+      $("event-eyebrow").textContent = isNewYearEvent(event)
         ? `THE COUNTDOWN TO ${date.getUTCFullYear() + 1}`
         : "A MOMENT WORTH LOOKING FORWARD TO";
-      $("hero-title").innerHTML = event.kind === "new-year"
+      $("hero-title").innerHTML = isNewYearEvent(event)
         ? "<span>A new chapter</span><span>awaits.</span>"
         : `<span id="event-title-line"></span><span>is getting closer.</span>`;
       const titleLine = $("event-title-line");
       if (titleLine) titleLine.textContent = event.title;
-      $("hero-copy").textContent = event.kind === "new-year"
+      $("hero-copy").textContent = isNewYearEvent(event)
         ? "Every ending makes room for a new beginning. Take a moment to look ahead — and make today count."
         : "Some moments are worth looking forward to. Here's to the anticipation, the preparation and the day itself.";
-      $("event-date").textContent = event.kind === "new-year"
+      $("event-date").textContent = isNewYearEvent(event)
         ? `New Year's Day · ${indiaFormatter.format(date)} · India Standard Time`
         : `${localFormatter.format(date)} · ${event.timeZone || Intl.DateTimeFormat().resolvedOptions().timeZone}`;
       document.title = `${event.title} countdown · NextChapter`;
@@ -289,7 +295,7 @@ const initialMessage = getDailyMessage(new Date());
       $("event-date").hidden = completed;
       if (completed) {
         const year = new Date(state.event.target + 5.5 * 60 * 60 * 1000).getUTCFullYear();
-        const isNewYear = state.event.kind === "new-year";
+        const isNewYear = isNewYearEvent(state.event);
         $("event-eyebrow").textContent = isNewYear ? "A BRAND NEW CHAPTER BEGINS" : "THIS IS YOUR MOMENT";
         $("arrival-title").textContent = isNewYear ? `Happy New Year ${year}!` : "The moment is here!";
         $("arrival-subtitle").textContent = isNewYear
@@ -298,6 +304,7 @@ const initialMessage = getDailyMessage(new Date());
         if (!state.completed) trackMetric("arrival_view");
       }
       state.completed = completed;
+      refreshSocialLinks();
       const progress = getYearProgress(Date.now());
       $("progress-label").textContent = `${progress.year} YEAR PROGRESS`;
       $("progress-value").textContent = `${progress.percentage.toFixed(1)}%`;
@@ -380,12 +387,26 @@ const initialMessage = getDailyMessage(new Date());
       });
     }
 
+    function getShareMessage() {
+      const completed = getCountdownParts(state.event.target, Date.now()).complete;
+      if (completed) {
+        return isNewYearEvent(state.event)
+          ? `Happy New Year! ${state.event.title} has arrived. Every second counts.`
+          : `${state.event.title} is here! Every second counts.`;
+      }
+      return `I'm counting down to ${state.event.title} with NextChapter. Every second counts.`;
+    }
+
+    function refreshSocialLinks() {
+      const url = createShareUrl();
+      const text = getShareMessage();
+      $("whatsapp-share").href = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
+      $("x-share").href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+    }
+
     async function shareEvent() {
       const url = createShareUrl();
-      const completed = getCountdownParts(state.event.target, Date.now()).complete;
-      const text = completed
-        ? (state.event.kind === "new-year" ? `Happy New Year! ${state.event.title} has arrived. Every second counts.\n\n` : `${state.event.title} is here! Every second counts.\n\n`) + "https://vtrrk.in/countdown/"
-        : `I'm counting down to ${state.event.title}. Every second counts.`;
+      const text = getShareMessage();
       trackMetric("share_click");
       if (navigator.share) {
         try {
@@ -426,14 +447,15 @@ const initialMessage = getDailyMessage(new Date());
       context.fillStyle = "#f4f8ff";
       context.font = completed ? "700 72px Arial" : "700 64px Arial";
       const year = new Date(state.event.target + 5.5 * 60 * 60 * 1000).getUTCFullYear();
+      const isNewYear = isNewYearEvent(state.event);
       const title = completed
-        ? (state.event.kind === "new-year" ? `HAPPY NEW YEAR ${year}!` : "THE MOMENT IS HERE!")
+        ? (isNewYear ? `HAPPY NEW YEAR ${year}!` : "THE MOMENT IS HERE!")
         : (state.event.title.length > 27 ? `${state.event.title.slice(0, 26)}…` : state.event.title);
       context.fillText(title, 88, 235);
       context.fillStyle = "#b8c8dc";
       context.font = "30px Arial";
       context.fillText(completed
-        ? (state.event.kind === "new-year" ? "A new chapter begins. Make it extraordinary." : state.event.title)
+        ? (isNewYear ? "A new chapter begins. Make it extraordinary." : state.event.title)
         : `Only ${parts.days.toLocaleString()} days to go. Make every second count.`, 90, 315);
       if (!completed) {
         context.fillStyle = "#f4f8ff";
@@ -512,6 +534,8 @@ const initialMessage = getDailyMessage(new Date());
       button.addEventListener("click", () => setTheme(button.dataset.themeChoice)),
     );
     $("share-button").addEventListener("click", shareEvent);
+    $("whatsapp-share").addEventListener("click", () => trackMetric("share_click"));
+    $("x-share").addEventListener("click", () => trackMetric("share_click"));
     $("image-button").addEventListener("click", downloadShareCard);
     $("next-countdown-button").addEventListener("click", () => {
       setEvent(defaultEvent());
