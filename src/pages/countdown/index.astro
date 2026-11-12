@@ -50,6 +50,11 @@ const initialMessage = getDailyMessage(new Date());
     [data-theme="violet"]{--bg:#100d20;--bg-soft:#1a1530;--panel:rgba(35,28,62,.78);--panel-strong:#282044;--accent:#c2a5ff;--accent-2:#7fc7ff;--glow:rgba(170,133,255,.2)}
     @media(max-width:760px){.hero{padding-top:60px}.two-column{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.section{padding:38px 0}.glass-card{padding:20px}}
     @media(max-width:480px){.shell{width:calc(100% - 28px)}.topbar{padding-top:18px}.quiet-link{padding:8px 10px;font-size:.7rem}.hero{padding-top:48px}.countdown{gap:7px;margin-top:32px}.time-unit{padding:18px 5px 15px;border-radius:14px}.time-value{font-size:clamp(1.8rem,10vw,2.8rem)}.time-label{font-size:.52rem;letter-spacing:.1em}.hero-tools .button{flex:1}.quick-grid{gap:8px}.quick-card{min-height:118px;padding:14px}.section-heading{align-items:flex-start;flex-direction:column}.footer{align-items:flex-start;flex-direction:column;gap:9px}}
+    .arrival-card{position:relative;isolation:isolate;overflow:hidden;width:min(820px,100%);margin:40px auto 0;padding:clamp(30px,6vw,66px) 24px 34px;border:1px solid rgba(120,215,232,.32);border-radius:28px;background:radial-gradient(ellipse at 18% 12%,rgba(120,215,232,.17),transparent 42%),radial-gradient(ellipse at 84% 8%,rgba(160,145,255,.18),transparent 38%),linear-gradient(145deg,rgba(22,47,72,.96),rgba(9,20,36,.98));box-shadow:0 28px 90px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.08);text-align:center}
+    .arrival-card[hidden]{display:none}.arrival-card:before,.arrival-card:after{content:"";position:absolute;z-index:-1;width:190px;height:190px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(120,215,232,.0) 0deg 8deg,rgba(120,215,232,.72) 9deg 10deg,rgba(120,215,232,0) 11deg 22deg);mask:radial-gradient(circle,transparent 0 12%,#000 13% 14%,transparent 15% 100%);opacity:.35;animation:arrival-bloom 5s ease-in-out infinite alternate}
+    .arrival-card:before{top:-82px;left:8%}.arrival-card:after{top:-94px;right:7%;background:repeating-conic-gradient(from 18deg,rgba(0,0,0,0) 0deg 8deg,rgba(170,155,255,.8) 9deg 10deg,rgba(0,0,0,0) 11deg 22deg);animation-delay:-2.5s}
+    @keyframes arrival-bloom{from{transform:scale(.8) rotate(-12deg);opacity:.18}to{transform:scale(1.12) rotate(12deg);opacity:.45}}
+    .arrival-kicker{margin:0 0 18px;color:var(--accent);font-size:.68rem;font-weight:800;letter-spacing:.24em}.arrival-card h2{margin:0 auto;max-width:680px;font-size:clamp(2.5rem,8vw,5.7rem);line-height:1.02;letter-spacing:-.075em;background:linear-gradient(105deg,#fff 15%,#a8e8ed 52%,#c4b7ff 90%);background-clip:text;-webkit-background-clip:text;color:transparent}.arrival-subtitle{max-width:560px;margin:20px auto 28px;color:#c0cfe0;font-size:clamp(.95rem,2vw,1.12rem);line-height:1.7}.arrival-watermark{display:inline-flex;align-items:center;gap:10px;padding:9px 16px;border:1px solid rgba(120,215,232,.28);border-radius:999px;color:#d8f4f5;font-size:.78rem;font-weight:750;letter-spacing:.13em;background:rgba(120,215,232,.07)}.arrival-watermark:before{content:"✦";color:var(--accent)}.arrival-next{margin-top:24px}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
   </style>
 </head>
@@ -70,12 +75,20 @@ const initialMessage = getDailyMessage(new Date());
         <p class="hero-copy" id="hero-copy">Every ending makes room for a new beginning. Take a moment to look ahead — and make today count.</p>
         <p class="event-date" id="event-date">New Year's Day · {dateLabel} · India Standard Time</p>
 
-        <div class="countdown" role="timer" aria-label="Live countdown" aria-live="off">
+        <div class="countdown" id="countdown" role="timer" aria-label="Live countdown" aria-live="off">
           <div class="time-unit"><span class="time-value" id="days">000</span><span class="time-label">DAYS</span></div>
           <div class="time-unit"><span class="time-value" id="hours">00</span><span class="time-label">HOURS</span></div>
           <div class="time-unit"><span class="time-value" id="minutes">00</span><span class="time-label">MINUTES</span></div>
           <div class="time-unit"><span class="time-value" id="seconds">00</span><span class="time-label">SECONDS</span></div>
         </div>
+
+        <section class="arrival-card" id="arrival-card" aria-live="polite" aria-atomic="true" hidden>
+          <p class="arrival-kicker">THE WAIT IS OVER</p>
+          <h2 id="arrival-title">Happy New Year 2027!</h2>
+          <p class="arrival-subtitle" id="arrival-subtitle">A new chapter begins. Wishing you a year filled with possibility.</p>
+          <span class="arrival-watermark">vtrrk.in</span>
+          <div class="arrival-next"><button class="button" id="next-countdown-button" type="button">Start another countdown →</button></div>
+        </section>
 
         <div class="hero-tools">
           <button class="button primary" id="share-button" type="button">↗ <span>Share this moment</span></button>
@@ -83,7 +96,7 @@ const initialMessage = getDailyMessage(new Date());
           <button class="button" id="fullscreen-button" type="button">⛶ <span>Focus mode</span></button>
         </div>
 
-        <div class="progress-section" aria-label="Year progress">
+        <div class="progress-section" id="progress-section" aria-label="Year progress">
           <div class="progress-heading"><span id="progress-label">2026 YEAR PROGRESS</span><strong id="progress-value">0%</strong></div>
           <div class="progress-track" role="progressbar" id="progress-bar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Year completed"><div class="progress-fill" id="progress-fill"></div></div>
           <p class="progress-note" id="progress-note">A year is made of moments. Make yours matter.</p>
@@ -139,7 +152,7 @@ const initialMessage = getDailyMessage(new Date());
       </section>
     </main>
 
-    <footer class="footer"><span>NextChapter · Every second counts.</span><span>Made with curiosity by <a href="https://vtrrk.in/">VTRRK</a></span></footer>
+    <footer class="footer"><span>NextChapter · Every second counts.</span><span id="visit-counter" hidden>Visits to NextChapter: <strong id="visit-count">—</strong></span><span>Made with curiosity by <a href="https://vtrrk.in/">VTRRK</a></span></footer>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -162,12 +175,33 @@ const initialMessage = getDailyMessage(new Date());
     const localFormatter = new Intl.DateTimeFormat(undefined, {
       dateStyle: "long", timeStyle: "short",
     });
-    const state = { event: null, interval: null, installPrompt: null, saved: [] };
+    const state = { event: null, interval: null, installPrompt: null, saved: [], completed: false };
     const nowYear = () => getYearProgress(Date.now()).year;
 
     function defaultEvent() {
       const year = nowYear() + 1;
       return { title: `New Year ${year}`, target: getNewYearTarget(year), kind: "new-year", timeZone: "Asia/Kolkata" };
+    }
+
+    function trackMetric(event) {
+      return fetch("/api/countdown/metrics", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ event }),
+        keepalive: true,
+      }).catch(() => null);
+    }
+
+    async function loadVisitCount() {
+      try {
+        const response = await fetch("/api/countdown/metrics", { headers: { accept: "application/json" } });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (Number.isFinite(data.visits)) {
+          $("visit-count").textContent = data.visits.toLocaleString();
+          $("visit-counter").hidden = false;
+        }
+      } catch { /* Analytics are optional; the countdown remains fully usable. */ }
     }
 
     function showToast(message) {
@@ -213,6 +247,13 @@ const initialMessage = getDailyMessage(new Date());
 
     function renderEvent() {
       const event = state.event;
+      state.completed = false;
+      $("arrival-card").hidden = true;
+      $("countdown").hidden = false;
+      $("progress-section").hidden = false;
+      $("hero-title").hidden = false;
+      $("hero-copy").hidden = false;
+      $("event-date").hidden = false;
       const date = new Date(event.target);
       $("event-eyebrow").textContent = event.kind === "new-year"
         ? `THE COUNTDOWN TO ${date.getUTCFullYear() + 1}`
@@ -239,10 +280,24 @@ const initialMessage = getDailyMessage(new Date());
       $("hours").textContent = String(parts.hours).padStart(2, "0");
       $("minutes").textContent = String(parts.minutes).padStart(2, "0");
       $("seconds").textContent = String(parts.seconds).padStart(2, "0");
-      if (parts.complete) {
-        $("hero-copy").textContent = "The moment is here. Take it in — and make a memory.";
-        $("event-eyebrow").textContent = "THIS IS YOUR MOMENT";
+      const completed = parts.complete;
+      $("arrival-card").hidden = !completed;
+      $("countdown").hidden = completed;
+      $("progress-section").hidden = completed;
+      $("hero-title").hidden = completed;
+      $("hero-copy").hidden = completed;
+      $("event-date").hidden = completed;
+      if (completed) {
+        const year = new Date(state.event.target + 5.5 * 60 * 60 * 1000).getUTCFullYear();
+        const isNewYear = state.event.kind === "new-year";
+        $("event-eyebrow").textContent = isNewYear ? "A BRAND NEW CHAPTER BEGINS" : "THIS IS YOUR MOMENT";
+        $("arrival-title").textContent = isNewYear ? `Happy New Year ${year}!` : "The moment is here!";
+        $("arrival-subtitle").textContent = isNewYear
+          ? "May this new chapter bring fresh possibilities, meaningful moments and plenty of reasons to smile."
+          : `${state.event.title} has arrived. Take it in, celebrate the moment, and make a memory.`;
+        if (!state.completed) trackMetric("arrival_view");
       }
+      state.completed = completed;
       const progress = getYearProgress(Date.now());
       $("progress-label").textContent = `${progress.year} YEAR PROGRESS`;
       $("progress-value").textContent = `${progress.percentage.toFixed(1)}%`;
@@ -327,7 +382,11 @@ const initialMessage = getDailyMessage(new Date());
 
     async function shareEvent() {
       const url = createShareUrl();
-      const text = `I'm counting down to ${state.event.title}. Every second counts.`;
+      const completed = getCountdownParts(state.event.target, Date.now()).complete;
+      const text = completed
+        ? (state.event.kind === "new-year" ? `Happy New Year! ${state.event.title} has arrived. Every second counts.\n\n` : `${state.event.title} is here! Every second counts.\n\n`) + "https://vtrrk.in/countdown/"
+        : `I'm counting down to ${state.event.title}. Every second counts.`;
+      trackMetric("share_click");
       if (navigator.share) {
         try {
           await navigator.share({ title: `${state.event.title} · NextChapter`, text, url });
@@ -359,31 +418,49 @@ const initialMessage = getDailyMessage(new Date());
       glow.addColorStop(1, "rgba(120,215,232,0)");
       context.fillStyle = glow;
       context.fillRect(0, 0, 1200, 630);
+      const parts = getCountdownParts(state.event.target, Date.now());
+      const completed = parts.complete;
       context.fillStyle = "#78d7e8";
       context.font = "700 22px Arial";
       context.fillText("NEXTCHAPTER  ·  EVERY SECOND COUNTS", 88, 104);
       context.fillStyle = "#f4f8ff";
-      context.font = "700 64px Arial";
-      const title = state.event.title.length > 27 ? `${state.event.title.slice(0, 26)}…` : state.event.title;
-      context.fillText(title, 88, 225);
-      const parts = getCountdownParts(state.event.target, Date.now());
-      context.fillStyle = "#f4f8ff";
-      context.font = "700 112px Arial";
-      context.fillText(String(parts.days).padStart(3, "0"), 88, 390);
-      context.fillStyle = "#9aacc2";
-      context.font = "700 22px Arial";
-      context.fillText("DAYS TO GO", 94, 438);
+      context.font = completed ? "700 72px Arial" : "700 64px Arial";
+      const year = new Date(state.event.target + 5.5 * 60 * 60 * 1000).getUTCFullYear();
+      const title = completed
+        ? (state.event.kind === "new-year" ? `HAPPY NEW YEAR ${year}!` : "THE MOMENT IS HERE!")
+        : (state.event.title.length > 27 ? `${state.event.title.slice(0, 26)}…` : state.event.title);
+      context.fillText(title, 88, 235);
+      context.fillStyle = "#b8c8dc";
+      context.font = "30px Arial";
+      context.fillText(completed
+        ? (state.event.kind === "new-year" ? "A new chapter begins. Make it extraordinary." : state.event.title)
+        : `Only ${parts.days.toLocaleString()} days to go. Make every second count.`, 90, 315);
+      if (!completed) {
+        context.fillStyle = "#f4f8ff";
+        context.font = "700 112px Arial";
+        context.fillText(String(parts.days).padStart(3, "0"), 88, 430);
+        context.fillStyle = "#9aacc2";
+        context.font = "700 22px Arial";
+        context.fillText("DAYS TO GO", 94, 478);
+      } else {
+        for (const [cx, cy, radius, color] of [[930,160,78,"rgba(120,215,232,.85)"],[1035,320,54,"rgba(170,155,255,.85)"],[810,370,44,"rgba(255,207,130,.8)"]]) {
+          const burst = context.createRadialGradient(cx,cy,2,cx,cy,radius);
+          burst.addColorStop(0,color); burst.addColorStop(1,"rgba(120,215,232,0)");
+          context.fillStyle=burst; context.fillRect(cx-radius,cy-radius,radius*2,radius*2);
+        }
+      }
       context.fillStyle = "#b8c8dc";
       context.font = "28px Arial";
-      context.fillText("Don't just count the days. Make the days count.", 88, 535);
+      context.fillText(completed ? "May the moments ahead be worth remembering." : "Don't just count the days. Make the days count.", 88, 535);
       context.fillStyle = "#78d7e8";
-      context.font = "600 20px Arial";
-      context.fillText("vtrrk.in/countdown", 88, 584);
+      context.font = "700 22px Arial";
+      context.fillText("vtrrk.in", 88, 584);
       return canvas;
     }
 
     async function downloadShareCard() {
       const canvas = drawShareCard();
+      trackMetric("card_download");
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
       if (!blob) {
         showToast("Couldn't create the image on this device.");
@@ -436,6 +513,11 @@ const initialMessage = getDailyMessage(new Date());
     );
     $("share-button").addEventListener("click", shareEvent);
     $("image-button").addEventListener("click", downloadShareCard);
+    $("next-countdown-button").addEventListener("click", () => {
+      setEvent(defaultEvent());
+      history.replaceState({}, "", window.location.pathname);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
     $("fullscreen-button").addEventListener("click", async () => {
       try {
         if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
@@ -471,6 +553,7 @@ const initialMessage = getDailyMessage(new Date());
     const pad = (value) => String(value).padStart(2, "0");
     $("event-date-input").value = `${localDefault.getFullYear()}-${pad(localDefault.getMonth() + 1)}-${pad(localDefault.getDate())}T${pad(localDefault.getHours())}:${pad(localDefault.getMinutes())}`;
     updateCountdown();
+    trackMetric("page_view").finally(loadVisitCount);
     state.interval = window.setInterval(updateCountdown, 1000);
 
     if ("serviceWorker" in navigator && location.protocol === "https:") {
