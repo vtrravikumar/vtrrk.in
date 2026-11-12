@@ -326,8 +326,14 @@ const initialMessage = getDailyMessage(new Date());
       const secondsInWords = numberToIndianWords(totalSeconds);
       const spokenSeconds = secondsInWords.charAt(0).toUpperCase() + secondsInWords.slice(1);
       const finalGroupStart = spokenSeconds.lastIndexOf(",") + 1;
-      const leadingText = spokenSeconds.slice(0, finalGroupStart);
-      const finalNumberGroup = spokenSeconds.slice(finalGroupStart).trim();
+      const finalGroup = spokenSeconds.slice(finalGroupStart).trim();
+      const finalAndIndex = finalGroup.lastIndexOf(" and ");
+      const highlightedPart = finalAndIndex >= 0
+        ? finalGroup.slice(finalAndIndex + 5)
+        : finalGroup;
+      const leadingText = spokenSeconds.slice(0, finalGroupStart) +
+        (finalAndIndex >= 0 ? finalGroup.slice(0, finalAndIndex + 5) : "");
+      const finalNumberGroup = highlightedPart;
       $("total-seconds").replaceChildren(document.createTextNode(leadingText));
       const highlightedNumber = document.createElement("span");
       highlightedNumber.className = "seconds-number-highlight";
