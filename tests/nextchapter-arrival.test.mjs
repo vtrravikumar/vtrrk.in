@@ -95,3 +95,15 @@ test("NextChapter inserts a visible space between a custom event title and 'is g
   const page = await read("../src/pages/countdown/index.astro");
   assert.ok(page.includes('<span id="event-title-line"></span> <span>is getting closer.</span>'));
 });
+
+
+test("NextChapter launches a short, one-time fireworks celebration on arrival", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  assert.ok(page.includes('id="arrival-fireworks"'));
+  assert.ok(page.includes("function launchArrivalFireworks()"));
+  assert.ok(page.includes("prefers-reduced-motion: reduce"));
+  assert.ok(page.includes("sessionStorage.getItem(eventKey)"));
+  assert.ok(page.includes("if (!state.completed) launchArrivalFireworks();"));
+  assert.ok(page.includes("elapsed < 5900"));
+  assert.ok(page.includes('["#ffd166", "#79d8ed", "#b9a0ff", "#ff7185", "#fff4d6"]'));
+});
