@@ -73,3 +73,25 @@ test("NextChapter highlights only the final spoken number phrase and leaves 'and
   assert.ok(page.includes('document.createTextNode(" seconds")'));
   assert.ok(page.includes(":global(.seconds-number-highlight){color:#ff626b"));
 });
+
+
+test("NextChapter shows the WhatsApp share link only on mobile devices", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  assert.ok(page.includes("#whatsapp-share{display:none}"));
+  assert.ok(page.includes("html.is-mobile-device #whatsapp-share{display:inline-flex}"));
+  assert.ok(page.includes("navigator.userAgentData?.mobile === true"));
+  assert.ok(page.includes("/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i"));
+  assert.ok(page.includes('document.documentElement.classList.add("is-mobile-device")'));
+});
+
+
+test("NextChapter total-seconds words use the exact same snapshot as the main countdown", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  assert.ok(page.includes("const totalSeconds = parts.totalSeconds;"));
+  assert.ok(!page.includes("Math.ceil((state.event.target - Date.now()) / 1000)"));
+});
+
+test("NextChapter inserts a visible space between a custom event title and 'is getting closer'", async () => {
+  const page = await read("../src/pages/countdown/index.astro");
+  assert.ok(page.includes('<span id="event-title-line"></span> <span>is getting closer.</span>'));
+});
