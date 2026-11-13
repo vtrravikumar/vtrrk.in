@@ -272,7 +272,7 @@ const initialMessage = getDailyMessage(new Date());
         : "A MOMENT WORTH LOOKING FORWARD TO";
       $("hero-title").innerHTML = isNewYearEvent(event)
         ? "A new chapter<br /><span>awaits.</span>"
-        : `<span id="event-title-line"></span><span>is getting closer.</span>`;
+        : `<span id="event-title-line"></span> <span>is getting closer.</span>`;
       const titleLine = $("event-title-line");
       if (titleLine) titleLine.textContent = event.title;
       $("hero-copy").textContent = isNewYearEvent(event)
@@ -326,7 +326,7 @@ const initialMessage = getDailyMessage(new Date());
       $("countdown").hidden = completed;
       $("progress-section").hidden = completed;
       $("seconds-total").hidden = completed;
-      const totalSeconds = Math.max(0, Math.ceil((state.event.target - Date.now()) / 1000));
+      const totalSeconds = parts.totalSeconds;
       const secondsInWords = numberToIndianWords(totalSeconds);
       const spokenSeconds = secondsInWords.charAt(0).toUpperCase() + secondsInWords.slice(1);
       const finalGroupStart = spokenSeconds.lastIndexOf(",") + 1;
