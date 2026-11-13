@@ -50,6 +50,8 @@ const initialMessage = getDailyMessage(new Date());
     [data-theme="violet"]{--bg:#100d20;--bg-soft:#1a1530;--panel:rgba(35,28,62,.78);--panel-strong:#282044;--accent:#c2a5ff;--accent-2:#7fc7ff;--glow:rgba(170,133,255,.2)}
     @media(max-width:760px){.hero{padding-top:60px}.two-column{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.section{padding:38px 0}.glass-card{padding:20px}}
     @media(max-width:480px){.shell{width:calc(100% - 28px)}.topbar{padding-top:18px}.quiet-link{padding:8px 10px;font-size:.7rem}.hero{padding-top:48px}.countdown{gap:7px;margin-top:32px}.time-unit{padding:18px 5px 15px;border-radius:14px}.time-value{font-size:clamp(1.8rem,10vw,2.8rem)}.time-label{font-size:.52rem;letter-spacing:.1em}.hero-tools .button{flex:1}.quick-grid{gap:8px}.quick-card{min-height:118px;padding:14px}.section-heading{align-items:flex-start;flex-direction:column}.footer{align-items:flex-start;flex-direction:column;gap:9px}}
+    .arrival-fireworks{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-events:none}.arrival-fireworks[hidden]{display:none}
+    @media (prefers-reduced-motion:reduce){.arrival-fireworks{display:none!important}}
     .arrival-card{position:relative;isolation:isolate;overflow:hidden;width:min(820px,100%);margin:40px auto 0;padding:clamp(30px,6vw,66px) 24px 34px;border:1px solid rgba(120,215,232,.32);border-radius:28px;background:radial-gradient(ellipse at 18% 12%,rgba(120,215,232,.17),transparent 42%),radial-gradient(ellipse at 84% 8%,rgba(160,145,255,.18),transparent 38%),linear-gradient(145deg,rgba(22,47,72,.96),rgba(9,20,36,.98));box-shadow:0 28px 90px rgba(0,0,0,.34),inset 0 1px rgba(255,255,255,.08);text-align:center}
     .arrival-card[hidden]{display:none}.arrival-card:before,.arrival-card:after{content:"";position:absolute;z-index:-1;width:190px;height:190px;border-radius:50%;background:repeating-conic-gradient(from 0deg,rgba(120,215,232,.0) 0deg 8deg,rgba(120,215,232,.72) 9deg 10deg,rgba(120,215,232,0) 11deg 22deg);mask:radial-gradient(circle,transparent 0 12%,#000 13% 14%,transparent 15% 100%);opacity:.35;animation:arrival-bloom 5s ease-in-out infinite alternate}
     .arrival-card:before{top:-82px;left:8%}.arrival-card:after{top:-94px;right:7%;background:repeating-conic-gradient(from 18deg,rgba(0,0,0,0) 0deg 8deg,rgba(170,155,255,.8) 9deg 10deg,rgba(0,0,0,0) 11deg 22deg);animation-delay:-2.5s}
@@ -159,6 +161,7 @@ const initialMessage = getDailyMessage(new Date());
     <footer class="footer"><span>NextChapter · Every second counts.</span><span id="visit-counter" hidden>Visits to NextChapter: <strong id="visit-count">—</strong></span><span>Made with curiosity by <a href="https://vtrrk.in/">VTRRK</a></span></footer>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="arrival-fireworks" class="arrival-fireworks" aria-hidden="true" hidden></canvas>
 
   <script type="module">
     import {
@@ -314,6 +317,75 @@ const initialMessage = getDailyMessage(new Date());
       return parts.join(", ");
     }
 
+    function launchArrivalFireworks() {
+      const canvas = $("arrival-fireworks");
+      if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const eventKey = `nextchapter.fireworks.${state.event.title}|${state.event.target}`;
+      try {
+        if (sessionStorage.getItem(eventKey)) return;
+        sessionStorage.setItem(eventKey, "shown");
+      } catch { /* Continue without session storage. */ }
+
+      const context = canvas.getContext("2d");
+      if (!context) return;
+      canvas.hidden = false;
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      let width = window.innerWidth;
+      let height = window.innerHeight;
+      const resize = () => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.round(width * pixelRatio);
+        canvas.height = Math.round(height * pixelRatio);
+        context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      };
+      resize();
+      const particles = [];
+      const palette = ["#ffd166", "#79d8ed", "#b9a0ff", "#ff7185", "#fff4d6"];
+      const launchBurst = (x, y, color) => {
+        const count = 58;
+        for (let index = 0; index < count; index += 1) {
+          const angle = (Math.PI * 2 * index) / count + Math.random() * 0.08;
+          const speed = 1.5 + Math.random() * 4.2;
+          particles.push({ x, y, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed,
+            life: 70 + Math.random() * 35, age: 0, size: 1.1 + Math.random() * 1.8,
+            color, gravity: 0.035 + Math.random() * 0.025 });
+        }
+      };
+      const start = performance.now();
+      const schedule = [
+        [220, .16, .27], [620, .84, .24], [1120, .32, .43], [1640, .72, .39],
+        [2180, .5, .2], [2820, .2, .5], [3340, .82, .48], [3950, .5, .32],
+      ];
+      let nextBurst = 0;
+      const draw = (now) => {
+        const elapsed = now - start;
+        context.clearRect(0, 0, width, height);
+        while (nextBurst < schedule.length && elapsed >= schedule[nextBurst][0]) {
+          const [, x, y] = schedule[nextBurst];
+          launchBurst(width * x, height * y, palette[nextBurst % palette.length]);
+          nextBurst += 1;
+        }
+        for (let index = particles.length - 1; index >= 0; index -= 1) {
+          const p = particles[index];
+          p.age += 1; p.x += p.vx; p.y += p.vy;
+          p.vx *= .985; p.vy = p.vy * .985 + p.gravity;
+          context.globalAlpha = Math.max(0, 1 - p.age / p.life);
+          context.fillStyle = p.color; context.shadowBlur = 10; context.shadowColor = p.color;
+          context.beginPath(); context.arc(p.x, p.y, p.size, 0, Math.PI * 2); context.fill();
+          if (p.age >= p.life) particles.splice(index, 1);
+        }
+        context.globalAlpha = 1; context.shadowBlur = 0;
+        if (elapsed < 5900 || particles.length) requestAnimationFrame(draw);
+        else {
+          canvas.hidden = true; context.clearRect(0, 0, width, height);
+          window.removeEventListener("resize", resize);
+        }
+      };
+      window.addEventListener("resize", resize);
+      requestAnimationFrame(draw);
+    }
+
     function updateCountdown() {
       if (!state.event) return;
       const parts = getCountdownParts(state.event.target, Date.now());
@@ -355,6 +427,7 @@ const initialMessage = getDailyMessage(new Date());
       $("hero-copy").hidden = completed;
       $("event-date").hidden = completed;
       if (completed) {
+        if (!state.completed) launchArrivalFireworks();
         const year = new Date(state.event.target + 5.5 * 60 * 60 * 1000).getUTCFullYear();
         const isNewYear = isNewYearEvent(state.event);
         $("event-eyebrow").textContent = isNewYear ? "A BRAND NEW CHAPTER BEGINS" : "THIS IS YOUR MOMENT";
