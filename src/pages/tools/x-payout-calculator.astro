@@ -1,0 +1,199 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="X Payout Calculator — V.T.R. Ravi Kumar"
+  description="Estimate X Original Content Rewards using qualified impressions, an adjustable qualification estimate and an assumed payout rate."
+>
+  <main id="main-content" class="calculator-page" tabindex="-1">
+    <header class="page-intro">
+      <p class="eyebrow">Creator tools · X monetisation</p>
+      <h1 class="type-page-heading">X payout calculator.</h1>
+      <p class="intro">Estimate potential rewards from qualified impressions — not just the view count on your posts.</p>
+      <p class="updated">Modelled for X Original Content Rewards · 90-day window</p>
+    </header>
+
+    <section class="calculator" aria-label="Payout estimate calculator">
+      <div class="inputs">
+        <div class="section-heading">
+          <p class="step">01 / YOUR REACH</p>
+          <h2>Start with your impressions.</h2>
+          <p>Use your total impressions over the last 90 days. The calculator estimates what portion may qualify.</p>
+        </div>
+
+        <label class="field">
+          <span>Total impressions <small>Last 90 days · for earnings estimate</small></span>
+          <input id="total-impressions" type="number" min="0" step="1000" value="1000000" inputmode="numeric" />
+        </label>
+
+        <label class="field">
+          <span>Verified Home Timeline impressions <small>Last 90 days · replies excluded</small></span>
+          <input id="verified-home-impressions" type="number" min="0" step="1000" value="400000" inputmode="numeric" />
+        </label>
+
+        <div class="field">
+          <div class="field-heading">
+            <label for="qualification-rate">Estimated qualified share</label>
+            <output id="qualification-output" for="qualification-rate">12%</output>
+          </div>
+          <input id="qualification-rate" type="range" min="0" max="100" step="0.5" value="12" />
+          <div class="range-labels"><span>0% · None qualify</span><span>100% · All qualify</span></div>
+          <small class="hint">Your estimate of the share of total impressions that meet the qualified-impression definition: unique Premium-user Home Timeline views with at least half the post visible.</small>
+        </div>
+
+        <label class="field">
+          <span>Verified followers <small>Current count</small></span>
+          <input id="verified-followers" type="number" min="0" step="1" value="500" inputmode="numeric" />
+        </label>
+
+        <div class="section-heading rate-heading">
+          <p class="step">02 / ESTIMATE THE RATE</p>
+          <h2>Choose an assumed payout rate.</h2>
+          <p>X does not publish a fixed rate. These presets are illustrative scenario values, not official X rates.</p>
+        </div>
+
+        <div class="rate-presets" role="group" aria-label="Illustrative payout rate presets">
+          <button type="button" class="preset" data-rate="0.38"><span>Low</span><strong>$0.38</strong><small>/ 1,000 qualified</small></button>
+          <button type="button" class="preset active" data-rate="1.28" aria-pressed="true"><span>Mid</span><strong>$1.28</strong><small>/ 1,000 qualified</small></button>
+          <button type="button" class="preset" data-rate="2.03"><span>High</span><strong>$2.03</strong><small>/ 1,000 qualified</small></button>
+        </div>
+
+        <label class="field">
+          <span>Your assumed rate <small>USD per 1,000 qualified impressions</small></span>
+          <div class="rate-input"><span>$</span><input id="payout-rate" type="number" min="0" max="1000" step="0.01" value="1.28" inputmode="decimal" /></div>
+        </label>
+      </div>
+
+      <aside class="results" aria-live="polite" aria-atomic="true">
+        <p class="step">YOUR ESTIMATE</p>
+        <p class="result-label">Estimated payout</p>
+        <output id="estimated-payout" class="payout">$153.60</output>
+        <p class="result-note">Illustrative estimate · USD · before any fees or taxes</p>
+        <div class="result-divider"></div>
+        <div class="metric">
+          <span>Estimated qualified impressions</span>
+          <strong id="qualified-impressions">120,000</strong>
+        </div>
+        <div class="metric">
+          <span>Qualification estimate</span>
+          <strong id="qualification-summary">12%</strong>
+        </div>
+        <div class="metric">
+          <span>Assumed rate</span>
+          <strong id="rate-summary">$1.28</strong>
+        </div>
+        <div class="result-divider"></div>
+        <p class="step">PUBLISHED ELIGIBILITY THRESHOLDS</p>
+        <div class="threshold">
+          <div class="threshold-heading"><span>Verified Home Timeline impressions</span><strong id="impressions-progress-label">80%</strong></div>
+          <div class="progress"><span id="impressions-progress" style="width:80%"></span></div>
+          <small id="impressions-threshold-note">400,000 of 500,000 in 90 days</small>
+        </div>
+        <div class="threshold">
+          <div class="threshold-heading"><span>Verified followers</span><strong id="followers-progress-label">100%</strong></div>
+          <div class="progress"><span id="followers-progress" style="width:100%"></span></div>
+          <small id="followers-threshold-note">500 of 500 verified followers</small>
+        </div>
+        <p id="eligibility-status" class="eligibility-status">You meet the displayed follower threshold. You need 100,000 more verified Home Timeline impressions.</p>
+        <p class="disclaimer">Meeting these two thresholds does not guarantee acceptance or payment. X may apply additional eligibility, originality, account-standing and payout requirements.</p>
+      </aside>
+    </section>
+
+    <section class="explainer">
+      <p class="eyebrow">How the estimate works</p>
+      <h2>Impressions are not all equal.</h2>
+      <div class="formula">
+        <span>Total impressions</span><b>×</b><span>Qualified share</span><b>=</b><strong>Qualified impressions</strong>
+      </div>
+      <p>Estimated payout = qualified impressions ÷ 1,000 × your assumed payout rate. Eligibility progress is tracked separately using verified Home Timeline impressions and verified followers.</p>
+      <p class="fine-print">Qualified impressions are unique impressions from Premium users on the Home Timeline, with at least 50% of the post visible. Repeat views from the same account on a post, paid or promoted impressions, and fraudulent impressions are excluded. Only original content is eligible under the programme rules.</p>
+      <p class="source-link">Sources: <a href="https://help.x.com/en/using-x/original-content-rewards" target="_blank" rel="noopener noreferrer">X Original Content Rewards Help</a> · <a href="https://legal.x.com/en/original-content-rewards-terms.html" target="_blank" rel="noopener noreferrer">Programme terms</a></p>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  import { calculateXRewardsEstimate } from "../../utils/x-rewards-calculator.mjs";
+
+  const byId = (id) => document.getElementById(id);
+  const totalInput = byId("total-impressions");
+  const qualificationInput = byId("qualification-rate");
+  const followersInput = byId("verified-followers");
+  const verifiedHomeInput = byId("verified-home-impressions");
+  const rateInput = byId("payout-rate");
+  const number = (value) => Number(value || 0);
+  const integer = (value) => Math.floor(number(value)).toLocaleString("en-US");
+  const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(value);
+
+  function update() {
+    const impressions = Math.max(0, number(totalInput.value));
+    const qualification = Math.min(Math.max(number(qualificationInput.value), 0), 100);
+    const followers = Math.max(0, number(followersInput.value));
+    const rate = Math.min(Math.max(number(rateInput.value), 0), 1000);
+    const estimate = calculateXRewardsEstimate({
+      totalImpressions: impressions,
+      qualificationRate: qualification,
+      payoutPerThousand: rate,
+      verifiedHomeTimelineImpressions: Math.max(0, number(verifiedHomeInput.value)),
+      verifiedFollowers: followers,
+    });
+    const qualified = estimate.qualifiedImpressions;
+
+    byId("qualification-output").textContent = qualification.toLocaleString("en-US", { maximumFractionDigits: 1 }) + "%";
+    byId("estimated-payout").textContent = money(estimate.estimatedPayout);
+    byId("qualified-impressions").textContent = integer(qualified);
+    byId("qualification-summary").textContent = qualification.toLocaleString("en-US", { maximumFractionDigits: 1 }) + "%";
+    byId("rate-summary").textContent = money(rate);
+    byId("impressions-progress-label").textContent = Math.round(estimate.impressionsProgress) + "%";
+    byId("followers-progress-label").textContent = Math.round(estimate.followersProgress) + "%";
+    byId("impressions-progress").style.width = estimate.impressionsProgress + "%";
+    byId("followers-progress").style.width = estimate.followersProgress + "%";
+    byId("impressions-threshold-note").textContent = integer(estimate.verifiedHomeTimelineImpressions) + " of 500,000 in 90 days";
+    byId("followers-threshold-note").textContent = integer(followers) + " of 500 verified followers";
+
+    const status = byId("eligibility-status");
+    if (estimate.meetsPublishedThresholds) {
+      status.textContent = "You meet both displayed numerical thresholds. Other programme requirements still apply.";
+      status.dataset.state = "success";
+    } else if (estimate.meetsImpressionsThreshold) {
+      status.textContent = "You meet the verified Home Timeline impressions threshold. You need " + integer(estimate.remainingVerifiedFollowers) + " more verified followers.";
+      status.dataset.state = "info";
+    } else if (estimate.meetsFollowersThreshold) {
+      status.textContent = "You meet the displayed follower threshold. You need " + integer(estimate.remainingVerifiedHomeTimelineImpressions) + " more verified Home Timeline impressions.";
+      status.dataset.state = "info";
+    } else {
+      status.textContent = "You need " + integer(estimate.remainingVerifiedHomeTimelineImpressions) + " more verified Home Timeline impressions and " + integer(estimate.remainingVerifiedFollowers) + " more verified followers to meet these numerical thresholds.";
+      status.dataset.state = "info";
+    }
+  }
+
+  [totalInput, qualificationInput, verifiedHomeInput, followersInput, rateInput].forEach((input) => {
+    input.addEventListener("input", update);
+    input.addEventListener("change", update);
+  });
+
+  document.querySelectorAll("[data-rate]").forEach((button) => {
+    button.addEventListener("click", () => {
+      rateInput.value = button.dataset.rate;
+      document.querySelectorAll("[data-rate]").forEach((preset) => {
+        const active = preset === button;
+        preset.classList.toggle("active", active);
+        preset.setAttribute("aria-pressed", String(active));
+      });
+      update();
+    });
+  });
+  rateInput.addEventListener("input", () => {
+    document.querySelectorAll("[data-rate]").forEach((preset) => {
+      const active = Number(preset.dataset.rate) === number(rateInput.value);
+      preset.classList.toggle("active", active);
+      preset.setAttribute("aria-pressed", String(active));
+    });
+  });
+  update();
+</script>
+
+<style>
+.calculator-page{width:min(1120px,calc(100% - 3rem));margin:0 auto;padding-bottom:6rem}.page-intro{padding:7rem 0 3.5rem;max-width:760px}.eyebrow,.step{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}.page-intro h1{margin:0;letter-spacing:-.055em}.intro{max-width:650px;margin:1.25rem 0 0;color:var(--muted);font-size:clamp(1.1rem,2vw,1.3rem);line-height:1.6}.updated{margin:1rem 0 0;color:var(--muted);font-size:.78rem}.calculator{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:2rem;align-items:start}.inputs,.results{padding:2rem;border:1px solid var(--border);border-radius:1.5rem;background:var(--surface);box-shadow:var(--glass-shadow);backdrop-filter:blur(18px)}.section-heading{margin-bottom:2rem}.section-heading .step{margin:0 0 .7rem}.section-heading h2,.explainer h2{margin:0;font-size:clamp(1.5rem,3vw,2.15rem);letter-spacing:-.045em}.section-heading>p:last-child{max-width:550px;margin:.65rem 0 0;color:var(--muted);font-size:.88rem;line-height:1.6}.field{display:block;margin:1.4rem 0}.field>span,.field-heading{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;font-weight:650;font-size:.9rem}.field small{color:var(--muted);font-size:.72rem;font-weight:400}.field input:not([type=range]){width:100%;height:48px;margin-top:.6rem;padding:0 .9rem;border:1px solid var(--border);border-radius:.75rem;background:var(--surface-elevated);color:var(--foreground);font:inherit;font-variant-numeric:tabular-nums}.field input:focus{outline:2px solid var(--accent);outline-offset:2px}.field input[type=range]{width:100%;margin:1.2rem 0 .25rem;accent-color:var(--accent)}.field-heading output{color:var(--accent);font-variant-numeric:tabular-nums}.range-labels{display:flex;justify-content:space-between;color:var(--muted);font-size:.68rem}.hint{display:block;margin-top:.8rem;line-height:1.5}.rate-heading{margin:2.5rem 0 1rem}.rate-presets{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}.preset{display:flex;flex-direction:column;gap:.3rem;align-items:flex-start;padding:.85rem .75rem;border:1px solid var(--border);border-radius:.85rem;background:transparent;color:var(--foreground);text-align:left;cursor:pointer}.preset span{font-size:.72rem;color:var(--muted)}.preset strong{font-size:1.1rem}.preset small{font-size:.62rem;color:var(--muted);line-height:1.3}.preset.active{border-color:var(--accent);background:var(--accent-soft)}.rate-input{display:flex;align-items:center;gap:.4rem;margin-top:.4rem;padding-left:.9rem;border:1px solid var(--border);border-radius:.75rem;background:var(--surface-elevated)}.rate-input>span{color:var(--muted)}.rate-input input:not([type=range]){margin:0;border:0;background:transparent}.results{position:sticky;top:1.5rem;background:linear-gradient(155deg,var(--surface-elevated),var(--surface))}.results .step{margin:0 0 1.4rem}.result-label{margin:0;color:var(--muted);font-size:.85rem}.payout{display:block;margin:.2rem 0;font-size:clamp(2.8rem,6vw,4.3rem);font-weight:750;letter-spacing:-.07em;line-height:1.1;font-variant-numeric:tabular-nums}.result-note{margin:.5rem 0 0;color:var(--muted);font-size:.7rem}.result-divider{height:1px;margin:1.5rem 0;background:var(--border)}.metric{display:flex;justify-content:space-between;gap:1rem;margin:.9rem 0;font-size:.82rem}.metric span{color:var(--muted)}.metric strong{font-variant-numeric:tabular-nums;text-align:right}.threshold{margin:1.2rem 0}.threshold-heading{display:flex;justify-content:space-between;gap:1rem;font-size:.8rem}.threshold-heading strong{font-variant-numeric:tabular-nums}.progress{height:7px;margin:.6rem 0;border-radius:99px;background:var(--border);overflow:hidden}.progress span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent),var(--accent-creative));transition:width .2s ease}.threshold small{color:var(--muted);font-size:.7rem}.eligibility-status{margin:1.2rem 0 0;padding:.85rem 1rem;border:1px solid var(--border);border-radius:.8rem;background:var(--accent-soft);font-size:.78rem;line-height:1.5}.eligibility-status[data-state=success]{border-color:color-mix(in srgb,#239b69 40%,var(--border));background:color-mix(in srgb,#239b69 10%,transparent)}.disclaimer{margin:1rem 0 0;color:var(--muted);font-size:.68rem;line-height:1.55}.explainer{margin-top:5rem;padding:3rem 0;border-top:1px solid var(--border)}.explainer h2{margin:.5rem 0 1.5rem}.formula{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.8rem;padding:1.4rem;border:1px solid var(--border);border-radius:1rem;background:var(--surface);font-size:.85rem}.formula b{color:var(--accent)}.formula strong{color:var(--accent);font-weight:750}.explainer>p:not(.eyebrow){color:var(--muted);font-size:.9rem;line-height:1.7}.explainer .fine-print{max-width:850px;font-size:.78rem}.source-link a{color:var(--accent)}@media(max-width:800px){.calculator-page{width:min(100% - 1.5rem,1120px)}.page-intro{padding:4.5rem 0 2.5rem}.calculator{grid-template-columns:1fr}.results{position:static;grid-row:1}.inputs,.results{padding:1.3rem}.formula{justify-content:flex-start}}@media(max-width:480px){.rate-presets{gap:.4rem}.preset{padding:.7rem .55rem}.preset strong{font-size:1rem}.preset small{font-size:.58rem}.metric{font-size:.76rem}}
+</style>
