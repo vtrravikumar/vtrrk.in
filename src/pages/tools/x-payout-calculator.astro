@@ -23,8 +23,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         </div>
 
         <label class="field">
-          <span>Total impressions <small>Last 90 days</small></span>
+          <span>Total impressions <small>Last 90 days · for earnings estimate</small></span>
           <input id="total-impressions" type="number" min="0" step="1000" value="1000000" inputmode="numeric" />
+        </label>
+
+        <label class="field">
+          <span>Verified Home Timeline impressions <small>Last 90 days · replies excluded</small></span>
+          <input id="verified-home-impressions" type="number" min="0" step="1000" value="400000" inputmode="numeric" />
         </label>
 
         <div class="field">
@@ -34,7 +39,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
           </div>
           <input id="qualification-rate" type="range" min="0" max="100" step="0.5" value="12" />
           <div class="range-labels"><span>0% · None qualify</span><span>100% · All qualify</span></div>
-          <small class="hint">Your estimate of unique Premium-user Home Timeline impressions where at least half the post was visible.</small>
+          <small class="hint">Your estimate of the share of total impressions that meet the qualified-impression definition: unique Premium-user Home Timeline views with at least half the post visible.</small>
         </div>
 
         <label class="field">
@@ -83,14 +88,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
         <div class="threshold">
           <div class="threshold-heading"><span>Qualified impressions</span><strong id="impressions-progress-label">24%</strong></div>
           <div class="progress"><span id="impressions-progress" style="width:24%"></span></div>
-          <small id="impressions-threshold-note">120,000 of 500,000 in 90 days</small>
+          <small id="impressions-threshold-note">400,000 of 500,000 in 90 days</small>
         </div>
         <div class="threshold">
           <div class="threshold-heading"><span>Verified followers</span><strong id="followers-progress-label">100%</strong></div>
           <div class="progress"><span id="followers-progress" style="width:100%"></span></div>
           <small id="followers-threshold-note">500 of 500 verified followers</small>
         </div>
-        <p id="eligibility-status" class="eligibility-status">You meet the displayed follower threshold. You need 380,000 more qualified impressions.</p>
+        <p id="eligibility-status" class="eligibility-status">You meet the displayed follower threshold. You need 100,000 more verified Home Timeline impressions.</p>
         <p class="disclaimer">Meeting these two thresholds does not guarantee acceptance or payment. X may apply additional eligibility, originality, account-standing and payout requirements.</p>
       </aside>
     </section>
@@ -101,7 +106,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       <div class="formula">
         <span>Total impressions</span><b>×</b><span>Qualified share</span><b>=</b><strong>Qualified impressions</strong>
       </div>
-      <p>Estimated payout = qualified impressions ÷ 1,000 × your assumed payout rate.</p>
+      <p>Estimated payout = qualified impressions ÷ 1,000 × your assumed payout rate. Eligibility progress is tracked separately using verified Home Timeline impressions and verified followers.</p>
       <p class="fine-print">Qualified impressions are unique impressions from Premium users on the Home Timeline, with at least 50% of the post visible. Repeat views from the same account on a post, paid or promoted impressions, and fraudulent impressions are excluded. Only original content is eligible under the programme rules.</p>
       <p class="source-link">Sources: <a href="https://help.x.com/en/using-x/original-content-rewards" target="_blank" rel="noopener noreferrer">X Original Content Rewards Help</a> · <a href="https://legal.x.com/en/original-content-rewards-terms.html" target="_blank" rel="noopener noreferrer">Programme terms</a></p>
     </section>
@@ -115,6 +120,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   const totalInput = byId("total-impressions");
   const qualificationInput = byId("qualification-rate");
   const followersInput = byId("verified-followers");
+  const verifiedHomeInput = byId("verified-home-impressions");
   const rateInput = byId("payout-rate");
   const number = (value) => Number(value || 0);
   const integer = (value) => Math.floor(number(value)).toLocaleString("en-US");
@@ -129,6 +135,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       totalImpressions: impressions,
       qualificationRate: qualification,
       payoutPerThousand: rate,
+      verifiedHomeTimelineImpressions: Math.max(0, number(verifiedHomeInput.value)),
       verifiedFollowers: followers,
     });
     const qualified = estimate.qualifiedImpressions;
@@ -142,7 +149,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
     byId("followers-progress-label").textContent = Math.round(estimate.followersProgress) + "%";
     byId("impressions-progress").style.width = estimate.impressionsProgress + "%";
     byId("followers-progress").style.width = estimate.followersProgress + "%";
-    byId("impressions-threshold-note").textContent = integer(qualified) + " of 500,000 in 90 days";
+    byId("impressions-threshold-note").textContent = integer(estimate.verifiedHomeTimelineImpressions) + " of 500,000 in 90 days";
     byId("followers-threshold-note").textContent = integer(followers) + " of 500 verified followers";
 
     const status = byId("eligibility-status");
@@ -150,18 +157,18 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
       status.textContent = "You meet both displayed numerical thresholds. Other programme requirements still apply.";
       status.dataset.state = "success";
     } else if (estimate.meetsImpressionsThreshold) {
-      status.textContent = "You meet the qualified-impressions threshold. You need " + integer(estimate.remainingVerifiedFollowers) + " more verified followers.";
+      status.textContent = "You meet the verified Home Timeline impressions threshold. You need " + integer(estimate.remainingVerifiedFollowers) + " more verified followers.";
       status.dataset.state = "info";
     } else if (estimate.meetsFollowersThreshold) {
-      status.textContent = "You meet the displayed follower threshold. You need " + integer(estimate.remainingQualifiedImpressions) + " more qualified impressions.";
+      status.textContent = "You meet the displayed follower threshold. You need " + integer(estimate.remainingVerifiedHomeTimelineImpressions) + " more verified Home Timeline impressions.";
       status.dataset.state = "info";
     } else {
-      status.textContent = "You need " + integer(estimate.remainingQualifiedImpressions) + " more qualified impressions and " + integer(estimate.remainingVerifiedFollowers) + " more verified followers to meet these numerical thresholds.";
+      status.textContent = "You need " + integer(estimate.remainingVerifiedHomeTimelineImpressions) + " more verified Home Timeline impressions and " + integer(estimate.remainingVerifiedFollowers) + " more verified followers to meet these numerical thresholds.";
       status.dataset.state = "info";
     }
   }
 
-  [totalInput, qualificationInput, followersInput, rateInput].forEach((input) => {
+  [totalInput, qualificationInput, verifiedHomeInput, followersInput, rateInput].forEach((input) => {
     input.addEventListener("input", update);
     input.addEventListener("change", update);
   });
