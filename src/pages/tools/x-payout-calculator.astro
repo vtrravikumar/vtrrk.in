@@ -109,6 +109,8 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
+  import { calculateXRewardsEstimate } from "../../utils/x-rewards-calculator.mjs";
+
   const byId = (id) => document.getElementById(id);
   const totalInput = byId("total-impressions");
   const qualificationInput = byId("qualification-rate");
@@ -117,43 +119,44 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
   const number = (value) => Number(value || 0);
   const integer = (value) => Math.floor(number(value)).toLocaleString("en-US");
   const money = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(value);
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
   function update() {
     const impressions = Math.max(0, number(totalInput.value));
-    const qualification = clamp(number(qualificationInput.value), 0, 100);
+    const qualification = Math.min(Math.max(number(qualificationInput.value), 0), 100);
     const followers = Math.max(0, number(followersInput.value));
-    const rate = clamp(number(rateInput.value), 0, 1000);
-    const qualified = Math.floor(impressions * qualification / 100);
-    const payout = qualified / 1000 * rate;
-    const impressionsProgress = Math.min(qualified / 500000 * 100, 100);
-    const followersProgress = Math.min(followers / 500 * 100, 100);
+    const rate = Math.min(Math.max(number(rateInput.value), 0), 1000);
+    const estimate = calculateXRewardsEstimate({
+      totalImpressions: impressions,
+      qualificationRate: qualification,
+      payoutPerThousand: rate,
+      verifiedFollowers: followers,
+    });
+    const qualified = estimate.qualifiedImpressions;
 
     byId("qualification-output").textContent = qualification.toLocaleString("en-US", { maximumFractionDigits: 1 }) + "%";
-    byId("estimated-payout").textContent = money(payout);
+    byId("estimated-payout").textContent = money(estimate.estimatedPayout);
     byId("qualified-impressions").textContent = integer(qualified);
     byId("qualification-summary").textContent = qualification.toLocaleString("en-US", { maximumFractionDigits: 1 }) + "%";
     byId("rate-summary").textContent = money(rate);
-    byId("impressions-progress-label").textContent = Math.round(impressionsProgress) + "%";
-    byId("followers-progress-label").textContent = Math.round(followersProgress) + "%";
-    byId("impressions-progress").style.width = impressionsProgress + "%";
-    byId("followers-progress").style.width = followersProgress + "%";
+    byId("impressions-progress-label").textContent = Math.round(estimate.impressionsProgress) + "%";
+    byId("followers-progress-label").textContent = Math.round(estimate.followersProgress) + "%";
+    byId("impressions-progress").style.width = estimate.impressionsProgress + "%";
+    byId("followers-progress").style.width = estimate.followersProgress + "%";
     byId("impressions-threshold-note").textContent = integer(qualified) + " of 500,000 in 90 days";
     byId("followers-threshold-note").textContent = integer(followers) + " of 500 verified followers";
 
-    const remaining = Math.max(0, 500000 - qualified);
     const status = byId("eligibility-status");
-    if (remaining === 0 && followers >= 500) {
+    if (estimate.meetsPublishedThresholds) {
       status.textContent = "You meet both displayed numerical thresholds. Other programme requirements still apply.";
       status.dataset.state = "success";
-    } else if (remaining === 0) {
-      status.textContent = "You meet the qualified-impressions threshold. You need " + integer(500 - followers) + " more verified followers.";
+    } else if (estimate.meetsImpressionsThreshold) {
+      status.textContent = "You meet the qualified-impressions threshold. You need " + integer(estimate.remainingVerifiedFollowers) + " more verified followers.";
       status.dataset.state = "info";
-    } else if (followers >= 500) {
-      status.textContent = "You meet the displayed follower threshold. You need " + integer(remaining) + " more qualified impressions.";
+    } else if (estimate.meetsFollowersThreshold) {
+      status.textContent = "You meet the displayed follower threshold. You need " + integer(estimate.remainingQualifiedImpressions) + " more qualified impressions.";
       status.dataset.state = "info";
     } else {
-      status.textContent = "You need " + integer(remaining) + " more qualified impressions and " + integer(500 - followers) + " more verified followers to meet these numerical thresholds.";
+      status.textContent = "You need " + integer(estimate.remainingQualifiedImpressions) + " more qualified impressions and " + integer(estimate.remainingVerifiedFollowers) + " more verified followers to meet these numerical thresholds.";
       status.dataset.state = "info";
     }
   }
