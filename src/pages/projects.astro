@@ -2,15 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const projects = await getCollection("projects");
+const allProjects = await getCollection("projects");
+const projects = allProjects.filter((project) => project.data.status === "Completed");
 ---
 
-<BaseLayout title="Projects — V.T.R. Ravi Kumar" description="Projects V.T.R. Ravi Kumar is building and exploring.">
+<BaseLayout title="Projects — V.T.R. Ravi Kumar" description="Selected completed projects by V.T.R. Ravi Kumar.">
   <main id="main-content" tabindex="-1">
     <header>
       <p class="label">Projects</p>
-      <h1 class="type-page-heading">Things I'm building.</h1>
-      <p>Projects, experiments and practical things that keep me curious.</p>
+      <h1 class="type-page-heading">Selected work.</h1>
+      <p>Projects I've completed, built and brought to a meaningful milestone.</p>
     </header>
     <section>
       {projects.map((project) => (
@@ -19,7 +20,7 @@ const projects = await getCollection("projects");
             <h2><a href={`/projects/${project.id}/`}>{project.data.title}</a></h2>
             <p>{project.data.description}</p>
           </div>
-          {project.data.status && <span>{project.data.status}</span>}
+          <span>{project.data.status}</span>
         </article>
       ))}
     </section>
