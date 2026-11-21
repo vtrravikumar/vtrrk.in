@@ -9,24 +9,9 @@ export const now = {
 				"Building Vichar — an AI writing companion for X. The web experience is live, and the Chrome extension is being prepared to bring the workflow into the X composer.",
 		},
 		{
-			title: "TruePost",
+			title: "Vansvriksh",
 			description:
-				"Building a Chrome extension that helps identify AI-generated images and videos in social feeds, starting with X. The current focus is detection, filtering and a practical MVP.",
-		},
-		{
-			title: "Writing & VTR Press",
-			description:
-				"Writing books and continuing to develop VTR Press into a practical publishing workflow for producing polished PDF books and optional EPUB editions.",
-		},
-		{
-			title: "Ride Together",
-			description:
-				"Exploring and building a group-riding platform focused on making motorcycle rides safer and easier to organize, with a cost-conscious cloud deployment approach.",
-		},
-		{
-			title: "Photography & Travel",
-			description:
-				"Continuing to curate photography, develop the photography section of vtrrk.in, and document travel, places and the road.",
+				"Building a family tree website to document family members, relationships and the stories connecting generations.",
 		},
 	],
 };
